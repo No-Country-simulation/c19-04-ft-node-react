@@ -5,23 +5,21 @@ import logger from '../utils/logger.js'
 export const createTable = async (req, res) => {
 	const data = req.body
 
+	if (!data.tableNumber) {
+		return res.status(400).json({ error: 'Missing required fields' })
+	}
+
 	try {
-		const tableWithoutQR = {
+		const newQR = await generateQR(data.tableNumber.toString())
+		const table = {
+			QRCode: newQR,
 			tableNumber: data.tableNumber,
 			products: data.products,
 		}
 
-		const createdTable = await TableModel.create(tableWithoutQR)
+		await TableModel.create(table)
 
-		const newQR = await generateQR(createdTable._id.toString())
-
-		const updatedTable = await TableModel.findByIdAndUpdate(
-			createdTable._id,
-			{ $set: { QRCode: newQR } },
-			{ new: true },
-		)
-
-		res.status(201).json(updatedTable)
+		res.status(201).json(table)
 		logger.info('Table created successfully')
 	} catch (err) {
 		logger.error(
