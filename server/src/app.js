@@ -1,13 +1,18 @@
 import express from 'express'
+import dbConnection from './connections/mongoose.js'
+import cors from 'cors'
 
 const app = express()
 
 app.use(express.json())
+app.use(cors())
 
 app.get('/', (req, res) => {
-	res.send('No se centrar un div, soy backend')
+	res.json('C19-04-backend')
 })
 
-app.listen(3000, () => {
-	console.log('Server on port 3000')
+dbConnection()
+
+app.listen(process.env.PORT, () => {
+	console.info(`Server is running on http://localhost:${process.env.PORT}`)
 })
