@@ -1,6 +1,7 @@
 import express from 'express'
 import dbConnection from './connections/mongoose.js'
 import cors from 'cors'
+import logger from './utils/logger.js'
 
 const app = express()
 
@@ -9,6 +10,11 @@ app.use(cors())
 
 app.get('/', (req, res) => {
 	res.json('C19-04-backend')
+})
+
+app.get('/health', (req, res) => {
+	logger.http('Health OK.')
+	res.json('Health OK')
 })
 
 dbConnection()
