@@ -6,3 +6,13 @@
 // Entradas
 // Postres
 // Menus -> Menu[]
+
+import mongoose from 'mongoose'
+
+const cardMenuSchema = new mongoose.Schema({
+	test: String,
+})
+
+const CardMenu = mongoose.model('CardMenu', cardMenuSchema)
+
+export default CardMenu

@@ -1,7 +1,8 @@
 import express from 'express'
-import dbConnection from './connections/mongoose.js'
 import cors from 'cors'
 import logger from './utils/logger.js'
+import { ServerUp } from './connections/server.js'
+import TableRoutes from './routes/table.routes.js'
 
 const app = express()
 
@@ -17,8 +18,6 @@ app.get('/health', (req, res) => {
 	res.json('Health OK')
 })
 
-dbConnection()
+app.use('/api', TableRoutes)
 
-app.listen(process.env.PORT, () => {
-	console.info(`Server is running on http://localhost:${process.env.PORT}`)
-})
+ServerUp(app)
