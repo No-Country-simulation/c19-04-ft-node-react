@@ -1,4 +1,3 @@
-//modelo de mozo
 import mongoose from 'mongoose'
 import { USERNAMEREGEXP, PASSWORDREGEXP, NAMEREGEXP, SURNAMEREGEXP } from '../utils/regexpValidators'
 
@@ -45,6 +44,10 @@ const waiterSchema = new mongoose.Schema({
     moneyEarned: {
         type: Number,
         default: 0
+    },
+    isWaiter: {
+        type: Boolean,
+        required: true,
     }
 })
 

@@ -2,7 +2,7 @@ import TableModel from '../models/table.model.js'
 import { generateQR } from './qr.service.js'
 import logger from '../utils/logger.js'
 
-export const createTable = async (req, res) => {
+const createTable = async (req, res) => {
 	const data = req.body
 
 	if (!data.tableNumber) {
@@ -29,7 +29,7 @@ export const createTable = async (req, res) => {
 	}
 }
 
-export const getTable = async (req, res) => {
+const getTable = async (req, res) => {
 	const tableNumber = req.params.tableNumber
 
 	try {
@@ -46,3 +46,5 @@ export const getTable = async (req, res) => {
 		res.status(500).json({ error: 'Error getting table' })
 	}
 }
+
+export default { getTable, createTable }
