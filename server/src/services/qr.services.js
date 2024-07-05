@@ -1,1 +1,0 @@
-// CRUD DE QR
