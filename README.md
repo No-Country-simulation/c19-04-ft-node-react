@@ -1,3 +1,24 @@
+<div align="middle"><b>USER STORIES DEL PROYECTO</b></div>
+
+---
+ 
+  - Como usuario quiero poder escanear un qr que identifique la mesa para consultar carta o llamar al mozo.
+  - Como usuario quiero poder ver la carta para consultar los productos disponibles
+  - Como usuario quiero poder llamar al mozo para establecer mi pedido
+  - Como mozo quiero poder recibir notificaciones para saber que mesa requiere de mi atención
+  - Como mozo quiero establecer el pedido de la mesa para establecer el pedido a la cocina.
+  - Como cocina quiero recibir notificaciones acerca de los pedidos que vayan produciendose para poder gestionar mejor los tiempos
+  - Como cocina quiero tener un boton para solicitar un mozo para avisarle que ya puede llevar el pedido a la mesa correspondiente.
+  - Como administrador quiero poder registrar mozos para establecer una nueva persona en la sucursal que elija.
+  - Como administrador quiero poder registrar cocinas para gestionar mis sucursales.
+  - Como administrador quiero tener un apartado de analiticas para saber diferentes estadisticas del negocio.
+
+---
+
+ <div align="middle"><b>DESCRIPCION DEL PROYECTO</b></div>
+
+---
+ 
 Este proyecto se enfoca en facilitar la interaccion entre clientes y la cocina, le saca carga de trabajo a los mozos, los chefs disponen de la facilidad de deshabilitar menus y los administradores podrán crear cocina y mozos a placer.
 
 Cual es la necesidad principal que queremos resolver: Es comun que a la hora de atender a un restaurant los mozos nos ignoren de manera indirecta ya que hay varias mesas que deben atender, y al mismo tiempo tienen que prestarle atencion a los clientes, por lo que los clientes (comensales) tienden a llamarle mas la atencion que de cierta manera puede incomodar.
@@ -6,9 +27,11 @@ QR en la mesa identificandola por su numero
 Los usuarios escanearan el QR con su celular, el cual llamara a un mozo encargado de esa mesa
 El mozo recibirá un mensaje en su pantalla de celular el cual para esto debera loguearse como mozo.
 
-![QR Scan Cliente](https://i.imgur.com/Whgs2yK.png)
+<div style="display: flex;">
+  <img src="https://i.imgur.com/Whgs2yK.png" alt="Imagen 1">
+  <img src="https://i.imgur.com/0W15Sax.png" alt="Imagen 2">
+</div>
 
-![Web Push Notificacion Mozo](https://i.imgur.com/0W15Sax.png)
 
 
 para el resto del proceso, la toma del pedido, la cuenta y demás se manejaran como manera tradicional hasta la finalizacion de la 2da version.
@@ -20,11 +43,11 @@ La cocina recibira una notificacion sobre el pedido de la mesa identificandola p
 El mozo al recibir la notificacion, se dirijira a la cocina a buscar el pedido, al usuario se le informará con una notificacion que el pedido ya esta en camino.
 El administrador podrá crear mozos y cocinas a gusto a través de un panel propio para ellos.
 
-![QR Scan Cliente](https://i.imgur.com/xTbmBGN.png)
-
-![Web Push Notificacion Mozo](https://i.imgur.com/yDFZxRW.png)
-
-![Web Push Notificacion Cocina](https://i.imgur.com/Iuo4FiI.png)
+<div style="display: flex;">
+  <img src="https://i.imgur.com/xTbmBGN.png" alt="QR Scan Cliente">
+  <img src="https://i.imgur.com/yDFZxRW.png" alt="Web Push Notificacion Mozo">
+  <img src="https://i.imgur.com/Iuo4FiI.png" alt="Web Push Notificacion Cocina">
+</div>
 
 una vez entregado esta segunda versión se procederá a evaluar que features podemos agregar de la lista de backlog necesarias, se plantearon las siguientes:
 -
@@ -39,3 +62,4 @@ una vez entregado esta segunda versión se procederá a evaluar que features pod
 Bajo ninguna de las circunstancia este sistema requiere prescindir de ninguna de las partes involucradas, ya que recomendamos mantener las estructuras mas tradicionales para las personas que no son tech-friendly (amigables con la tecnologia) o que prefieren una experiencia mas tradicional
 
 IMAGENES A REALIZAR A FUTURO.
+
