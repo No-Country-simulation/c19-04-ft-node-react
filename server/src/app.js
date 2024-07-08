@@ -4,13 +4,9 @@ import logger from './utils/logger.js'
 import { ServerUp } from './connections/server.js'
 import TableRoutes from './routes/table.routes.js'
 import AuthRoutes from './routes/auth.routes.js'
-<<<<<<< HEAD
 import AdminRoutes from './routes/administrator.routes.js'
 import WaiterRoutes from './routes/waiter.routes.js'
-=======
-import AdminRoutes from './routes/admin.routes.js'
 import CardMenuRoutes from './routes/card-menu.routes.js'
->>>>>>> 63749f9ae84c354bd2b09186f1b75b578aeeb652
 
 const app = express()
 app.disable('x-powered-by')
