@@ -4,8 +4,8 @@ import WaiterController from '../controllers/waiter.controller.js'
 
 const router = Router()
 
-router.post('/callWaiter/:tableNumber', WaiterController.sendMessage)
-
+router.patch('/callWaiter/:tableNumber', WaiterController.sendMessage)
+router.get('/msgWaiter/:waiterUsername', WaiterController.getRequestedTables)
 
 export default router
 

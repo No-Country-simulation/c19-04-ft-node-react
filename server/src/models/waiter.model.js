@@ -21,8 +21,8 @@ const waiterSchema = new mongoose.Schema({
     tablesAssigned: {
         type: Object,
         default: []
-    }
-    ,
+    },
+    requestedBy: [],
     moneyEarned: {
         type: Number,
         default: 0
