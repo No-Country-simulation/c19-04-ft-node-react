@@ -5,21 +5,22 @@ import logger from '../utils/logger.js'
 export const createTable = async (req, res) => {
 	const data = req.body
 
-	if (!data.tableNumber) {
+	if (!data.link) {
 		return res.status(400).json({ error: 'Missing required fields' })
 	}
 
 	try {
-		const newQR = await generateQR(data.tableNumber.toString())
+		const newQR = await generateQR(data.link.toString())
 		const table = {
 			QRCode: newQR,
 			tableNumber: data.tableNumber,
+			link: data.link,
 			products: data.products,
 		}
 
 		await TableModel.create(table)
 
-		res.status(201).json(table)
+		res.status(201).send('Table created successfully')
 		logger.info('Table created successfully')
 	} catch (err) {
 		logger.error(
