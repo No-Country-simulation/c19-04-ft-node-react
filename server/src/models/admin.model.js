@@ -14,10 +14,7 @@ const adminSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    isAdmin: {
-        type: Boolean,
-        default: true,
-    }
+    role: "admin"
 })
 
 const AdminModel = mongoose.model('Admin', adminSchema)

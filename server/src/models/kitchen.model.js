@@ -12,7 +12,8 @@ const kitchenSchema = new mongoose.Schema({
     branch: {
         type: Number,
         default: 0,
-    }
+    },
+    role: "kitchen"
 })
 
 const KitchenModel = mongoose.model('Kitchen', kitchenSchema)
