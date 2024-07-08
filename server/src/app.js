@@ -5,6 +5,7 @@ import { ServerUp } from './connections/server.js'
 import TableRoutes from './routes/table.routes.js'
 import AuthRoutes from './routes/auth.routes.js'
 import AdminRoutes from './routes/administrator.routes.js'
+import WaiterRoutes from './routes/waiter.routes.js'
 
 const app = express()
 
@@ -23,5 +24,6 @@ app.get('/health', (req, res) => {
 app.use('/api', TableRoutes)
 app.use('/api', AuthRoutes)
 app.use('/api', AdminRoutes)
+app.use('/api', WaiterRoutes)
 
 ServerUp(app)

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import regexpValidators from '../utils/regexpValidators.js'
 
 const waiterSchema = new mongoose.Schema({
     username: {
@@ -17,7 +18,7 @@ const waiterSchema = new mongoose.Schema({
         type: Number,
         default: 5
     },
-    tablesAsigned: {
+    tablesAssigned: {
         type: Object,
         default: []
     }

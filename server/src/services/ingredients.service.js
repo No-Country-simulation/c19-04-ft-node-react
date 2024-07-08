@@ -31,7 +31,7 @@ export const updateIngredient = async (req, res) => {
     console.log("hola")
 
 }
-export const deleteIngredient = async (req, res) => {
+export const getIngredient = async (req, res) => {
     console.log("hola")
 
 }

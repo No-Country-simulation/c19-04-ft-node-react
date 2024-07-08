@@ -1,10 +1,10 @@
-import { addIngredient, removeIngredient, updateIngredient, deleteIngredient } from '../services/ingredients.service.js'
+import { addIngredient, removeIngredient, updateIngredient, getIngredient } from '../services/ingredients.service.js'
 
 const IngredientController = {
     addIngredient,
     removeIngredient,
     updateIngredient,
-    deleteIngredient
+    getIngredient
 }
 
 export default IngredientController
