@@ -13,7 +13,10 @@ const kitchenSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
-    role: "kitchen"
+    role: {
+        type: String,
+        default: "kitchen"
+    }
 })
 
 const KitchenModel = mongoose.model('Kitchen', kitchenSchema)

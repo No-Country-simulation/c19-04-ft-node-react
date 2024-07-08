@@ -9,7 +9,10 @@ const tableSchema = new mongoose.Schema({
 			ref: 'CardMenu',
 		},
 	],
-	role: "table"
+	role: {
+		type: String,
+		default: "table"
+	}
 })
 
 const TableModel = mongoose.model('Table', tableSchema)

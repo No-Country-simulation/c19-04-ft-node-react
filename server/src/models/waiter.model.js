@@ -26,9 +26,9 @@ const waiterSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    isWaiter: {
-        type: Boolean,
-        default: true,
+    role: {
+        type: String,
+        default: "waiter"
     }
 })
 

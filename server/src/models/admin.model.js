@@ -14,7 +14,10 @@ const adminSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    role: "admin"
+    role: {
+        type: String,
+        default: "admin"
+    }
 })
 
 const AdminModel = mongoose.model('Admin', adminSchema)

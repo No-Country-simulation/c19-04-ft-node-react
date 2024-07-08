@@ -1,9 +1,12 @@
-//metodos del panel admin
+import AuthController from "../controllers/auth.controller.js";
+import IngredientsController from "../controllers/ingredients.controller.js";
 
-//add waiter
+import { Router } from 'express'
+const router = Router()
+//POST ADD WAITER / TABLE / KITCHEN / ADMIN
+router.post('/register', AuthController.signUp)
 
-//add table
+//POST INGREDIENTES
+router.post('/ingredients', IngredientsController.addIngredient)
 
-//add kitchen
-
-//add admin
+export default router
