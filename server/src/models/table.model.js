@@ -10,6 +10,7 @@ const tableSchema = new mongoose.Schema({
 			ref: 'CardMenu',
 		},
 	],
+	role: "table"
 })
 
 const TableModel = mongoose.model('Table', tableSchema)

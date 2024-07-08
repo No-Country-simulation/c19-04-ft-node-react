@@ -1,35 +1,22 @@
-//modelo de admin
-
-// Usuario
-// Contraseña
-// isAdmin
-
 import mongoose from 'mongoose'
-import { USERNAMEREGEXP, PASSWORDREGEXP, NAMEREGEXP, SURNAMEREGEXP } from '../utils/regexpValidators'
+import regexpValidators from '../utils/regexpValidators.js'
 
-const waiterSchema = new mongoose.Schema({
-    user: {
+const adminSchema = new mongoose.Schema({
+    username: {
         type: String,
         validate: {
-            validator: (userName) => USERNAMEREGEXP.test(userName),
-            message: invalidUsername => `${invalidUsername.value} no es un usuario valido!`
+            validator: (userName) => regexpValidators.USERNAMEREGEXP.test(userName),
+            message: invalidUsername => `${invalidUsername.value} no es un usuario valido!`,
         },
         required: true,
     },
     password: {
         type: String,
-        validate: {
-            validator: (password) => PASSWORDREGEXP.test(password),
-            message: passwordInvalid => `${passwordInvalid.value} no es un contraseña valida!`
-        },
         required: true,
     },
-    isAdmin: {
-        type: Boolean,
-        required: true,
-    }
+    role: "admin"
 })
 
-const WaiterModel = mongoose.model('Waiter', waiterSchema)
+const AdminModel = mongoose.model('Admin', adminSchema)
 
-export default WaiterModel
+export default AdminModel
