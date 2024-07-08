@@ -1,27 +1,52 @@
 import jwt from 'jsonwebtoken'
 import UserModel from '../models/user.model.js'
+import AdminModel from '../models/admin.model.js'
+import WaiterModel from '../models/waiter.model.js'
+import KitchenModel from '../models/kitchen.model.js'
 import logger from '../utils/logger.js'
 
 export const signUp = async (req, res) => {
 	const { username, password, role } = req.body
 	try {
-		const lowerUsername = username.toLowerCase()
-		if (!lowerUsername || !password) {
+		if (!username || !password || !role) {
 			logger.error('Missing required fields')
-			return res.status(400).json('Missing required fields')
+			return res.status(400).json({ message: 'Missing required fields' })
+		}
+		if (await UserModel.findOne({ username: username }) || await AdminModel.findOne({ username: username }) || await KitchenModel.findOne({ username: username }) || await WaiterModel.findOne({ username: username })) {
+			logger.error('The user that attempt to register already exists')
+			return res.status(404).json({ message: "The user that attempt to register already exists" })
 		}
 
 		const hashedPassword = await UserModel.encryptPassword(password)
 
-		await UserModel.create({
-			username: lowerUsername,
-			password: hashedPassword,
-			role,
-		})
+		if (role === 'admin') {
+			await AdminModel.create({
+				username,
+				password: hashedPassword,
+			})
+		} else if (role === 'waiter') {
+			await WaiterModel.create({
+				username,
+				password: hashedPassword,
+				tablesAsigned: [],
 
-		logger.info(`User ${lowerUsername} created successfully`)
-		res.status(201).json(`User ${lowerUsername} created successfully`)
-	} catch (err) {
+			})
+		} else if (role === 'kitchen') {
+			await KitchenModel.create({
+				username,
+				password: hashedPassword,
+			})
+		} else {
+			await UserModel.create({
+				username,
+				password: hashedPassword,
+			})
+		}
+
+		logger.info(`User ${username} created successfully`)
+		res.status(201).json(`User ${username} created successfully`)
+	}
+	catch (err) {
 		logger.error(`Error in signUp: ${err}`)
 		res.status(500).send('Internal Server Error')
 	}
@@ -30,8 +55,7 @@ export const signUp = async (req, res) => {
 export const signIn = async (req, res) => {
 	const { username, password } = req.body
 	try {
-		const lowerUsername = username.toLowerCase()
-		const userFound = await UserModel.findOne({ username: lowerUsername })
+		const userFound = await UserModel.findOne({ username: username })
 
 		if (!userFound) {
 			logger.error('User not found')
@@ -48,7 +72,7 @@ export const signIn = async (req, res) => {
 			return res.status(401).json('Invalid password')
 		}
 
-		const token = jwt.sign({ id: userFound._id }, process.env.SECRET, {
+		const token = jwt.sign({ id: userFound._id }, process.env.SECRET_KEY, {
 			expiresIn: process.env.TOKEN_EXPIRATION || 86400,
 		})
 
@@ -71,7 +95,7 @@ export const signOut = async (req, res) => {
 
 		res.cookie('token', '', {
 			httpOnly: true,
-			expires: new Date(0),
+			expires: new Date(),
 		})
 
 		logger.info('Logged out successfully')

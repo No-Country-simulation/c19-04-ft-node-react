@@ -1,9 +1,14 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
+import regexpValidators from '../utils/regexpValidators.js'
 
 const userSchema = new mongoose.Schema({
 	username: {
 		type: String,
+		validate: {
+			validator: (username) => regexpValidators.USERNAMEREGEXP.test(username),
+			message: invalidUser => `${invalidUser.value} no es un usuario valido!`
+		},
 		required: true,
 	},
 	password: {
