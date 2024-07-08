@@ -4,9 +4,11 @@ import logger from './utils/logger.js'
 import { ServerUp } from './connections/server.js'
 import TableRoutes from './routes/table.routes.js'
 import AuthRoutes from './routes/auth.routes.js'
-import AdminRoutes from './routes/administrator.routes.js'
+import AdminRoutes from './routes/admin.routes.js'
+import CardMenuRoutes from './routes/card-menu.routes.js'
 
 const app = express()
+app.disable('x-powered-by')
 
 app.use(express.json())
 app.use(cors())
@@ -23,5 +25,6 @@ app.get('/health', (req, res) => {
 app.use('/api', TableRoutes)
 app.use('/api', AuthRoutes)
 app.use('/api', AdminRoutes)
+app.use('/api', CardMenuRoutes)
 
 ServerUp(app)
