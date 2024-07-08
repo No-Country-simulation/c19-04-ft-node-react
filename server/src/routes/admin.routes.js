@@ -18,4 +18,5 @@ router.get('/menu', AdminController.getMenu)
 
 //PATCH MENU
 router.patch('/menu/:id', AdminController.updateMenu)
+
 export default router
