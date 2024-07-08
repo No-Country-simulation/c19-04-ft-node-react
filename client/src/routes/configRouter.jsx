@@ -10,6 +10,7 @@ const routerPathComponent = [
 		path: '*',
 		element: <NotFound />,
 	},
+	
 ]
 
 export default routerPathComponent
