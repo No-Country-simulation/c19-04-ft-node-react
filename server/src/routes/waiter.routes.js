@@ -1,3 +1,5 @@
-//POST cerrar mesa
+//GET ORDEN LISTA
 
-//POST establecer pedido
+//POST ORDEN
+
+//PATCH Abrir mesa

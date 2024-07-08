@@ -27,11 +27,3 @@ const menuSchema = new mongoose.Schema({
 const MenuModel = mongoose.model('Menu', menuSchema)
 
 export default MenuModel
-
-//Nombre del menu
-//Descripcion del menu
-//Lista de ingredientes booleanas
-//Tiempo estimado de entrega
-//Precio
-//Disponibilidad
-// IMAGEN (?)

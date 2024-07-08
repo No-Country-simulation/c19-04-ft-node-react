@@ -1,12 +1,3 @@
-//modelo de carta del restaurante
-
-// Bebidas Alcoholicas []
-// Guarniciones []
-// Bebidas sin Alcohol []
-// Entradas
-// Postres
-// Menus -> Menu[]
-
 import mongoose from 'mongoose'
 
 const cardMenuSchema = new mongoose.Schema({
@@ -16,7 +7,6 @@ const cardMenuSchema = new mongoose.Schema({
 	dessert: [],
 	starters: [],
 	menus: []
-
 })
 
 const CardMenu = mongoose.model('CardMenu', cardMenuSchema)
