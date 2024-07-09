@@ -29,18 +29,18 @@ export const sendMessage = async (req, res) => {
 
 export const assignTables = async (req, res) => {
     try {
-        const dataWaiter = req.params.userMozo
-        const mozo = await WaiterModel.findOne({ username: dataWaiter })
+        const dataWaiter = req.params.waiterUsername
+        const waiter = await WaiterModel.findOne({ username: dataWaiter })
 
         req.body.tables.map((mesa) => {
-            const isAlreadyAssigned = mozo.tablesAssigned.indexOf(mesa)
+            const isAlreadyAssigned = waiter.tablesAssigned.indexOf(mesa)
             if (isAlreadyAssigned !== -1) {
                 return res.status(403).json({ mesagge: 'Table is already assigned to this waiter' })
             }
-            mozo.tablesAssigned.push(mesa)
+            waiter.tablesAssigned.push(mesa)
         })
 
-        await WaiterModel.findByIdAndUpdate({ _id: mozo._id }, mozo, { new: true })
+        await WaiterModel.findByIdAndUpdate({ _id: waiter._id }, waiter, { new: true })
 
         logger.info('Waiter updated correctly')
         res.status(200).json({ message: 'Tables assigned correctly' })
