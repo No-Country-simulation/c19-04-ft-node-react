@@ -1,3 +1,5 @@
+import PreviousPageButton from "../../components/PreviousPageButton/PreviousPageButton"
+
 const Home = () => {
 	return (
 		<div>
@@ -8,6 +10,7 @@ const Home = () => {
 			<p className='text-violet-500 bg-slate-600 text-3xl'>
 				tailwind es amistoso con su curva de aprendizaje
 			</p>
+			<PreviousPageButton/>
 		</div>
 	)
 }
