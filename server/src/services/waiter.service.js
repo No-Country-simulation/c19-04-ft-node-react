@@ -44,7 +44,7 @@ export const assignTables = async (req, res) => {
 
         logger.info('Waiter updated correctly')
         res.status(200).json({ message: 'Tables assigned correctly' })
-    } catch (error) {
+    } catch (err) {
         logger.error(`Something unexpected happend at ${err}`)
         res.status(500).json({ message: 'Server Internal Error' })
 
@@ -57,7 +57,24 @@ export const getRequestedTables = async (req, res) => {
         const waiterUsername = req.params.waiterUsername
         const waiter = await WaiterModel.findOne({ username: waiterUsername })
         res.status(200).json(waiter.requestedBy)
-    } catch (error) {
+    } catch (err) {
+        logger.error(`Something unexpected happend at ${err}`)
+        res.status(500).json({ message: 'Server Internal Error' })
+    }
+}
+
+export const deleteRequestTable = async (req, res) => {
+    try {
+        const tableNumber = req.params.tableNumber
+        const waiter = await WaiterModel.findOne({ tablesAssigned: Number.parseInt(tableNumber) })
+        const array = waiter.requestedBy
+        const elementIndex = array.map(element => element.tableNumber === Number.parseInt(tableNumber)).indexOf(true)
+        if (elementIndex === -1) return res.status(403).json({ message: `The table number ${tableNumber} doesn't made a request to the waiter.` })
+
+        array.splice(elementIndex, 1)
+        await WaiterModel.findByIdAndUpdate({ _id: waiter._id }, waiter, { new: true })
+        return res.status(200).json({ message: `Request for waiter ${waiter.username} already done.` })
+    } catch (err) {
         logger.error(`Something unexpected happend at ${err}`)
         res.status(500).json({ message: 'Server Internal Error' })
     }
