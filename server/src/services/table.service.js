@@ -20,7 +20,7 @@ export const createTable = async (req, res) => {
 
 		await TableModel.create(table)
 
-		res.status(201).send('Table created successfully')
+		res.status(201).json({ message: 'Table created successfully' })
 		logger.info('Table created successfully')
 	} catch (err) {
 		logger.error(
@@ -41,7 +41,7 @@ export const getTable = async (req, res) => {
 		}
 
 		res.type('image/png')
-		res.status(200).send(table.QRCode)
+		res.status(200).json({ QRCode: table.QRCode })
 	} catch (err) {
 		logger.error(`Error getting table: ${err}`)
 		res.status(500).json({ error: 'Error getting table' })
