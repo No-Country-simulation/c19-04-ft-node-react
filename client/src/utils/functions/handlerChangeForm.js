@@ -12,7 +12,6 @@ export function handleChangeForm(setFormData) {
 }
 
 export function handlerSubmitRegister(formData, setErrors) {
-  console.log(formData);
   return (event) => {
     event.preventDefault();
     const newErrors = validateForm(formData);
