@@ -1,10 +1,12 @@
-import { validateForm } from "./validateForm";
+import { validateForm } from './validateForm';
 
 export function handleChangeForm(setFormData) {
   return (event) => {
+    const valueWithoutSpaces = event.target.value.replace(/\s/g, '');
+
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [event.target.name]: event.target.value,
+      [event.target.name]: valueWithoutSpaces,
     }));
   };
 }
@@ -16,7 +18,8 @@ export function handlerSubmitRegister(formData, setErrors) {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      console.log("Formulario enviado:", formData);
+      console.log('Formulario enviado:', formData);
     }
   };
 }
+
