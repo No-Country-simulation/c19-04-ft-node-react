@@ -1,6 +1,6 @@
-import Register from '../views/Admin/Register/Register.jsx';
 import Home from '../views/Home/Home.jsx';
 import NotFound from '../views/NotFound/NotFound.jsx';
+import DashBoardAdmins from '../views/Admin/DashBoardAdmin.jsx';
 
 const routerPathComponent = [
   {
@@ -9,7 +9,7 @@ const routerPathComponent = [
   },
   {
     path: '/admin/register',
-    element: <Register />,
+    element: <DashBoardAdmins />,
   },
   {
     path: '*',
