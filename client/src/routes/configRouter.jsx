@@ -13,7 +13,7 @@ const routerPathComponent = [
 	},
 	{
 		path: '/invalid-password',
-		element: <InvalidPasswordMessage />,
+		element: <InvalidPasswordMessage  />,
 	}
 
 

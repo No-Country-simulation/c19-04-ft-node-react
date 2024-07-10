@@ -1,15 +1,14 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const redirectLogin = (path, delay) => {
-
-  const navidate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navidate(path)
+      navigate(path);
     }, delay);
 
     return () => clearTimeout(timer);
-  }, [navidate, path, delay]);
-}
+  }, [path, delay]);
+};
