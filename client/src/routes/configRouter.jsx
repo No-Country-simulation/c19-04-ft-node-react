@@ -15,6 +15,7 @@ const routerPathComponent = [
 		path: '/customer-actions',
 		element: <CustomerActions />,
 	}
+	
 ]
 
 export default routerPathComponent
