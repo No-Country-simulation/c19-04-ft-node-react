@@ -1,6 +1,5 @@
-import Home from '../views/Home/Home.jsx';
-import NotFound from '../views/NotFound/NotFound.jsx';
-import DashBoardAdmins from '../views/Admin/DashBoardAdmin.jsx';
+import Home from '../views/Home/Home.jsx'
+import NotFound from '../views/NotFound/NotFound.jsx'
 
 const routerPathComponent = [
   {
@@ -15,6 +14,11 @@ const routerPathComponent = [
     path: '*',
     element: <NotFound />,
   },
+	{
+		path: '/customer-actions',
+		element: <CustomerActions />,
+	}
+	
 ];
 
 export default routerPathComponent;
