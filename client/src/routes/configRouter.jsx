@@ -18,13 +18,13 @@ const routerPathComponent = [
     element: <CustomerActions />,
   },
   {
+    path: '/login',
+    element : <Login/>
+  },
+  {
     path: '*',
     element: <NotFound />,
   },
-	{
-		path: '/login',
-		element : <Login/>
-	}
 	
 ];
 
