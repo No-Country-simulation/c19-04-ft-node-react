@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-export default function useNavigateHelper() {
+export function useNavigateHelper() {
   const navigate = useNavigate();
 
   const navigateBack = () => {
@@ -10,6 +10,7 @@ export default function useNavigateHelper() {
   const navigateForward = () => {
     navigate(1);
   };
+  
   const navigateTo = (path) => {
     navigate(path);
   };
