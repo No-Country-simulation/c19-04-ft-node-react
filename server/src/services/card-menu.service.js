@@ -9,6 +9,6 @@ export const getCardMenu = async (req, res) => {
 		res.status(200).json(menu)
 	} catch (err) {
 		logger.error(`Error in getCardMenu: ${err.message}`)
-		res.status(500).send({ message: err.message })
+		res.status(500).json({ message: err.message })
 	}
 }

@@ -12,7 +12,7 @@ export const createMenu = async (req, res) => {
 			.json({ message: `Menu created successfully: ${data.title}` })
 	} catch (err) {
 		logger.error(`Error in createMenu: ${err}`)
-		res.status(500).send({ message: 'Internal server error' })
+		res.status(500).json({ message: 'Internal server error' })
 	}
 }
 
@@ -23,7 +23,7 @@ export const getMenu = async (req, res) => {
 		res.status(200).json(menu)
 	} catch (err) {
 		logger.error(`Error in getMenu: ${err}`)
-		res.status(500).send({ message: 'Internal server error' })
+		res.status(500).json({ message: 'Internal server error' })
 	}
 }
 
@@ -35,11 +35,11 @@ export const updateMenu = async (req, res) => {
 		if (!data) {
 			return res
 				.status(400)
-				.send({ message: 'Data to update can not be empty!' })
+				.json({ message: 'Data to update can not be empty!' })
 		}
 
 		if (!id) {
-			return res.status(400).send({ message: `ID ${id} not found` })
+			return res.status(400).json({ message: `ID ${id} not found` })
 		}
 		const menu = await MenuModel.findByIdAndUpdate(id, data, {
 			new: true,
@@ -50,6 +50,6 @@ export const updateMenu = async (req, res) => {
 			.json({ message: `Menu updated successfully: ${menu.title}` })
 	} catch (err) {
 		logger.error(`Error in updateMenu: ${err}`)
-		res.status(500).send({ message: 'Internal server error' })
+		res.status(500).json({ message: 'Internal server error' })
 	}
 }
