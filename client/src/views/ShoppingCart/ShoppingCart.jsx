@@ -7,7 +7,7 @@ function ShoppingCart() {
   return (
     <div className="flex flex-col items-center min-h-screen bg-customLight">
       <NavBar />
-      <h2 className="text-4xl font-bold m-10">Resumen del pedido</h2>
+      <h2 className="text-4xl font-bold m-3 md:mb-10 ">Resumen del pedido</h2>
       <ShoppingCartItemsContainer />
       <ShoppingCartActions />
     </div>

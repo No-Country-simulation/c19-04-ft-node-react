@@ -24,7 +24,7 @@ function ShoppingCartItemsContainer() {
   ];
 
   return (
-    <div className="flex flex-col w-full mb-auto">
+    <div className="flex flex-col w-full mb-20 gap-12">
       {DEMO_ITEMS.map((item) => (
         <ShoppingCartItemsCards
           key={item.id}
