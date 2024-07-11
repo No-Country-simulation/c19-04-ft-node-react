@@ -22,7 +22,7 @@ const NotFound = () => {
                 <p className="py-2 text-base text-gray-800">
                     ¡Lo sentimos! Por favor, visita nuestra página principal para llegar a donde necesitas ir.
                 </p>
-                <button className="w-full lg:w-auto my-4 border rounded-md px-1 sm:px-16 py-5 bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50">
+                <button className="w-full lg:w-auto my-4 border rounded-md px-1 sm:px-16 py-5 bg-customBlue text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-800 focus:ring-opacity-50">
 				<Link to='home'>Volver al Home</Link> 
                 </button>
             </div>
