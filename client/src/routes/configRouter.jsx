@@ -3,6 +3,7 @@ import Login from '../views/Login/Login.jsx'
 import NotFound from '../views/NotFound/NotFound.jsx'
 import CustomerActions from '../components/CustomerActions/CustomerActions.jsx'
 import DashBoardAdmins from '../views/Admin/DashBoardAdmin.jsx'
+import InvalidPasswordMessage from '../components/InvalidPasswordMessage/InvalidPasswordMessage.jsx'
 
 const routerPathComponent = [
   {
