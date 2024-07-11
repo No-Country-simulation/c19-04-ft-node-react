@@ -9,11 +9,7 @@ router.get('/msgWaiter/:waiterUsername', WaiterController.getRequestedTables)
 
 export default router
 
-
-
 //GET ORDEN LISTA
-
-
 
 //POST ORDEN
 

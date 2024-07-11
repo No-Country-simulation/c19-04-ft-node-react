@@ -1,9 +1,13 @@
-import { sendMessage, assignTables, getRequestedTables } from '../services/waiter.service.js'
+import {
+	sendMessage,
+	assignTables,
+	getRequestedTables,
+} from '../services/waiter.service.js'
 
 const WaiterController = {
-    sendMessage,
-    assignTables,
-    getRequestedTables,
+	sendMessage,
+	assignTables,
+	getRequestedTables,
 }
 
 export default WaiterController

@@ -6,7 +6,7 @@ const cardMenuSchema = new mongoose.Schema({
 	drinks: [],
 	dessert: [],
 	starters: [],
-	menus: []
+	menus: [],
 })
 
 const CardMenu = mongoose.model('CardMenu', cardMenuSchema)

@@ -7,7 +7,7 @@ import AuthRoutes from './routes/auth.routes.js'
 import AdminRoutes from './routes/administrator.routes.js'
 import WaiterRoutes from './routes/waiter.routes.js'
 import CardMenuRoutes from './routes/card-menu.routes.js'
-
+import OrderRoutes from './routes/order.routes.js'
 const app = express()
 app.disable('x-powered-by')
 
@@ -28,5 +28,6 @@ app.use('/api', AuthRoutes)
 app.use('/api', AdminRoutes)
 app.use('/api', WaiterRoutes)
 app.use('/api', CardMenuRoutes)
+app.use('/api/orders', OrderRoutes)
 
 ServerUp(app)

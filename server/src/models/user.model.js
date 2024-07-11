@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		validate: {
 			validator: (username) => regexpValidators.USERNAMEREGEXP.test(username),
-			message: invalidUser => `${invalidUser.value} no es un usuario valido!`
+			message: (invalidUser) => `${invalidUser.value} no es un usuario valido!`,
 		},
 		required: true,
 	},

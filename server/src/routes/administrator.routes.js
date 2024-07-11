@@ -1,7 +1,7 @@
-import AuthController from "../controllers/auth.controller.js";
-import IngredientsController from "../controllers/ingredients.controller.js";
+import AuthController from '../controllers/auth.controller.js'
+import IngredientsController from '../controllers/ingredients.controller.js'
 import { Router } from 'express'
-import WaiterController from "../controllers/waiter.controller.js";
+import WaiterController from '../controllers/waiter.controller.js'
 
 const router = Router()
 //POST ADD WAITER / TABLE / KITCHEN / ADMIN
