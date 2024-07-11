@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { asyncOrderHandlers } from "./asyncHandlers";
+import { addOrder, deleteOrder, removeOrder, updateOrder } from "../../../../utils/functions/syncOrdersFunctions";
 
 const initialState = {
-  orders: [],
+  ordersOfTable: [],
   status: "idle",
   error: null,
 };
@@ -11,21 +12,10 @@ export const orderTableSlice = createSlice({
   name: "orderTable",
   initialState,
   reducers: {
-    addOrderLocally: (state, action) => {
-      state.orders.push(action.payload);
-    },
-    removeOrderLocally: (state, action) => {
-      state.orders = state.orders.filter(order => order.id !== action.payload.orderId);
-    },
-    updateOrderLocally: (state, action) => {
-      const { orderId, orderUpdate } = action.payload;
-      const existingOrder = state.orders.find(order => order.id === orderId);
-      if (existingOrder) {
-        existingOrder.status = orderUpdate.status;
-      } else {
-        state.error = 'Order not found';
-      }
-    },
+    addOrderLocally: addOrder,
+    removeOrderLocally: removeOrder,
+    deleteOrderLocally: deleteOrder,
+    updateOrderLocally: updateOrder,
   },
   extraReducers: (builder) => {
     Object.keys(asyncOrderHandlers).forEach((actionType) => {
@@ -40,5 +30,10 @@ export const orderTableSlice = createSlice({
   },
 });
 
-export const { addOrderLocally, removeOrderLocally, updateOrderLocally } = orderTableSlice.actions;
+export const {
+  addOrderLocally,
+  removeOrderLocally,
+  updateOrderLocally,
+  deleteOrderLocally,
+} = orderTableSlice.actions;
 export default orderTableSlice.reducer;
