@@ -1,7 +1,7 @@
 // src/components/Login.jsx
 
 import React, { useState } from 'react';
-import { validateUsername, validatePassword } from '../App/validaciones'; // Importar funciones de validación
+import { validateUsername, validatePassword } from '../../utils/functions/validateLogin'; // Importar funciones de validación
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Importar FontAwesomeIcon
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'; // Importar íconos de ojo
 
