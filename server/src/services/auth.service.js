@@ -15,10 +15,12 @@ export const signUp = async (req, res) => {
 			logger.error('Missing required fields')
 			return res.status(400).json({ message: 'Missing required fields' })
 		}
-		if (await UserModel.findOne({ username: username })
-			|| await AdminModel.findOne({ username: username })
-			|| await KitchenModel.findOne({ username: username })
-			|| await WaiterModel.findOne({ username: username })) {
+		if (
+			(await UserModel.findOne({ username: username })) ||
+			(await AdminModel.findOne({ username: username })) ||
+			(await KitchenModel.findOne({ username: username })) ||
+			(await WaiterModel.findOne({ username: username }))
+		) {
 			logger.error('The user that attempt to register already exists')
 			return res
 				.status(404)
@@ -58,7 +60,6 @@ export const signUp = async (req, res) => {
 
 		logger.info(`User ${username} created successfully`)
 		res.status(201).json(`User ${username} created successfully`)
-
 	} catch (err) {
 		logger.error(`Error in signUp: ${err}`)
 		res.status(500).json({ message: 'Internal Server Error' })

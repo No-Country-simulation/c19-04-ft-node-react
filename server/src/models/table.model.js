@@ -12,8 +12,11 @@ const tableSchema = new mongoose.Schema({
 	],
 	role: {
 		type: String,
-		default: "table"
-	}
+		default: 'table',
+	},
+	// notes: {
+	// 	type: String,
+	// }
 })
 
 const TableModel = mongoose.model('Table', tableSchema)

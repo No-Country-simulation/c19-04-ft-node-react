@@ -1,5 +1,5 @@
-import AuthController from "../controllers/auth.controller.js";
-import IngredientsController from "../controllers/ingredients.controller.js";
+import AuthController from '../controllers/auth.controller.js'
+import IngredientsController from '../controllers/ingredients.controller.js'
 import { Router } from 'express'
 import WaiterController from "../controllers/waiter.controller.js";
 import AdminController from '../controllers/admin.controller.js'
