@@ -38,7 +38,7 @@ const createLogger = (env) => {
 					format: winston.format.simple(),
 				}),
 				new winston.transports.Console({
-					level: 'warn',
+					level: 'info',
 					format: winston.format.combine(
 						winston.format.colorize(),
 						winston.format.simple(),
