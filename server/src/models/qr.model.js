@@ -1,7 +1,10 @@
 import mongoose from 'mongoose'
 
 const qrSchema = new mongoose.Schema({
-	qrCode: Buffer,
+	qrCode: {
+		type: Buffer,
+		required: true,
+	},
 })
 
 const QRModel = mongoose.model('QR', qrSchema)
