@@ -1,4 +1,4 @@
-const USERNAMEREGEXP = /^[a-zA-Z0-9]{6,8}$/;
+const USERNAMEREGEXP = /^[a-z0-9]{6,8}$/;
 const PASSWORDREGEXP =
   /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*['#'?!@$%^&*-]).{8,11}$/;
 
@@ -11,7 +11,7 @@ export function validateForm(formData) {
     errors.username = "El usuario es obligatorio";
   } else if (!USERNAMEREGEXP.test(formData.username)) {
     errors.username =
-      "El usuario debe contener entre 6 a 8 caracteres y sólo puede contener letras (mayúsculas y minúsculas) y números.";
+      "El usuario debe contener entre 6 a 8 caracteres y sólo puede contener letras minúsculas y números.";
   }
 
   if (!formData.role.trim()) {
