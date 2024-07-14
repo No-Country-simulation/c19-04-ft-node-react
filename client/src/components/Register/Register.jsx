@@ -116,6 +116,7 @@ const RegisterUser = () => {
 
       <div className="space-x-10">
         <button
+          onClick={handlerSubmitRegister}
           type="submit"
           className="bg-purple-400 rounded-lg p-3 uppercase text-sm text-white font-bold"
         >

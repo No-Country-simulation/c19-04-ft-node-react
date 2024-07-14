@@ -1,3 +1,4 @@
+import { registerForm } from '../api/registerForm';
 import { validateForm } from './validateForm';
 
 export function handleChangeForm(setFormData) {
@@ -12,13 +13,19 @@ export function handleChangeForm(setFormData) {
 }
 
 export function handlerSubmitRegister(formData, setErrors) {
-  return (event) => {
+  return async (event) => {
     event.preventDefault();
     const newErrors = validateForm(formData);
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      console.log('Formulario enviado:', formData);
+      try {
+        const response = await registerForm(formData);
+        console.log('Formulario enviado:', response);
+      } catch (error) {
+        console.error('Error en el registro, problema con el servidor:', error);
+        setErrors({ submit: error.message });
+      }
     }
   };
 }
