@@ -3,8 +3,8 @@ import TableController from '../controllers/table.controller.js'
 
 const router = Router()
 
-router.post('/testqr', TableController.createTable)
+router.post('/tableQR', TableController.createTable)
 
-router.get('/testget/:tableNumber', TableController.getTable)
+router.get('/tableQR/:tableNumber', TableController.getTable)
 
 export default router
