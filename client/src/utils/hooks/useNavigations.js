@@ -1,19 +1,19 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
 
 export function useNavigateHelper() {
-  const navigate = useNavigate();
+	const navigate = useNavigate()
 
-  const navigateBack = () => {
-    navigate(-1);
-  };
+	const navigateBack = () => {
+		navigate(-1)
+	}
 
-  const navigateForward = () => {
-    navigate(1);
-  };
-  
-  const navigateTo = (path) => {
-    navigate(path);
-  };
+	const navigateForward = () => {
+		navigate(1)
+	}
 
-  return { navigateBack, navigateForward, navigateTo };
+	const navigateTo = (path) => {
+		navigate(path)
+	}
+
+	return { navigateBack, navigateForward, navigateTo }
 }

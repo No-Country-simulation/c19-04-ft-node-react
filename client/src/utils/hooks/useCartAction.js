@@ -1,24 +1,29 @@
-import { useDispatch } from "react-redux";
-import { addOrderLocally, removeOrderLocally, deleteOrderLocally } from "../../state/store/slices/tableOrder/orderSlice";
+import { useDispatch } from 'react-redux'
+import {
+	addOrderLocally,
+	removeOrderLocally,
+	deleteOrderLocally,
+} from '../../state/store/slices/tableOrder/orderSlice'
 
 const useCartAction = () => {
+	const dispatch = useDispatch()
 
-    const dispatch = useDispatch()
+	const handleIncrement = (itemId) => {
+		dispatch(addOrderLocally(itemId))
+	}
 
-    const handleIncrement = (itemId) => {
-        dispatch(addOrderLocally(itemId))
-    }
+	const handleDecrement = (itemId) => {
+		dispatch(removeOrderLocally(itemId))
+	}
+	const handleDeleteProduct = (itemId) => {
+		dispatch(deleteOrderLocally(itemId))
+	}
 
-    const handleDecrement = (itemId) => {
-        dispatch(removeOrderLocally(itemId))
-    }
-    const handleDeleteProduct = (itemId) => {
-        dispatch(deleteOrderLocally(itemId))
-    }
-
-    return {
-        handleDecrement,handleIncrement, handleDeleteProduct
-    }
+	return {
+		handleDecrement,
+		handleIncrement,
+		handleDeleteProduct,
+	}
 }
 
-export default useCartAction;
+export default useCartAction

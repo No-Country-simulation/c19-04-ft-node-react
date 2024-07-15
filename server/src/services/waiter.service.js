@@ -95,11 +95,9 @@ export const deleteRequestTable = async (req, res) => {
 			.map((element) => element.tableNumber === Number.parseInt(tableNumber))
 			.indexOf(true)
 		if (elementIndex === -1)
-			return res
-				.status(403)
-				.json({
-					message: `The table number ${tableNumber} doesn't made a request to the waiter.`,
-				})
+			return res.status(403).json({
+				message: `The table number ${tableNumber} doesn't made a request to the waiter.`,
+			})
 
 		array.splice(elementIndex, 1)
 		await WaiterModel.findByIdAndUpdate({ _id: waiter._id }, waiter, {
