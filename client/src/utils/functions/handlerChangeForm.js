@@ -15,13 +15,25 @@ export function handleChangeForm(setFormData) {
 export function handlerSubmitRegister(formData, setErrors) {
   return async (event) => {
     event.preventDefault();
-    const newErrors = validateForm(formData);
-    setErrors(newErrors);
 
-    console.log("funcion registro");
-    if (Object.keys(newErrors).length === 0) {
+    //submite pasa las comprobaciones
+    const newErrors = validateForm(formData);
+
+    //setea los errores para luego tratar de hacer la llamada
+    setErrors(newErrors);
+    
+
+    //crear una funcion para Esta transformacion
+    const dataToApi = {
+      username: formData.username,
+      password: formData.password,
+      role: formData.role
+    }
+    
+    
+    if (Object.keys(newErrors).length <= 1 && Object.keys(newErrors.passwordDetails).length === 0) {
       try {
-        const response = await registerForm(formData);
+        const response = await registerForm(dataToApi);
         console.log('Formulario enviado:', response);
       } catch (error) {
         console.error('Error en el registro, problema con el servidor:', error);

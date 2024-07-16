@@ -17,8 +17,8 @@ const RegisterUser = () => {
 
   const [errors, setErrors] = useState({});
   const [showPassword, togglePasswordVisibility] = usePasswordVisibility();
-  const [showConfirmPassword, toggleConfirmPasswordVisibility] =
-    usePasswordVisibility();
+  const [showConfirmPassword, toggleConfirmPasswordVisibility] = usePasswordVisibility();
+
 
   return (
     <form
@@ -155,7 +155,7 @@ const RegisterUser = () => {
       </div>
       <div className='flex gap-6'>
         <button
-          onClick={handlerSubmitRegister}
+          onClick={handlerSubmitRegister(formData, setErrors)} //testear si borrando esto Funciona el OnSubmit
           type='submit'
           className='bg-purple-400 rounded-lg p-3 uppercase text-sm text-white font-bold w-full'
         >
@@ -165,7 +165,7 @@ const RegisterUser = () => {
           type='button'
           className='bg-slate-400 rounded-lg p-3 uppercase text-sm text-white font-bold w-full'
           onClick={() =>
-            setFormData({
+            setFormData({ // crear una funcion que limpie el estado de formData
               username: '',
               role: '',
               password: '',

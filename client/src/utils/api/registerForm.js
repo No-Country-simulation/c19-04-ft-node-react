@@ -5,19 +5,15 @@ export async function registerForm(data) {
     const response = await axiosInstance.post("/api/register", data);
 
     if (response.status === 201) {
-      console.log("Usuario registrado exitosamente");
-      console.log(response);
+      console.log("Usuario registrado exitosamente"); //usar componente que creo Rocio para los mensajes
       return response.data;
     } else {
       console.error(
-        `Error al registrar usuario: ${response.status} - ${response.data}`
-      );
-      throw new Error(
-        `Error al registrar usuario: ${response.status} - ${response.data}`
+        `Error al registrar usuario: ${response.status} - ${response.data}` //usar componente By Rocio
       );
     }
   } catch (error) {
-    console.error(`Error al registrar usuario: ${error.message}`);
+    console.error(`Error al registrar usuario: ${error.message}`);  //usar componente By Rocio DICIENDO QUE HAY UN PROBLEMA CON LA BASE DE DATOS 
     throw error;
   }
 }
