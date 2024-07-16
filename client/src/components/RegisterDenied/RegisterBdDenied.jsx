@@ -1,9 +1,9 @@
 import MessageRedirect from "../MessageRedirect/MessageRedirect";
 
-const RegisterDenied = () => {
+const RegisterDeniedBD = () => {
   const messageRegister = {
-    title: "Registro Fallido",
-    message: "Usuario ya existente, intentelo nuevamente",
+    title: "Problemas con el Servidor",
+    message: "Error con la base de datos, comuniquese con su proveedor",
     path: "/admin/register",
   };
 
@@ -18,4 +18,4 @@ const RegisterDenied = () => {
   );
 };
 
-export default RegisterDenied;
+export default RegisterDeniedBD;
