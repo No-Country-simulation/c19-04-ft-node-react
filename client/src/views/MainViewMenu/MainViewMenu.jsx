@@ -2,6 +2,7 @@ import React from 'react'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import FilterFood from '../../components/FilterFood/FilterFood'
 import useFilterFood from '../../utils/hooks/useFilterFood'
+import ContainerCards from '../../components/ContainerCards/ContainerCards'
 
 const MainViewMenu = () => {
 
@@ -15,7 +16,9 @@ const MainViewMenu = () => {
                 <section className='border-y border-customBlueFilter my-'>
                     <FilterFood changeFilters={changeFilters} />
                 </section>
-                <div className='h-96'></div>
+                <div className='h-96'>
+                    <ContainerCards/>
+                </div>
             </div>
         </div>
     )

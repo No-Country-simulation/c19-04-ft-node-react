@@ -4,13 +4,36 @@ export default {
   theme: {
     extend: {
       colors: {
-        customRed: '#EF233C',
-        customBlue: '#003566',
-        customLight: '#F9F7F3',
-        customGreen: '#386641',
-        customBlueFilter:'#124A7D'
+        customRed: "#EF233C",
+        customBlue: "#003566",
+        customLight: "#F9F7F3",
+        customGreen: "#386641",
+        customBlueFilter: "#124A7D",
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities(
+        {
+          ".word-spacing-tight": {
+            wordSpacing: "-0.125rem", 
+          },
+          ".word-spacing-normal": {
+            wordSpacing: "normal", 
+          },
+          ".word-spacing-wide": {
+            wordSpacing: "0.25rem", 
+          },
+          ".word-spacing-wider": {
+            wordSpacing: "0.5rem", 
+          },
+          ".word-spacing-widest": {
+            wordSpacing: "1rem", 
+          },
+        },
+        ["responsive", "hover"]
+      );
+    },
+  ],
 };
