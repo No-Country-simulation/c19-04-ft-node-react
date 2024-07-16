@@ -4,7 +4,7 @@ import mock from "../../assets/other-assets/mock.json"
 const ContainerCards = () => {
 
   return (
-    <div className="flex flex-wrap gap-6 place-content-center ">
+    <div className="flex flex-wrap gap-5 place-content-center ">
       {mock.map((item, index) => (
         <CardsMainMenu key={index} title={item.title} img={item.img} price={item.price} extraInfo={item.extraInfo} />
       ))}

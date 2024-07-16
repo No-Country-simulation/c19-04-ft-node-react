@@ -16,7 +16,7 @@ const MainViewMenu = () => {
                 <section className='border-y border-customBlueFilter my-'>
                     <FilterFood changeFilters={changeFilters} />
                 </section>
-                <div className='h-96'>
+                <div className='py-7' >
                     <ContainerCards/>
                 </div>
             </div>
