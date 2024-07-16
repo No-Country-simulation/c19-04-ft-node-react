@@ -8,6 +8,7 @@ export default {
         customBlue: '#003566',
         customLight: '#F9F7F3',
         customGreen: '#386641',
+        customBlueFilter:'#124A7D'
       },
     },
   },

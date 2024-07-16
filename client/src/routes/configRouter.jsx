@@ -5,6 +5,7 @@ import CustomerActions from "../components/CustomerActions/CustomerActions.jsx";
 import DashBoardAdmins from "../views/Admin/DashBoardAdmin.jsx";
 import InvalidPasswordMessage from "../components/InvalidPasswordMessage/InvalidPasswordMessage.jsx";
 import ShoppingCart from "../views/ShoppingCart/ShoppingCart.jsx";
+import MainViewMenu from "../views/MainViewMenu/MainViewMenu.jsx";
 
 const routerPathComponent = [
   {
@@ -35,6 +36,10 @@ const routerPathComponent = [
     path: "*",
     element: <NotFound />,
   },
+  {
+    path: "main-view-menu",
+    element: <MainViewMenu/>
+  }
 ];
 
 export default routerPathComponent;
