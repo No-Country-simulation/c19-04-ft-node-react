@@ -1,10 +1,10 @@
 const CardsMainMenu = ({ img, title, extraInfo, price }) => {
     return (
-        <div className="w-[168px] h-[215px] rounded-[20px] bg-customLight flex flex-col text-black overflow-hidden">
+        <div className="w-[168px] max-h-[215px] rounded-[20px] bg-customLight flex flex-col text-black overflow-hidden shadow-md shadow-gray-600">
             <div className="grow">
                 <img className="object-cover w-full h-full" src={img} alt="" />
             </div>
-            <div className="tracking-tight">
+            <div className="tracking-tight ">
                 <section className="flex flex-col gap-1 m-2 ">
                     <p className="font-bold  word-spacing-tight">{title}</p>
                     <p className="text-[12px]">{extraInfo}</p>
