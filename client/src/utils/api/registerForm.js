@@ -6,6 +6,7 @@ export async function registerForm(data) {
 
     if (response.status === 201) {
       console.log("Usuario registrado exitosamente");
+      console.log(response);
       return response.data;
     } else {
       console.error(

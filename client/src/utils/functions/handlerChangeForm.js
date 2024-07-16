@@ -18,6 +18,7 @@ export function handlerSubmitRegister(formData, setErrors) {
     const newErrors = validateForm(formData);
     setErrors(newErrors);
 
+    console.log("funcion registro");
     if (Object.keys(newErrors).length === 0) {
       try {
         const response = await registerForm(formData);
