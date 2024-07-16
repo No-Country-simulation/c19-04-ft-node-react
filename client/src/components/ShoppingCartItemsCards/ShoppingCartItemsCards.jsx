@@ -4,7 +4,7 @@ import useCartAction from "../../utils/hooks/useCartAction";
 
 function ShoppingCartItemsCards({ name, price, img }) {
 
-  const { handleDecrement,handleIncrement, handleDeleteProduct} = useCartAction()
+  const { handleDeleteProduct} = useCartAction()
   return (
     <div className="grid grid-cols-1 my-1 md:grid-cols-[220px_minmax(900px,_1fr)] w-full bg-customLight rounded-[30px] gap-3">
       <img
