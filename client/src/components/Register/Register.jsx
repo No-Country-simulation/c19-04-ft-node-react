@@ -6,6 +6,7 @@ import {
 import { usePasswordVisibility } from '../../utils/hooks/usePassworVisibility';
 import eyeIconSVG from '../../../src/assets/svg/eye.svg';
 import eyeOffIconSVG from '../../../src/assets/svg/eye-off.svg';
+import { cleanData } from '../../utils/functions/cleanData';
 
 const RegisterUser = () => {
   const [formData, setFormData] = useState({
@@ -155,22 +156,25 @@ const RegisterUser = () => {
       </div>
       <div className='flex gap-6'>
         <button
-          onClick={handlerSubmitRegister(formData, setErrors)} //testear si borrando esto Funciona el OnSubmit
+          // onClick={handlerSubmitRegister(formData, setErrors)} //testear si borrando esto Funciona el OnSubmit
           type='submit'
-          className='bg-purple-400 rounded-lg p-3 uppercase text-sm text-white font-bold w-full'
+          className='bg-customBlue rounded-lg p-3 uppercase text-sm text-white font-bold w-full hover:bg-sky-600'
         >
           Registrar
         </button>
         <button
           type='button'
-          className='bg-slate-400 rounded-lg p-3 uppercase text-sm text-white font-bold w-full'
-          onClick={() =>
-            setFormData({ // crear una funcion que limpie el estado de formData
-              username: '',
-              role: '',
-              password: '',
-              confirmPassword: '',
-            })
+          className='bg-customBlue rounded-lg p-3 uppercase text-sm text-white font-bold w-full hover:bg-sky-600'
+          onClick={() => {
+            setFormData(cleanData(formData))
+            console.log(cleanData(formData));
+            // setFormData({ // crear una funcion que limpie el estado de formData
+            //   username: '',
+            //   role: '',
+            //   password: '',
+            //   confirmPassword: '',
+            // })
+          }
           }
         >
           Cancelar
