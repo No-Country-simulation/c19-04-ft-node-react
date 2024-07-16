@@ -6,7 +6,7 @@ export const redirectLogin = (path, delay) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigatTo(path);
+      navigateTo(path);
     }, delay);
 
     return () => clearTimeout(timer);

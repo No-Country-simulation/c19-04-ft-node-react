@@ -6,6 +6,7 @@ import DashBoardAdmins from "../views/Admin/DashBoardAdmin.jsx";
 import InvalidPasswordMessage from "../components/InvalidPasswordMessage/InvalidPasswordMessage.jsx";
 import ShoppingCart from "../views/ShoppingCart/ShoppingCart.jsx";
 import RegisterSuccessfully from "../components/RegisterSuccessfully/RegisterSuccessfully.jsx";
+import RegisterDenied from "../components/RegisterDenied/RegisterDenied.jsx";
 
 const routerPathComponent = [
   {
@@ -35,6 +36,10 @@ const routerPathComponent = [
   {
     path: "/register-successfully",
     element: <RegisterSuccessfully />,
+  },
+  {
+    path: "/register-denied",
+    element: <RegisterDenied />,
   },
   {
     path: "*",

@@ -1,9 +1,9 @@
 import MessageRedirect from "../MessageRedirect/MessageRedirect";
 
-const RegisterSuccessfully = () => {
+const RegisterDenied = () => {
   const messageRegister = {
-    title: "Registro exitoso",
-    message: "Usuario registrado correctamente",
+    title: "Registro Fallido",
+    message: "Error en el registro, pongase en contacto con el proveedor ",
     path: "/Login",
   };
 
@@ -18,4 +18,4 @@ const RegisterSuccessfully = () => {
   );
 };
 
-export default RegisterSuccessfully;
+export default RegisterDenied;

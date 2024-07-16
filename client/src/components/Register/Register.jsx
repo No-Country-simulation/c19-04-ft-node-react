@@ -7,6 +7,7 @@ import { usePasswordVisibility } from '../../utils/hooks/usePassworVisibility';
 import eyeIconSVG from '../../../src/assets/svg/eye.svg';
 import eyeOffIconSVG from '../../../src/assets/svg/eye-off.svg';
 import { cleanData } from '../../utils/functions/cleanData';
+import { useNavigateHelper } from '../../utils/hooks/useNavigations';
 
 const RegisterUser = () => {
   const [formData, setFormData] = useState({
@@ -20,10 +21,11 @@ const RegisterUser = () => {
   const [showPassword, togglePasswordVisibility] = usePasswordVisibility();
   const [showConfirmPassword, toggleConfirmPasswordVisibility] = usePasswordVisibility();
 
+  const { navigateTo } = useNavigateHelper();
 
   return (
     <form
-      onSubmit={handlerSubmitRegister(formData, setErrors)}
+      onSubmit={handlerSubmitRegister(formData, setErrors, navigateTo )}
       className='space-y-10 w-80'
     >
       <div className='space-y-4'>

@@ -1,8 +1,7 @@
-import { messageRegister } from "../api/messageRegister";
 import { registerForm } from "../api/registerForm";
 import { dataToApi } from "./dataToApi";
 import { validateForm } from "./validateForm";
-import {useNavigateHelper} from "../hooks/useNavigations";
+
 
 export function handleChangeForm(setFormData) {
   return (event) => {
@@ -15,7 +14,7 @@ export function handleChangeForm(setFormData) {
   };
 }
 
-export function handlerSubmitRegister(formData, setErrors) {
+export function handlerSubmitRegister(formData, setErrors, navigate) {
   return async (event) => {
     event.preventDefault();
 
@@ -34,12 +33,15 @@ export function handlerSubmitRegister(formData, setErrors) {
     ) {
       try {
         const response = await registerForm(dataApi);
-        if (response.status === 200) {
-          const { navigateTo } = useNavigateHelper();
-
-          navigateTo("/register-successfully");
+        console.log(response)
+        if(response.status === 201){
+          navigate("/register-successfully");
+        } 
+        if(response.response.status === 404 ) {
+          navigate("/register-denied")
         }
-        console.log("Formulario enviado:", response);
+        
+
       } catch (error) {
         console.error("Error en el registro, problema con el servidor:", error);
         setErrors({ submit: error.message });
