@@ -4,7 +4,7 @@ import CardMenuController from '../controllers/card-menu.controller.js'
 const router = Router()
 
 //GET de card-menu
-router.get('/card-menu', CardMenuController.getCardMenu)
+router.get('/', CardMenuController.getCardMenu)
 
 //PATCH de card-menu
 
