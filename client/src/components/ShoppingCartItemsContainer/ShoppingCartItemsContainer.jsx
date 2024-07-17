@@ -8,13 +8,13 @@ function ShoppingCartItemsContainer() {
 
   return (
     <div className="flex flex-col w-full mb-20 gap-12">
-      {arrayPedidos.map((item) => (
+      {arrayPedidos.map((item, index) => (
         <ShoppingCartItemsCards
-          key={item.productId.title}
-          _id= {item.productId.title}
+          key={index}
+          _id= {item.productId._id}
           name={item.productId.title}
           price={item.productId.price}
-          img={item.productId.img}
+          img={item.productId.imgUrl}
         />
       ))}
     </div>

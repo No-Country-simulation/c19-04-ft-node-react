@@ -1,163 +1,182 @@
 [
-    {
+  {
       "title": "Pollo a la Brasa",
       "description": "Acompañado con papas fritas",
-      "estimatedTimeToDelive": 10,
-      "img": "https://buenazo.cronosmedia.glr.pe/original/2023/07/14/64ac3e8c599470217672a906.jpg",
-      "price": "$5000",
-      "available": "true"
-    },
-    {
+      "estimatedTimeToDeliver": 10,
+      "imgUrl": "https://buenazo.cronosmedia.glr.pe/original/2023/07/14/64ac3e8c599470217672a906.jpg",
+      "price": 5000,
+      "available": true,
+      "category": "Platos principales"
+  },
+  {
       "title": "Pizza Margarita",
       "description": "Con queso mozzarella y albahaca",
-      "estimatedTimeToDelive": 20,
-      "img": "https://estudiarcocina.com/wp-content/uploads/2023/01/Origen-de-la-pizza-margarita.png",
-      "price": "$7000",
-      "available": "true"
-    },
-    {
+      "estimatedTimeToDeliver": 20,
+      "imgUrl": "https://estudiarcocina.com/wp-content/uploads/2023/01/Origen-de-la-pizza-margarita.png",
+      "price": 7000,
+      "available": true,
+      "category": "Platos principales"
+  },
+  {
       "title": "Hamburguesa Clásica",
       "description": "Con lechuga, tomate y queso",
-      "estimatedTimeToDelive": 12,
-      "img": "https://espanol.kingsford.com/wp-content/uploads/2017/02/KFD_SpicyBBQBaconRanchBurger35382_WEB.jpg",
-      "price": "$6500",
-      "available": "true"
-    },
-    {
+      "estimatedTimeToDeliver": 12,
+      "imgUrl": "https://espanol.kingsford.com/wp-content/uploads/2017/02/KFD_SpicyBBQBaconRanchBurger35382_WEB.jpg",
+      "price": 6500,
+      "available": true,
+      "category": "Platos principales"
+  },
+  {
       "title": "Tacos al Pastor",
       "description": "Servidos con cebolla y cilantro",
-      "estimatedTimeToDelive": 20,
-      "img": "https://www.simplyrecipes.com/thmb/3K4LQNFWWR3H62xa598c_XAYIQQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Tacos-Al-Pastor-Lead-04-429571d03db94ed1a8a24f8c2d351cec.jpg",
-      "price": "$4500",
-      "available": "true"
-    },
-    {
+      "estimatedTimeToDeliver": 20,
+      "imgUrl": "https://www.simplyrecipes.com/thmb/3K4LQNFWWR3H62xa598c_XAYIQQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Tacos-Al-Pastor-Lead-04-429571d03db94ed1a8a24f8c2d351cec.jpg",
+      "price": 4500,
+      "available": true,
+      "category": "Platos principales"
+  },
+  {
       "title": "Ensalada Caesar",
       "description": "Con aderezo casero y crutones",
-      "estimatedTimeToDelive": 20,
-      "img": "https://www.comedera.com/wp-content/uploads/2023/10/shutterstock_1087243763.jpg",
-      "price": "$4000",
-      "available": "true"
-    },
-    {
+      "estimatedTimeToDeliver": 20,
+      "imgUrl": "https://www.comedera.com/wp-content/uploads/2023/10/shutterstock_1087243763.jpg",
+      "price": 4000,
+      "available": true,
+      "category": "Entradas"
+  },
+  {
       "title": "Sushi de Salmón",
       "description": "Rollos frescos y bien sazonados",
-      "estimatedTimeToDelive": 40,
-      "img": "https://okdiario.com/img/2021/08/11/sushi-queso-crema-y-salmon.jpg",
-      "price": "$12000",
-      "available": "true"
-    },
-    {
+      "estimatedTimeToDeliver": 40,
+      "imgUrl": "https://okdiario.com/img/2021/08/11/sushi-queso-crema-y-salmon.jpg",
+      "price": 12000,
+      "available": true,
+      "category": "Platos principales"
+  },
+  {
       "title": "Spaghetti Bolognesa",
       "description": "Con carne de res y salsa de tomate",
-      "estimatedTimeToDelive": 20,
-      "img": "https://www.unileverfoodsolutions.com.co/dam/global-ufs/mcos/NOLA/calcmenu/recipes/col-recipies/fruco-tomate-cocineros/BOLO%C3%91ESA%201200x709.png",
-      "price": "$7500",
-      "available": "true"
-    },
-    {
+      "estimatedTimeToDeliver": 20,
+      "imgUrl": "https://www.unileverfoodsolutions.com.co/dam/global-ufs/mcos/NOLA/calcmenu/recipes/col-recipies/fruco-tomate-cocineros/BOLO%C3%91ESA%201200x709.png",
+      "price": 7500,
+      "available": true,
+      "category": "Platos principales"
+  },
+  {
       "title": "Paella Valenciana",
       "description": "Con mariscos y verduras frescas",
-      "estimatedTimeToDelive": 20,
-      "img": "https://kevincocinero.com/wp-content/uploads/2023/07/paella-valenciana-pollo-conejo.jpg",
-      "price": "$15000",
-      "available": "true"
-    },
-    {
+      "estimatedTimeToDeliver": 20,
+      "imgUrl": "https://kevincocinero.com/wp-content/uploads/2023/07/paella-valenciana-pollo-conejo.jpg",
+      "price": 15000,
+      "available": true,
+      "category": "Platos principales"
+  },
+  {
       "title": "Ceviche de Camarón",
       "description": "Mariscos marinados con limón",
-      "estimatedTimeToDelive": 20,
-      "img": "https://assets.unileversolutions.com/recipes-v2/235860.jpg",
-      "price": "$6000",
-      "available": "true"
-    },
-    {
+      "estimatedTimeToDeliver": 20,
+      "imgUrl": "https://assets.unileversolutions.com/recipes-v2/235860.jpg",
+      "price": 6000,
+      "available": true,
+      "category": "Entradas"
+  },
+  {
       "title": "Crepes de Nutella",
       "description": "Rellenos de crema de chocolate",
-      "estimatedTimeToDelive": 20,
-      "img": "https://img.taste.com.au/kXTe12a1/taste/2018/03/nutella-pancakes-135836-1.jpg",
-      "price": "$3500",
-      "available": "true"
-    },
-    {
+      "estimatedTimeToDeliver": 20,
+      "imgUrl": "https://img.taste.com.au/kXTe12a1/taste/2018/03/nutella-pancakes-135836-1.jpg",
+      "price": 3500,
+      "available": true,
+      "category": "Postres"
+  },
+  {
       "title": "Costillas BBQ",
       "description": "Glaseadas con salsa barbacoa",
-      "estimatedTimeToDelive": 20,
-      "img": "https://www.recetasnestle.com.ec/sites/default/files/srh_recipes/f0cc503abb2ea74aa2394550d0fa4bba.jpg",
-      "price": "$8000",
-      "available": "true"
-    },
-    {
+      "estimatedTimeToDeliver": 20,
+      "imgUrl": "https://www.recetasnestle.com.ec/sites/default/files/srh_recipes/f0cc503abb2ea74aa2394550d0fa4bba.jpg",
+      "price": 8000,
+      "available": true,
+      "category": "Platos principales"
+  },
+  {
       "title": "Hot Dog Especial",
       "description": "Con cebolla caramelizada y ketchup",
-      "estimatedTimeToDelive": 20,
-      "img": "https://www.gastrolabweb.com/u/fotografias/m/2021/12/21/f850x638-23332_100821_5050.jpg",
-      "price": "$3000",
-      "available": "true"
-    },
-    {
+      "estimatedTimeToDeliver": 20,
+      "imgUrl": "https://www.gastrolabweb.com/u/fotografias/m/2021/12/21/f850x638-23332_100821_5050.jpg",
+      "price": 3000,
+      "available": true,
+      "category": "Platos principales"
+  },
+  {
       "title": "Canelones de Ricotta",
       "description": "Con salsa bechamel y espinacas",
-      "estimatedTimeToDelive": 20,
-      "img": "https://imag.bonviveur.com/canelones-de-espinacas-y-queso.jpg",
-      "price": "$7000",
-      "available": "true"
-    },
-    {
+      "estimatedTimeToDeliver": 20,
+      "imgUrl": "https://imag.bonviveur.com/canelones-de-espinacas-y-queso.jpg",
+      "price": 7000,
+      "available": true,
+      "category": "Platos principales"
+  },
+  {
       "title": "Fajitas de Pollo",
       "description": "Servidas con guacamole y salsa",
-      "estimatedTimeToDelive": 20,
-      "img": "https://img.freepik.com/fotos-premium/fajitas-pollo-guacamole-plato-blanco-visto-arriba_864588-27111.jpg",
-      "price": "$6500",
-      "available": "true"
-    },
-    {
+      "estimatedTimeToDeliver": 20,
+      "imgUrl": "https://img.freepik.com/fotos-premium/fajitas-pollo-guacamole-plato-blanco-visto-arriba_864588-27111.jpg",
+      "price": 6500,
+      "available": true,
+      "category": "Platos principales"
+  },
+  {
       "title": "Pasta Carbonara",
       "description": "Con panceta y crema de huevo",
-      "estimatedTimeToDelive": 20,
-      "img": "https://images.ecestaticos.com/p2iJ3v7PaCyQ4D4K3JAP_Uyhuns=/0x77:1228x769/1338x752/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fcf2%2Fee0%2F81f%2Fcf2ee081f2ffc18e32b05627b79534f3.jpg",
-      "price": "$7200",
-      "available": "true"
-    },
-    {
+      "estimatedTimeToDeliver": 20,
+      "imgUrl": "https://images.ecestaticos.com/p2iJ3v7PaCyQ4D4K3JAP_Uyhuns=/0x77:1228x769/1338x752/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fcf2%2Fee0%2F81f%2Fcf2ee081f2ffc18e32b05627b79534f3.jpg",
+      "price": 7200,
+      "available": true,
+      "category": "Platos principales"
+  },
+  {
       "title": "Alitas de Pollo",
       "description": "Con salsa picante o barbacoa",
-      "estimatedTimeToDelive": 20,
-      "img": "https://www.pequerecetas.com/wp-content/uploads/2015/01/alitas-de-pollo-a-la-barbacoa-receta.jpg",
-      "price": "$5500",
-      "available": "true"
-    },
-    {
+      "estimatedTimeToDeliver": 20,
+      "imgUrl": "https://www.pequerecetas.com/wp-content/uploads/2015/01/alitas-de-pollo-a-la-barbacoa-receta.jpg",
+      "price": 5500,
+      "available": true,
+      "category": "Platos principales"
+  },
+  {
       "title": "Goulash Húngaro",
       "description": "Estofado de carne con paprika",
-      "estimatedTimeToDelive": 20,
-      "img": "https://www.cocinatis.com/archivos/202207/CTIS119-receta-goulash-hungaro_large_16x9.jpg",
-      "price": "$9000",
-      "available": "true"
-    },
-    {
+      "estimatedTimeToDeliver": 20,
+      "imgUrl": "https://www.cocinatis.com/archivos/202207/CTIS119-receta-goulash-hungaro_large_16x9.jpg",
+      "price": 9000,
+      "available": true,
+      "category": "Platos principales"
+  },
+  {
       "title": "Moussaka",
       "description": "Con carne de res y berenjenas",
-      "estimatedTimeToDelive": 20,
-      "img": "https://www.francoislambert.one/cdn/shop/articles/moussaka_traditionnelle.webp?v=1713385154",
-      "price": "$8500",
-      "available": "true"
-    },
-    {
+      "estimatedTimeToDeliver": 20,
+      "imgUrl": "https://www.francoislambert.one/cdn/shop/articles/moussaka_traditionnelle.webp?v=1713385154",
+      "price": 8500,
+      "available": true,
+      "category": "Platos principales"
+  },
+  {
       "title": "Tarta de Manzana",
       "description": "Con masa crujiente y manzanas caramelizadas",
-      "estimatedTimeToDelive": 20,
-      "img": "https://mandolina.co/wp-content/uploads/2023/05/Tarta-de-manzana.png",
-      "price": "$4000",
-      "available": "true"
-    },
-    {
+      "estimatedTimeToDeliver": 20,
+      "imgUrl": "https://mandolina.co/wp-content/uploads/2023/05/Tarta-de-manzana.png",
+      "price": 4000,
+      "available": true,
+      "category": "Postres"
+  },
+  {
       "title": "Brownie de Chocolate",
       "description": "Con trozos de nuez y cobertura de chocolate",
-      "estimatedTimeToDelive": 20,
-      "img": "https://cdn.bolivia.com/gastronomia/2011/08/09/brownie-de-chocolate-3474.jpg",
-      "price": "$3000",
-      "available": "true"
-    }
-  ]
-  
+      "estimatedTimeToDeliver": 20,
+      "imgUrl": "https://cdn.bolivia.com/gastronomia/2011/08/09/brownie-de-chocolate-3474.jpg",
+      "price": 3000,
+      "available": true,
+      "category": "Postres"
+  }
+]
