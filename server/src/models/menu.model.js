@@ -13,7 +13,12 @@ const menuSchema = new mongoose.Schema({
 	category: {
 		type: String,
 		required: true,
-		enum: ['Entradas', 'Platos principales', 'Postres', 'Bebidas', 'Alcohol'],
+		enum: ['Entradas', 'Platos principales', 'Postres', 'Bebidas', 'Alcohol']
+  },
+	imgUrl: {
+		type: String,
+		required: true,
+
 	},
 	ingredients: [],
 	estimatedTimeToDeliver: {
