@@ -161,7 +161,8 @@ Crear menu.
 - **Body:**
   ```json
    "title": "Pizza",
-   "description": "Aca no le ponemos Ananá 🚩"
+   "description": "Aca no le ponemos Ananá 🚩",
+   "imgUrl": "https://tu-web.com/img.png"
    "estimatedTimeToDeliver": 20,
    "price": 9,
    "available": true
