@@ -9,7 +9,7 @@ import eyeOffIconSVG from "../../../src/assets/svg/eye-off.svg";
 import { cleanData } from "../../utils/functions/cleanData";
 import { useNavigateHelper } from "../../utils/hooks/useNavigations";
 
-const RegisterUser = () => {
+const RegisterUser = ({ closeModal }) => {
   const [formData, setFormData] = useState({
     username: "",
     role: "",
@@ -24,16 +24,18 @@ const RegisterUser = () => {
 
   const { navigateTo } = useNavigateHelper();
 
+  const handleCancelClick = () => {
+    setFormData(cleanData(formData));
+    closeModal();
+  };
+
   return (
     <form
       onSubmit={handlerSubmitRegister(formData, setErrors, navigateTo)}
-      className="space-y-10 w-80"
+      className="space-y-10 sm:w-80"
     >
-      <div className="space-y-4">
-        <div>
-          <label htmlFor="username" className="sr-only">
-            Nombre de usuario:
-          </label>
+      <div className="space-y-6">
+        <div className="relative">
           <input
             type="text"
             id="username"
@@ -41,8 +43,14 @@ const RegisterUser = () => {
             placeholder="Nombre de usuario"
             value={formData.username}
             onChange={handleChangeForm(setFormData)}
-            className="bg-slate-300 rounded-lg p-2 w-full"
+            className="bg-slate-300 rounded-3xl px-5 pb-4 pt-6 w-full peer placeholder-shown:pt-4 transition-all duration-300 placeholder-transparent"
           />
+          <label
+            htmlFor="username"
+            className="absolute inset-0 top-1 left-3 text-[0.7rem] text-green rounded-lg px-2 uppercase peer-placeholder-shown:-translate-x-0 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:normal-case transition-all duration-300 cursor-text"
+          >
+            Nombre de usuario
+          </label>
           {errors.username && (
             <span className="text-red-400 text-sm pl-2">{errors.username}</span>
           )}
@@ -57,7 +65,7 @@ const RegisterUser = () => {
             value={formData.role}
             onChange={handleChangeForm(setFormData)}
             placeholder="Rol"
-            className="bg-slate-300 rounded-lg p-2 w-full"
+            className="bg-slate-300 rounded-3xl px-4 py-4 w-full cursor-pointer"
           >
             <option value="" className="text-gray-400">
               Selecciona un rol
@@ -72,9 +80,6 @@ const RegisterUser = () => {
           )}
         </div>
         <div>
-          <label htmlFor="password" className="sr-only">
-            Contraseña:
-          </label>
           <div className="relative flex items-center justify-end">
             <input
               type={showPassword ? "text" : "password"}
@@ -83,9 +88,15 @@ const RegisterUser = () => {
               placeholder="Contraseña"
               value={formData.password}
               onChange={handleChangeForm(setFormData)}
-              className="bg-slate-300 rounded-lg p-2 w-full"
+              className="bg-slate-300 rounded-3xl px-5 pb-4 pt-6 w-full peer placeholder-shown:pt-4 transition-all duration-300 placeholder-transparent"
               maxLength={11}
             />
+            <label
+              htmlFor="password"
+              className="absolute inset-0 top-1 left-3 text-[0.7rem] text-green rounded-lg px-2 uppercase peer-placeholder-shown:-translate-x-0 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:normal-case transition-all duration-300 cursor-text"
+            >
+              Contraseña
+            </label>
             <button
               type="button"
               onClick={togglePasswordVisibility}
@@ -116,9 +127,6 @@ const RegisterUser = () => {
           ))}
         </div>
         <div>
-          <label htmlFor="confirmPassword" className="sr-only">
-            Confirmar Contraseña:
-          </label>
           <div className="relative flex items-center justify-end">
             <input
               type={showConfirmPassword ? "text" : "password"}
@@ -127,9 +135,15 @@ const RegisterUser = () => {
               placeholder="Confirmar contraseña"
               value={formData.confirmPassword}
               onChange={handleChangeForm(setFormData)}
-              className="bg-slate-300 rounded-lg p-2 w-full"
+              className="bg-slate-300 rounded-3xl px-5 pb-4 pt-6 w-full peer placeholder-shown:pt-4 transition-all duration-300 placeholder-transparent"
               maxLength={11}
             />
+            <label
+              htmlFor="confirmPassword"
+              className="absolute inset-0 top-1 left-3 text-[0.7rem] text-green rounded-lg px-2 uppercase peer-placeholder-shown:-translate-x-0 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:normal-case transition-all duration-300 cursor-text"
+            >
+              Confirmar Contraseña
+            </label>
             <button
               type="button"
               onClick={toggleConfirmPasswordVisibility}
@@ -160,16 +174,14 @@ const RegisterUser = () => {
       <div className="flex gap-6">
         <button
           type="submit"
-          className="bg-customBlue rounded-lg p-3 uppercase text-sm text-white font-bold w-full hover:bg-sky-600"
+          className="bg-customBlue rounded-2xl p-4 uppercase text-sm text-white font-bold w-full transition-transform duration-200 sm:hover:scale-110 hover:bg-sky-600"
         >
           Registrar
         </button>
         <button
           type="button"
-          className="bg-customBlue rounded-lg p-3 uppercase text-sm text-white font-bold w-full hover:bg-sky-600"
-          onClick={() => {
-            setFormData(cleanData(formData));
-          }}
+          className="bg-customBlue rounded-2xl p-4 uppercase text-sm text-white font-bold w-full transition-transform duration-200 sm:hover:scale-110 hover:bg-sky-600"
+          onClick={() => handleCancelClick()}
         >
           Cancelar
         </button>
