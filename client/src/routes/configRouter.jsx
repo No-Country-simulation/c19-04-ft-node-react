@@ -8,6 +8,8 @@ import ShoppingCart from "../views/ShoppingCart/ShoppingCart.jsx";
 import RegisterSuccessfully from "../components/RegisterSuccessfully/RegisterSuccessfully.jsx";
 import RegisterDenied from "../components/RegisterDenied/RegisterDenied.jsx";
 import RegisterDeniedBD from "../components/RegisterDenied/RegisterBdDenied.jsx";
+import MainViewMenu from "../views/MainViewMenu/MainViewMenu.jsx";
+
 
 const routerPathComponent = [
   {
@@ -47,13 +49,13 @@ const routerPathComponent = [
     element: <RegisterDeniedBD />,
   },
   {
+    path: "main-view-menu",
+    element: <MainViewMenu/>
+  },
+  {
     path: "*",
     element: <NotFound />,
   },
-  {
-    path: "main-view-menu",
-    element: <MainViewMenu/>
-  }
 ];
 
 export default routerPathComponent;

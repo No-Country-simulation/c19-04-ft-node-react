@@ -32,6 +32,7 @@ export function handlerSubmitRegister(formData, setErrors, navigate) {
     ) {
       try {
         const response = await registerForm(dataApi);
+        console.log(response)
 
         if (response && response.status === 201) {
           navigate("/register-successfully");

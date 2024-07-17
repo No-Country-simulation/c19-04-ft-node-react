@@ -8,7 +8,6 @@ const ContainerCards = () => {
       {mock.map((item, index) => (
         <CardsMainMenu key={index} title={item.title} img={item.img} price={item.price} extraInfo={item.extraInfo} />
       ))}
-        {/* <CardsMainMenu img={} title={} price={} extraInfo={}/> */}
     </div>
   )
 }

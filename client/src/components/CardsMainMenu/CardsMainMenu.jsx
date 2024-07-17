@@ -1,4 +1,13 @@
+import useCartAction from "../../utils/hooks/useCartAction"
+import { orderSelectorQuantity } from "../../utils/functions/orderSelector"
+import { createCartItemObject } from   "../../utils/functions/createItemObject.js"
+
 const CardsMainMenu = ({ img, title, extraInfo, price }) => {
+
+    const itemPayload = createCartItemObject(title,extraInfo,price,img)
+    const { handleDecrement, handleIncrement } = useCartAction();
+    const quantity = orderSelectorQuantity(itemPayload)?.quantity ?? 0
+
     return (
         <div className="w-[168px] min-h-[225px] rounded-[20px] bg-customLight flex flex-col text-black overflow-hidden shadow-md shadow-gray-600">
             <div className="grow">
@@ -13,9 +22,13 @@ const CardsMainMenu = ({ img, title, extraInfo, price }) => {
                             {price}
                         </p>
                         <div className="bg-gray-300 rounded-[20px] w-[82px] h-8 flex justify-around items-center">
-                            <button className="flex items-center justify-center w-6 h-6 bg-blue-400 rounded-full">-</button>
-                            <p className="flex items-center justify-center">0</p>
-                            <button className="flex items-center justify-center w-6 h-6 bg-blue-500 rounded-full">+</button>
+                            <button
+                                className="flex items-center justify-center w-6 h-6 bg-blue-400 rounded-full"
+                                onClick={() => { handleDecrement(itemPayload) }}>-</button>
+                            <p className="flex items-center justify-center">{quantity}</p>
+                            <button
+                                className="flex items-center justify-center w-6 h-6 bg-blue-500 rounded-full"
+                                onClick={() => { handleIncrement(itemPayload) }}>+</button>
                         </div>
 
                     </div>

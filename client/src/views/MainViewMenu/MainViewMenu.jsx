@@ -3,6 +3,7 @@ import SearchBar from '../../components/SearchBar/SearchBar'
 import FilterFood from '../../components/FilterFood/FilterFood'
 import useFilterFood from '../../utils/hooks/useFilterFood'
 import ContainerCards from '../../components/ContainerCards/ContainerCards'
+import NavBar from '../../components/NavBar/NavBar'
 
 const MainViewMenu = () => {
 
@@ -10,6 +11,7 @@ const MainViewMenu = () => {
 
     return (
         <div className='bg-customBlue'>
+            <NavBar/>
             <SearchBar />
             <div className='text-white mx-5'>
                 <h2 className='text-[28px] font-bold leading-8 my-2'>Categorías</h2>
