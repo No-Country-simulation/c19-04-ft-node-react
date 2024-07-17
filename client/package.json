@@ -11,6 +11,7 @@
 		"biome:format": "biome format --write ../client ../server"
 	},
 	"dependencies": {
+		"@headlessui/react": "^2.1.2",
 		"@reduxjs/toolkit": "^2.2.6",
 		"axios": "^1.7.2",
 		"react": "^18.3.1",

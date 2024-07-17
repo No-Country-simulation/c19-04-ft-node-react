@@ -1,8 +1,9 @@
-export const createCartItemObject = (title, extraInfo, price, img) => ({
-    _id: title,
+export const createCartItemObject = (_id, title, description, price, imgUrl, time) => ({
+    _id: _id,
     title: title,
-    description: extraInfo,
+    description: description,
     price: price,
-    img: img,
+    imgUrl: imgUrl,
+    time: time
 });
 

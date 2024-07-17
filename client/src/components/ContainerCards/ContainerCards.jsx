@@ -1,12 +1,18 @@
 import CardsMainMenu from "../CardsMainMenu/CardsMainMenu"
-import mock from "../../assets/other-assets/mock.json"
 
-const ContainerCards = () => {
+const ContainerCards = ({ menus }) => {
 
   return (
     <div className="flex flex-wrap gap-5 place-content-center ">
-      {mock.map((item, index) => (
-        <CardsMainMenu key={index} title={item.title} img={item.img} price={item.price} extraInfo={item.extraInfo} />
+      {menus.map((item, index) => (
+        <CardsMainMenu
+          key={index}
+          _id={item._id}
+          title={item.title}
+          imgUrl={item.imgUrl}
+          price={item.price}
+          description={item.description}
+          time={item.estimatedTimeToDeliver} />
       ))}
     </div>
   )
