@@ -38,7 +38,6 @@ export function handlerSubmitRegister(formData, setErrors, navigate) {
           navigate("/register-successfully");
         }
       } catch (error) {
-        console.error("Error en el registro, problema con el servidor:", error);
 
         if (error.response) {
           if (
