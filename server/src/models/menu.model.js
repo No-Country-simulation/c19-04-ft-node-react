@@ -10,6 +10,10 @@ const menuSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	imgUrl: {
+		type: String,
+		required: true,
+	},
 	ingredients: [],
 	estimatedTimeToDeliver: {
 		type: Number,
