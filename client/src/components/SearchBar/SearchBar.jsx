@@ -14,6 +14,10 @@ const SearchBar = () => {
         dispatch(setSearchValue(e.target.value));
     };
 
+    const arraySearch = useSelector((state) => state.dataMenus.menus)
+    console.log(arraySearch);
+    const busquedaEnArray = arraySearch.filter((item) => item.title.toLowerCase().includes(debounceSearchValue.toLowerCase()));
+    console.log(busquedaEnArray);
     return (
         <section className=" min-h-24 flex place-content-center">
             <div className={`flex flex-row-reverse items-center py-2 w-[90%] sm:w-[60%] ${searchValue !== '' ? 'gap-6' : ' gap-5'}`}>
