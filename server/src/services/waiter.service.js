@@ -65,8 +65,6 @@ export const assignTables = async (req, res) => {
 
 		logger.info('Waiter updated correctly')
 		res.status(200).json({ message: 'Tables assigned correctly' })
-<<<<<<< HEAD
-=======
 	} catch (err) {
 		logger.error(`Something unexpected happend at ${err}`)
 		res.status(500).json({ message: 'Server Internal Error' })
@@ -83,7 +81,6 @@ export const getRequestedTables = async (req, res) => {
 		logger.error(`Something unexpected happend at ${err}`)
 		res.status(500).json({ message: 'Server Internal Error' })
 	}
->>>>>>> dev
 }
 
 export const deleteRequestTable = async (req, res) => {

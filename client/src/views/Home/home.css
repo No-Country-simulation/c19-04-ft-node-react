@@ -1,0 +1,11 @@
+.buttonBorder {
+    border: 80px solid ;
+    border-image-width: 1;
+    border-image-source: url("https://cdn.discordapp.com/attachments/1262972597323174015/1262972644647632936/border.png?ex=66988a6f&is=669738ef&hm=d474647b05285b866e428fc8e1463fa43db8c73eb98e3af4ddaac3673a529c42&");
+    border-image-repeat: stretch;
+    border-image-slice: 150;
+    
+}
+.buttonBorder:hover {
+ transform: scale(1.2);
+}
