@@ -5,7 +5,9 @@ import CustomerActions from "../components/CustomerActions/CustomerActions.jsx";
 import DashBoardAdmins from "../views/Admin/DashBoardAdmin.jsx";
 import InvalidPasswordMessage from "../components/InvalidPasswordMessage/InvalidPasswordMessage.jsx";
 import ShoppingCart from "../views/ShoppingCart/ShoppingCart.jsx";
-import MainViewMenu from "../views/MainViewMenu/MainViewMenu.jsx";
+import RegisterSuccessfully from "../components/RegisterSuccessfully/RegisterSuccessfully.jsx";
+import RegisterDenied from "../components/RegisterDenied/RegisterDenied.jsx";
+import RegisterDeniedBD from "../components/RegisterDenied/RegisterBdDenied.jsx";
 
 const routerPathComponent = [
   {
@@ -31,6 +33,18 @@ const routerPathComponent = [
   {
     path: "/shopping-cart",
     element: <ShoppingCart />,
+  },
+  {
+    path: "/register-successfully",
+    element: <RegisterSuccessfully />,
+  },
+  {
+    path: "/register-denied",
+    element: <RegisterDenied />,
+  },
+  {
+    path: "/register-offline",
+    element: <RegisterDeniedBD />,
   },
   {
     path: "*",
