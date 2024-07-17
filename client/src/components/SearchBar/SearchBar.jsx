@@ -1,11 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchValue } from '../../state/store/slices/searchValue/searchSlice';
-import filterIcon from "../../assets/images/filter.png"
+import filterIcon from "../../assets/images/filter.png";
+import { useDebounce } from 'use-debounce';
+import SearchBarResult from '../SearchBarResult/SearchBarResult'
 
 const SearchBar = () => {
 
     const dispatch = useDispatch();
     const searchValue = useSelector((state) => state.search.searchValue);
+    const [debounceSearchValue] = useDebounce(searchValue, 1000);
 
     const handleInputChange = (e) => {
         dispatch(setSearchValue(e.target.value));
@@ -23,6 +26,9 @@ const SearchBar = () => {
                     value={searchValue}
                     onChange={handleInputChange}
                 />
+            </div>
+            <div>
+               {debounceSearchValue !== '' ? console.log(searchValue) : null}
             </div>
         </section>
     );
