@@ -12,6 +12,7 @@ const MainViewMenu = () => {
     const { menus, loading, error } = useSelector((state) => state.dataMenus);
     const dispatch = useDispatch();
 
+   
     useEffect(() => {
         dispatch(dataMenuGet());
     }, [dispatch]);
