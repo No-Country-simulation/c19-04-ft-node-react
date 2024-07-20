@@ -1,14 +1,9 @@
 import mongoose from 'mongoose'
-import regexpValidators from '../utils/regexpValidators.js'
 
 const waiterSchema = new mongoose.Schema({
 	username: {
 		type: String,
-		validate: {
-			validator: (userName) => regexpValidators.USERNAMEREGEXP.test(userName),
-			message: (invalidUsername) =>
-				`${invalidUsername.value} no es un usuario valido!`,
-		},
+		unique: true,
 		required: true,
 	},
 	password: {
