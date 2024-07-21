@@ -73,7 +73,17 @@ export default {
           900: "#3D3D3D",
           950: "#292929",
         },
+       
       },
+      boxShadow: {
+        'custom-light': '0 2px 5px 0 rgba(0, 0, 0, 0.1)',
+      },
+      lineClamp: {
+        2: '2',
+      },
+      height: {
+        '2-line': 'calc(2 * 15px * 1.1025)'
+      }
     },
   },
   plugins: [
