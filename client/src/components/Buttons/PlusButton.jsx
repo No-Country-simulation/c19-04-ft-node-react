@@ -1,13 +1,14 @@
 import React from 'react'
-import { ReactSVG } from "react-svg";
+import { ReactSVG } from 'react-svg'
+import plusSvg from '../../assets/svg/plus.svg'
 
-const SecondaryIconButton = ({children, onClick, disabled, icon}) => {
+const PlusButton = ({ onClick, disabled, classNameIcon }) => {
   return (
     <button
       onClick={!disabled ? onClick : null}
       disabled={disabled}
       className={`
-        flex justify-center bg-customGray-50 border-2 rounded-lg  font-bold p-4 shadow-md gap-1
+        flex justify-center bg-customGray-50 border-2 rounded-lg font-bold p-4 shadow-md gap-1
       ${
         disabled
           ? "text-customRed-200 border-customRed-200 cursor-not-allowed"
@@ -15,10 +16,9 @@ const SecondaryIconButton = ({children, onClick, disabled, icon}) => {
       }
     `}
     >
-      {children}
-      <ReactSVG src={icon} className="inline-block ml-2 w-6" />
+      <ReactSVG src={plusSvg} className={`inline-block ${classNameIcon}`} />
     </button>
   )
 }
 
-export default SecondaryIconButton
+export default PlusButton

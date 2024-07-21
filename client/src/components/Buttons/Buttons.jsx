@@ -9,6 +9,8 @@ import IconButtonSecondary from './IconButtonSecondary'
 import TextButton from './TextButton'
 import minusSvg from '../../assets/svg/minus.svg'
 import plusSvg from '../../assets/svg/plus.svg'
+import PlusButton from './PlusButton'
+import MinButton from './MinButton'
 
 
 const Buttons = () => {
@@ -32,8 +34,9 @@ const Buttons = () => {
       <TextButton>Text Button</TextButton>
       <TextButton disabled>Text Button</TextButton>
       <div className='flex gap-4'>
-        <IconButtonSecondary icon={minusSvg} classNameIcon={"w-6"}></IconButtonSecondary>
-        <IconButtonSecondary icon={plusSvg} classNameIcon={"w-6"}></IconButtonSecondary>
+        <MinButton classNameIcon={'w-6'}></MinButton>
+        <PlusButton classNameIcon={'w-6'}></PlusButton>
+
       </div>
       
     </div>
