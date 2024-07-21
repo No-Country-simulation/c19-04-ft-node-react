@@ -1,12 +1,10 @@
 import jwt from 'jsonwebtoken'
-import UserModel from '../models/user.model.js'
 import AdminModel from '../models/admin.model.js'
 import WaiterModel from '../models/waiter.model.js'
 import KitchenModel from '../models/kitchen.model.js'
-import bcrypt from 'bcrypt'
 import logger from '../utils/logger.js'
 import TableModel from '../models/table.model.js'
-import regexpValidators from '../utils/regexpValidators.js'
+import Hash from '../utils/hash.js'
 
 export const signUp = async (req, res) => {
 	try {
@@ -16,7 +14,6 @@ export const signUp = async (req, res) => {
 			return res.status(400).json({ message: 'Missing required fields' })
 		}
 		if (
-			(await UserModel.findOne({ username: username })) ||
 			(await AdminModel.findOne({ username: username })) ||
 			(await KitchenModel.findOne({ username: username })) ||
 			(await WaiterModel.findOne({ username: username }))
@@ -26,14 +23,8 @@ export const signUp = async (req, res) => {
 				.status(404)
 				.json({ message: 'The user that attempt to register already exists' })
 		}
-		/* 		if (!regexpValidators.PASSWORDREGEXP.test(password)) {
-			return res.status(403).json({ message: 'The password is not secure.' })
-		}
-		if (!regexpValidators.USERNAMEREGEXP.test(username)) {
-			return res.status(403).json({ message: 'The username is invalid.' })
-		} */
 
-		const hashedPassword = await UserModel.encryptPassword(password)
+		const hashedPassword = await Hash.create(password)
 
 		if (role === 'admin') {
 			await AdminModel.create({
@@ -51,11 +42,6 @@ export const signUp = async (req, res) => {
 				username,
 				password: hashedPassword,
 			})
-		} else {
-			await UserModel.create({
-				username,
-				password: hashedPassword,
-			})
 		}
 
 		logger.info(`User ${username} created successfully`)
@@ -68,12 +54,14 @@ export const signUp = async (req, res) => {
 
 export const signIn = async (req, res) => {
 	const { username, password } = req.body
+
 	try {
 		const userFound =
 			(await AdminModel.findOne({ username: username })) ||
 			(await WaiterModel.findOne({ username: username })) ||
 			(await KitchenModel.findOne({ username: username })) ||
 			(await TableModel.findOne({ username: username }))
+
 		if (!userFound) {
 			logger.error('User not found')
 			return res
@@ -83,10 +71,7 @@ export const signIn = async (req, res) => {
 				)
 		}
 
-		const matchPassword = await UserModel.comparePassword(
-			password,
-			userFound.password,
-		)
+		const matchPassword = await Hash.compare(password, userFound.password)
 
 		if (!matchPassword) {
 			logger.error('Invalid password')
@@ -97,13 +82,18 @@ export const signIn = async (req, res) => {
 				)
 		}
 
-		const token = jwt.sign({ id: userFound._id }, process.env.SECRET_KEY, {
-			expiresIn: process.env.TOKEN_EXPIRATION || 86400,
+		const payload = {
+			id: userFound._id,
+			role: userFound.role,
+		}
+
+		const token = jwt.sign(payload, process.env.SECRET_KEY, {
+			expiresIn: process.env.TOKEN_EXPIRATION,
 		})
 
 		res.cookie('token', token, {
 			httpOnly: true,
-			secure: false,
+			secure: false, //TODO: Cambiar a true en PROD (https)
 		})
 
 		logger.info('Logged in successfully')
