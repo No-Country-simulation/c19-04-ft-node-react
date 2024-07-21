@@ -18,7 +18,7 @@ const MainViewMenu = () => {
     }, [dispatch]);
 
     return (
-        <div className='bg-customBlue'>
+        <div className='bg-customBgMain'>
             <NavBar />
             <SearchBar />
             <div className='text-white mx-5'>
