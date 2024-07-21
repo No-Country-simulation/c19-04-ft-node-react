@@ -77,7 +77,7 @@ IMAGENES A REALIZAR A FUTURO.
 Registrar un usuario. (Solo es posible acceder al register si eres admin)
 
 - **Method:** POST
-- **Endpoint:** `http://localhost:${PORT}/api/auth/register`
+- **Endpoint:** `http://localhost:${PORT}/api/admin/register`
 - **Body:**
   ```json
   {
@@ -132,27 +132,6 @@ Traer mesa mediante el QR (Numero de mesa).
 
 ## Admin
 
-### Agregar incredientes
-- **Method:** POST
-- **Endpoint:** `http://localhost:${PORT}/api/admin/ingredients`
-- **Body:**
-  ```json
-   "ingredientName": "Example",
-   "quantity": 1
-  ```
-
-### Traer ingredientes
-- **Method:** GET
-- **Endpoint:** `http://localhost:${PORT}/api/admin/ingredients`
-
-### Eliminar ingredientes
-- **Method:** DELETE
-- **Endpoint:** `http://localhost:${PORT}/api/admin/ingredients/:nombre`
-
-### Asignar mesa al mozo
-- **Method:** PATCH
-- **Endpoint:** `http://localhost:${PORT}/api/admin/assignTable/:userMozo`
-
 ### Menu
 Crear menu.
 
@@ -162,7 +141,7 @@ Crear menu.
   ```json
    "title": "Pizza",
    "description": "Aca no le ponemos Ananá 🚩",
-   "imgUrl": "https://tu-web.com/img.png"
+   "imgUrl": "https://tu-web.com/img.png",
    "estimatedTimeToDeliver": 20,
    "price": 9,
    "available": true
@@ -178,22 +157,11 @@ Traer los menus.
 Editar menu. (Se puede pasar solo el campo que desea editar, no hacen falta todos)
 
 - **Method:** PATCH
-- **Endpoint:** `http://localhost:${PORT}/api/admin/:id`
+- **Endpoint:** `http://localhost:${PORT}/api/admin/menu/:id`
 - **Body:**
   ```json
    "price": 14,
   ```
-
-## Waiter
-
-### Waiter
-Llamar al mozo.
-
-- **Method:** PATCH
-- **Endpoint:** `http://localhost:${PORT}/api/waiter/callWaiter/:tableNumber`
-
-
-## Card Menu
 
 ### Card
 Traer la carta para los comensales.

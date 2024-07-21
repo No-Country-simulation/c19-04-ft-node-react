@@ -1,15 +1,42 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "./src/**/*.css"],
-  theme: {
-    extend: {
-      colors: {
-        customRed: '#EF233C',
-        customBlue: '#003566',
-        customLight: '#F9F7F3',
-        customGreen: '#386641',
-      },
+    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "./src/**/*.css"],
+    theme: {
+        extend: {
+            colors: {
+                customRed: "#EF233C",
+                customBlue: "#003566",
+                customLight: "#F9F7F3",
+                customGreen: "#386641",
+                customBlueFilter: "#124A7D",
+            },
+            width: {
+                "clamp-200-300": "clamp(100px, 100%, 200px)",
+            },
+        },
     },
-  },
-  plugins: [],
+    plugins: [
+        function ({ addUtilities }) {
+            addUtilities(
+                {
+                    ".word-spacing-tight": {
+                        wordSpacing: "-0.125rem",
+                    },
+                    ".word-spacing-normal": {
+                        wordSpacing: "normal",
+                    },
+                    ".word-spacing-wide": {
+                        wordSpacing: "0.25rem",
+                    },
+                    ".word-spacing-wider": {
+                        wordSpacing: "0.5rem",
+                    },
+                    ".word-spacing-widest": {
+                        wordSpacing: "1rem",
+                    },
+                },
+                ["responsive", "hover"]
+            );
+        },
+    ],
 };

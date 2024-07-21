@@ -1,5 +1,4 @@
 import React from "react";
-import { redirectLogin } from "../../utils/functions/redirectLogin";
 import MessageRedirect from "../MessageRedirect/MessageRedirect";
 
 const InvalidPasswordMessage = () => {

@@ -16,17 +16,22 @@ const menuSchema = new mongoose.Schema({
 	},
 	tags: {
 		type: String,
+		required: true,
 		enum: [
 			'Hamburguesas',
 			'Pizzas',
 			'Pastas',
 			'Ensaladas',
 			'Sushi',
-			'Milanesa',
+			'Milanesas',
 		],
 	},
+	imgUrl: {
+		type: String,
+		required: true,
+	},
 	ingredients: [],
-	estimatedTimeToDeliver: {
+	estimatedTime: {
 		type: Number,
 	},
 	price: {
