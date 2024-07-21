@@ -1,12 +1,10 @@
-import RegisterUser from '../../components/Register/Register';
+import NavBarAdmin from "../../components/DashboardAdmin/NavBarAdmin";
 
 const DashBoardAdmins = () => {
   return (
-    <div className='flex justify-center items-center h-screen'>
-      <div className='space-y-10'>
-        <h1 className='text-5xl font-thin text-center'>Registrate</h1>
-        <RegisterUser />
-      </div>
+    <div className="relative flex justify-center items-center h-screen bg-white">
+      <div className="space-y-10"></div>
+      <NavBarAdmin />
     </div>
   );
 };
