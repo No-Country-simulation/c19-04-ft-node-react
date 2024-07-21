@@ -6,11 +6,11 @@ const SecondaryButton = ({ children, onClick, disabled }) => {
       onClick={!disabled ? onClick : null}
       disabled={disabled}
       className={`
-        box-border rounded-lg text-red-600 font-bold p-4 focus:outline-none focus:shadow-outline w-full shadow-md
+        bg-customGray-50 border-2 border-customRed-500 rounded-lg  text-customRed-500 font-bold p-4 focus:outline-none focus:shadow-outline shadow-md gap-1
       ${
         disabled
-          ? "bg-red-200 cursor-not-allowed"
-          : "bg-white hover:bg-red-600 active:bg-red-900"
+          ? "text-customRed-200 border-customRed-200 cursor-not-allowed"
+          : "hover:text-customRed-600 hover:border-customRed-600  active:text-customRed-700 active:border-customRed-700"
       }
     `}
     >

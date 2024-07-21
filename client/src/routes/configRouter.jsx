@@ -9,6 +9,8 @@ import RegisterSuccessfully from "../components/RegisterSuccessfully/RegisterSuc
 import RegisterDenied from "../components/RegisterDenied/RegisterDenied.jsx";
 import RegisterDeniedBD from "../components/RegisterDenied/RegisterBdDenied.jsx";
 import Buttons from "../components/Buttons/Buttons.jsx";
+import MainViewMenu from "../views/MainViewMenu/MainViewMenu.jsx";
+
 
 const routerPathComponent = [
   {
@@ -48,15 +50,17 @@ const routerPathComponent = [
     element: <RegisterDeniedBD />,
   },
   {
-    path: "/button",
+    path: "/buttons",
     element: <Buttons />,
+  },
+  {
+    path: "main-view-menu",
+    element: <MainViewMenu/>
   },
   {
     path: "*",
     element: <NotFound />,
   },
-
-
 ];
 
 export default routerPathComponent;

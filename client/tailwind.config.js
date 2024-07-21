@@ -8,6 +8,7 @@ export default {
         secondary: ["Bodoni Moda", "serif"],
       },
       colors: {
+        customBgMain: "#EEECE8",
         customGreen: {
           50: "#F1FDF0",
           100: "#DCFDDB",
@@ -74,7 +75,39 @@ export default {
           950: "#292929",
         },
       },
+      boxShadow: {
+        "custom-light": "0 2px 5px 0 rgba(0, 0, 0, 0.1)",
+      },
+      lineClamp: {
+        2: "2",
+      },
+      height: {
+        "2-line": "calc(2 * 15px * 1.1025)",
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities(
+        {
+          ".word-spacing-tight": {
+            wordSpacing: "-0.125rem",
+          },
+          ".word-spacing-normal": {
+            wordSpacing: "normal",
+          },
+          ".word-spacing-wide": {
+            wordSpacing: "0.25rem",
+          },
+          ".word-spacing-wider": {
+            wordSpacing: "0.5rem",
+          },
+          ".word-spacing-widest": {
+            wordSpacing: "1rem",
+          },
+        },
+        ["responsive", "hover"]
+      );
+    },
+  ],
 };

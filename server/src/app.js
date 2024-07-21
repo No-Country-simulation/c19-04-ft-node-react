@@ -23,11 +23,11 @@ app.get('/health', (req, res) => {
 	res.json('Health OK')
 })
 
-app.use('/api', TableRoutes)
-app.use('/api', AuthRoutes)
-app.use('/api', AdminRoutes)
-app.use('/api', WaiterRoutes)
-app.use('/api', CardMenuRoutes)
+app.use('/api/table', TableRoutes)
+app.use('/api/auth', AuthRoutes)
+app.use('/api/admin', AdminRoutes)
+app.use('/api/waiter', WaiterRoutes)
+app.use('/api/card-menu', CardMenuRoutes)
 app.use('/api/orders', OrderRoutes)
 
 ServerUp(app)

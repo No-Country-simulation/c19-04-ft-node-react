@@ -174,13 +174,13 @@ const RegisterUser = ({ closeModal }) => {
       <div className="flex gap-6">
         <button
           type="submit"
-          className="bg-customBlue rounded-2xl p-4 uppercase text-sm text-white font-bold w-full transition-transform duration-200 sm:hover:scale-110 hover:bg-sky-600"
+          className="bg-customBlue-400 rounded-2xl p-4 uppercase text-sm text-white font-bold w-full transition-transform duration-200 sm:hover:scale-110 hover:bg-customBlue-300"
         >
           Registrar
         </button>
         <button
           type="button"
-          className="bg-customBlue rounded-2xl p-4 uppercase text-sm text-white font-bold w-full transition-transform duration-200 sm:hover:scale-110 hover:bg-sky-600"
+          className="bg-customBlue-400 rounded-2xl p-4 uppercase text-sm text-white font-bold w-full transition-transform duration-200 sm:hover:scale-110 hover:bg-customBlue-300"
           onClick={() => handleCancelClick()}
         >
           Cancelar
