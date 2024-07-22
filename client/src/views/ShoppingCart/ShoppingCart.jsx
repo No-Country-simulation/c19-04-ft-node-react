@@ -5,9 +5,11 @@ import NavBar from "../../components/NavBar/NavBar";
 
 function ShoppingCart() {
   return (
-    <div className="flex flex-col items-center min-h-screen bg-customLight">
+    <div className="flex flex-col items-center min-h-screen bg-customBlue">
       <NavBar />
-      <h2 className="text-4xl font-bold m-3 md:mb-10 ">Resumen del pedido</h2>
+      <h2 className="text-4xl font-bold text-white  px-4 text-center  rounded-lg py-3 ">
+        Detalles de Orden
+      </h2>
       <ShoppingCartItemsContainer />
       <ShoppingCartActions />
     </div>

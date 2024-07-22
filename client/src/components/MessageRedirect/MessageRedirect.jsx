@@ -3,8 +3,8 @@ import { redirectLogin } from "../../utils/functions/redirectLogin";
 import loader from "../../assets/svg/loader.svg";
 import { countdown } from "../../utils/functions/coundown.js";
 
-const MessageRedirect = ({ title, message }) => {
-  redirectLogin("/login", 5000);
+const MessageRedirect = ({ title, message, path }) => {
+  redirectLogin(path, 5000);
 
   const redirectTimer = countdown(5);
 
