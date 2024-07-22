@@ -41,10 +41,10 @@ export default function DropdownFoodItem({ food }) {
         </div>
       </div>
       <div
-        className={` rounded-b-lg transition-all duration-500 overflow-hidden ${isOpen ? "max-h-40 shadow-lg" : "max-h-0"
+        className={`rounded-b-lg transition-all duration-500 overflow-hidden ${isOpen ? "max-h-40 shadow-lg" : "max-h-0"
           }`}
       >
-        <div className="bg-white text-sm flex flex-col px-4 pb-4 space-y-2">
+        <div className="bg-white text-sm flex flex-col px-4 pb-4 pt-1 space-y-2">
           <ul>
             <li className="flex justify-between">
               <div className="flex gap-2 items-center">

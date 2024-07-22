@@ -6,24 +6,25 @@ import ContainerCards from '../../components/ContainerCards/ContainerCards';
 import NavBar from '../../components/NavBar/NavBar';
 import { dataMenuGet } from '../../state/store/slices/dataMenu/actionsDataMenu/dataMenuGetAction';
 import { useDispatch, useSelector } from 'react-redux';
-
+import SecondaryButton from '../../components/Buttons/SecondaryButton';
+import MainButton from '../../components/Buttons/MainButton';
 const MainViewMenu = () => {
     const { filter, filterFood, changeFilters } = useFilterFood();
     const { menus, loading, error } = useSelector((state) => state.dataMenus);
     const dispatch = useDispatch();
 
-   
+
     useEffect(() => {
         dispatch(dataMenuGet());
     }, [dispatch]);
 
     return (
-        <div className='bg-customBgMain'>
+        <div className='bg-customBgMain pb-4'>
             <NavBar />
             <SearchBar />
-            <div className='text-white'>
-                <h2 className='text-[28px] font-bold leading-8 my-2'>Categorías</h2>
-                <section className='border-y border-customBlueFilter my-'>
+            <div>
+                <h2 className='text-[16px] leading-5  px-5 pb-3'>Menú</h2>
+                <section className='border-y'>
                     <FilterFood changeFilters={changeFilters} />
                 </section>
                 <div className='py-7'>
@@ -32,6 +33,11 @@ const MainViewMenu = () => {
                     />
                 </div>
             </div>
+            <div className="sticky left-0 bottom-0 w-[95vw] py-3 flex flex-wrap gap-y-8 gap-x-2 mx-auto z-10  bg-opacity-100 backdrop-blur-lg">
+                <SecondaryButton children="Llamar al Mozo" classNameSize="h-10 items-center w-1/2" />
+                <MainButton children="¡ Pedir !" classNameSize="h-10 items-center grow" />
+            </div>
+
         </div>
     );
 }

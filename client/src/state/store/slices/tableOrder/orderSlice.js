@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { asyncOrderHandlers } from "./asyncHandlers";
-import { addOrder, deleteOrder, removeOrder, deleteAllOrders } from "../../../../utils/functions/syncOrdersFunctions";
+import { addOrder, deleteOrder, removeOrder, deleteAllOrders, totalPayProduct } from "../../../../utils/functions/syncOrdersFunctions";
 
 const initialState = {
-  ordersOfTable: [], //reduce(acc, element => forEach)
+  ordersOfTable: [],
   status: "idle",
   error: null,
   totalPay: 0,
@@ -17,7 +17,7 @@ export const orderTableSlice = createSlice({
     removeOrderLocally: removeOrder,
     deleteOrderLocally: deleteOrder,
     deleteAllOrderLocally: deleteAllOrders,
-    //totalPayOrder: totalPayProduct()
+    totalPayOrder: totalPayProduct,
   },
   extraReducers: (builder) => {
     Object.keys(asyncOrderHandlers).forEach((actionType) => {
@@ -37,5 +37,6 @@ export const {
   removeOrderLocally,
   deleteAllOrderLocally,
   deleteOrderLocally,
+  totalPayOrder,
 } = orderTableSlice.actions;
 export default orderTableSlice.reducer;

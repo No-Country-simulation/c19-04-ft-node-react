@@ -45,10 +45,8 @@ export function deleteAllOrders(state) {
 }
 
 export function totalPayProduct(state) {
-  return state.ordersOfTable.reduce((total, order) => {
-    order.forEach(element => {
-      total += element.quantity * element.productId.price
-    });
-    return total
+  let valueToPay = state.ordersOfTable.reduce((total, order) => {
+   return total += order.quantity * order.productId.price;
   }, 0);
+  state.totalPay = valueToPay;
 }
