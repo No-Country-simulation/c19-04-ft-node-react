@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { validateUsername, validatePassword } from '../../utils/functions/validateLogin';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { login } from '../../utils/api/Loginapi';
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -9,8 +10,10 @@ const Login = () => {
     const [usernameErrors, setUsernameErrors] = useState([]);
     const [passwordErrors, setPasswordErrors] = useState([]);
     const [showPassword, setShowPassword] = useState(false);
+    const [loginError, setLoginError] = useState('');
+    const [loginMessage, setLoginMessage] = useState('');
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
         const usernameValidationErrors = validateUsername(username);
         const passwordValidationErrors = validatePassword(password);
@@ -28,10 +31,13 @@ const Login = () => {
         setUsernameErrors([]);
         setPasswordErrors([]);
 
-        if (username === 'user123' && password === 'Password1!') {
-            alert('Inicio de sesión exitoso');
-        } else {
-            alert('Credenciales inválidas');
+        try {
+            const { data, message } = await login(username, password);
+            setLoginMessage(message);
+            // Maneja la respuesta de la autenticación
+            console.log(data);
+        } catch (error) {
+            setLoginError(error.message);
         }
     };
 
@@ -54,6 +60,8 @@ const Login = () => {
                             onChange={(e) => {
                                 setUsername(e.target.value);
                                 setUsernameErrors([]);
+                                setLoginError('');
+                                setLoginMessage('');
                             }}
                             required
                         />
@@ -77,6 +85,8 @@ const Login = () => {
                                 onChange={(e) => {
                                     setPassword(e.target.value);
                                     setPasswordErrors([]);
+                                    setLoginError('');
+                                    setLoginMessage('');
                                 }}
                                 required
                             />
@@ -104,6 +114,12 @@ const Login = () => {
                         >
                             Iniciar Sesión
                         </button>
+                        {loginError && (
+                            <p className="text-red-500 text-sm mt-4">{loginError}</p>
+                        )}
+                        {loginMessage && (
+                            <p className="text-green-500 text-sm mt-4">{loginMessage}</p>
+                        )}
                     </div>
                 </form>
             </div>
@@ -112,6 +128,3 @@ const Login = () => {
 };
 
 export default Login;
-
-
-
