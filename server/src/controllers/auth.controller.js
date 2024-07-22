@@ -1,9 +1,10 @@
-import { signUp, signIn, signOut } from '../services/auth.service.js'
+import { getUser, signUp, signIn, signOut } from "../services/auth.service.js";
 
 const AuthController = {
-	signUp,
-	signIn,
-	signOut,
-}
+    getUser,
+    signUp,
+    signIn,
+    signOut,
+};
 
-export default AuthController
+export default AuthController;

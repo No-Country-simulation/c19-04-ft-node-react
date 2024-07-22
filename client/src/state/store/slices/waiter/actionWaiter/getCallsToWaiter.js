@@ -1,11 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstace from "../../../../../utils/api/axiosInstance";
 
-export const dataMenuGet = createAsyncThunk(
-    "dataMenu/setMenus",
-    async (_, thunkAPI) => {
+export const getCallsToWaiters = createAsyncThunk(
+    "waiterCalls/getCalls",
+    async (waiterUsername, thunkAPI) => {
         try {
-            const response = await axiosInstace.get("/api/card-menu");
+            const response = await axiosInstace.get(
+                `api/waiter/msgWaiter/${waiterUsername}`
+            );
             if (response.status === 200) {
                 return response.data;
             } else {
