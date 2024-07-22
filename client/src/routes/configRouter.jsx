@@ -8,6 +8,7 @@ import ShoppingCart from "../views/ShoppingCart/ShoppingCart.jsx";
 import RegisterSuccessfully from "../components/RegisterSuccessfully/RegisterSuccessfully.jsx";
 import RegisterDenied from "../components/RegisterDenied/RegisterDenied.jsx";
 import RegisterDeniedBD from "../components/RegisterDenied/RegisterBdDenied.jsx";
+import Buttons from "../components/Buttons/Buttons.jsx";
 import MainViewMenu from "../views/MainViewMenu/MainViewMenu.jsx";
 
 
@@ -47,6 +48,10 @@ const routerPathComponent = [
   {
     path: "/register-offline",
     element: <RegisterDeniedBD />,
+  },
+  {
+    path: "/buttons",
+    element: <Buttons />,
   },
   {
     path: "main-view-menu",

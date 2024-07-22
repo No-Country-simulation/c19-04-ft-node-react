@@ -43,3 +43,10 @@ export function deleteAllOrders(state) {
     state.error = "No tienes ninguna orden hecha";
   }
 }
+
+export function totalPayProduct(state) {
+  let valueToPay = state.ordersOfTable.reduce((total, order) => {
+   return total += order.quantity * order.productId.price;
+  }, 0);
+  state.totalPay = valueToPay;
+}

@@ -8,10 +8,10 @@ const FilterFood = ({ changeFilters }) => {
     };
     
     return (
-        <div className="flex py-5 place-content-center text-black">
-            <ul className="flex flex-row gap-4 overflow-y-auto text-[18px] px-2 custom-scrollbar">
+        <div className="flex place-content-center text-black">
+            <ul className="flex flex-row overflow-y-auto text-[18px]  custom-scrollbar">
                 {list.map((item, index) => (
-                    <li className="py-4 " key={index}>
+                    <li  key={index}>
                         <button
                             onClick={(e) => handleChangeType(e, item)}
                             className="bg-customLight w-28 h-[51px] text-[16px] font-medium rounded-[20px] hover:scale-[1.1] ease-linear duration-300"
