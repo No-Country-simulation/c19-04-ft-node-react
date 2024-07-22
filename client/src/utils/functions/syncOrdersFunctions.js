@@ -43,3 +43,12 @@ export function deleteAllOrders(state) {
     state.error = "No tienes ninguna orden hecha";
   }
 }
+
+export function totalPayProduct(state) {
+  return state.ordersOfTable.reduce((total, order) => {
+    order.forEach(element => {
+      total += element.quantity * element.productId.price
+    });
+    return total
+  }, 0);
+}
