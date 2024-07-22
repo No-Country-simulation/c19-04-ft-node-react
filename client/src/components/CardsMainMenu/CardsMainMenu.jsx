@@ -2,8 +2,8 @@ import useCartAction from "../../utils/hooks/useCartAction"
 import { orderSelectorQuantity } from "../../utils/functions/orderSelector"
 import { createCartItemObject } from "../../utils/functions/createItemObject.js"
 import corazonImg from "../../assets/images/corazon.png"
-import starImg from "../../assets/images/formaEstrella.png"
 import imgHamburguesaPrueba from "../../assets/images/imgHamburgesa.png"
+import Rating from "../Rating/Rating.jsx"
 
 const CardsMainMenu = ({ _id, title, imgUrl, price, description, time }) => {
 
@@ -39,15 +39,8 @@ const CardsMainMenu = ({ _id, title, imgUrl, price, description, time }) => {
                         </div>
 
                     </div>
-                    <div className="flex items-center w-[78px] h-[13.13px] gap-[5px]">
-                        <h4 className="text-center text-base leading-[20.16px] font-bold ">4.3</h4>
-                        <div className="flex gap-[2px]">
-                            <img className="w-[14px] h-[13.13px]" src={starImg} alt="star rating" />
-                            <img className="w-[14px] h-[13.13px]" src={starImg} alt="star rating" />
-                            <img className="w-[14px] h-[13.13px]" src={starImg} alt="star rating" />
-                            <img className="w-[14px] h-[13.13px]" src={starImg} alt="star rating" />
-                            <img className="w-[14px] h-[13.13px]" src={starImg} alt="star rating" />
-                        </div>
+                    <div className="flex items-center w-[78px] h-[13.13px] gap-[5px] ">
+                        <Rating />
                     </div>
                 </section>
             </div>
