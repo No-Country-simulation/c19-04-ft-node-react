@@ -10,7 +10,6 @@ async function served(table) {
             console.log("ha sido atendido");
         }
     } catch (error) {
-        console.log(error);
         console.log(error.response.data.message);
     }
 }

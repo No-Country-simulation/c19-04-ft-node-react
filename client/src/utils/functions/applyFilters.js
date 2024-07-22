@@ -7,7 +7,6 @@ export const applyFiltersToMenu = function (menus, filters) {
             ? item.category === filters.categoryFilter
             : true;
     });
-    console.log(filters.searchValue);
     if (filters.searchValue) {
         filteredMenus = filteredMenus.filter((item) => {
             return item.title
