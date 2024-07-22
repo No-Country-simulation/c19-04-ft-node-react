@@ -107,8 +107,29 @@ export default {
             wordSpacing: "1rem",
           },
         },
-        ["responsive", "hover"]
-      );
     },
-  ],
+    plugins: [
+        function ({ addUtilities }) {
+            addUtilities(
+                {
+                    ".word-spacing-tight": {
+                        wordSpacing: "-0.125rem",
+                    },
+                    ".word-spacing-normal": {
+                        wordSpacing: "normal",
+                    },
+                    ".word-spacing-wide": {
+                        wordSpacing: "0.25rem",
+                    },
+                    ".word-spacing-wider": {
+                        wordSpacing: "0.5rem",
+                    },
+                    ".word-spacing-widest": {
+                        wordSpacing: "1rem",
+                    },
+                },
+                ["responsive", "hover"]
+            );
+        },
+    ],
 };
