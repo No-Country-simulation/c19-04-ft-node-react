@@ -3,9 +3,10 @@ import { asyncOrderHandlers } from "./asyncHandlers";
 import { addOrder, deleteOrder, removeOrder, deleteAllOrders } from "../../../../utils/functions/syncOrdersFunctions";
 
 const initialState = {
-  ordersOfTable: [],
+  ordersOfTable: [], //reduce(acc, element => forEach)
   status: "idle",
   error: null,
+  totalPay: 0,
 };
 
 export const orderTableSlice = createSlice({
@@ -16,6 +17,7 @@ export const orderTableSlice = createSlice({
     removeOrderLocally: removeOrder,
     deleteOrderLocally: deleteOrder,
     deleteAllOrderLocally: deleteAllOrders,
+    //totalPayOrder: totalPayProduct()
   },
   extraReducers: (builder) => {
     Object.keys(asyncOrderHandlers).forEach((actionType) => {

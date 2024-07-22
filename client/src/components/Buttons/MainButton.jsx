@@ -1,12 +1,12 @@
 import React from "react";
 
-const MainButton = ({ children, onClick, disabled }) => {
+const MainButton = ({ children, onClick, disabled, classNameSize }) => {
   return (
     <button
       onClick={!disabled ? onClick : null}
       disabled={disabled}
       className={`
-        box-border rounded-lg text-white font-bold p-4 shadow-md
+        box-border rounded-lg text-white font-bold shadow-md ${classNameSize}
       ${
         disabled
           ? "bg-customRed-200 cursor-not-allowed"

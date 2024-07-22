@@ -8,7 +8,7 @@ const PlusButton = ({ onClick, disabled, classNameIcon }) => {
       onClick={!disabled ? onClick : null}
       disabled={disabled}
       className={`
-        flex justify-center bg-customGray-50 border-2 rounded-lg font-bold p-4 shadow-md gap-1
+        flex justify-center bg-customGray-50 border-2 rounded-lg font-bold p-2 shadow-md gap-1
       ${
         disabled
           ? "text-customRed-200 border-customRed-200 cursor-not-allowed"
@@ -16,7 +16,7 @@ const PlusButton = ({ onClick, disabled, classNameIcon }) => {
       }
     `}
     >
-      <ReactSVG src={plusSvg} className={`inline-block ${classNameIcon}`} />
+      <ReactSVG src={plusSvg} className={`inline-block ${classNameIcon}`}/>
     </button>
   )
 }

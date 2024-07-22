@@ -7,7 +7,7 @@ function ShoppingCartItemsContainer() {
   const ordersUser = useSelector((state) => state.order.ordersOfTable)
 
   return (
-    <div className="flex flex-col justify-center items-center w-full mb-20 gap-2">
+    <div className="flex flex-col items-center w-full mb-20 gap-2 grow">
       {ordersUser.map((item, index) => (<DropdownFoodItem food={item} key={index} />))}
     </div>
   );

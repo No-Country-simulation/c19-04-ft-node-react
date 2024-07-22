@@ -21,9 +21,9 @@ export default function DropdownFoodItem({ food }) {
   };
 
   return (
-    <div className="w-[380px] relative">
+    <div className="w-[390px]">
       <div
-        className={`bg-white shadow-lg rounded-lg transition-[border-radius] p-4 ${isOpen ? "rounded-b-none duration-0" : "duration-1000"
+        className={`bg-white shadow-lg rounded-lg transition-[border-radius] p-3 ${isOpen ? "rounded-b-none duration-0" : "duration-1000"
           }`}
       >
         <div className="flex justify-between w-full ">
