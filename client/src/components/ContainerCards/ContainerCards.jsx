@@ -3,7 +3,7 @@ import CardsMainMenu from "../CardsMainMenu/CardsMainMenu"
 const ContainerCards = ({ menus }) => {
 
   return (
-    <div className="flex flex-wrap gap-y-[50px] gap-x-2 px-0 py-9 mb-56">
+    <div className="flex flex-wrap gap-y-[50px] gap-x-2 px-0 py-9 mb-56 place-content-center">
       {menus.map((item, index) => (
         <CardsMainMenu
           key={index}

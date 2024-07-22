@@ -21,7 +21,7 @@ const MainViewMenu = () => {
         <div className='bg-customBgMain'>
             <NavBar />
             <SearchBar />
-            <div className='text-white mx-5'>
+            <div className='text-white'>
                 <h2 className='text-[28px] font-bold leading-8 my-2'>Categorías</h2>
                 <section className='border-y border-customBlueFilter my-'>
                     <FilterFood changeFilters={changeFilters} />

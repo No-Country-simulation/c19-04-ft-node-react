@@ -12,7 +12,7 @@ const CardsMainMenu = ({ _id, title, imgUrl, price, description, time }) => {
     const quantity = orderSelectorQuantity(itemPayload)?.quantity ?? 0
 
     return (
-        <div className="bg-customGray-50 w-[190px] min-h-[177px] rounded-[10px] bg-customLight flex flex-col gap-[5px] pt-[50px] p-[10px] text-black shadow-custom-light relative">
+        <div className="bg-customGray-50 w-[180px] min-h-[177px] rounded-[10px] bg-customLight flex flex-col gap-[5px] pt-[50px] p-[10px] text-black shadow-custom-light relative">
             <div className="absolute inset-0 flex items-center justify-center -translate-y-2/4">
                 <img className="object-cover w-[140px] h-[140px]" src={imgHamburguesaPrueba} alt={title} />
             </div>
