@@ -1,42 +1,37 @@
-import cartImg from "../../assets/images/cartFood.png";
-import waiterImg from "../../assets/images/waiter.png";
-import arrowLeftImg from "../../assets/images/arrowLeft.png";
-import { bgStyles } from "../../assets/other-assets/navBarDinamicBg";
-import { Link, useParams } from "react-router-dom";
+import hearthImg from "../../assets/images/corazon.png";
+import tableImg from "../../assets/images/tableFood.png";
+import { Link } from "react-router-dom";
 import { useNavigateHelper } from "../../utils/hooks/useNavigations";
 import axiosInstace from "../../utils/api/axiosInstance";
 import callWaiter from "../../utils/functions/callWaiterToTable";
 
-const NavBar = ({ bgMain }) => {
-    const navbarClass = bgStyles[bgMain];
-    const { navigateBack } = useNavigateHelper();
-
-    const { table } = useParams();
+const NavBar = () => {
+    const { navigateTo } = useNavigateHelper();
 
     return (
-        <div className="h-48 w-full flex justify-between items-center px-4 grow-0">
-            <button onClick={() => navigateBack()}>
+        <div className="sticky top-0 left-0 w-full h-13 flex justify-between items-center px-4 pt-5 pb-2 z-10  bg-opacity-100 backdrop-blur-lg">
+            <button onClick={() => navigateTo("/main-view-menu")}>
                 <img
-                    className="max-w-12 max-h-12"
-                    src={arrowLeftImg}
+                    className="max-w-[33px]"
+                    src={tableImg}
                     alt="Volver Atras"
                 />
             </button>
-            <button onClick={() => callWaiter(table)}>
+            <div className="w-[109px] h-[46px] font-[18px]">
+                <h3 className="font-bold leading-[22px] text-center">Mesa 1</h3>
+                <h3 className="font-medium text-center leading-[22px]">
+                    ¡Hola <span className="font-bold">Usuario!</span>
+                </h3>
+            </div>
+            <Link to="/shopping-cart">
                 <img
-                    className="max-h-14"
-                    src={waiterImg}
-                    alt="Llamar al Mozo"
-                />
-            </button>
-            <Link to={`/my-order/${table}`}>
-                <img
-                    className={`max-w-[62] max-h-[60px] ${navbarClass} rounded-[20px]`}
-                    src={cartImg}
+                    className="max-w-7"
+                    src={hearthImg}
                     alt="Ordenes de Comida"
                 />
             </Link>
         </div>
     );
 };
+
 export default NavBar;

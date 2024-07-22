@@ -24,10 +24,10 @@ const FilterFood = ({ categories }) => {
     }, [filters]);
 
     return (
-        <div className="flex py-5 place-content-center text-black">
-            <ul className="flex flex-row gap-4 overflow-y-auto text-[18px] px-2 custom-scrollbar">
-                {categories.map((item, index) => (
-                    <li className="py-4 " key={index}>
+        <div className="flex place-content-center text-black">
+            <ul className="flex flex-row overflow-y-auto text-[18px]  custom-scrollbar">
+                {list.map((item, index) => (
+                    <li key={index}>
                         <button
                             onClick={(e) => handleChangeType(e, item)}
                             value={item}

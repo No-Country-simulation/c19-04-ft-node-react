@@ -1,22 +1,14 @@
 import React from "react";
-import ShoppingCartItemsCards from "../ShoppingCartItemsCards/ShoppingCartItemsCards";
 import { useSelector } from "react-redux";
+import DropdownFoodItem from "../Dropdown/DropdownFoodItem";
 
 function ShoppingCartItemsContainer() {
-  
-  const arrayPedidos = useSelector((state)=> state.order.ordersOfTable)
+
+  const ordersUser = useSelector((state) => state.order.ordersOfTable)
 
   return (
-    <div className="flex flex-col w-full mb-20 gap-12">
-      {arrayPedidos.map((item, index) => (
-        <ShoppingCartItemsCards
-          key={index}
-          _id= {item.productId._id}
-          name={item.productId.title}
-          price={item.productId.price}
-          img={item.productId.imgUrl}
-        />
-      ))}
+    <div className="flex flex-col items-center w-full mb-10 gap-2 grow">
+      {ordersUser.map((item, index) => (<DropdownFoodItem food={item} key={index} />))}
     </div>
   );
 }
