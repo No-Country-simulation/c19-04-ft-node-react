@@ -14,7 +14,7 @@ const VerifyToken = async (req, res, next) => {
 		const userId = decoded.id
 		const userRole = decoded.role
 
-		const userIsValid = await Promise.any([
+		const userIsValid = await Promise.allSettled([
 			AdminModel.findById({ _id: userId }),
 			KitchenModel.findById({ _id: userId }),
 			WaiterModel.findById({ _id: userId }),
