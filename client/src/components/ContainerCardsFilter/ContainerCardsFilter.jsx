@@ -78,7 +78,7 @@ const ContainerCardsFilter = ({ dataFilter }) => {
                 {dataFilter.map((element) => (
                     <CardSearch 
                         _id = {element._id}
-                        description={element.descriptionBONITA}
+                        description={element.description}
                         price={element.price}
                         timePreparation={element.estimatedTimeToDeliver}
                         title={element.title}
