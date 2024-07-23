@@ -1,6 +1,6 @@
 import clockInfo from "../../assets/images/clockInfo.png";
 
-const AdditionalInfoFoodTime = () => {
+const AdditionalInfoFoodTime = ({time}) => {
     return (
         <div className="flex max-w-[64px] h-[25px] gap-[2px] p-[5px] rounded-[20px] bg-customRed-100 items-center">
             <img
@@ -11,7 +11,7 @@ const AdditionalInfoFoodTime = () => {
                     filter: 'invert(44%) sepia(91%) saturate(747%) hue-rotate(320deg) brightness(96%) contrast(101%)'
                 }}
             />
-            <p className="text-customRed-300 text-[12px] leading-[15.12px]">15 min</p>
+            <p className="text-customRed-300 text-[12px] leading-[15.12px]">{time} min</p>
         </div>
     );
 }

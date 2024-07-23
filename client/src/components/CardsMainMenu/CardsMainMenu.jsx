@@ -14,7 +14,7 @@ const CardsMainMenu = ({ _id, title, imgUrl, price, description, time }) => {
     return (
         <div className="bg-customGray-50 w-[180px] min-h-[177px] rounded-[10px] bg-customLight flex flex-col gap-[5px] pt-[50px] p-[10px] text-black shadow-custom-light relative">
             <div className="absolute inset-0 flex items-center justify-center -translate-y-2/4">
-                <img className="object-cover w-[140px] h-[140px]" src={imgHamburguesaPrueba} alt={title} />
+                <img className="object-cover w-[160px] h-[90px] rounded-3xl" src={imgUrl} alt={title} />
             </div>
             <div className="tracking-tight gap-[5px]">
                 <section className="flex flex-col gap-[5px]">
