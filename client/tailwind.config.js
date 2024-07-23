@@ -84,6 +84,7 @@ export default {
       },
       height: {
         "2-line": "calc(2 * 15px * 1.1025)",
+        "4-line": "calc(4 * 14px * 1.1025)",
       },
     },
   },
