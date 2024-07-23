@@ -10,7 +10,7 @@ import SecondaryButton from "../../components/Buttons/SecondaryButton";
 import MainButton from "../../components/Buttons/MainButton";
 import { useNavigateHelper } from "../../utils/hooks/useNavigations";
 const MainViewMenu = () => {
-    // const { filter, filterFood, changeFilters } = useFilterFood();
+    const { filter, filterFood, changeFilters } = useFilterFood();
     const { filteredMenus, categories, loading, error } = useSelector(
         (state) => state.dataMenus
     );
@@ -28,13 +28,10 @@ const MainViewMenu = () => {
             <div>
                 <h2 className="text-[16px] leading-5  px-5 pb-3">Menú</h2>
                 <section className="border-y">
-                    <FilterFood changeFilters={changeFilters} />
+                    <FilterFood categories={categories} changeFilters={changeFilters} />
                 </section>
-                <div className='py-7'>
-                    
-                    <ContainerCards
-                        menus={menus}
-                    />
+                <div className="py-7">
+                    <ContainerCards menus={filteredMenus} />
                 </div>
             </div>
             <div className="sticky left-0 bottom-0 w-[95vw] py-3 flex flex-wrap gap-y-8 gap-x-2 mx-auto z-10  bg-opacity-100 backdrop-blur-lg">
