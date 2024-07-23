@@ -9,12 +9,19 @@ import { useDispatch, useSelector } from "react-redux";
 import SecondaryButton from "../../components/Buttons/SecondaryButton";
 import MainButton from "../../components/Buttons/MainButton";
 import { useNavigateHelper } from "../../utils/hooks/useNavigations";
+
 const MainViewMenu = () => {
     const { filter, filterFood, changeFilters } = useFilterFood();
     const { filteredMenus, categories, loading, error } = useSelector(
         (state) => state.dataMenus
     );
     const dispatch = useDispatch();
+
+    // useEffect(() => {
+
+    // para seleccionar que contenedor utilizar
+
+    // }, [filteredMenus]);
 
     useEffect(() => {
         dispatch(dataMenuGet());
