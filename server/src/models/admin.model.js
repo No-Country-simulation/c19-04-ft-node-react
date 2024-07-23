@@ -1,14 +1,9 @@
 import mongoose from 'mongoose'
-import regexpValidators from '../utils/regexpValidators.js'
 
 const adminSchema = new mongoose.Schema({
 	username: {
 		type: String,
-		validate: {
-			validator: (userName) => regexpValidators.USERNAMEREGEXP.test(userName),
-			message: (invalidUsername) =>
-				`${invalidUsername.value} is not a valid username!`,
-		},
+		unique: true,
 		required: true,
 	},
 	password: {

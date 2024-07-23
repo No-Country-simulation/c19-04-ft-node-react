@@ -3,8 +3,8 @@ import MessageRedirect from "../MessageRedirect/MessageRedirect";
 const RegisterDenied = () => {
   const messageRegister = {
     title: "Registro Fallido",
-    message: "Error en el registro, pongase en contacto con el proveedor ",
-    path: "/Login",
+    message: "Usuario ya existente, intentelo nuevamente",
+    path: "/admin/register",
   };
 
   return (

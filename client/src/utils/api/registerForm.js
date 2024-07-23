@@ -1,14 +1,15 @@
-import axiosInstance from "./axiosInstance.js";
-
+import axiosInstanceWithCredentials from "./axiosInstanceWithCredentials.js";
 
 export async function registerForm(data) {
-  try {
-    const response = await axiosInstance.post("/api/register", data);
-    if (response.status === 201) {      
-      return response
+    try {
+        const response = await axiosInstanceWithCredentials.post(
+            "/api/admin/register",
+            data
+        );
+        if (response.status === 201) {
+            return response;
+        }
+    } catch (error) {
+        throw error;
     }
-  } catch (error) {
-    console.error(`Error al registrar usuario servidor: ${error}`);  //usar componente By Rocio DICIENDO QUE HAY UN PROBLEMA CON LA BASE DE DATOS 
-    return error
-  }
 }

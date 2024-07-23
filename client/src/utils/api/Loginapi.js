@@ -1,9 +1,10 @@
 // src/utils/api.js
-import axiosInstace from "./axiosInstance";
+
+import axiosInstanceWithCredentials from "./axiosInstanceWithCredentials";
 
 export const login = async (username, password) => {
     try {
-        const response = await axiosInstace.post("api/auth/login", {
+        const response = await axiosInstanceWithCredentials.post("api/auth/login", {
             username,
             password
         });

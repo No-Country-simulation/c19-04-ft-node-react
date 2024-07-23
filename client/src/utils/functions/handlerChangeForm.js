@@ -2,50 +2,55 @@ import { registerForm } from "../api/registerForm";
 import { dataToApi } from "./dataToApi";
 import { validateForm } from "./validateForm";
 
-
 export function handleChangeForm(setFormData) {
-  return (event) => {
-    const valueWithoutSpaces = event.target.value.replace(/\s/g, "");
+    return (event) => {
+        const valueWithoutSpaces = event.target.value.replace(/\s/g, "");
 
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [event.target.name]: valueWithoutSpaces,
-    }));
-  };
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [event.target.name]: valueWithoutSpaces,
+        }));
+    };
 }
 
 export function handlerSubmitRegister(formData, setErrors, navigate) {
-  return async (event) => {
-    event.preventDefault();
+    return async (event) => {
+        event.preventDefault();
 
-    //submite pasa las comprobaciones
-    const newErrors = validateForm(formData);
+        // Submite pasa las comprobaciones
+        const newErrors = validateForm(formData);
 
-    //setea los errores para luego tratar de hacer la llamada
-    setErrors(newErrors);
+        // Setea los errores para luego tratar de hacer la llamada
+        setErrors(newErrors);
 
-    //crear una funcion para Esta transformacion
-    const dataApi = dataToApi(formData);
+        // Crear una función para esta transformación
+        const dataApi = dataToApi(formData);
 
-    if (
-      Object.keys(newErrors).length <= 1 &&
-      Object.keys(newErrors.passwordDetails).length === 0
-    ) {
-      try {
-        const response = await registerForm(dataApi);
-        console.log(response)
-        if(response.status === 201){
-          navigate("/register-successfully");
-        } 
-        if(response.response.status === 404 ) {
-          navigate("/register-denied")
+        if (
+            Object.keys(newErrors).length <= 1 &&
+            Object.keys(newErrors.passwordDetails).length === 0
+        ) {
+            try {
+                const response = await registerForm(dataApi);
+
+                if (response && response.status === 201) {
+                    navigate("/register-successfully");
+                }
+            } catch (error) {
+                if (error.response) {
+                    if (
+                        error.response.status === 404 &&
+                        error.response.data.message ===
+                            "The user that attempt to register already exists"
+                    ) {
+                        navigate("/register-denied");
+                    }
+                } else if (error.code === "ERR_NETWORK") {
+                    navigate("/register-offline");
+                } else {
+                    setErrors({ submit: error.message });
+                }
+            }
         }
-        
-
-      } catch (error) {
-        console.error("Error en el registro, problema con el servidor:", error);
-        setErrors({ submit: error.message });
-      }
-    }
-  };
+    };
 }

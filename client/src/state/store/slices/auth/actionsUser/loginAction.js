@@ -1,19 +1,22 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstace from "../../../../../utils/api/axiosInstance";
+import axiosInstanceWithCredentials from "../../../../../utils/api/axiosInstanceWithCredentials";
 
 export const loginAction = createAsyncThunk(
-  "user/loginUser",
-  async (userId, thunkAPI) => {
-    try {
-      const response = await axiosInstace.get(`/user/${userId}`);
-      if (!response.ok) {
-        const errorData = await response.json();
-        return thunkAPI.rejectWithValue(errorData);
-      }
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+    "user/loginUser",
+    async (loginInfo, thunkAPI) => {
+        try {
+            const response = await axiosInstanceWithCredentials.post(
+                "api/auth/login",
+                loginInfo
+            );
+            if (response.status !== 200) {
+                // const errorData = await response.json();
+                return thunkAPI.rejectWithValue("No se inició sesión");
+            }
+            return loginInfo;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message);
+        }
     }
-  }
 );
