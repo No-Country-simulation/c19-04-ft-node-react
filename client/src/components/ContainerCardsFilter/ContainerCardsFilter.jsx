@@ -77,8 +77,8 @@ const ContainerCardsFilter = ({ dataFilter }) => {
                 <div className="flex-shrink-0" style={{ width: '30px' }}></div>
                 {dataFilter.map((element) => (
                     <CardSearch 
-                        id = {element._id}
-                        description={element.description}
+                        _id = {element._id}
+                        description={element.descriptionBONITA}
                         price={element.price}
                         timePreparation={element.estimatedTimeToDeliver}
                         title={element.title}
