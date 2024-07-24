@@ -1,12 +1,12 @@
 import React from "react";
 
-const TextButton = ({ children, onClick, disabled }) => {
+const TextButton = ({ children, onClick, disabled, className }) => {
   return (
     <button
       onClick={!disabled ? onClick : null}
       disabled={disabled}
       className={`
-        flex justify-center font-bold p-3 gap-1
+        flex justify-center font-bold ${className}
       ${
         disabled
           ? "text-customRed-200 cursor-not-allowed"
