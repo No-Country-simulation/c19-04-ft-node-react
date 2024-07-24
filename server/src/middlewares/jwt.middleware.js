@@ -14,17 +14,15 @@ const VerifyToken = async (req, res, next) => {
         const userId = decoded.id;
         const userRole = decoded.role;
 
-        const userPromises = [
-            AdminModel.findById({ _id: userId }).exec(),
-            KitchenModel.findById({ _id: userId }).exec(),
-            WaiterModel.findById({ _id: userId }).exec(),
-        ];
+		const userIsValid = await Promise.allSettled([
+			AdminModel.findById({ _id: userId }),
+			KitchenModel.findById({ _id: userId }),
+			WaiterModel.findById({ _id: userId }),
+		]).catch((err) => {
+			logger.error(`Error in userIsValid ${err}`)
+			return null
+		})
 
-        const results = await Promise.allSettled(userPromises);
-
-        const userIsValid = results.some(
-            (result) => result.status === "fulfilled" && result.value !== null
-        );
 
         if (!userIsValid)
             return res.status(404).json({ msg: "User not found in any model" });

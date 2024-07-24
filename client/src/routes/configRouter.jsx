@@ -74,6 +74,10 @@ const routerPathComponent = [
         path: "/dashAdmin",
         element: <ContainerComponentsDashboard />,
     },
+    // {
+    //     path: "/temporal",
+    //     element: <Temporal />,
+    // },
     {
         path: "*",
         element: <NotFound />,
