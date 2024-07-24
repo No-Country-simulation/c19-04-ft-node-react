@@ -11,6 +11,7 @@ import RegisterDeniedBD from "../components/RegisterDenied/RegisterBdDenied.jsx"
 import Buttons from "../components/Buttons/Buttons.jsx";
 import MainViewMenu from "../views/MainViewMenu/MainViewMenu.jsx";
 import TableCalls from "../views/TableCalls/TableCalls.jsx";
+import ContainerComponentsDashboard from "../components/ContainerComponentDashboard/ContainerComponentsDashboard.jsx";
 
 const routerPathComponent = [
     {
@@ -68,6 +69,10 @@ const routerPathComponent = [
     {
         path: "/calls",
         element: <TableCalls />,
+    },
+    {
+        path: "/dashAdmin",
+        element: <ContainerComponentsDashboard />,
     },
     {
         path: "*",
