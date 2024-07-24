@@ -2,21 +2,13 @@ import React from "react";
 import DropdownFoodItem from "../Dropdown/DropdownFoodItem";
 import DropdownAdmin from "../Dropdown/DropdownAdmin";
 import TextButton from "../Buttons/TextButton";
+import "../../styles/scrollbarFilters.css"
 
 const AdminControlPanel = () => {
-  const optionsPanel = {
-    title: "Gestionar Menú",
-    subOptions: [
-      "Agregar Menú",
-      "Editar Menú",
-      "Listar Menú",
-      "Desabilitar Menú",
-      "Eliminar Menu",
-    ],
-  };
+
   const arrayOptionsPanel = [
     {
-      title: "Gestionar Menú",
+      title: "Gestión Menú",
       subOptions: [
         "Agregar Menú",
         "Editar Menú",
@@ -26,11 +18,11 @@ const AdminControlPanel = () => {
       ],
     },
     {
-      title: "Gestionar Meseros",
+      title: "Gestión Meseros",
       subOptions: ["Asignar Mesa", "Horas de Trabajo", "Salario"],
     },
     {
-      title: "Gestionar Pedidos",
+      title: "Pedidos / Entregas",
       subOptions: [
         "Ver Todos los Pedidos",
         "Pedidos por Mesa",
@@ -39,14 +31,14 @@ const AdminControlPanel = () => {
       ],
     },
     {
-      title: "Gestionar Usuarios",
+      title: "Gestión Usuarios",
       subOptions: ["Meseros", "Mesas", "Admins"],
     },
   ];
 
   return (
     <div className="max-h-full">
-      <div className="my-4 overflow-y-auto max-h-[500px] custom-scrollbar">
+      <div className="my-4 overflow-y-auto max-h-[400px] custom-scrollbar">
         {arrayOptionsPanel.map((panel) => (
           <DropdownAdmin options={panel} />
         ))}

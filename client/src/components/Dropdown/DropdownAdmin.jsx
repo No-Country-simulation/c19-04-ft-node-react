@@ -20,9 +20,9 @@ const DropdownAdmin = ({ options }) => {
           isOpen ? "rounded-b-none duration-0" : "duration-1000"
         }`}
       >
-        <div className="flex justify-around w-full gap-4">
-          <p className="text-[14px] font-semibold">{options.title}</p>
-          <button className="" onClick={toggleDropdown}>
+        <div className="flex justify-around w-full gap-4 items-start">
+          <p className="text-[14px] font-normal">{options.title}</p>
+          <button className="pt-1" onClick={toggleDropdown}>
             <img
               src={triangleIconSVG}
               alt=""
@@ -47,8 +47,8 @@ const DropdownAdmin = ({ options }) => {
                 className="flex flex-col hover:bg-customGray-100 p-2 m-1 rounded-lg"
               >
                 <div className="flex justify-between items-center">
-                  <div className="flex gap-2 items-center ">
-                    <TextButton className="text-customGray-500 hover:text-customGray-600 active:text-customGray-700 text-[12px] text-left">
+                  <div className="flex gap-2 items-center">
+                    <TextButton className="text-customGray-500 hover:text-customGray-600 active:text-customGray-700 text-[12px] text-left font-normal">
                       {option}
                     </TextButton>
                   </div>
