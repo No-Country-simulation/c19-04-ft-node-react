@@ -5,9 +5,14 @@ import WaiterController from "../controllers/waiter.controller.js";
 import AdminController from "../controllers/admin.controller.js";
 
 const router = Router();
-//POST ADD WAITER / TABLE / KITCHEN / ADMIN
+
+// TRAER TODOS LOS MESEROS
+router.get("/waiters", WaiterController.getWaiters);
+
+// TRAER INFORMACION DE USUARIO LOGUEADO
 router.get("/user", AuthController.getUser);
 
+//POST ADD WAITER / TABLE / KITCHEN / ADMIN
 router.post("/register", AuthController.signUp);
 
 //POST INGREDIENTES
@@ -20,7 +25,7 @@ router.get("/ingredients", IngredientsController.getIngredient);
 router.delete("/ingredients/:nombre", IngredientsController.removeIngredient);
 
 //POST ASSIGN TABLES TO WAITERS
-router.patch("/assignTables/:userMozo", WaiterController.assignTables);
+router.patch("/assignTables/:waiterUsername", WaiterController.assignTables);
 
 //POST MENU
 router.post("/menu", AdminController.createMenu);
