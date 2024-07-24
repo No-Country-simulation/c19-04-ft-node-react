@@ -34,12 +34,11 @@ app.get("/health", (req, res) => {
     res.json("Health OK");
 });
 
-app.use("/api/table", TableRoutes);
-app.use("/api/auth", AuthRoutes);
-app.use("/api/admin", VerifyToken, AdminRoutes);
-// app.use("/api/admin", AdminRoutes);
-app.use("/api/waiter", WaiterRoutes);
-app.use("/api/card-menu", CardMenuRoutes);
-app.use("/api/orders", OrderRoutes);
+app.use('/api/table', TableRoutes)
+app.use('/api/auth', AuthRoutes)
+app.use('/api/admin', VerifyToken, AdminRoutes)
+app.use('/api/waiter', WaiterRoutes)
+app.use('/api/card-menu', CardMenuRoutes)
+app.use('/api/orders', VerifyToken, OrderRoutes)
 
 ServerUp(app);
