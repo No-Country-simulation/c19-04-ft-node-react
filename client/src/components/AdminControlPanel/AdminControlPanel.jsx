@@ -4,7 +4,7 @@ import DropdownAdmin from "../Dropdown/DropdownAdmin";
 import TextButton from "../Buttons/TextButton";
 import "../../styles/scrollbarContainerDashboard.css"
 
-const AdminControlPanel = () => {
+const AdminControlPanel = ({isOpen}) => {
 
   const arrayOptionsPanel = [
     {
@@ -37,10 +37,10 @@ const AdminControlPanel = () => {
   ];
 
   return (
-    <div className="max-h-full flex flex-col">
+    <div className={`max-h-full flex flex-col ${isOpen ? "block" : " hidden"}`}>
       <div className="my-4 overflow-y-auto max-h-[400px] custom-scrollbar mb-8">
         {arrayOptionsPanel.map((panel) => (
-          <DropdownAdmin options={panel} />
+          <DropdownAdmin options={panel} isOpenA={isOpen} />
         ))}
       </div>
       <TextButton

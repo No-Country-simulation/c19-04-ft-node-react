@@ -6,19 +6,21 @@ import starIconSVG from "../../assets/svg/star.svg";
 import TextButton from "../Buttons/TextButton";
 import { Button } from "@headlessui/react";
 
-const DropdownAdmin = ({ options }) => {
+const DropdownAdmin = ({ options, isOpenA }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsOpen((prevState) => !prevState);
   };
 
+  console.log(isOpenA)
+
   return (
-    <div className="w-full py-1 px-2 ">
+
+    <div className={`w-full py-1 px-2 `} >
       <div
-        className={`bg-white shadow-lg rounded-lg transition-[border-radius] p-2 ${
-          isOpen ? "rounded-b-none duration-0" : "duration-1000"
-        }`}
+        className={`bg-white shadow-lg rounded-lg transition-[border-radius] p-2 ${isOpen ? "rounded-b-none duration-0" : "duration-1000"
+          }`}
       >
         <div className="flex justify-around w-full gap-4 items-start">
           <p className="text-[14px] font-normal">{options.title}</p>
@@ -26,18 +28,16 @@ const DropdownAdmin = ({ options }) => {
             <img
               src={triangleIconSVG}
               alt=""
-              className={`w-3 h-3 transform transition-transform duration-500 ${
-                isOpen ? "rotate-180" : ""
-              } `}
+              className={`w-3 h-3 transform transition-transform duration-500 ${isOpen ? "rotate-180" : ""
+                } `}
             />
           </button>
         </div>
       </div>
 
       <div
-        className={`rounded-b-lg transition-all duration-500 overflow-hidden ${
-          isOpen ? "max-h-[200px]" : "max-h-0"
-        }`}
+        className={`rounded-b-lg transition-all duration-500 overflow-hidden ${isOpen & isOpenA ? "max-h-[200px]" : "max-h-0"
+          }`}
       >
         <div className="bg-white flex flex-col px-3 pb-4 space-y-2">
           <ul className="">
