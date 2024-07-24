@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCallsToWaiters } from "../../state/store/slices/waiter/actionWaiter/getCallsToWaiter";
+import { getCallsToWaiters } from "../../state/store/slices/callWaiter/actionWaiter/getCallsToWaiter";
 import TablesCards from "../../components/TablesCards/TablesCards";
 import CustomCall from "../../components/CustomCall/CustomCall";
 
@@ -11,8 +11,10 @@ function TableCalls() {
         (state) => state.callWaiters
     );
 
+    const currentUser = useSelector((state) => state.user.currentUser);
+
     useEffect(() => {
-        dispatch(getCallsToWaiters(waiterUsername));
+        currentUser && dispatch(getCallsToWaiters(currentUser.username));
     }, []);
 
     const waiterUsername = "carlosc";
