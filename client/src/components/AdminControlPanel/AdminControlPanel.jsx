@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import DropdownFoodItem from "../Dropdown/DropdownFoodItem";
 import DropdownAdmin from "../Dropdown/DropdownAdmin";
 import TextButton from "../Buttons/TextButton";
 import "../../styles/scrollbarContainerDashboard.css"
 
 const AdminControlPanel = ({isOpen}) => {
-
   const arrayOptionsPanel = [
     {
       title: "Gestión Menú",
