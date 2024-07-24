@@ -51,12 +51,7 @@ export const assignTables = async (req, res) => {
         const { waiterUsername } = req.params;
         const { tables } = req.body;
 
-        console.log("waiterUsername", waiterUsername);
-        console.log("tables", tables);
-
         const waiter = await WaiterModel.findOne({ username: waiterUsername });
-
-        console.log(waiter);
 
         waiter.tablesAssigned = tables;
 
