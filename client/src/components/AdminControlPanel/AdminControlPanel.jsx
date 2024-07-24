@@ -2,7 +2,7 @@ import React from "react";
 import DropdownFoodItem from "../Dropdown/DropdownFoodItem";
 import DropdownAdmin from "../Dropdown/DropdownAdmin";
 import TextButton from "../Buttons/TextButton";
-import "../../styles/scrollbarFilters.css"
+import "../../styles/scrollbarContainerDashboard.css"
 
 const AdminControlPanel = () => {
 
@@ -37,13 +37,14 @@ const AdminControlPanel = () => {
   ];
 
   return (
-    <div className="max-h-full">
-      <div className="my-4 overflow-y-auto max-h-[400px] custom-scrollbar">
+    <div className="max-h-full flex flex-col">
+      <div className="my-4 overflow-y-auto max-h-[400px] custom-scrollbar mb-8">
         {arrayOptionsPanel.map((panel) => (
           <DropdownAdmin options={panel} />
         ))}
       </div>
       <TextButton
+        className={"align-self-end"}
         onClick={() => {
           console.log("Cerrar sesión");
         }}

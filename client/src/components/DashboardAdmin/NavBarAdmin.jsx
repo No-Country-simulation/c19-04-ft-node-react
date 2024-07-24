@@ -17,7 +17,7 @@ export default function NavBar() {
 
   return (
     <div
-      className={`fixed bottom-0 w-full p-2 sm:transition-all sm:duration-300 sm:absolute sm:h-full bg-customBlue-600 sm:left-0 sm:py-10 flex flex-col sm:justify-center sm:items-start ${
+      className={`fixed bottom-0 w-full p-2 pl-4 sm:transition-all sm:duration-300 sm:absolute sm:h-full bg-customRed-100 sm:left-0 sm:py-10 flex flex-col sm:justify-center sm:items-start ${
         isExpanded ? "sm:w-48" : "sm:w-14"
       }`}
     >
@@ -33,7 +33,7 @@ export default function NavBar() {
           <img src={userAddIconSVG} />
         </div>
         <span
-          className={`absolute -z-10 text-nowrap text-white font-semibold transition-all duration-300 hidden sm:inline ${
+          className={`absolute -z-10 text-nowrap text-customGray-700 font-semibold transition-all duration-300 hidden sm:inline ${
             isExpanded ? "translate-x-10" : "-translate-x-20"
           }`}
         >
@@ -64,7 +64,7 @@ export default function NavBar() {
       {/* Aquí termina el modal */}
       
       <button
-        className="hidden sm:block sm:absolute sm:-right-6 sm:bg-customGreen-500"
+        className="hidden sm:block sm:absolute sm:-right-6 sm:bg-customGray-500"
         onClick={() => setIsExpanded((prevState) => !prevState)}
       >
         {isExpanded ? (
