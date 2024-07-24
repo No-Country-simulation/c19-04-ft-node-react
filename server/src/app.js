@@ -32,6 +32,6 @@ app.use('/api/auth', AuthRoutes)
 app.use('/api/admin', VerifyToken, AdminRoutes)
 app.use('/api/waiter', WaiterRoutes)
 app.use('/api/card-menu', CardMenuRoutes)
-app.use('/api/orders', OrderRoutes)
+app.use('/api/orders', VerifyToken, OrderRoutes)
 
 ServerUp(app)

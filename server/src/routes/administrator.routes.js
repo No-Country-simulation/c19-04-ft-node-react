@@ -1,7 +1,7 @@
 import AuthController from '../controllers/auth.controller.js'
 import IngredientsController from '../controllers/ingredients.controller.js'
 import { Router } from 'express'
-import WaiterController from "../controllers/waiter.controller.js";
+import WaiterController from '../controllers/waiter.controller.js'
 import AdminController from '../controllers/admin.controller.js'
 
 const router = Router()
@@ -10,7 +10,6 @@ router.post('/register', AuthController.signUp)
 
 //POST INGREDIENTES
 router.post('/ingredients', IngredientsController.addIngredient)
-
 
 //GET INGREDIENTES
 router.get('/ingredients', IngredientsController.getIngredient)
