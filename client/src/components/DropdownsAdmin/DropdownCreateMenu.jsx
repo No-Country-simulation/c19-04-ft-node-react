@@ -1,117 +1,147 @@
-import React, { useState } from 'react';
+import React from 'react';
+import MainButton from "../Buttons/MainButton";
+import SecondaryButton from "../Buttons/SecondaryButton";
 import {
     validateTitulo,
     validateDescription,
     validateImagen,
     validateTiempoDePreparacion,
     validatePrecio,
-    validateTag,
-} from '../../utils/functions/ValidationMenu';
-import MainButton from '../Buttons/MainButton';
-import SecondaryButton from '../Buttons/SecondaryButton';
+    validateTag
+} from "../../utils/functions/ValidationMenu";
 
 const validTags = [
-    'Hamburguesas',
-    'Pizzas',
-    'Pastas',
-    'Ensaladas',
-    'Sushi',
-    'Milanesas'
+  'Hamburguesas',
+  'Pizzas',
+  'Pastas',
+  'Ensaladas',
+  'Sushi',
+  'Milanesas',
 ];
 
-const DropdownCreateMenu = ({ closeDropdown }) => {
-    const [formData, setFormData] = useState({
-        Titulo: '',
-        Description: '',
-        Imagen: '',
-        'Tiempo de preparacion': '',
-        Precio: '',
-        Tag: '',
-    });
-
-    const [errors, setErrors] = useState({});
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
-    const validateForm = () => {
-        const newErrors = {};
-        newErrors.Titulo = validateTitulo(formData.Titulo);
-        newErrors.Description = validateDescription(formData.Description);
-        newErrors.Imagen = validateImagen(formData.Imagen);
-        newErrors['Tiempo de preparacion'] = validateTiempoDePreparacion(formData['Tiempo de preparacion']);
-        newErrors.Precio = validatePrecio(formData.Precio);
-        newErrors.Tag = validateTag(formData.Tag);
-        setErrors(newErrors);
-
-        return Object.values(newErrors).every((error) => !error);
-    };
-
+const DropdownCreateMenu = ({
+    newMenu,
+    handleInputChange,
+    handleCreateMenu,
+    closeDropdown
+}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (validateForm()) {
-            console.log('Formulario enviado', formData);
-            // Aquí puedes manejar la lógica de creación del menú
-            closeDropdown();
+        const titleError = validateTitulo(newMenu.title);
+        const descriptionError = validateDescription(newMenu.description);
+        const imgUrlError = validateImagen(newMenu.imgUrl);
+        const estimatedTimeError = validateTiempoDePreparacion(newMenu.estimatedTimeToDeliver);
+        const priceError = validatePrecio(newMenu.price);
+        const tagError = validateTag(newMenu.tags);
+
+        if (titleError || descriptionError || imgUrlError || estimatedTimeError || priceError || tagError) {
+            alert(`${titleError}\n${descriptionError}\n${imgUrlError}\n${estimatedTimeError}\n${priceError}\n${tagError}`);
+        } else {
+            handleCreateMenu(e);
         }
     };
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-            <div
-                className="absolute inset-0 bg-black/50 backdrop-blur-md"
-                onClick={closeDropdown}
-            ></div>
-
-            <div className="bg-customRed-50 w-full max-w-lg p-8 border border-customRed-200 rounded-lg shadow-lg relative z-10">
-                <h2 className="text-xl font-bold mb-5 text-customRed-400">Crear Nuevo Menú</h2>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    {['Titulo', 'Description', 'Imagen', 'Tiempo de preparacion', 'Precio', 'Tag'].map((field) => (
-                        <div key={field} className="flex flex-col">
-                            <label htmlFor={field} className="text-customRed-300 font-medium mb-1 text-xs">
-                                {field.charAt(0).toUpperCase() + field.slice(1)}
-                            </label>
-                            <input
-                                id={field}
-                                type={field === 'Precio' || field === 'Tiempo de preparacion' ? 'number' : 'text'}
-                                name={field}
-                                placeholder={field === 'Tiempo de preparacion' ? 'Tiempo Estimado' : ''}
-                                value={formData[field]}
-                                onChange={handleInputChange}
-                                required
-                                className="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-customRed-50 text-sm"
-                            />
-                            {errors[field] && (
-                                <span className="text-red-400 text-sm pl-2">{errors[field]}</span>
-                            )}
-                        </div>
-                    ))}
-                    <div className="flex flex-col">
-                        <label htmlFor="Tag" className="text-customRed-300 font-medium mb-1 text-xs">
-                            Etiquetas
-                        </label>
-                        <select
-                            id="Tag"
-                            name="Tag"
-                            value={formData.Tag}
+        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur flex items-center justify-center">
+            <div className="bg-customRed-50 p-6 rounded-lg w-[90%] max-w-lg border border-customRed-200">
+                <h2 className="text-xl font-bold mb-4 text-customRed-400">Crear Nuevo Menú</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className="mb-4">
+                        <label htmlFor="title" className="block text-sm font-medium text-customRed-300">Título</label>
+                        <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            value={newMenu.title}
                             onChange={handleInputChange}
-                            required
-                            className="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-customRed-50 text-sm"
+                            className="mt-1 block w-full border border-customRed-200 rounded-md shadow-sm focus:border-customRed-400 focus:ring-customRed-400 outline-none px-3 py-2 sm:text-[12px]"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="description" className="block text-sm font-medium text-customRed-300">Descripción</label>
+                        <textarea
+                            id="description"
+                            name="description"
+                            value={newMenu.description}
+                            onChange={handleInputChange}
+                            maxLength="400"
+                            className="mt-1 block w-full border border-customRed-200 rounded-md shadow-sm focus:border-customRed-400 focus:ring-customRed-400 outline-none px-3 py-2 sm:text-[12px]"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="imgUrl" className="block text-sm font-medium text-customRed-300">URL de la Imagen</label>
+                        <input
+                            type="text"
+                            id="imgUrl"
+                            name="imgUrl"
+                            value={newMenu.imgUrl}
+                            onChange={handleInputChange}
+                            className="mt-1 block w-full border border-customRed-200 rounded-md shadow-sm focus:border-customRed-400 focus:ring-customRed-400 outline-none px-3 py-2 sm:text-[12px]"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="estimatedTimeToDeliver" className="block text-sm font-medium text-customRed-300">Tiempo de Preparación (minutos)</label>
+                        <input
+                            type="number"
+                            id="estimatedTimeToDeliver"
+                            name="estimatedTimeToDeliver"
+                            value={newMenu.estimatedTimeToDeliver}
+                            onChange={handleInputChange}
+                            className="mt-1 block w-full border border-customRed-200 rounded-md shadow-sm focus:border-customRed-400 focus:ring-customRed-400 outline-none px-3 py-2 sm:text-[12px]"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="price" className="block text-sm font-medium text-customRed-300">Precio</label>
+                        <input
+                            type="number"
+                            id="price"
+                            name="price"
+                            value={newMenu.price}
+                            onChange={handleInputChange}
+                            className="mt-1 block w-full border border-customRed-200 rounded-md shadow-sm focus:border-customRed-400 focus:ring-customRed-400 outline-none px-3 py-2 sm:text-[12px]"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="category" className="block text-sm font-medium text-customRed-300">Categoría</label>
+                        <input
+                            type="text"
+                            id="category"
+                            name="category"
+                            value={newMenu.category}
+                            onChange={handleInputChange}
+                            className="mt-1 block w-full border border-customRed-200 rounded-md shadow-sm focus:border-customRed-400 focus:ring-customRed-400 outline-none px-3 py-2 sm:text-[12px]"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="tags" className="block text-sm font-medium text-customRed-300">Tags</label>
+                        <select
+                            id="tags"
+                            name="tags"
+                            value={newMenu.tags}
+                            onChange={handleInputChange}
+                            className="mt-1 block w-full border border-customRed-200 rounded-md shadow-sm focus:border-customRed-400 focus:ring-customRed-400 outline-none px-3 py-2 sm:text-[12px]"
                         >
-                            <option value="" disabled>Selecciona una etiqueta</option>
-                            {validTags.map(tag => (
-                                <option key={tag} value={tag}>{tag}</option>
+                            <option value="">Selecciona un tag</option>
+                            {validTags.map((tag) => (
+                                <option key={tag} value={tag}>
+                                    {tag}
+                                </option>
                             ))}
                         </select>
-                        {errors.Tag && (
-                            <span className="text-red-400 text-sm pl-2">{errors.Tag}</span>
-                        )}
                     </div>
-                    <div className="flex justify-between mt-4">
-                        <MainButton type="submit" classNameSize="px-12 py-2">Crear</MainButton>
-                        <SecondaryButton type="button" onClick={closeDropdown} classNameSize="px-6 py-2">Cancelar</SecondaryButton>
+                    <div className="flex justify-between space-x-4 pt-5">
+                        <SecondaryButton
+                            onClick={closeDropdown}
+                            classNameSize="px-4 py-2"
+                        >
+                            Cancelar
+                        </SecondaryButton>
+                        <MainButton
+                            type="submit"
+                            classNameSize="px-10 py-2"
+                        >
+                            Crear
+                        </MainButton>
                     </div>
                 </form>
             </div>

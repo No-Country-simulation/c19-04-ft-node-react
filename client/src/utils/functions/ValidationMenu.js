@@ -63,13 +63,13 @@ export const validatePrecio = (precio) => {
 };
 
 export const validateTag = (tag) => {
-    const tagPattern = /^[a-zA-Z0-9]+$/;
+    const tagPattern = /^[a-zA-Z\s]+$/;
     if (!tag) {
         return 'El tag es requerido';
     } else if (tag.length < 3) {
         return 'El tag debe tener al menos 3 caracteres';
     } else if (!tagPattern.test(tag)) {
-        return 'El tag solo puede contener letras y números';
+        return 'El tag solo puede contener letras ';
     }
     return '';
 };
