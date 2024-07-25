@@ -13,6 +13,7 @@ const InvalidPasswordMessage = () => {
         title={messageInvalid.title}
         message={messageInvalid.message}
         path={messageInvalid.path}
+        timeRedirect={3000}
       />
     </div>
   );

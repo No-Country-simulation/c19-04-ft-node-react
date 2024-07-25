@@ -3,14 +3,14 @@ import { redirectLogin } from "../../utils/functions/redirectLogin";
 import loader from "../../assets/svg/loader.svg";
 import { countdown } from "../../utils/functions/coundown.js";
 
-const MessageRedirect = ({ title, message, path }) => {
-  redirectLogin(path, 5000);
+const MessageRedirect = ({ title, message, path, timeRedirect = 3000 }) => {
+  redirectLogin(path, timeRedirect);
 
-  const redirectTimer = countdown(5);
+  const redirectTimer = countdown(3);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-customLight">
-      <div className="bg-customBlue p-6 rounded-lg shadow-xl mx-5">
+      <div className="bg-customRed-400 p-6 rounded-lg shadow-xl mx-5">
         <h2 className="text-xl font-bold mb-5 text-white">{title}</h2>
         <p className="text-white my-7">{message}</p>
 
