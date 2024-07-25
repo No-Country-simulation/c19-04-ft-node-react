@@ -1,30 +1,21 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
-const orderSchema = new mongoose.Schema(
-	{
-		orderNumber: {
-			type: Number,
-			required: true,
-		},
-		table: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Table',
-		},
-		status: {
-			type: String,
-			enum: ['pending', 'ready'],
-			default: 'pending',
-		},
-		readyAt: {
-			type: Date,
-		},
-		//   delay: { //Próximamente
-		//     type: Date,
-		//   }
-	},
-	{ timestamps: true },
-)
+const orderSchema = new mongoose.Schema({
+  orderNumber: {
+    type: Number,
+    required: true,
+    unique: true,
+  },
+  tableNumber: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Table",
+  },
+  orderedDishes: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Menu",
+  },
+});
 
-const OrderModel = mongoose.model('Order', orderSchema)
+const OrderModel = mongoose.model("Order", orderSchema);
 
-export default OrderModel
+export default OrderModel;

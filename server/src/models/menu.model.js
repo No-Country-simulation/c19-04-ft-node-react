@@ -1,49 +1,60 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 const menuSchema = new mongoose.Schema({
-	title: {
-		type: String,
-		required: true,
-	},
-	description: {
-		type: String,
-		required: true,
-	},
-	category: {
-		type: String,
-		required: true,
-		enum: ['Entradas', 'Platos principales', 'Postres', 'Bebidas', 'Alcohol'],
-	},
-	tags: {
-		type: String,
-		required: true,
-		enum: [
-			'Hamburguesas',
-			'Pizzas',
-			'Pastas',
-			'Ensaladas',
-			'Sushi',
-			'Milanesas',
-		],
-	},
-	imgUrl: {
-		type: String,
-		required: true,
-	},
-	ingredients: [],
-	estimatedTime: {
-		type: Number,
-	},
-	price: {
-		type: Number,
-		required: true,
-	},
-	available: {
-		type: Boolean,
-		default: false,
-	},
-})
+  dishNumber: {
+    type: Number,
+    required: true,
+    unique: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  category: {
+    type: String,
+    required: true,
+    categories: [],
+  },
+  tags: {
+    type: String,
+    required: true,
+    tags: [],
+  },
+  imgUrl: {
+    type: String,
+    required: true,
+  },
+  ingredients: {
+    type: String,
+    required: true,
+    ingredients: [],
+  },
+  estimatedTime: {
+    type: Number,
+  },
+  people: {
+    type: Number,
+  },
+  extraInfo: {
+    type: String,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  available: {
+    type: Boolean,
+    default: false,
+  },
+  rating: {
+    type: Number,
+  },
+});
 
-const MenuModel = mongoose.model('Menu', menuSchema)
+const MenuModel = mongoose.model("Menu", menuSchema);
 
-export default MenuModel
+export default MenuModel;

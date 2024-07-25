@@ -1,34 +1,25 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 const waiterSchema = new mongoose.Schema({
-	username: {
-		type: String,
-		unique: true,
-		required: true,
-	},
-	password: {
-		type: String,
-		required: true,
-	},
-	hourSalary: {
-		type: Number,
-		default: 5,
-	},
-	tablesAssigned: {
-		type: Object,
-		default: [],
-	},
-	requestedBy: [],
-	moneyEarned: {
-		type: Number,
-		default: 0,
-	},
-	role: {
-		type: String,
-		default: 'waiter',
-	},
-})
+  username: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  role: {
+    type: String,
+    default: "waiter",
+  },
+});
 
-const WaiterModel = mongoose.model('Waiter', waiterSchema)
+const WaiterModel = mongoose.model("Waiter", waiterSchema);
 
-export default WaiterModel
+export default WaiterModel;
