@@ -1,24 +1,15 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 const tableSchema = new mongoose.Schema({
-	QRCode: Buffer,
-	tableNumber: Number,
-	link: String,
-	products: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'CardMenu',
-		},
-	],
-	role: {
-		type: String,
-		default: 'table',
-	},
-	// notes: {
-	// 	type: String,
-	// }
-})
+  QRCode: Buffer,
+  tableNumber: Number,
+  link: String,
+  role: {
+    type: String,
+    default: "table",
+  },
+});
 
-const TableModel = mongoose.model('Table', tableSchema)
+const TableModel = mongoose.model("Table", tableSchema);
 
-export default TableModel
+export default TableModel;
