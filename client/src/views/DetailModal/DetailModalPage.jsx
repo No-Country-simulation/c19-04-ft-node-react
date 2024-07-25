@@ -10,7 +10,7 @@ const DetailModalPage = () => {
         details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         price: '9.000',
         rating: 4.7,
-        time: '15 min',
+        time: '15',
         servings: '1 persona',
         type: 'Carnívoro'
     };

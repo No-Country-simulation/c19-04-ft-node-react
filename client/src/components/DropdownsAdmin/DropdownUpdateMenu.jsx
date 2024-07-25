@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axiosInstanceWithCredentials from '../../utils/api/axiosInstanceWithCredentials'; 
 import MainButton from '../Buttons/MainButton';
 import SecondaryButton from '../Buttons/SecondaryButton';
 
@@ -15,9 +14,8 @@ const DropdownUpdateMenu = ({ selectedMenu, handleUpdateMenu, closeDropdown }) =
 
     const updateMenu = async () => {
         try {
-            const { _id, ...updatedFields } = formState;
-            await axiosInstanceWithCredentials.patch(`/api/admin/menu/${_id}`, updatedFields);
-            handleUpdateMenu(_id, updatedFields);
+            handleUpdateMenu(formState);
+            closeDropdown();
         } catch (error) {
             console.error("Error al actualizar el menú:", error);
         }
@@ -39,7 +37,7 @@ const DropdownUpdateMenu = ({ selectedMenu, handleUpdateMenu, closeDropdown }) =
                     }}
                     className="space-y-4"
                 >
-                    {['title', 'description', 'imgUrl', 'estimatedTimeToDeliver', 'price', 'tag'].map((field) => (
+                    {['title', 'description', 'imgUrl', 'estimatedTimeToDeliver', 'price', 'tags'].map((field) => (
                         <div key={field} className="flex flex-col">
                             <label htmlFor={field} className="text-customRed-300 font-medium mb-1 text-xs">
                                 {field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, ' $1')}
@@ -50,7 +48,6 @@ const DropdownUpdateMenu = ({ selectedMenu, handleUpdateMenu, closeDropdown }) =
                                 name={field}
                                 value={formState[field]}
                                 onChange={handleChange}
-                                
                                 className="p-2 border border-customRed-200 rounded focus:outline-none focus:ring-2 focus:ring-customRed-50 text-sm"
                             />
                         </div>
