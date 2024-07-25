@@ -138,6 +138,7 @@ const DropdownCreateMenu = ({
                         </SecondaryButton>
                         <MainButton
                             type="submit"
+                            
                             classNameSize="px-10 py-2"
                         >
                             Crear
