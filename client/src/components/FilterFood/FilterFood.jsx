@@ -41,7 +41,7 @@ const FilterFood = ({ categories }) => {
                                 filters.categoryFilter === item
                                     ? "bg-customGreen"
                                     : "bg-customLight"
-                            } min-w-28 px-4 h-[51px] text-[16px] font-medium rounded-[20px] hover:text-customRed hover:underline hover:underline-offset-4 hover:decoration-customRed ease-linear duration-300`}
+                            } min-w-28 px-4 h-[51px] text-[16px] font-medium rounded-[20px] hover:text-customRed-400 hover:underline hover:underline-offset-4 hover:decoration-customRed ease-linear duration-300`}
                         >
                             {item}
                         </button>

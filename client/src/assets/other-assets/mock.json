@@ -17,7 +17,8 @@
       "price": 7000,
       "available": true,
       "category": "Platos principales",
-      "tags":"Ensaladas"
+      "tags": "Pizzas"
+      
       
   },
   {
@@ -27,7 +28,8 @@
       "imgUrl": "https://espanol.kingsford.com/wp-content/uploads/2017/02/KFD_SpicyBBQBaconRanchBurger35382_WEB.jpg",
       "price": 6500,
       "available": true,
-      "category": "Platos principales"
+      "category": "Platos principales",
+        "tags": "Hamburguesas"
   },
   {
       "title": "Tacos al Pastor",
@@ -36,7 +38,8 @@
       "imgUrl": "https://www.simplyrecipes.com/thmb/3K4LQNFWWR3H62xa598c_XAYIQQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Tacos-Al-Pastor-Lead-04-429571d03db94ed1a8a24f8c2d351cec.jpg",
       "price": 4500,
       "available": true,
-      "category": "Platos principales"
+      "category": "Platos principales",
+      "tags": "Hamburguesas"
   },
   {
       "title": "Ensalada Caesar",
@@ -45,7 +48,8 @@
       "imgUrl": "https://www.comedera.com/wp-content/uploads/2023/10/shutterstock_1087243763.jpg",
       "price": 4000,
       "available": true,
-      "category": "Entradas"
+      "category": "Entradas",
+      "tags": "Ensaladas"
   },
   {
       "title": "Sushi de Salmón",
@@ -73,6 +77,7 @@
       "price": 15000,
       "available": true,
       "category": "Platos principales"
+      
   },
   {
       "title": "Ceviche de Camarón",
@@ -81,7 +86,9 @@
       "imgUrl": "https://assets.unileversolutions.com/recipes-v2/235860.jpg",
       "price": 6000,
       "available": true,
-      "category": "Entradas"
+      "category": "Entradas",
+       "tags": "Sushi"
+
   },
   {
       "title": "Crepes de Nutella",
@@ -90,7 +97,8 @@
       "imgUrl": "https://img.taste.com.au/kXTe12a1/taste/2018/03/nutella-pancakes-135836-1.jpg",
       "price": 3500,
       "available": true,
-      "category": "Postres"
+      "category": "Postres",
+        "tags": "Milanesas"
   },
   {
       "title": "Costillas BBQ",
