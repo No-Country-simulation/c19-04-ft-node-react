@@ -6,7 +6,8 @@
       "imgUrl": "https://buenazo.cronosmedia.glr.pe/original/2023/07/14/64ac3e8c599470217672a906.jpg",
       "price": 5000,
       "available": true,
-      "category": "Platos principales"
+      "category": "Platos principales",
+      "tags": "Hamburguesas"
   },
   {
       "title": "Pizza Margarita",
@@ -15,7 +16,9 @@
       "imgUrl": "https://estudiarcocina.com/wp-content/uploads/2023/01/Origen-de-la-pizza-margarita.png",
       "price": 7000,
       "available": true,
-      "category": "Platos principales"
+      "category": "Platos principales",
+      "tags":"Ensaladas"
+      
   },
   {
       "title": "Hamburguesa Clásica",

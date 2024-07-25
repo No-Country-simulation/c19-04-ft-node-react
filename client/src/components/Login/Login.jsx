@@ -46,7 +46,7 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-white sm:bg-customBlue">
+        <div className="min-h-screen flex items-center justify-center bg-white sm:bg-customRed-400">
             <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
                 <h2 className="text-2xl font-bold mb-6 text-center">Inicio de Sesión</h2>
                 <form onSubmit={handleLogin} className="space-y-6">
@@ -108,10 +108,10 @@ const Login = () => {
                         )}
                     </div>
                     <div>
-                        <button 
-                            type="submit" 
-                            className="w-full bg-customBlue text-white py-2 rounded-lg hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        >
+                    <button 
+                    type="submit" 
+                    className="w-full bg-customRed-400 text-white py-2 rounded-lg hover:bg-customRed-600 focus:outline-none focus:ring-2 focus:ring-customRed-400"
+                >
                             Iniciar Sesión
                         </button>
                         {loginError && (
