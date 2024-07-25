@@ -5,7 +5,12 @@ import SecondaryButton from '../Buttons/SecondaryButton';
 const DropdownCreateMenu = ({ newMenu, handleInputChange, handleCreateMenu, closeDropdown }) => {
     return (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-            <div className="absolute inset-0 bg-black/50" onClick={closeDropdown}></div>
+
+            <div
+                className="absolute inset-0 bg-black/50 backdrop-blur-md"
+                onClick={closeDropdown}
+            ></div>
+
             <div className="bg-customRed-50 w-full max-w-lg p-8 border border-customRed-200 rounded-lg shadow-lg relative z-10">
                 <h2 className="text-xl font-bold mb-5 text-customRed-400">Crear Nuevo Menú</h2>
                 <form onSubmit={handleCreateMenu} className="space-y-4">
@@ -18,18 +23,17 @@ const DropdownCreateMenu = ({ newMenu, handleInputChange, handleCreateMenu, clos
                                 id={field}
                                 type={field === 'Precio' || field === 'Tiempo de preparacion' ? 'number' : 'text'}
                                 name={field}
-                                placeholder={field === 'estimatedTimeToDeliver' ? 'Tiempo Estimado' : ''}
+                                placeholder={field === 'Tiempo de preparacion' ? 'Tiempo Estimado' : ''}
                                 value={newMenu[field]}
                                 onChange={handleInputChange}
                                 required
-                                className="p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-customRed-50 text-sm"
+                                className="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-customRed-50 text-sm"
                             />
                         </div>
                     ))}
-                    <div className="flex justify-between">
-
-                        <MainButton children="Crear" classNameSize="px-8 py-2 " />
-                        <SecondaryButton children="Cancelar" classNameSize="px-4 py-2" />
+                    <div className="flex justify-between mt-4">
+                        <MainButton children="Crear" classNameSize="px-12 py-2" />
+                        <SecondaryButton children="Cancelar" classNameSize="px-6 py-2" />
                     </div>
                 </form>
             </div>

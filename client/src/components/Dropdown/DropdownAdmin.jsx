@@ -13,7 +13,7 @@ const DropdownAdmin = ({ options, isOpenA }) => {
     setIsOpen((prevState) => !prevState);
   };
 
-  console.log(isOpenA)
+  
 
   return (
 

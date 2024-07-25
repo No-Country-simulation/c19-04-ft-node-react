@@ -15,7 +15,6 @@ import ContainerComponentsDashboard from "../ContainerComponentDashboard/Contain
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  console.log(isExpanded)
 
   return (
     <div className="inline-flex">
