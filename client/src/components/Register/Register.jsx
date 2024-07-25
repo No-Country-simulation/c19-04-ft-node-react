@@ -43,7 +43,7 @@ const RegisterUser = ({ closeModal }) => {
             placeholder="Nombre de usuario"
             value={formData.username}
             onChange={handleChangeForm(setFormData)}
-            className="bg-slate-300 rounded-3xl px-5 pb-4 pt-6 w-full peer placeholder-shown:pt-4 transition-all duration-300 placeholder-transparent"
+            className="bg-slate-200 rounded-3xl px-5 pb-4 pt-6 w-full peer placeholder-shown:pt-4 transition-all duration-300 placeholder-transparent"
           />
           <label
             htmlFor="username"
@@ -65,7 +65,7 @@ const RegisterUser = ({ closeModal }) => {
             value={formData.role}
             onChange={handleChangeForm(setFormData)}
             placeholder="Rol"
-            className="bg-slate-300 rounded-3xl px-4 py-4 w-full cursor-pointer"
+            className="bg-slate-200  rounded-3xl px-4 py-4 w-full cursor-pointer"
           >
             <option value="" className="text-gray-400">
               Selecciona un rol
@@ -88,7 +88,7 @@ const RegisterUser = ({ closeModal }) => {
               placeholder="Contraseña"
               value={formData.password}
               onChange={handleChangeForm(setFormData)}
-              className="bg-slate-300 rounded-3xl px-5 pb-4 pt-6 w-full peer placeholder-shown:pt-4 transition-all duration-300 placeholder-transparent"
+              className="bg-slate-200 rounded-3xl px-5 pb-4 pt-6 w-full peer placeholder-shown:pt-4 transition-all duration-300 placeholder-transparent"
               maxLength={11}
             />
             <label
@@ -135,7 +135,7 @@ const RegisterUser = ({ closeModal }) => {
               placeholder="Confirmar contraseña"
               value={formData.confirmPassword}
               onChange={handleChangeForm(setFormData)}
-              className="bg-slate-300 rounded-3xl px-5 pb-4 pt-6 w-full peer placeholder-shown:pt-4 transition-all duration-300 placeholder-transparent"
+              className="bg-slate-200 rounded-3xl px-5 pb-4 pt-6 w-full peer placeholder-shown:pt-4 transition-all duration-300 placeholder-transparent"
               maxLength={11}
             />
             <label
@@ -174,13 +174,13 @@ const RegisterUser = ({ closeModal }) => {
       <div className="flex gap-6">
         <button
           type="submit"
-          className="bg-customBlue-400 rounded-2xl p-4 uppercase text-sm text-white font-bold w-full transition-transform duration-200 sm:hover:scale-110 hover:bg-customBlue-300"
+          className="bg-customRed-400 rounded-2xl p-4 uppercase text-sm text-white font-bold w-full transition-transform duration-200 sm:hover:scale-110 hover:bg-customRed-300"
         >
           Registrar
         </button>
         <button
           type="button"
-          className="bg-customBlue-400 rounded-2xl p-4 uppercase text-sm text-white font-bold w-full transition-transform duration-200 sm:hover:scale-110 hover:bg-customBlue-300"
+          className="bg-customRed-400 rounded-2xl p-4 uppercase text-sm text-white font-bold w-full transition-transform duration-200 sm:hover:scale-110 hover:bg-customRed-300"
           onClick={() => handleCancelClick()}
         >
           Cancelar

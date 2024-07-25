@@ -11,8 +11,7 @@ import RegisterDeniedBD from "../components/RegisterDenied/RegisterBdDenied.jsx"
 import Buttons from "../components/Buttons/Buttons.jsx";
 import MainViewMenu from "../views/MainViewMenu/MainViewMenu.jsx";
 import TableCalls from "../views/TableCalls/TableCalls.jsx";
-import AdminAssignTables from "../views/AdminAssignTables/AdminAssignTables.jsx";
-import ManageUsers from "../views/ManageUsers/ManageUsers.jsx";
+import Temporal from "../views/Temporal/Temporal.jsx";
 
 const routerPathComponent = [
     {
@@ -72,12 +71,8 @@ const routerPathComponent = [
         element: <TableCalls />,
     },
     {
-        path: "/admin/assign-tables",
-        element: <AdminAssignTables />,
-    },
-    {
-        path: "/admin/manage-users",
-        element: <ManageUsers />,
+        path: "/temporal",
+        element: <Temporal />,
     },
     {
         path: "*",
