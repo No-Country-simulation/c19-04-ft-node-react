@@ -3,6 +3,7 @@ import { deleteUser } from "./actionsUser/deleteAction";
 import { logoutUser } from "./actionsUser/logoutAction";
 import { updateUser } from "./actionsUser/updateAction";
 import { loginAction } from "./actionsUser/loginAction";
+import { fetchUser } from "./actionsUser/fetchUser";
 import {
     handlePending,
     handleFulfilled,
@@ -25,4 +26,7 @@ export const asyncHandlers = {
     [loginAction.pending]: handlePending,
     [loginAction.fulfilled]: handleFulfilled,
     [loginAction.rejected]: handleRejected,
+    [fetchUser.pending]: handlePending,
+    [fetchUser.fulfilled]: handleFulfilled,
+    [fetchUser.rejected]: handleRejected,
 };
