@@ -27,10 +27,6 @@ const routerPathComponent = [
         element: <CustomerActions />,
     },
     {
-        path: "/login",
-        element: <Login />,
-    },
-    {
         path: "/invalid-password",
         element: <InvalidPasswordMessage />,
     },
