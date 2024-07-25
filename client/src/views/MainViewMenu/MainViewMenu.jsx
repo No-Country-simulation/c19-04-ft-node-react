@@ -32,7 +32,7 @@ const MainViewMenu = () => {
     useEffect(() => {
         dispatch(dataMenuGet());
     }, [dispatch]);
-    console.log(filteredMenus)
+    
 
     const { navigateTo } = useNavigateHelper();
     return (

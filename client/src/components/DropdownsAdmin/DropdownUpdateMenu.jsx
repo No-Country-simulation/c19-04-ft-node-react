@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axiosInstanceWithCredentials from '../../utils/api/axiosInstanceWithCredentials'; 
 import MainButton from '../Buttons/MainButton';
 import SecondaryButton from '../Buttons/SecondaryButton';
 
 const DropdownUpdateMenu = ({ selectedMenu, handleUpdateMenu, closeDropdown }) => {
+    const [formState, setFormState] = useState(selectedMenu);
+
     if (!selectedMenu) return null;
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        handleUpdateMenu({ ...selectedMenu, [name]: value });
+        setFormState({ ...formState, [name]: value });
+    };
+
+    const updateMenu = async () => {
+        try {
+            const { _id, ...updatedFields } = formState;
+            await axiosInstanceWithCredentials.patch(`/api/admin/menu/${_id}`, updatedFields);
+            handleUpdateMenu(_id, updatedFields);
+        } catch (error) {
+            console.error("Error al actualizar el menú:", error);
+        }
     };
 
     return (
@@ -22,7 +35,7 @@ const DropdownUpdateMenu = ({ selectedMenu, handleUpdateMenu, closeDropdown }) =
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
-                        handleUpdateMenu(selectedMenu._id, selectedMenu);
+                        updateMenu();
                     }}
                     className="space-y-4"
                 >
@@ -35,16 +48,16 @@ const DropdownUpdateMenu = ({ selectedMenu, handleUpdateMenu, closeDropdown }) =
                                 id={field}
                                 type={field === 'price' || field === 'estimatedTimeToDeliver' ? 'number' : 'text'}
                                 name={field}
-                                value={selectedMenu[field]}
+                                value={formState[field]}
                                 onChange={handleChange}
-                                required
+                                
                                 className="p-2 border border-customRed-200 rounded focus:outline-none focus:ring-2 focus:ring-customRed-50 text-sm"
                             />
                         </div>
                     ))}
                     <div className="flex justify-between mt-4">
                         <MainButton children="Actualizar" classNameSize="px-8 py-2" />
-                        <SecondaryButton children="Cancelar" classNameSize="px-6 py-2" />
+                        <SecondaryButton onClick={closeDropdown} children="Cancelar" classNameSize="px-6 py-2" />
                     </div>
                 </form>
             </div>
