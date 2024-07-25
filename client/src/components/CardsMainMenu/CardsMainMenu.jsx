@@ -2,8 +2,8 @@ import useCartAction from "../../utils/hooks/useCartAction"
 import { orderSelectorQuantity } from "../../utils/functions/orderSelector"
 import { createCartItemObject } from "../../utils/functions/createItemObject.js"
 import corazonImg from "../../assets/images/corazon.png"
-import starImg from "../../assets/images/formaEstrella.png"
 import imgHamburguesaPrueba from "../../assets/images/imgHamburgesa.png"
+import Rating from "../Rating/Rating.jsx"
 
 const CardsMainMenu = ({ _id, title, imgUrl, price, description, time }) => {
 
@@ -14,7 +14,7 @@ const CardsMainMenu = ({ _id, title, imgUrl, price, description, time }) => {
     return (
         <div className="bg-customGray-50 w-[180px] min-h-[177px] rounded-[10px] bg-customLight flex flex-col gap-[5px] pt-[50px] p-[10px] text-black shadow-custom-light relative">
             <div className="absolute inset-0 flex items-center justify-center -translate-y-2/4">
-                <img className="object-cover w-[140px] h-[140px]" src={imgHamburguesaPrueba} alt={title} />
+                <img className="object-cover w-[160px] h-[90px] rounded-3xl" src={imgUrl} alt={title} />
             </div>
             <div className="tracking-tight gap-[5px]">
                 <section className="flex flex-col gap-[5px]">
@@ -39,15 +39,8 @@ const CardsMainMenu = ({ _id, title, imgUrl, price, description, time }) => {
                         </div>
 
                     </div>
-                    <div className="flex items-center w-[78px] h-[13.13px] gap-[5px]">
-                        <h4 className="text-center text-base leading-[20.16px] font-bold ">4.3</h4>
-                        <div className="flex gap-[2px]">
-                            <img className="w-[14px] h-[13.13px]" src={starImg} alt="star rating" />
-                            <img className="w-[14px] h-[13.13px]" src={starImg} alt="star rating" />
-                            <img className="w-[14px] h-[13.13px]" src={starImg} alt="star rating" />
-                            <img className="w-[14px] h-[13.13px]" src={starImg} alt="star rating" />
-                            <img className="w-[14px] h-[13.13px]" src={starImg} alt="star rating" />
-                        </div>
+                    <div className="flex items-center w-[78px] h-[13.13px] gap-[5px] ">
+                        <Rating />
                     </div>
                 </section>
             </div>
