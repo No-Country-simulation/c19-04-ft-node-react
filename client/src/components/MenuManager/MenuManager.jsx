@@ -7,7 +7,7 @@ import "../../styles/scrollbarContainerDashboard.css";
 import axiosInstanceWithCredentials from "../../utils/api/axiosInstanceWithCredentials";
 import MainButton from "../Buttons/MainButton";
 import SecondaryButton from "../Buttons/SecondaryButton";
-
+import "../../styles/scrollbarContainerDashboard.css"
 const MenuManager = () => {
     const [menus, setMenus] = useState([]);
     const [selectedMenu, setSelectedMenu] = useState(null);
@@ -78,29 +78,29 @@ const MenuManager = () => {
     };
 
     return (
-        <div className="relative p-4">
-            <div className="flex flex-wrap space-x-4 mb-4">
+        <div className="relative ">
+            <div className="flex flex-nowrap justify-center gap-4 m-4">
                 <MainButton
                     onClick={() => setDropdown({ ...dropdown, create: !dropdown.create })}
-                    classNameSize="p-2"
+                    classNameSize="p-2 text-[14px]"
                 >
                     Crear Elemento
                 </MainButton>
                 <SecondaryButton
                     onClick={() => setShowTable(!showTable)}
-                    classNameSize="p-2"
+                    classNameSize="p-2 text-[14px]"
                 >
                     Editar Menú
                 </SecondaryButton>
                 <MainButton
                     onClick={() => setDropdown({ ...dropdown, delete: !dropdown.delete })}
-                    classNameSize="p-2"
+                    classNameSize="p-2 text-[14px]"
                 >
                     Eliminar Elemento
                 </MainButton>
                 <SecondaryButton
                     onClick={() => setDropdown({ ...dropdown, toggle: !dropdown.toggle })}
-                    classNameSize="p-2"
+                    classNameSize="p-2 text-[14px]"
                 >
                     Cambiar Disponibilidad
                 </SecondaryButton>
@@ -115,30 +115,49 @@ const MenuManager = () => {
 
             {/* Mostrar tabla de menús si `showTable` es true y hay menús */}
             {showTable && !error && menus.length > 0 ? (
-                <div className="overflow-x-auto">
-                    <table className="min-w-full bg-white border border-gray-200">
-                        <thead>
+                <div className="overflow-x-auto scrollbar-container text-[14px] custom-scrollbar-x scroll-smooth">
+                    <table className="min-w-full bg-white shadow-xl border-separate border-spacing-0">
+                        <thead className="bg-gray-100">
                             <tr>
-                                <th className="border px-4 py-2">Título</th>
-                                <th className="border px-4 py-2">Categoría</th>
-                                <th className="border px-4 py-2">Descripción</th>
-                                <th className="border px-4 py-2">Precio</th>
-                                <th className="border px-4 py-2">Acciones</th>
+                                <th className="px-4 py-2 border border-transparent">Imagen</th>
+                                <th className="px-4 py-2 border border-transparent">Título</th>
+                                <th className="px-4 py-2 border border-transparent">Categoría</th>
+                                <th className="px-4 py-2 border border-transparent">Descripción</th>
+                                <th className="px-4 py-2 border border-transparent">Precio</th>
+                                <th className="px-4 py-2 border border-transparent">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {menus.map((menu) => (
-                                <tr key={menu._id}>
-                                    <td className="border px-4 py-2">{menu.title}</td>
-                                    <td className="border px-4 py-2">{menu.category}</td>
-                                    <td className="border px-4 py-2">{menu.description}</td>
-                                    <td className="border px-4 py-2">{menu.price}</td>
-                                    <td className="border px-4 py-2">
+                            {menus.map((menu, index) => (
+                                <tr
+                                    key={menu._id}
+                                    className={`hover:bg-customRed-100 ${index === menus.length - 1 ? "last:rounded-b-3xl" : ""}`}
+                                >
+                                    <td className=" border border-white">
+                                        <img
+                                            src={menu.imgUrl}
+                                            alt={menu.title}
+                                            className="w-20 h-20 object-cover rounded-lg" // Asegura que la imagen se ajuste y tenga bordes redondeados
+                                        />
+                                    </td>
+                                    <td className={`px-4 py-2 border border-white ${index === menus.length - 1 ? "rounded-l-3xl" : ""}`}>
+                                        {menu.title}
+                                    </td>
+                                    <td className="px-4 py-2 border border-white">
+                                        {menu.category}
+                                    </td>
+                                    <td className="px-4 py-2 truncate max-w-xs border border-white">
+                                        {menu.description}
+                                    </td>
+                                    <td className="px-4 py-2 border border-white">
+                                        {menu.price}
+                                    </td>
+                                    <td className={`px-2 py-2 rounded-sm border border-white ${index === menus.length - 1 ? "rounded-r-3xl" : ""}`}>
                                         <SecondaryButton
                                             onClick={() => selectMenuForUpdate(menu)}
-                                            children="Editar"
-                                            classNameSize="px-2"
+                                            classNameSize="px-3 w-full"
                                         >
+                                            Editar
                                         </SecondaryButton>
                                     </td>
                                 </tr>

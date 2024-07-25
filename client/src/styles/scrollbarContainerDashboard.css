@@ -2,9 +2,18 @@
   scrollbar-width: 6px;
   scrollbar-color: #f9f7f3;
 }
+.custom-scrollbar-x {
+  scrollbar-width: 10px;
+  scrollbar-color: #f9f7f3;
+}
 
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
+  
+}
+.custom-scrollbar-x::-webkit-scrollbar {
+  width: 10px;
+  
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
