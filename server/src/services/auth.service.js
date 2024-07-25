@@ -147,3 +147,32 @@ export const getUser = async (req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 };
+
+export const getAllUsers = async (req, res) => {
+    // const { userId } = req;
+
+    try {
+        const userPromises = [
+            AdminModel.find(),
+            KitchenModel.find(),
+            WaiterModel.find(),
+        ];
+
+        const results = await Promise.allSettled(userPromises);
+
+        const allUsers = results.map((item) => item.value).flat();
+
+        // const user = results.find(
+        //     (result) => result.status === "fulfilled" && result.value !== null
+        // ).value;
+
+        logger.info("User fetched successfully.");
+
+        // const { username, role } = user;
+
+        res.status(200).json(allUsers);
+    } catch (err) {
+        logger.error(`Error in signOut: ${err}`);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+};

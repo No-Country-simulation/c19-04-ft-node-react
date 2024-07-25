@@ -1,7 +1,14 @@
-import { getUser, signUp, signIn, signOut } from "../services/auth.service.js";
+import {
+    getUser,
+    signUp,
+    signIn,
+    signOut,
+    getAllUsers,
+} from "../services/auth.service.js";
 
 const AuthController = {
     getUser,
+    getAllUsers,
     signUp,
     signIn,
     signOut,

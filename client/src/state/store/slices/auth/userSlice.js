@@ -11,7 +11,7 @@ import { fetchUser } from "./actionsUser/fetchUser";
 export const userAuthSlice = createSlice({
     name: "user",
     initialState: {
-        currentUser: null,
+        currentUser: { username: "", role: "" },
         status: "idle",
         error: null,
     },
