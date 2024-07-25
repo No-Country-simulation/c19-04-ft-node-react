@@ -18,8 +18,8 @@ const MenuManager = () => {
         estimatedTimeToDeliver: 0,
         price: 0,
         available: true,
-        category: "", // Corregido el campo 'category'
-        tags: "", // Corregido el campo 'tags'
+        category: "",
+        tags: "",
     });
     const [dropdown, setDropdown] = useState({
         create: false,
@@ -31,18 +31,19 @@ const MenuManager = () => {
     const [error, setError] = useState("");
 
     useEffect(() => {
-        const fetchMenus = async () => {
-            try {
-                const response = await axiosInstanceWithCredentials.get("/api/admin/menu");
-                setMenus(response.data);
-                setError("");
-            } catch (error) {
-                console.error("Error fetching menus:", error);
-                setError("No se puede acceder a la base de datos. Por favor, inténtelo de nuevo más tarde.");
-            }
-        };
         fetchMenus();
     }, []);
+
+    const fetchMenus = async () => {
+        try {
+            const response = await axiosInstanceWithCredentials.get("/api/admin/menu");
+            setMenus(response.data);
+            setError("");
+        } catch (error) {
+            console.error("Error fetching menus:", error);
+            setError("No se puede acceder a la base de datos. Por favor, inténtelo de nuevo más tarde.");
+        }
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -51,17 +52,16 @@ const MenuManager = () => {
 
     const handleCreateMenu = async (e) => {
         e.preventDefault();
+        // Validación del menú (como se mostró antes)
+        const validationError = validateMenuData(newMenu);
+        if (validationError) {
+            setError(validationError);
+            return;
+        }
+
         try {
-            const response = await axiosInstanceWithCredentials.post("/api/admin/menu", {
-                title: newMenu.title,
-                description: newMenu.description,
-                imgUrl: newMenu.imgUrl,
-                estimatedTimeToDeliver: newMenu.estimatedTimeToDeliver,
-                price: newMenu.price,
-                available: newMenu.available,
-                category: newMenu.category, // Añadir el campo category
-                tags: newMenu.tags // Corregido el campo 'tags'
-            });
+            setError("");
+            const response = await axiosInstanceWithCredentials.post("/api/admin/menu", newMenu);
             setMenus([...menus, response.data]);
             setNewMenu({
                 title: "",
@@ -70,8 +70,8 @@ const MenuManager = () => {
                 estimatedTimeToDeliver: 0,
                 price: 0,
                 available: true,
-                category: "", // Resetear el campo category
-                tags: "" // Resetear el campo tags
+                category: "",
+                tags: "",
             });
             setDropdown({ ...dropdown, create: false });
         } catch (error) {
@@ -80,7 +80,59 @@ const MenuManager = () => {
         }
     };
 
-    // El resto de funciones como handleUpdateMenu, handleDeleteMenu y handleToggleAvailability permanecen igual
+    const handleUpdateMenu = async (updatedMenu) => {
+        try {
+            await axiosInstanceWithCredentials.patch(`/api/admin/menu/${updatedMenu._id}`, updatedMenu);
+            const updatedMenus = menus.map(menu => menu._id === updatedMenu._id ? updatedMenu : menu);
+            setMenus(updatedMenus);
+            setDropdown({ ...dropdown, update: false });
+        } catch (error) {
+            console.error("Error al actualizar el menú:", error);
+            setError("No se pudo actualizar el menú. Por favor, inténtelo de nuevo más tarde.");
+        }
+    };
+
+    const handleDeleteMenu = async (menuId) => {
+        try {
+            await axiosInstanceWithCredentials.delete(`/api/admin/menu/${menuId}`);
+            const updatedMenus = menus.filter(menu => menu._id !== menuId);
+            setMenus(updatedMenus);
+            setDropdown({ ...dropdown, delete: false });
+        } catch (error) {
+            console.error("Error al eliminar el menú:", error);
+            setError("No se pudo eliminar el menú. Por favor, inténtelo de nuevo más tarde.");
+        }
+    };
+
+    const handleToggleAvailability = async (menu) => {
+        try {
+            const updatedMenu = { ...menu, available: !menu.available };
+            await axiosInstanceWithCredentials.patch(`/api/admin/menu/${menu._id}`, updatedMenu);
+            const updatedMenus = menus.map(m => m._id === menu._id ? updatedMenu : m);
+            setMenus(updatedMenus);
+            setDropdown({ ...dropdown, toggle: false });
+        } catch (error) {
+            console.error("Error al cambiar la disponibilidad del menú:", error);
+            setError("No se pudo cambiar la disponibilidad. Por favor, inténtelo de nuevo más tarde.");
+        }
+    };
+
+    const sortMenus = (criteria) => {
+        const sortedMenus = [...menus].sort((a, b) => {
+            if (criteria === "title") {
+                return a.title.localeCompare(b.title);
+            } else if (criteria === "price") {
+                return a.price - b.price;
+            }
+            return 0;
+        });
+        setMenus(sortedMenus);
+    };
+
+    const selectMenuForUpdate = (menu) => {
+        setSelectedMenu(menu);
+        setDropdown({ ...dropdown, update: true });
+    };
 
     return (
         <div className="relative">
@@ -108,6 +160,18 @@ const MenuManager = () => {
                     classNameSize="p-2 text-[14px]"
                 >
                     Cambiar Disponibilidad
+                </SecondaryButton>
+                <SecondaryButton
+                    onClick={() => sortMenus("title")}
+                    classNameSize="p-2 text-[14px]"
+                >
+                    Ordenar por Título
+                </SecondaryButton>
+                <SecondaryButton
+                    onClick={() => sortMenus("price")}
+                    classNameSize="p-2 text-[14px]"
+                >
+                    Ordenar por Precio
                 </SecondaryButton>
             </div>
 
