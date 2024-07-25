@@ -70,10 +70,7 @@ const routerPathComponent = [
         path: "/calls",
         element: <TableCalls />,
     },
-    {
-        path: "/dashAdmin",
-        element: <ContainerComponentsDashboard />,
-    },
+   
     // {
     //     path: "/temporal",
     //     element: <Temporal />,
