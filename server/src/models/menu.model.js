@@ -15,23 +15,20 @@ const menuSchema = new mongoose.Schema({
     required: true,
   },
   category: {
-    type: String,
+    type: [String],
     required: true,
-    categories: [],
   },
   tags: {
-    type: String,
+    type: [String],
     required: true,
-    tags: [],
   },
   imgUrl: {
     type: String,
     required: true,
   },
   ingredients: {
-    type: String,
+    type: [String],
     required: true,
-    ingredients: [],
   },
   estimatedTime: {
     type: Number,

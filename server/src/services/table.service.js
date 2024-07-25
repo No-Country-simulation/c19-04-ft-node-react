@@ -4,6 +4,10 @@ import logger from "../utils/logger.js";
 import database from "../connections/firebase.js";
 import { ref, onValue, get, set } from "firebase/database";
 import { tablesRef } from "../utils/firebaseRefs.js";
+import {
+  addUnassignedTable,
+  removeUnassignedTable,
+} from "../utils/tableFunctions/index.js";
 export const createTable = async (req, res) => {
   const data = req.body;
 
@@ -25,15 +29,6 @@ export const createTable = async (req, res) => {
       ...tablesData,
       [tableKey]: {
         isActive: false,
-        waiter: null,
-        // diners: {
-        //   0: {
-        //     admin: true,
-        //     name: "Thiago",
-        //     ready: false,
-        //     order: null,
-        //   },
-        // },
       },
     });
     console.log("Table created successfully in Firebase");
@@ -67,20 +62,6 @@ export const getTable = async (req, res) => {
   }
 };
 
-const addUnassignedTable = async (tableNumber) => {
-  const unassignedTablesRef = ref(database, "/tables/unassignedTables");
-  const unassignedSnapshot = await get(unassignedTablesRef);
-  const unassignedData = unassignedSnapshot.val();
-  if (unassignedData.some((item) => item == tableNumber)) return;
-  await set(unassignedTablesRef, [...unassignedData, tableNumber]);
-};
-const removeUnassignedTable = async (tableNumber) => {
-  const unassignedTablesRef = ref(database, "/tables/unassignedTables");
-  const unassignedSnapshot = await get(unassignedTablesRef);
-  const unassignedData = unassignedSnapshot.val();
-  const newArray = unassignedData.filter((item) => item !== tableNumber);
-  await set(unassignedTablesRef, newArray);
-};
 export const joinTable = async (req, res) => {
   const tableNumber = req.params.tableNumber;
   const { name } = req.body;
@@ -118,18 +99,6 @@ export const joinTable = async (req, res) => {
     if (!tableData.waiter) {
       await addUnassignedTable(tableNumber);
     }
-    // const allTablesSnapshot = await get(tablesRef);
-    // const allTablesData = allTablesSnapshot.val();
-    // console.log(allTablesData);
-    // if (
-    //   !tableData.waiter ||
-    //   allTablesData.unassignedTables.some((item) => item == tableNumber)
-    // ) {
-    //   await set(tableRef, {
-    //     ...allTablesData,
-    //     unassignedTables: [...allTablesData.unassignedTables, tableNumber],
-    //   });
-    // }
     return res
       .status(200)
       .json({ message: `${name} se ha unido a la mesa ${tableNumber}` });
