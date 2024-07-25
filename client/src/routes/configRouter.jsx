@@ -12,6 +12,7 @@ import Buttons from "../components/Buttons/Buttons.jsx";
 import MainViewMenu from "../views/MainViewMenu/MainViewMenu.jsx";
 import TableCalls from "../views/TableCalls/TableCalls.jsx";
 import ContainerComponentsDashboard from "../components/ContainerComponentDashboard/ContainerComponentsDashboard.jsx";
+import DetailModalPage from "../views/DetailModal/DetailModalPage.jsx";
 
 const routerPathComponent = [
     {
@@ -71,6 +72,10 @@ const routerPathComponent = [
     //     path: "/temporal",
     //     element: <Temporal />,
     // },
+    {
+        path: "/detail",
+        element: <DetailModalPage />
+    },
     {
         path: "*",
         element: <NotFound />,
