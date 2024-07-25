@@ -63,3 +63,154 @@ Bajo ninguna de las circunstancia este sistema requiere prescindir de ninguna de
 
 IMAGENES A REALIZAR A FUTURO.
 
+---
+
+<div align="middle">
+ ENDPOINTS
+</div>
+
+---
+
+## Auth
+
+### Register
+Registrar un usuario. (Solo es posible acceder al register si eres admin)
+
+- **Method:** POST
+- **Endpoint:** `http://localhost:${PORT}/api/admin/register`
+- **Body:**
+  ```json
+  {
+    "username": "Example1",
+    "password": "Asd123"
+    "role": "admin" (es opcional, luego se eliminara)
+  }
+  ```
+
+### Login
+Iniciar sesión.
+
+- **Method:** POST
+- **Endpoint:** `http://localhost:${PORT}/api/auth/login`
+- **Body:**
+  ```json
+  {
+   "username": "Example1",
+   "password": "Asd123"
+  }
+  ``` 
+
+### Logout
+Cerrar sesión.
+
+- **Method:** POST
+- **Endpoint:** `http://localhost:${PORT}/api/auth/logout`
+
+
+## Table
+
+### TableQR
+Crear un QR para la mesa.
+
+- **Method:** POST
+- **Endpoint:** `http://localhost:${PORT}/api/table/tableQR`
+- **Body:**
+  ```json
+  {
+    "tableNumber": 1,
+    "link": "https://tu-web.com/api/table/..." (link para ver la mesa, carta, llamado, etc)
+    "products:": []
+  }
+  ```
+
+### QR
+Traer mesa mediante el QR (Numero de mesa).
+
+- **Method:** GET
+- **Endpoint:** `http://localhost:${PORT}/api/table/tableQR/:numberTable`
+
+
+## Admin
+
+### Menu
+Crear menu.
+
+- **Method:** POST
+- **Endpoint:** `http://localhost:${PORT}/api/admin/menu`
+- **Body:**
+  ```json
+   "title": "Pizza",
+   "description": "Aca no le ponemos Ananá 🚩",
+   "imgUrl": "https://tu-web.com/img.png",
+   "estimatedTimeToDeliver": 20,
+   "price": 9,
+   "available": true
+  ```
+
+### Menu
+Traer los menus.
+
+- **Method:** GET
+- **Endpoint:** `http://localhost:${PORT}/api/admin/menu`
+
+### Menu
+Editar menu. (Se puede pasar solo el campo que desea editar, no hacen falta todos)
+
+- **Method:** PATCH
+- **Endpoint:** `http://localhost:${PORT}/api/admin/menu/:id`
+- **Body:**
+  ```json
+   "price": 14,
+  ```
+
+### Card
+Traer la carta para los comensales.
+
+- **Method:** GET
+- **Endpoint:** `http://localhost:${PORT}/api/card-menu/`
+
+## Orders
+
+### New order
+Crear una nueva orden.
+
+- **Method:** POST
+- **Endpoint:** `http://localhost:{PORT}/api/orders/create`
+- **Body:**
+  ```json
+   "table": "table._id"
+  ```
+
+### All Orders
+Traer todas las ordenes.
+
+- **Method:** GET
+- **Endpoint:** `http://localhost:${PORT}/api/orders/all`
+
+### Pending
+Traer ordenes pendientes.
+
+- **Method:** GET
+- **Endpoint:** `http://localhost:{PORT}/api/orders/pending`
+
+### Update Status
+Actualizar el estado de la orden.
+
+- **Method:** PATCH
+- **Endpoint:** `http://localhost:{PORT}/api/orders/update/:orderId`
+- **Body:**
+  ```json
+   "status": 'ready'
+  ```
+
+### Ready
+Traer ordenes listas
+
+- **Method:** GET
+- **Endpoint:** `http://localhost:{PORT}/api/orders/ready`
+
+### Delete Orders
+Eliminar ordenes.
+
+- **Method:** DELETE
+- **Endpoint:** `http://localhost:{PORT}/api/orders/delete/:orderId`

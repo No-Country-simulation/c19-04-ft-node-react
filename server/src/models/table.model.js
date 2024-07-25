@@ -3,12 +3,20 @@ import mongoose from 'mongoose'
 const tableSchema = new mongoose.Schema({
 	QRCode: Buffer,
 	tableNumber: Number,
+	link: String,
 	products: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'CardMenu',
 		},
 	],
+	role: {
+		type: String,
+		default: 'table',
+	},
+	// notes: {
+	// 	type: String,
+	// }
 })
 
 const TableModel = mongoose.model('Table', tableSchema)

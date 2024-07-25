@@ -1,6 +1,6 @@
 export function addOrder(state, action) {
   const existingOrder = state.ordersOfTable.find(
-    (order) => order.productId === action.payload
+    (order) => order.productId._id === action.payload._id
   );
   if (existingOrder) {
     existingOrder.quantity += 1;
@@ -11,14 +11,14 @@ export function addOrder(state, action) {
 
 export function removeOrder(state, action) {
   const existingOrder = state.ordersOfTable.find(
-    (order) => order.productId === action.payload
+    (order) => order.productId._id === action.payload._id
   );
   if (existingOrder) {
     if (existingOrder.quantity > 1) {
       existingOrder.quantity -= 1;
     } else {
       state.ordersOfTable = state.ordersOfTable.filter(
-        (order) => order.productId !== action.payload
+        (order) => order.productId._id !== action.payload._id
       );
     }
   }
@@ -26,21 +26,27 @@ export function removeOrder(state, action) {
 
 export function deleteOrder(state, action) {
   const existingOrder = state.ordersOfTable.find(
-    (order) => order.productId === action.payload
+    (order) => order.productId._id === action.payload._id
   );
   if (existingOrder) {
     state.ordersOfTable = state.ordersOfTable.filter(
-      (order) => order.productId !== action.payload
+      (order) => order.productId._id !== action.payload._id
     );
   }
 }
 
-export function updateOrder (state, action) {
-    const { orderId, orderUpdate } = action.payload;
-    const existingOrder = state.ordersOfTable.find((order) => order.id === orderId);
-    if (existingOrder) {
-      existingOrder.status = orderUpdate.status;
-    } else {
-      state.error = "Order not found";
-    }
+export function deleteAllOrders(state) {
+  if (state.ordersOfTable && state.ordersOfTable.length > 0) {
+    state.ordersOfTable = [];
+    state.error = null;
+  } else {
+    state.error = "No tienes ninguna orden hecha";
   }
+}
+
+export function totalPayProduct(state) {
+  let valueToPay = state.ordersOfTable.reduce((total, order) => {
+   return total += order.quantity * order.productId.price;
+  }, 0);
+  state.totalPay = valueToPay;
+}
