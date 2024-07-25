@@ -2,6 +2,7 @@ import DropdownAdmin from "../Dropdown/DropdownAdmin";
 import TextButton from "../Buttons/TextButton";
 import "../../styles/scrollbarContainerDashboard.css";
 import optionsPanelAdmin from "../../assets/other-assets/optionsPanelAdmin.js"
+import logoutUser from "../../utils/api/logoutUser.js"
 
 const AdminControlPanel = ({ isOpen }) => {
   return (
@@ -19,7 +20,11 @@ const AdminControlPanel = ({ isOpen }) => {
         children="Cerrar Sesión"
         className={"align-self-end"}
         onClick={() => {
-          console.log("Cerrar sesión");
+          if (logoutUser) {
+            <logoutUser />
+            console.log("Cerrar sesión");
+          }
+          
         }}
       />
     </div>

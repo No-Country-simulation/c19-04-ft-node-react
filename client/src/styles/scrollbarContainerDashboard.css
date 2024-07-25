@@ -17,3 +17,24 @@
   border-radius: 10px;
   border: 1px solid #f9f7f3;
 }
+
+
+.custom-scrollbar-x {
+  scrollbar-width: 6px; 
+  scrollbar-color: gray; 
+}
+
+.custom-scrollbar-x::-webkit-scrollbar {
+  height: 6px; 
+}
+
+.custom-scrollbar-x::-webkit-scrollbar-track {
+  background: #f9f7f3; 
+  border-radius: 10px;
+}
+
+.custom-scrollbar-x::-webkit-scrollbar-thumb {
+  background-color: gray; 
+  border-radius: 10px;
+  border: 1px solid #f9f7f3; 
+}

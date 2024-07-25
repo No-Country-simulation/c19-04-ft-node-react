@@ -9,6 +9,8 @@ const DropdownAdmin = ({ options, isOpenA }) => {
     setIsOpen((prevState) => !prevState);
   };
 
+  
+
   return (
     <div className={`w-full py-1 px-2 `}>
       <div

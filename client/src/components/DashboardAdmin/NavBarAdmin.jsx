@@ -42,7 +42,7 @@ export default function NavBar() {
               transition
               className="space-y-10 bg-white rounded-lg px-4 py-8 duration-200 ease-out data-[closed]:translate-y-[34rem] sm:px-10 sm:py-12 sm:data-[closed]:translate-y-0 sm:data-[closed]:scale-95 sm:data-[closed]:opacity-0  sm:duration-300"
             >
-              <DialogTitle className="text-4xl font-bold text-customBlue-400 text-center">
+              <DialogTitle className="text-4xl font-bold text-black  text-center">
                 Crear usuario
               </DialogTitle>
               <RegisterUser closeModal={() => setIsOpen(false)} />

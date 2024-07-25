@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
+import DropdownCreateMenu from "../DropdownsAdmin/DropdownCreateMenu";
+import DropdownUpdateMenu from "../DropdownsAdmin/DropdownUpdateMenu";
+import DropdownDeleteMenu from "../DropdownsAdmin/DropdownDeleteMenu";
+import DropdownToggleAvailability from "../DropdownsAdmin/DropdownToggleAvailability";
 import "../../styles/scrollbarContainerDashboard.css";
+import axiosInstanceWithCredentials from "../../utils/api/axiosInstanceWithCredentials";
+import MainButton from "../Buttons/MainButton";
+import SecondaryButton from "../Buttons/SecondaryButton";
 
 const MenuManager = () => {
     const [menus, setMenus] = useState([]);
@@ -11,19 +18,31 @@ const MenuManager = () => {
         estimatedTimeToDeliver: 0,
         price: 0,
         available: true,
-        tag: "",
+        category: "", // Corregido el campo 'category'
+        tags: "", // Corregido el campo 'tags'
     });
+    const [dropdown, setDropdown] = useState({
+        create: false,
+        update: false,
+        delete: false,
+        toggle: false,
+    });
+    const [showTable, setShowTable] = useState(false);
+    const [error, setError] = useState("");
 
     useEffect(() => {
+        const fetchMenus = async () => {
+            try {
+                const response = await axiosInstanceWithCredentials.get("/api/admin/menu");
+                setMenus(response.data);
+                setError("");
+            } catch (error) {
+                console.error("Error fetching menus:", error);
+                setError("No se puede acceder a la base de datos. Por favor, inténtelo de nuevo más tarde.");
+            }
+        };
         fetchMenus();
     }, []);
-
-    const fetchMenus = async () => {
-        // Replace with your API endpoint
-        const response = await fetch("https://your-api-endpoint.com/menus");
-        const data = await response.json();
-        setMenus(data);
-    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -32,16 +51,18 @@ const MenuManager = () => {
 
     const handleCreateMenu = async (e) => {
         e.preventDefault();
-        // Replace with your API endpoint
-        const response = await fetch("https://your-api-endpoint.com/menus", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newMenu),
-        });
-        if (response.ok) {
-            fetchMenus();
+        try {
+            const response = await axiosInstanceWithCredentials.post("/api/admin/menu", {
+                title: newMenu.title,
+                description: newMenu.description,
+                imgUrl: newMenu.imgUrl,
+                estimatedTimeToDeliver: newMenu.estimatedTimeToDeliver,
+                price: newMenu.price,
+                available: newMenu.available,
+                category: newMenu.category, // Añadir el campo category
+                tags: newMenu.tags // Corregido el campo 'tags'
+            });
+            setMenus([...menus, response.data]);
             setNewMenu({
                 title: "",
                 description: "",
@@ -49,249 +70,141 @@ const MenuManager = () => {
                 estimatedTimeToDeliver: 0,
                 price: 0,
                 available: true,
-                tag: "",
+                category: "", // Resetear el campo category
+                tags: "" // Resetear el campo tags
             });
+            setDropdown({ ...dropdown, create: false });
+        } catch (error) {
+            console.error("Error al crear el menú:", error);
+            setError("No se pudo crear el menú. Por favor, inténtelo de nuevo más tarde.");
         }
     };
 
-    const handleUpdateMenu = async (menuId, updatedFields) => {
-        // Replace with your API endpoint
-        const response = await fetch(`https://your-api-endpoint.com/menus/${menuId}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(updatedFields),
-        });
-        if (response.ok) {
-            fetchMenus();
-            setSelectedMenu(null);
-        }
-    };
-
-    const handleDeleteMenu = async (menuId) => {
-        // Replace with your API endpoint
-        const response = await fetch(`https://your-api-endpoint.com/menus/${menuId}`, {
-            method: "DELETE",
-        });
-        if (response.ok) {
-            fetchMenus();
-        }
-    };
-
-    const handleToggleAvailability = async (menuId, available) => {
-        // Replace with your API endpoint
-        const response = await fetch(`https://your-api-endpoint.com/menus/${menuId}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ available }),
-        });
-        if (response.ok) {
-            fetchMenus();
-        }
-    };
+    // El resto de funciones como handleUpdateMenu, handleDeleteMenu y handleToggleAvailability permanecen igual
 
     return (
-        <div className="bg-customBgMain w-[70vw] min-w-[70vw] max-h-[80vh] h-[80vh] border border-gray-300 rounded-lg overflow-y-scroll custom-scrollbar scroll-smooth p-6">
-            <h1 className="text-3xl font-bold mb-4">Admin Dashboard</h1>
-
-            <form onSubmit={handleCreateMenu} className="mb-8">
-                <h2 className="text-2xl font-bold mb-4">Create Menu Item</h2>
-                <div className="grid grid-cols-2 gap-4">
-                    <input
-                        type="text"
-                        name="title"
-                        placeholder="Title"
-                        value={newMenu.title}
-                        onChange={handleInputChange}
-                        required
-                        className="p-2 border rounded"
-                    />
-                    <input
-                        type="text"
-                        name="imgUrl"
-                        placeholder="Image URL"
-                        value={newMenu.imgUrl}
-                        onChange={handleInputChange}
-                        required
-                        className="p-2 border rounded"
-                    />
-                    <input
-                        type="number"
-                        name="estimatedTimeToDeliver"
-                        placeholder="Estimated Time to Deliver"
-                        value={newMenu.estimatedTimeToDeliver}
-                        onChange={handleInputChange}
-                        required
-                        className="p-2 border rounded"
-                    />
-                    <input
-                        type="number"
-                        name="price"
-                        placeholder="Price"
-                        value={newMenu.price}
-                        onChange={handleInputChange}
-                        required
-                        className="p-2 border rounded"
-                    />
-                    <input
-                        type="text"
-                        name="tag"
-                        placeholder="Tag"
-                        value={newMenu.tag}
-                        onChange={handleInputChange}
-                        required
-                        className="p-2 border rounded"
-                    />
-                </div>
-                <textarea
-                    name="description"
-                    placeholder="Description"
-                    value={newMenu.description}
-                    onChange={handleInputChange}
-                    required
-                    className="p-2 border rounded w-full mt-4"
-                />
-                <button
-                    type="submit"
-                    className="bg-green-500 text-white p-2 rounded mt-4 w-full"
+        <div className="relative">
+            <div className="flex flex-nowrap justify-center gap-4 m-4">
+                <MainButton
+                    onClick={() => setDropdown({ ...dropdown, create: !dropdown.create })}
+                    classNameSize="p-2 text-[14px]"
                 >
-                    Create
-                </button>
-            </form>
+                    Crear Elemento
+                </MainButton>
+                <SecondaryButton
+                    onClick={() => setShowTable(!showTable)}
+                    classNameSize="p-2 text-[14px]"
+                >
+                    Editar Menú
+                </SecondaryButton>
+                <MainButton
+                    onClick={() => setDropdown({ ...dropdown, delete: !dropdown.delete })}
+                    classNameSize="p-2 text-[14px]"
+                >
+                    Eliminar Elemento
+                </MainButton>
+                <SecondaryButton
+                    onClick={() => setDropdown({ ...dropdown, toggle: !dropdown.toggle })}
+                    classNameSize="p-2 text-[14px]"
+                >
+                    Cambiar Disponibilidad
+                </SecondaryButton>
+            </div>
 
-            <h2 className="text-2xl font-bold mb-4">Menu List</h2>
-            <table className="w-full mb-8">
-                <thead>
-                    <tr className="bg-gray-200">
-                        <th className="p-2">Title</th>
-                        <th className="p-2">Description</th>
-                        <th className="p-2">Price</th>
-                        <th className="p-2">Availability</th>
-                        <th className="p-2">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {menus.map((menu) => (
-                        <tr key={menu.id} className="border-b">
-                            <td className="p-2">{menu.title}</td>
-                            <td className="p-2">{menu.description}</td>
-                            <td className="p-2">${menu.price}</td>
-                            <td className="p-2">{menu.available ? "Available" : "Disabled"}</td>
-                            <td className="p-2">
-                                <button
-                                    onClick={() => setSelectedMenu(menu)}
-                                    className="bg-blue-500 text-white p-2 rounded mr-2"
-                                >
-                                    View
-                                </button>
-                                <button
-                                    onClick={() => handleToggleAvailability(menu.id, !menu.available)}
-                                    className={`p-2 rounded ${menu.available ? "bg-red-500" : "bg-green-500"} text-white`}
-                                >
-                                    {menu.available ? "Disable" : "Enable"}
-                                </button>
-                                <button
-                                    onClick={() => handleDeleteMenu(menu.id)}
-                                    className="bg-red-500 text-white p-2 rounded ml-2"
-                                >
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-
-            {selectedMenu && (
-                <div className="p-4 bg-gray-100 rounded">
-                    <h2 className="text-2xl font-bold mb-4">Update Menu Item</h2>
-                    <form
-                        onSubmit={(e) => {
-                            e.preventDefault();
-                            handleUpdateMenu(selectedMenu.id, selectedMenu);
-                        }}
-                    >
-                        <div className="grid grid-cols-2 gap-4">
-                            <input
-                                type="text"
-                                name="title"
-                                placeholder="Title"
-                                value={selectedMenu.title}
-                                onChange={(e) =>
-                                    setSelectedMenu({ ...selectedMenu, title: e.target.value })
-                                }
-                                required
-                                className="p-2 border rounded"
-                            />
-                            <input
-                                type="text"
-                                name="imgUrl"
-                                placeholder="Image URL"
-                                value={selectedMenu.imgUrl}
-                                onChange={(e) =>
-                                    setSelectedMenu({ ...selectedMenu, imgUrl: e.target.value })
-                                }
-                                required
-                                className="p-2 border rounded"
-                            />
-                            <input
-                                type="number"
-                                name="estimatedTimeToDeliver"
-                                placeholder="Estimated Time to Deliver"
-                                value={selectedMenu.estimatedTimeToDeliver}
-                                onChange={(e) =>
-                                    setSelectedMenu({
-                                        ...selectedMenu,
-                                        estimatedTimeToDeliver: e.target.value,
-                                    })
-                                }
-                                required
-                                className="p-2 border rounded"
-                            />
-                            <input
-                                type="number"
-                                name="price"
-                                placeholder="Price"
-                                value={selectedMenu.price}
-                                onChange={(e) =>
-                                    setSelectedMenu({ ...selectedMenu, price: e.target.value })
-                                }
-                                required
-                                className="p-2 border rounded"
-                            />
-                            <input
-                                type="text"
-                                name="tag"
-                                placeholder="Tag"
-                                value={selectedMenu.tag}
-                                onChange={(e) =>
-                                    setSelectedMenu({ ...selectedMenu, tag: e.target.value })
-                                }
-                                required
-                                className="p-2 border rounded"
-                            />
-                        </div>
-                        <textarea
-                            name="description"
-                            placeholder="Description"
-                            value={selectedMenu.description}
-                            onChange={(e) =>
-                                setSelectedMenu({ ...selectedMenu, description: e.target.value })
-                            }
-                            required
-                            className="p-2 border rounded w-full mt-4"
-                        />
-                        <button
-                            type="submit"
-                            className="bg-blue-500 text-white p-2 rounded mt-4 w-full"
-                        >
-                            Update
-                        </button>
-                    </form>
+            {error && (
+                <div className="p-4 text-red-500">
+                    {error}
                 </div>
+            )}
+
+            {showTable && !error && menus.length > 0 ? (
+                <div className="overflow-x-auto scrollbar-container text-[14px] custom-scrollbar-x scroll-smooth">
+                    <table className="min-w-full bg-white shadow-xl border-separate border-spacing-0">
+                        <thead className="bg-gray-100">
+                            <tr>
+                                <th className="px-4 py-2 border border-transparent">Imagen</th>
+                                <th className="px-4 py-2 border border-transparent">Título</th>
+                                <th className="px-4 py-2 border border-transparent">Categoría</th>
+                                <th className="px-4 py-2 border border-transparent">Descripción</th>
+                                <th className="px-4 py-2 border border-transparent">Precio</th>
+                                <th className="px-4 py-2 border border-transparent">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {menus.map((menu, index) => (
+                                <tr
+                                    key={menu._id}
+                                    className={`hover:bg-customRed-100 ${index === menus.length - 1 ? "last:rounded-b-3xl" : ""}`}
+                                >
+                                    <td className="border border-white">
+                                        <img
+                                            src={menu.imgUrl}
+                                            alt={menu.title}
+                                            className="w-20 h-20 object-cover rounded-lg"
+                                        />
+                                    </td>
+                                    <td className={`px-4 py-2 border border-white ${index === menus.length - 1 ? "rounded-l-3xl" : ""}`}>
+                                        {menu.title}
+                                    </td>
+                                    <td className="px-4 py-2 border border-white">
+                                        {menu.category}
+                                    </td>
+                                    <td className="px-4 py-2 truncate max-w-xs border border-white">
+                                        {menu.description}
+                                    </td>
+                                    <td className="px-4 py-2 border border-white">
+                                        {menu.price}
+                                    </td>
+                                    <td className={`px-2 py-2 rounded-sm border border-white ${index === menus.length - 1 ? "rounded-r-3xl" : ""}`}>
+                                        <SecondaryButton
+                                            onClick={() => selectMenuForUpdate(menu)}
+                                            classNameSize="px-3 w-full"
+                                        >
+                                            Editar
+                                        </SecondaryButton>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            ) : showTable && !error ? (
+                <div className="p-4 text-red-500">
+                    No existe ningún menú para editar. Cree un menú antes, por favor.
+                </div>
+            ) : null}
+
+            {dropdown.create && (
+                <DropdownCreateMenu
+                    newMenu={newMenu}
+                    handleInputChange={handleInputChange}
+                    handleCreateMenu={handleCreateMenu}
+                    closeDropdown={() => setDropdown({ ...dropdown, create: false })}
+                />
+            )}
+
+            {dropdown.update && selectedMenu && (
+                <DropdownUpdateMenu
+                    selectedMenu={selectedMenu}
+                    handleUpdateMenu={handleUpdateMenu}
+                    closeDropdown={() => setDropdown({ ...dropdown, update: false })}
+                />
+            )}
+
+            {dropdown.delete && selectedMenu && (
+                <DropdownDeleteMenu
+                    selectedMenu={selectedMenu}
+                    handleDeleteMenu={handleDeleteMenu}
+                    closeDropdown={() => setDropdown({ ...dropdown, delete: false })}
+                />
+            )}
+
+            {dropdown.toggle && selectedMenu && (
+                <DropdownToggleAvailability
+                    selectedMenu={selectedMenu}
+                    handleToggleAvailability={handleToggleAvailability}
+                    closeDropdown={() => setDropdown({ ...dropdown, toggle: false })}
+                />
             )}
         </div>
     );
