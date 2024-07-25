@@ -4,7 +4,8 @@ import userAuthReducer from "./slices/auth/userSlice";
 import orderTableReducer from "./slices/tableOrder/orderSlice";
 import searchReducer from "./slices/searchValue/searchSlice";
 import menusReducer from "./slices/dataMenu/dataMenuSlice";
-import callWaitersReducer from "./slices/waiter/waiterSlice";
+import callWaitersReducer from "./slices/callWaiter/callWaiterSlice";
+import allWaitersReducer from "./slices/allWaiters/allWaitersSlice";
 
 const rootReducer = combineReducers({
     user: userAuthReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     search: searchReducer,
     dataMenus: menusReducer,
     callWaiters: callWaitersReducer,
+    allWaiters: allWaitersReducer,
 });
 
 export const store = configureStore({

@@ -1,7 +1,7 @@
 import React from "react";
 import served from "../../utils/functions/served";
 import { useDispatch } from "react-redux";
-import { getCallsToWaiters } from "../../state/store/slices/waiter/actionWaiter/getCallsToWaiter";
+import { getCallsToWaiters } from "../../state/store/slices/callWaiter/actionWaiter/getCallsToWaiter";
 
 function TablesCards({ table }) {
     const dispatch = useDispatch();
