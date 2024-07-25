@@ -149,14 +149,24 @@ export const getUser = async (req, res) => {
 };
 
 export const getAllUsers = async (req, res) => {
-    // const { userId } = req;
-
+    const { role } = req.body;
+    console.log(role);
     try {
-        const userPromises = [
-            AdminModel.find(),
-            KitchenModel.find(),
-            WaiterModel.find(),
-        ];
+        let userPromises = [];
+
+        if (role === "all") {
+            userPromises = [
+                AdminModel.find(),
+                KitchenModel.find(),
+                WaiterModel.find(),
+            ];
+        } else {
+            userPromises = [
+                AdminModel.find({ role }),
+                KitchenModel.find({ role }),
+                WaiterModel.find({ role }),
+            ];
+        }
 
         const results = await Promise.allSettled(userPromises);
 
@@ -166,7 +176,7 @@ export const getAllUsers = async (req, res) => {
         //     (result) => result.status === "fulfilled" && result.value !== null
         // ).value;
 
-        logger.info("User fetched successfully.");
+        logger.info("All users data fetched successfully.");
 
         // const { username, role } = user;
 

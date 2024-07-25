@@ -13,7 +13,7 @@ router.get("/waiters", WaiterController.getWaiters);
 router.get("/user", AuthController.getUser);
 
 // TRAER INFORMACION DE USUARIO LOGUEADO
-router.get("/allUsers", AuthController.getAllUsers);
+router.post("/allUsers", AuthController.getAllUsers);
 
 //POST ADD WAITER / TABLE / KITCHEN / ADMIN
 router.post("/register", AuthController.signUp);

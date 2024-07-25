@@ -6,6 +6,7 @@ import searchReducer from "./slices/searchValue/searchSlice";
 import menusReducer from "./slices/dataMenu/dataMenuSlice";
 import callWaitersReducer from "./slices/callWaiter/callWaiterSlice";
 import allWaitersReducer from "./slices/allWaiters/allWaitersSlice";
+import allUsersReducer from "./slices/users/usersSlice";
 
 const rootReducer = combineReducers({
     user: userAuthReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     dataMenus: menusReducer,
     callWaiters: callWaitersReducer,
     allWaiters: allWaitersReducer,
+    allUsers: allUsersReducer,
 });
 
 export const store = configureStore({

@@ -12,6 +12,7 @@ export const userAuthSlice = createSlice({
     name: "user",
     initialState: {
         currentUser: { username: "", role: "" },
+        allUsers: [],
         status: "idle",
         error: null,
     },
