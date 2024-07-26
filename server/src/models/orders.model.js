@@ -7,8 +7,8 @@ const orderSchema = new mongoose.Schema({
     unique: true,
   },
   tableNumber: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Table",
+    type: Number,
+    required: true,
   },
   orderedDishes: {
     type: mongoose.Schema.Types.ObjectId,

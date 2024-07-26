@@ -159,3 +159,16 @@ type FirebaseWaiter = {
     requestedBy: number | string; //tableNumber o sector
   };
 };
+
+// Kitchen y Bar
+
+// const entityPendingOrders = [].filter(item => item.to == entity)
+
+// El front llama al mozo cuando el producto está listo
+/*
+  /orders {
+    pending: [],
+    inProgress: [],
+    ready: []
+  }
+ */

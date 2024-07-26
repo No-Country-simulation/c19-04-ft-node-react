@@ -19,14 +19,9 @@ export const getAllOrders = async (req, res) => {
   }
 };
 
-export const saveOrder = async (req, res) => {
+export const saveOrder = async (tableNumber, order) => {
   // Para MONGO
   try {
-    const { table } = req.body;
-    if (!table) {
-      logger.error("Missing required fields");
-      return res.status(400).json({ message: "Missing required fields" });
-    }
     const fileName = fileURLToPath(import.meta.url);
     const dirname = path.dirname(fileName);
     const orderCountFile = path.resolve(
@@ -44,9 +39,10 @@ export const saveOrder = async (req, res) => {
       }
     );
     const { orderCount } = JSON.parse(orderCountJSON);
-    const order = await OrderModel.create({
+    const newOrder = await OrderModel.create({
       orderNumber: orderCount + 1,
-      table: table._id,
+      tableNumber: parseInt(tableNumber),
+      orderedDishes: order, // Array de Ids de MenuModel
     });
     fs.writeFile(
       orderCountFile,
@@ -55,11 +51,10 @@ export const saveOrder = async (req, res) => {
         if (err) throw err;
       }
     );
-    logger.info(`Order ${order} saved successfully.`);
-    return res.status(201).json(order);
+    logger.info(`Order ${newOrder} saved successfully.`);
   } catch (error) {
     logger.error(`Error in order.service.saveOrder: ${error}`);
-    res.status(500).send("Internal Server Error");
+    throw new Error(`Internal server error.`);
   }
 };
 
@@ -94,6 +89,8 @@ export const createOrder = async (req, res) => {
         order: finalOrder,
       },
     });
+    const lastOrderRef = ref(database, "/orders/lastOrder");
+    await set(lastOrderRef, allOrdersData.lastOrder + 1);
     logger.info(`Order created successfully`);
     res.status(201).json({ message: "Order created successfully" });
   } catch (error) {

@@ -9,6 +9,7 @@ import {
   removeUnassignedTable,
 } from "../utils/tableFunctions/index.js";
 import { assignTable } from "../services/waiter.service.js";
+
 export const createTable = async (req, res) => {
   const data = req.body;
 
@@ -70,6 +71,10 @@ export const joinTable = async (req, res) => {
     const tableRef = ref(database, `tables/table_${tableNumber}`);
     const tablesSnapshot = await get(tableRef);
     const tableData = tablesSnapshot.val();
+    if (!tableData) {
+      logger.error("The table does not exist.");
+      return res.status(404).json({ error: "The table does not exist." });
+    }
     const diners = tableData.diners;
     if (!diners) {
       await set(tableRef, {
@@ -117,13 +122,27 @@ export const assignWaiter = async (req, res) => {
     const tableRef = ref(database, `tables/table_${tableNumber}`);
     const tablesSnapshot = await get(tableRef);
     const tableData = tablesSnapshot.val();
-    if (tableData.waiter)
+    if (!tableData) {
+      logger.error(`Table ${tableNumber} does not exist.`);
+      return res
+        .status(404)
+        .json({ error: `Table ${tableNumber} does not exist.` });
+    }
+    if (tableData.waiter) {
+      logger.error("Waiter already assigned.");
       return res.status(400).json({ error: "Waiter already assigned." });
+    }
+    const assigned = await assignTable(waiter, tableNumber);
+    if (!assigned) {
+      logger.error(`The waiter ${waiter} does not exist.`);
+      return res
+        .status(404)
+        .json({ error: `The waiter ${waiter} does not exist.` });
+    }
     await set(tableRef, {
       ...tableData,
       waiter,
     });
-    await assignTable(waiter, tableNumber);
     await removeUnassignedTable(tableNumber);
     return res.status(200).json({
       message: `${waiter} has been successfully assigned to table ${tableNumber}`,
