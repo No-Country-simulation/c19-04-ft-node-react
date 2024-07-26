@@ -6,11 +6,8 @@ import { getCallsToWaiters } from "../../state/store/slices/callWaiter/actionWai
 function CustomCall() {
     const [table, setTable] = useState("");
     const dispatch = useDispatch();
-    const waiterUsername = "carlosc";
 
     const currentUser = useSelector((state) => state.user.currentUser);
-
-    console.log(currentUser);
 
     return (
         <div>
@@ -27,6 +24,7 @@ function CustomCall() {
                     await callWaiter(table);
 
                     currentUser &&
+                        currentUser.username &&
                         dispatch(getCallsToWaiters(currentUser.username));
                 }}
             >
