@@ -8,6 +8,7 @@ import {
   addUnassignedTable,
   removeUnassignedTable,
 } from "../utils/tableFunctions/index.js";
+import { assignTable } from "../services/waiter.service.js";
 export const createTable = async (req, res) => {
   const data = req.body;
 
@@ -122,6 +123,7 @@ export const assignWaiter = async (req, res) => {
       ...tableData,
       waiter,
     });
+    await assignTable(waiter, tableNumber);
     await removeUnassignedTable(tableNumber);
     return res.status(200).json({
       message: `${waiter} has been successfully assigned to table ${tableNumber}`,

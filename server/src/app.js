@@ -30,7 +30,7 @@ app.get("/health", (req, res) => {
 app.use("/api/table", TableRoutes);
 app.use("/api/auth", AuthRoutes);
 app.use("/api/admin", VerifyToken, AdminRoutes);
-app.use("/api/waiter", WaiterRoutes);
+app.use("/api/waiters", WaiterRoutes);
 app.use("/api/menu", MenuRoutes);
 app.use("/api/orders", VerifyToken, OrderRoutes);
 

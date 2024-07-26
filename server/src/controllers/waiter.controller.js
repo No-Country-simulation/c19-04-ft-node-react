@@ -1,15 +1,13 @@
 import {
-	sendMessage,
-	assignTables,
-	getRequestedTables,
-	deleteRequestTable,
-} from '../services/waiter.service.js'
+  createWaiter,
+  requestWaiter,
+  requestAttended,
+} from "../services/waiter.service.js";
 
 const WaiterController = {
-	sendMessage,
-	assignTables,
-	getRequestedTables,
-	deleteRequestTable,
-}
+  createWaiter,
+  requestWaiter,
+  requestAttended,
+};
 
-export default WaiterController
+export default WaiterController;

@@ -1,10 +1,10 @@
-import { Router } from 'express'
-import WaiterController from '../controllers/waiter.controller.js'
+import { Router } from "express";
+import WaiterController from "../controllers/waiter.controller.js";
 
-const router = Router()
+const router = Router();
 
-router.patch('/callWaiter/:tableNumber', WaiterController.sendMessage)
-router.get('/msgWaiter/:waiterUsername', WaiterController.getRequestedTables)
-router.delete('/deleteMsg/:tableNumber', WaiterController.deleteRequestTable)
+router.post("/create", WaiterController.createWaiter);
+router.post("/requestWaiter/:username", WaiterController.requestWaiter);
+router.post("/requestAttended/:username", WaiterController.requestAttended);
 
-export default router
+export default router;
