@@ -11,6 +11,8 @@ import MenuRoutes from "./routes/menu.routes.js";
 import OrderRoutes from "./routes/order.routes.js";
 import VerifyToken from "./middlewares/jwt.middleware.js";
 
+import FrontendRoutes from "./routes/frontendCalls.routes.js";
+
 const app = express();
 app.disable("x-powered-by");
 
@@ -33,5 +35,7 @@ app.use("/api/admin", VerifyToken, AdminRoutes);
 app.use("/api/waiters", WaiterRoutes);
 app.use("/api/menu", MenuRoutes);
 app.use("/api/orders", VerifyToken, OrderRoutes);
+
+app.use("/api/frontend", FrontendRoutes);
 
 ServerUp(app);

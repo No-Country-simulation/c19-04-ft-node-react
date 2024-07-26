@@ -60,13 +60,13 @@ export const saveOrder = async (tableNumber, order) => {
 
 export const createOrder = async (req, res) => {
   // Para FIREBASE
-  const { to, tableNumber, order } = req.body; //order es un array de ids de ObjectId de Mongo
-  if (!to || !tableNumber || !order)
+  const { tableNumber, order } = req.body; //order es un array de ids de ObjectId de Mongo
+  if (!tableNumber || !order)
     return res.status(400).json({ error: "Missing required fields." });
   try {
     const allOrdersSnapshot = await get(ordersRef);
     const allOrdersData = allOrdersSnapshot.val();
-    const pendingRef = ref(database, `/orders/${to}/pending`);
+    const pendingRef = ref(database, `/orders/pending`);
     const pendingSnapshot = await get(pendingRef);
     const pendingData = pendingSnapshot.val();
     const orderedDishes = await MenuController.getDishesByIds(
@@ -78,6 +78,7 @@ export const createOrder = async (req, res) => {
         title: dish.title,
         img: dish.img || "",
         notes: dish.notes || "",
+        to: dish.to,
       };
     });
     const orderId = uuidv4();
@@ -100,22 +101,92 @@ export const createOrder = async (req, res) => {
 };
 
 export const getPendingOrders = async (req, res) => {
+  const { to } = req.query;
+  if (!to) {
+    logger.error("Missing required fields.");
+    return res.status(400).json({ error: "Missing required fields." });
+  }
   try {
-    const pendingOrders = await OrderModel.find()
-      .where("status")
-      .equals("pending")
-      .exec();
-    logger.info(`All pending orders: ${pendingOrders}`);
-    return res.status(200).json(pendingOrders);
+    const pendingRef = ref(database, "/orders/pending");
+    const pendingSnapshot = await get(pendingRef);
+    const pendingData = pendingSnapshot.val() || [];
+    const filteredOrders = Object.values(pendingData).map((orderObj) => {
+      const menus = orderObj.order.filter((menu) => menu.to === to);
+      return { ...orderObj, order: menus };
+    });
+    if (filteredOrders[0].order.length == 0) {
+      logger.warn(`No ready orders to ${to}.`);
+      return res.status(200).json({ message: `No ready orders to ${to}.` });
+    }
+    logger.info(`All pending orders to ${to}: ${filteredOrders}`);
+    return res
+      .status(200)
+      .json({ message: `All pending orders to ${to}.`, filteredOrders });
   } catch (error) {
-    logger.error(`Error in order.service.allPendingOrders: ${error}`);
+    logger.error(`Error in order.service.getPendingOrders: ${error}`);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+export const getInProgressOrders = async (req, res) => {
+  const { to } = req.query;
+  if (!to) {
+    logger.error("Missing required fields.");
+    return res.status(400).json({ error: "Missing required fields." });
+  }
+  try {
+    const inProgressRef = ref(database, "/orders/inProgress");
+    const inProgressSnapshot = await get(inProgressRef);
+    const inProgressData = inProgressSnapshot.val() || [];
+    const filteredOrders = Object.values(inProgressData).map((orderObj) => {
+      const menus = orderObj.order.filter((menu) => menu.to === to);
+      return { ...orderObj, order: menus };
+    });
+    if (filteredOrders[0].order.length == 0) {
+      logger.warn(`No ready orders to ${to}.`);
+      return res.status(200).json({ message: `No ready orders to ${to}.` });
+    }
+    logger.info(`All inProgress orders to ${to}: ${filteredOrders}`);
+    return res
+      .status(200)
+      .json({ message: `All inProgress orders to ${to}.`, filteredOrders });
+  } catch (error) {
+    logger.error(`Error in order.service.getInProgressOrders: ${error}`);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+export const getReadyOrders = async (req, res) => {
+  const { to } = req.query;
+  if (!to) {
+    logger.error("Missing required fields.");
+    return res.status(400).json({ error: "Missing required fields." });
+  }
+  try {
+    const readyRef = ref(database, "/orders/ready");
+    const readySnapshot = await get(readyRef);
+    const readyData = readySnapshot.val() || [];
+    const filteredOrders = Object.values(readyData).map((orderObj) => {
+      const menus = orderObj.order.filter((menu) => menu.to === to);
+      return { ...orderObj, order: menus };
+    });
+    if (filteredOrders[0].order.length == 0) {
+      logger.warn(`No ready orders to ${to}.`);
+      return res.status(200).json({ message: `No ready orders to ${to}.` });
+    }
+    logger.info(`All ready orders to ${to}: ${filteredOrders}`);
+    return res
+      .status(200)
+      .json({ message: `All ready orders to ${to}.`, filteredOrders });
+  } catch (error) {
+    logger.error(`Error in order.service.getReadyOrders: ${error}`);
     res.status(500).send("Internal Server Error");
   }
 };
 
 export const updateStatus = async (req, res) => {
   const { orderId } = req.params;
-  const { from, updateTo } = req.body;
+  const { updateTo } = req.body;
   try {
     if (!orderId || !updateTo) {
       logger.error(`Missing required fields.`);
@@ -123,15 +194,11 @@ export const updateStatus = async (req, res) => {
     }
     const initialOrderRef = ref(
       database,
-      `/orders/${from == "bar" ? "bar" : "kitchen"}/${
-        updateTo == "inProgress" ? "pending" : "inProgress"
-      }`
+      `/orders/${updateTo == "inProgress" ? "pending" : "inProgress"}`
     );
     const finalOrderRef = ref(
       database,
-      `/orders/${from == "bar" ? "bar" : "kitchen"}/${
-        updateTo == "inProgress" ? "inProgress" : "ready"
-      }`
+      `/orders/${updateTo == "inProgress" ? "inProgress" : "ready"}`
     );
     const initialSnapshot = await get(initialOrderRef);
     const initialData = initialSnapshot.val();
@@ -169,20 +236,6 @@ export const updateStatus = async (req, res) => {
     });
   } catch (error) {
     logger.error(`Error in order.service.updateStatus: ${error}`);
-    res.status(500).send("Internal Server Error");
-  }
-};
-
-export const getReadyOrders = async (req, res) => {
-  try {
-    const readyOrders = await OrderModel.find()
-      .where("status")
-      .equals("ready")
-      .exec();
-    logger.info(`All ready orders: ${readyOrders}`);
-    return res.status(200).json(readyOrders);
-  } catch (error) {
-    logger.error(`Error in order.service.getReadyOrders: ${error}`);
     res.status(500).send("Internal Server Error");
   }
 };

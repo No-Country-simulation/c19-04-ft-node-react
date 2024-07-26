@@ -85,30 +85,27 @@ type MongoTips = {
           }
     ]
     /orders {
-        bar: {
-            pending: [
-                orderID: {
-                    orderNumber: number,
-                    tableNumber: number,
-                    order: MongoMenu.ObjectId[] // dish.title & dish.ingredients
-                }
-            ],
-            inProgress: [
-                orderID: {
-                    orderNumber: number,
-                    tableNumber: number,
-                    order: MongoMenu.ObjectId[] // dish.title & dish.ingredients
-                }
-            ],
-            ready: [
-                orderID: {
-                    orderNumber: number,
-                    tableNumber: number,
-                    order: MongoMenu.ObjectId[] // dish.title & dish.ingredients
-                }
-            ]
-        },
-        kitchen: {...}
+          pending: {
+              orderID: {
+                  orderNumber: number,
+                  tableNumber: number,
+                  order: MongoMenu.ObjectId[] // dish.title & dish.ingredients
+              }
+          ],
+          inProgress: [
+              orderID: {
+                  orderNumber: number,
+                  tableNumber: number,
+                  order: MongoMenu.ObjectId[] // dish.title & dish.ingredients
+              }
+          ],
+          ready: [
+              orderID: {
+                  orderNumber: number,
+                  tableNumber: number,
+                  order: MongoMenu.ObjectId[] // dish.title & dish.ingredients
+              }
+            }
     }
     /waiters [
         username: [
