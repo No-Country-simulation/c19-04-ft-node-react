@@ -1,3 +1,5 @@
 node_modules/
 .env
 *.yaml
+*.txt
+yarn.lock

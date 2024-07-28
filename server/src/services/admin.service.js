@@ -45,6 +45,22 @@ export const updateMenu = async (req, res) => {
 }
 
 //TODO: Remove menu
+export const removeMenu = async (req, res) => {
+	const { id } = req.params
+
+	try {
+		if (!id) {
+			logger.error(`ID ${id} not found`)
+			return res.status(400).json({ message: `ID ${id} not found` })
+		}
+
+		await MenuModel.findByIdAndDelete(id)
+		logger.info(`Menu deleted successfully: ${id}`)
+		res.status(200).json({ message: `Menu deleted successfully: ${id}` })
+	} catch (err) {
+		logger.error(`Error while removing menu service.removeMenu: ${err}`)
+	}
+}
 
 //Limpia todos los datos del día de FIREBASE y deja los estáticos, como las mesas y los mozos
 export const closeDay = async (req, res) => {
