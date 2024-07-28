@@ -35,8 +35,8 @@ app.use('/api/auth', AuthRoutes)
 app.use('/api/admin', VerifyToken, AdminRoutes)
 app.use('/api/waiters', WaiterRoutes)
 app.use('/api/menu', MenuRoutes)
-app.use('/api/orders', VerifyToken, OrderRoutes)
-app.use('/api/analytics', AnalyticsRoutes) // TODO: agregar middleware de verificación de token
+app.use('/api/orders', OrderRoutes)
+app.use('/api/analytics', VerifyToken, AnalyticsRoutes)
 
 app.use('/api/frontend', FrontendRoutes)
 
