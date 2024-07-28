@@ -5,10 +5,11 @@ import KitchenModel from '../models/kitchen.model.js'
 import logger from '../utils/logger.js'
 import TableModel from '../models/table.model.js'
 import Hash from '../utils/hash.js'
+import { createWaiter } from './waiter.service.js'
 
 export const signUp = async (req, res) => {
 	try {
-		const { username, password, role } = req.body
+		const { username, password, name, role } = req.body
 		if (!username || !password || !role) {
 			logger.error('Missing required fields')
 			return res.status(400).json({ message: 'Missing required fields' })
@@ -35,8 +36,10 @@ export const signUp = async (req, res) => {
 			await WaiterModel.create({
 				username,
 				password: hashedPassword,
-				tablesAsigned: [],
+				name,
+				role,
 			})
+			await createWaiter(username)
 		} else if (role === 'kitchen') {
 			await KitchenModel.create({
 				username,
@@ -45,7 +48,7 @@ export const signUp = async (req, res) => {
 		}
 
 		logger.info(`User ${username} created successfully`)
-		res.status(201).json(`User ${username} created successfully`)
+		res.status(201).json({ message: `User ${username} created successfully` })
 	} catch (err) {
 		logger.error(`Error in signUp: ${err}`)
 		res.status(500).json({ message: 'Internal Server Error' })

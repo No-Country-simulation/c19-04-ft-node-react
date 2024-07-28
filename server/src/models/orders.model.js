@@ -1,29 +1,20 @@
 import mongoose from 'mongoose'
 
-const orderSchema = new mongoose.Schema(
-	{
-		orderNumber: {
-			type: Number,
-			required: true,
-		},
-		table: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Table',
-		},
-		status: {
-			type: String,
-			enum: ['pending', 'ready'],
-			default: 'pending',
-		},
-		readyAt: {
-			type: Date,
-		},
-		//   delay: { //Próximamente
-		//     type: Date,
-		//   }
+const orderSchema = new mongoose.Schema({
+	orderNumber: {
+		type: Number,
+		required: true,
+		unique: true,
 	},
-	{ timestamps: true },
-)
+	tableNumber: {
+		type: Number,
+		required: true,
+	},
+	orderedDishes: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Menu',
+	},
+})
 
 const OrderModel = mongoose.model('Order', orderSchema)
 

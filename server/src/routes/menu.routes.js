@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import CardMenuController from '../controllers/card-menu.controller.js'
+import MenuController from '../controllers/menu.controller.js'
 
 const router = Router()
 
 //GET de card-menu
-router.get('/', CardMenuController.getCardMenu)
+router.get('/', MenuController.getMenu)
 
 //PATCH de card-menu
 

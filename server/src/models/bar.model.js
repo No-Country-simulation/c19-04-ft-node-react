@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const kitchenSchema = new mongoose.Schema({
+const barSchema = new mongoose.Schema({
 	username: {
 		type: String,
 		required: true,
@@ -16,10 +16,10 @@ const kitchenSchema = new mongoose.Schema({
 	},
 	role: {
 		type: String,
-		default: 'kitchen',
+		default: 'bar',
 	},
 })
 
-const KitchenModel = mongoose.model('Kitchen', kitchenSchema)
+const BarModel = mongoose.model('Bar', barSchema)
 
-export default KitchenModel
+export default BarModel

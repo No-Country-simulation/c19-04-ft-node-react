@@ -1,6 +1,11 @@
 import mongoose from 'mongoose'
 
 const menuSchema = new mongoose.Schema({
+	dishNumber: {
+		type: Number,
+		required: true,
+		unique: true,
+	},
 	title: {
 		type: String,
 		required: true,
@@ -9,30 +14,34 @@ const menuSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	category: {
+	to: {
 		type: String,
 		required: true,
-		enum: ['Entradas', 'Platos principales', 'Postres', 'Bebidas', 'Alcohol'],
+	},
+	category: {
+		type: [String],
+		required: true,
 	},
 	tags: {
-		type: String,
+		type: [String],
 		required: true,
-		enum: [
-			'Hamburguesas',
-			'Pizzas',
-			'Pastas',
-			'Ensaladas',
-			'Sushi',
-			'Milanesas',
-		],
 	},
 	imgUrl: {
 		type: String,
 		required: true,
 	},
-	ingredients: [],
+	ingredients: {
+		type: [String],
+		required: true,
+	},
 	estimatedTime: {
 		type: Number,
+	},
+	people: {
+		type: Number,
+	},
+	extraInfo: {
+		type: String,
 	},
 	price: {
 		type: Number,
@@ -41,6 +50,9 @@ const menuSchema = new mongoose.Schema({
 	available: {
 		type: Boolean,
 		default: false,
+	},
+	rating: {
+		type: Number,
 	},
 })
 

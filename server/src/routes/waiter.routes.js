@@ -3,8 +3,9 @@ import WaiterController from '../controllers/waiter.controller.js'
 
 const router = Router()
 
-router.patch('/callWaiter/:tableNumber', WaiterController.sendMessage)
-router.get('/msgWaiter/:waiterUsername', WaiterController.getRequestedTables)
-router.delete('/deleteMsg/:tableNumber', WaiterController.deleteRequestTable)
+router.post('/create', WaiterController.createWaiter)
+router.post('/requestWaiter/:username', WaiterController.requestWaiter)
+router.post('/attendRequest/:username', WaiterController.requestAttended)
+router.post('/closeTable/:tableNumber', WaiterController.closeTable)
 
 export default router
