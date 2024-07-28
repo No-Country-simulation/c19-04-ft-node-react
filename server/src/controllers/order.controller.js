@@ -1,23 +1,23 @@
 import {
-  saveOrder,
-  getPendingOrders,
-  getAllOrders,
-  getInProgressOrders,
-  getReadyOrders,
-  updateStatus,
-  deleteOrder,
-  createOrder,
-} from "../services/order.service.js";
+	saveOrder,
+	getPendingOrders,
+	getAllOrders,
+	getInProgressOrders,
+	getReadyOrders,
+	updateStatus,
+	deleteOrder,
+	createOrder,
+} from '../services/order.service.js'
 
 const OrderController = {
-  saveOrder,
-  createOrder,
-  getPendingOrders,
-  getAllOrders,
-  getInProgressOrders,
-  getReadyOrders,
-  updateStatus,
-  deleteOrder,
-};
+	saveOrder,
+	createOrder,
+	getPendingOrders,
+	getAllOrders,
+	getInProgressOrders,
+	getReadyOrders,
+	updateStatus,
+	deleteOrder,
+}
 
-export default OrderController;
+export default OrderController

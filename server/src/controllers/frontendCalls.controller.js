@@ -1,7 +1,7 @@
-import { setReady } from "../utils/frontendCalls.js";
+import { setReady } from '../utils/frontendCalls.js'
 
 const FrontendCallsController = {
-  setReady,
-};
+	setReady,
+}
 
-export default FrontendCallsController;
+export default FrontendCallsController

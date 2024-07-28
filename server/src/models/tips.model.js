@@ -1,11 +1,11 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const tipsSchema = new mongoose.Schema({
-  amount: {
-    type: Number,
-  },
-});
+	amount: {
+		type: Number,
+	},
+})
 
-const TipsModel = mongoose.model("Tips", tipsSchema);
+const TipsModel = mongoose.model('Tips', tipsSchema)
 
-export default TipsModel;
+export default TipsModel
