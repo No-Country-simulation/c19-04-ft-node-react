@@ -1,8 +1,8 @@
-import { getMenu, getDishesByIds } from "../services/menu.service.js";
+import { getMenu, getDishesByIds } from '../services/menu.service.js'
 
 const MenuController = {
-  getMenu,
-  getDishesByIds,
-};
+	getMenu,
+	getDishesByIds,
+}
 
-export default MenuController;
+export default MenuController

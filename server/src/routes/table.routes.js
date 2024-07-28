@@ -1,14 +1,15 @@
-import { Router } from "express";
-import TableController from "../controllers/table.controller.js";
-import VerifyToken from "../middlewares/jwt.middleware.js";
+import { Router } from 'express'
+import TableController from '../controllers/table.controller.js'
+import VerifyToken from '../middlewares/jwt.middleware.js'
 
-const router = Router();
+const router = Router()
 
-router.post("/tableQR", VerifyToken, TableController.createTable);
+router.post('/tableQR', VerifyToken, TableController.createTable)
 
-router.get("/tableQR/:tableNumber", TableController.getTable);
+router.get('/tableQR/:tableNumber', TableController.getTable)
 
-router.post("/tableQR/joinTable/:tableNumber", TableController.joinTable);
+router.post('/tableQR/joinTable/:tableNumber', TableController.joinTable)
 
-router.post("/tableQR/assignWaiter/:tableNumber", TableController.assignWaiter);
-export default router;
+router.post('/assignWaiter/:tableNumber', TableController.assignWaiter)
+
+export default router

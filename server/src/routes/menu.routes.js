@@ -1,11 +1,11 @@
-import { Router } from "express";
-import MenuController from "../controllers/menu.controller.js";
+import { Router } from 'express'
+import MenuController from '../controllers/menu.controller.js'
 
-const router = Router();
+const router = Router()
 
 //GET de card-menu
-router.get("/", MenuController.getMenu);
+router.get('/', MenuController.getMenu)
 
 //PATCH de card-menu
 
-export default router;
+export default router
