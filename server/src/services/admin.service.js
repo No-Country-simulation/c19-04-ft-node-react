@@ -44,7 +44,6 @@ export const updateMenu = async (req, res) => {
 	}
 }
 
-//TODO: Remove menu
 export const removeMenu = async (req, res) => {
 	const { id } = req.params
 
