@@ -2,7 +2,7 @@ import TableModel from '../models/table.model.js'
 import { generateQR } from './qr.service.js'
 import logger from '../utils/logger.js'
 import database from '../connections/firebase.js'
-import { ref, onValue, get, set } from 'firebase/database'
+import { ref, get, set } from 'firebase/database'
 import { tablesRef } from '../utils/firebaseRefs.js'
 import {
 	addUnassignedTable,
@@ -33,7 +33,7 @@ export const createTable = async (req, res) => {
 				isActive: false,
 			},
 		})
-		console.log('Table created successfully in Firebase')
+		logger.info('Table created successfully in Firebase')
 		await TableModel.create(table)
 
 		res.status(201).json({ message: 'Table created successfully' })

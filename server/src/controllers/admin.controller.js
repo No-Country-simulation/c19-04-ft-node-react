@@ -1,8 +1,14 @@
-import { createMenu, updateMenu, closeDay } from '../services/admin.service.js'
+import {
+	createMenu,
+	updateMenu,
+	removeMenu,
+	closeDay,
+} from '../services/admin.service.js'
 
 const AdminController = {
 	createMenu,
 	updateMenu,
+	removeMenu,
 	closeDay,
 }
 
