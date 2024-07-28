@@ -16,7 +16,10 @@ router.post('/ingredients', IngredientsController.addIngredient)
 router.get('/ingredients', IngredientsController.getIngredient)
 
 //DELETE INGREDIENTES
-router.delete('/ingredients/:nombre', IngredientsController.removeIngredient)
+router.delete('/ingredients/delete/:id', IngredientsController.removeIngredient)
+
+//PATCH INGREDIENTES
+router.patch('/ingredients/update/:id', IngredientsController.updateIngredient)
 
 //POST MENU
 router.post('/menu', AdminController.createMenu)
@@ -25,7 +28,10 @@ router.post('/menu', AdminController.createMenu)
 router.get('/menu', MenuController.getMenu)
 
 //PATCH MENU
-router.patch('/menu/:id', AdminController.updateMenu)
+router.patch('/menu/update/:id', AdminController.updateMenu)
+
+//DELETE MENU
+router.delete('/menu/delete/:id', AdminController.removeMenu)
 
 //PATCH CLOSE DAY
 router.patch('/closeDay', AdminController.closeDay)
