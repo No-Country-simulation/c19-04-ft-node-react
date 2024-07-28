@@ -123,7 +123,6 @@ export const signOut = async (req, res) => {
 
 export const getUser = async (req, res) => {
     const { userId } = req;
-
     try {
         const userPromises = [
             AdminModel.findById({ _id: userId }).exec(),
@@ -150,7 +149,6 @@ export const getUser = async (req, res) => {
 
 export const getAllUsers = async (req, res) => {
     const { role } = req.body;
-    console.log(role);
     try {
         let userPromises = [];
 
@@ -183,6 +181,35 @@ export const getAllUsers = async (req, res) => {
         res.status(200).json(allUsers);
     } catch (err) {
         logger.error(`Error in signOut: ${err}`);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
+export const deleteUser = async (req, res) => {
+    const { userId } = req.params;
+    console.log(req.params);
+
+    try {
+        const userPromises = [
+            AdminModel.findOneAndDelete({ _id: userId }).exec(),
+            KitchenModel.findOneAndDelete({ _id: userId }).exec(),
+            WaiterModel.findOneAndDelete({ _id: userId }).exec(),
+        ];
+
+        const results = await Promise.allSettled(userPromises);
+        const fulfilledResult = results.find(
+            (result) => result.status === "fulfilled" && result.value !== null
+        );
+
+        if (!fulfilledResult) throw new Error("User not found");
+
+        const { username, role } = fulfilledResult.value;
+
+        logger.info("User removed successfully.");
+
+        res.status(200).json({ username, role });
+    } catch (err) {
+        logger.error(`Error in deleteUser: ${err}`);
         res.status(500).json({ message: "Internal Server Error" });
     }
 };

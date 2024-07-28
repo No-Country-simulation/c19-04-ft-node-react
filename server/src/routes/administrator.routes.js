@@ -13,6 +13,9 @@ router.get("/waiters", WaiterController.getWaiters);
 router.get("/user", AuthController.getUser);
 
 // TRAER INFORMACION DE USUARIO LOGUEADO
+router.delete("/deleteUser/:userId", AuthController.deleteUser);
+
+// TRAER INFORMACION DE USUARIO LOGUEADO
 router.post("/allUsers", AuthController.getAllUsers);
 
 //POST ADD WAITER / TABLE / KITCHEN / ADMIN

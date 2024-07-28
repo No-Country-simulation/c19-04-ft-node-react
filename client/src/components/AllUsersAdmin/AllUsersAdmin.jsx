@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsersAction } from "../../state/store/slices/users/actionUsers/getAllUsersAction";
+import UpdateWaiter from "../UpdateWaiter/UpdateWaiter";
+import MainButton from "../Buttons/MainButton";
+import SecondaryButton from "../Buttons/SecondaryButton";
+import handleDeleteUser from "../../utils/functions/handleDeleteUser";
 
 function AllUsersAdmin() {
     const [loading, setLoading] = useState(false);
@@ -13,78 +17,107 @@ function AllUsersAdmin() {
 
     useEffect(() => {
         dispatch(getAllUsersAction(filter));
-    }, [filter]);
+    }, [dispatch, filter]);
 
     const handleFilter = (event) => {
         setFilter(event.target.value);
     };
 
+    const [showUpdateWaiter, setShowUpdateWaiter] = useState(false);
+
+    const handleShowUpdateWaiter = (event) => {
+        setShowUpdateWaiter(!showUpdateWaiter);
+    };
+
     return (
         <div className={loading ? "disable-mouse" : ""}>
-            <h1 className="text-[18px] mb-4 block">
-                Administración de usuarios
-            </h1>
-            <label htmlFor="type_of_user_selection">Filtro por rol:</label>
-            <select
-                onChange={handleFilter}
-                value={filter}
-                name="type_of_user_selection"
-                id="type_of_user_selection"
-            >
-                <option value="all">Todos</option>
-                <option value="admin">Administrador</option>
-                <option value="waiter">Mesero</option>
-                <option value="kitchen">Cocina</option>
-            </select>
-            <div className="w-full border bg-slate-400 grid grid-cols-5 gap-2 min-h-[3em] place-content-center text-[14px]">
-                <div className="text-center col-start-1 break-words">ID</div>
-                <div className="text-center col-start-2 break-words">
-                    Nombre de usuario
-                </div>
-                <div className="text-center col-start-3 break-words">
-                    Rol del usuario
-                </div>
-                <div className="text-center col-start-4 col-span-full break-words">
-                    Acciones
-                    {/* <button>Editar</button>
-                    <button>Eliminar</button>
-                    <button>Desactivar</button> */}
-                </div>
+            <div className="block">
+                <h1 className="text-[18px] mb-4 block">
+                    Administración de usuarios
+                </h1>
+                <label htmlFor="type_of_user_selection">Filtro por rol:</label>
+                <select
+                    onChange={handleFilter}
+                    value={filter}
+                    name="type_of_user_selection"
+                    id="type_of_user_selection"
+                >
+                    <option value="all">Todos</option>
+                    <option value="admin">Administrador</option>
+                    <option value="waiter">Mesero</option>
+                    <option value="kitchen">Cocina</option>
+                </select>
             </div>
-            {allUsers &&
-                allUsers.map((user) => (
-                    <div
-                        key={`userid${user._id}`}
-                        className="w-full my-4 grid grid-cols-5 gap-2 min-h-[3em]"
-                    >
-                        <div className="col-start-1 w-full flex items-center px-2">
-                            <h4 className="break-all h-min text-[12px]">
-                                {user._id}
-                            </h4>
-                        </div>
-                        <div className="col-start-2 w-full flex items-center px-2">
-                            <h4 className="break-all h-min text-[12px]">
-                                {user.username}
-                            </h4>
-                        </div>
-                        <div className="col-start-3 w-full flex items-center px-2">
-                            <h4 className="break-all h-min text-[12px]">
-                                {user.role}
-                            </h4>
-                        </div>
-                        <div className="text-center col-start-4 col-span-full break-words flex flex-wrap items-center justify-center gap-1">
-                            <button className="border border-red-500 rounded-[10px] px-4">
-                                Editar
-                            </button>
-                            <button className="border border-red-500 rounded-[10px] px-4">
-                                Eliminar
-                            </button>
-                            <button className="border border-red-500 rounded-[10px] px-4">
-                                Desactivar
-                            </button>
-                        </div>
-                    </div>
-                ))}
+
+            <div className="overflow-y-auto scrollbar-container text-[14px] custom-scrollbar-x scroll-smooth">
+                <table className="min-w-full bg-white shadow-xl border-separate border-spacing-0">
+                    <thead className="bg-gray-100">
+                        <tr>
+                            <th className="px-4 py-2 border border-transparent">
+                                ID
+                            </th>
+                            <th className="px-4 py-2 border border-transparent">
+                                Nombre de usuario
+                            </th>
+                            <th className="px-4 py-2 border border-transparent">
+                                Rol del usuario
+                            </th>
+                            <th className="px-4 py-2 border border-transparent">
+                                Acciones
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {allUsers?.map((user, index) => (
+                            <tr
+                                key={user._id}
+                                className={`hover:bg-customRed-100 ${
+                                    index === allUsers.length - 1
+                                        ? "last:rounded-b-3xl"
+                                        : ""
+                                }`}
+                            >
+                                <td
+                                    className={`px-4 py-2 border border-white break-all ${
+                                        index === allUsers.length - 1
+                                            ? "rounded-l-3xl"
+                                            : ""
+                                    }`}
+                                >
+                                    {user._id}
+                                </td>
+                                <td className="px-4 py-2 border border-white">
+                                    {user.username}
+                                </td>
+                                <td className="px-4 py-2 break-all border border-white">
+                                    {user.role}
+                                </td>
+                                <td
+                                    className={`px-2 py-2 rounded-sm border border-white ${
+                                        index === allUsers.length - 1
+                                            ? "rounded-r-3xl"
+                                            : ""
+                                    }`}
+                                >
+                                    <SecondaryButton
+                                        onClick={async () => {
+                                            await handleDeleteUser(user._id);
+                                            dispatch(getAllUsersAction(filter));
+                                        }}
+                                        classNameSize="px-3 w-full"
+                                    >
+                                        Eliminar
+                                    </SecondaryButton>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+
+            {showUpdateWaiter && (
+                <UpdateWaiter handleShowUpdateWaiter={handleShowUpdateWaiter} />
+            )}
         </div>
     );
 }

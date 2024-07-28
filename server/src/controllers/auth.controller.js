@@ -1,4 +1,5 @@
 import {
+    deleteUser,
     getUser,
     signUp,
     signIn,
@@ -7,6 +8,7 @@ import {
 } from "../services/auth.service.js";
 
 const AuthController = {
+    deleteUser,
     getUser,
     getAllUsers,
     signUp,

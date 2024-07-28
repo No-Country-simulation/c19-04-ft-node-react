@@ -17,7 +17,7 @@ function AssignTableToWaiter() {
         return () => {
             dispatch(emptyWaiters());
         };
-    }, []);
+    }, [dispatch]);
 
     const allTables = [1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -58,53 +58,48 @@ function AssignTableToWaiter() {
                     Mesas asignadas
                 </div>
             </div>
-            {allWaitersState &&
-                allWaitersState.waiters &&
-                allWaitersState.waiters.map((waiter) => {
-                    return (
-                        <div
-                            key={`${waiter.id}${waiter.username}`}
-                            className="w-full my-4 grid grid-cols-6 gap-2 min-h-[3em]"
-                        >
-                            <div className="col-start-1 col-span-1 md:col-span-2 w-full flex items-center px-2">
-                                <h4 className="break-all h-min text-[12px]">
-                                    {waiter.id}
-                                </h4>
-                            </div>
-                            <div className="col-start-2 md:col-start-3 col-span-1 w-full flex items-center px-2">
-                                <h4 className="break-all h-min text-[12px]">
-                                    {waiter.username}
-                                </h4>
-                            </div>
-                            <div className="col-start-3 md:col-start-4 col-span-full flex flex-wrap gap-2 px-2 items-center">
-                                {allTables &&
-                                    allTables.map((table) => {
-                                        const assigned =
-                                            waiter.tablesAssigned &&
-                                            waiter.tablesAssigned.includes(
-                                                table
-                                            );
-
-                                        return (
-                                            <button
-                                                key={`${waiter.username}/${table}`}
-                                                value={table}
-                                                data-username={waiter.username}
-                                                onClick={handleTableAssign}
-                                                className={`border ${
-                                                    assigned
-                                                        ? "border-green-500 bg-green-200"
-                                                        : "border-red-500 bg-red-200"
-                                                } h-8 w-8 rounded-[10px] text-[12px]`}
-                                            >
-                                                {table}
-                                            </button>
-                                        );
-                                    })}
-                            </div>
+            {allWaitersState?.waiters?.map((waiter) => {
+                return (
+                    <div
+                        key={`${waiter.id}${waiter.username}`}
+                        className="w-full my-4 grid grid-cols-6 gap-2 min-h-[3em]"
+                    >
+                        <div className="col-start-1 col-span-1 md:col-span-2 w-full flex items-center px-2">
+                            <h4 className="break-all h-min text-[12px]">
+                                {waiter.id}
+                            </h4>
                         </div>
-                    );
-                })}
+                        <div className="col-start-2 md:col-start-3 col-span-1 w-full flex items-center px-2">
+                            <h4 className="break-all h-min text-[12px]">
+                                {waiter.username}
+                            </h4>
+                        </div>
+                        <div className="col-start-3 md:col-start-4 col-span-full flex flex-wrap gap-2 px-2 items-center">
+                            {allTables?.map((table) => {
+                                const assigned =
+                                    waiter.tablesAssigned?.includes(table);
+
+                                return (
+                                    <button
+                                        type="button"
+                                        key={`${waiter.username}/${table}`}
+                                        value={table}
+                                        data-username={waiter.username}
+                                        onClick={handleTableAssign}
+                                        className={`border ${
+                                            assigned
+                                                ? "border-green-500 bg-green-200"
+                                                : "border-red-500 bg-red-200"
+                                        } h-8 w-8 rounded-[10px] text-[12px]`}
+                                    >
+                                        {table}
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
+                );
+            })}
         </div>
     );
 }
