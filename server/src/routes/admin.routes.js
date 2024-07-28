@@ -27,4 +27,7 @@ router.get('/menu', MenuController.getMenu)
 //PATCH MENU
 router.patch('/menu/:id', AdminController.updateMenu)
 
+//PATCH CLOSE DAY
+router.patch('/closeDay', AdminController.closeDay)
+
 export default router

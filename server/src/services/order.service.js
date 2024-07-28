@@ -51,7 +51,9 @@ export const saveOrder = async (tableNumber, order) => {
 				if (err) throw err
 			},
 		)
-		logger.info(`Order ${newOrder} saved successfully.`)
+		logger.info(
+			`Order ${newOrder.orderNumber}, ${newOrder.tableNumber} saved successfully.`,
+		)
 	} catch (error) {
 		logger.error(`Error in order.service.saveOrder: ${error}`)
 		throw new Error('Internal server error.')
