@@ -2,7 +2,7 @@ import logger from "../utils/logger.js";
 import database from "../connections/firebase.js";
 import { ref, get, set } from "firebase/database";
 import { waitersRef } from "../utils/firebaseRefs.js";
-import { ClassOrderController } from "./order.controller.js";
+import OrderController from "./order.controller.js";
 
 class WaiterController {
   static async createWaiter(username) {
@@ -143,7 +143,7 @@ class WaiterController {
   }
   static async closeTable(tableNumber, order) {
     try {
-      await ClassOrderController.saveOrder(tableNumber, order);
+      awaiOrderController.saveOrd(tableNumber, order);
       const tableRef = ref(database, `/tables/table_${tableNumber}`);
       await set(tableRef, {
         isActive: false,

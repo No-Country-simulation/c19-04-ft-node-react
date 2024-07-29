@@ -1,9 +1,9 @@
-import FrontendCallsController from "../controllers/frontendCalls.controller.js";
-import OrderController from "../controllers/order.controller.js";
 import { Router } from "express";
 import logger from "../utils/logger.js";
 import database from "../connections/firebase.js";
 import { ref, get, set } from "firebase/database";
+import FrontendCallsController from "../controllers/frontendCalls.controller.js";
+import OrderController from "../controllers/order.controller.js";
 const router = Router();
 
 // POST: SET DINER READY TO TRUE
@@ -58,26 +58,5 @@ router.post("/:table_number/:dinerIndex", async (req, res) => {
     return res.status(500).send("Internal server error.");
   }
 });
-
-// router.post("/test", (req, res) => {
-//   const { name, lastName } = req.body;
-//   if (!name || !lastName) {
-//     logger.error("Missing either name or lastName from body.");
-//     return res
-//       .status(400)
-//       .json({ message: "Missing either name or lastName from body." });
-//   }
-//   try {
-//     const test = FrontendCallsController.test(name, lastName);
-//     logger[test.responseType](test.message);
-//     return res.status(test.status).json({
-//       [test.responseType]: test.message,
-//       result: test.result,
-//     });
-//   } catch (error) {
-//     logger.error(`Error in route 'frontendCalls POST/test'. Error: ${error}`);
-//     return res.status(500).send("Internal server error.");
-//   }
-// });
 
 export default router;
