@@ -1,13 +1,11 @@
 import AuthController from "../controllers/auth.controller.js";
 import IngredientsController from "../controllers/ingredients.controller.js";
 import { Router } from "express";
-import WaiterController from "../controllers/waiter.controller.js";
 import AdminController from "../controllers/admin.controller.js";
 
 const router = Router();
 
 // TRAER TODOS LOS MESEROS
-router.get("/waiters", WaiterController.getWaiters);
 
 // TRAER INFORMACION DE USUARIO LOGUEADO
 router.get("/user", AuthController.getUser);
@@ -28,18 +26,27 @@ router.post("/ingredients", IngredientsController.addIngredient);
 router.get("/ingredients", IngredientsController.getIngredient);
 
 //DELETE INGREDIENTES
-router.delete("/ingredients/:nombre", IngredientsController.removeIngredient);
+router.delete(
+    "/ingredients/delete/:id",
+    IngredientsController.removeIngredient
+);
 
-//POST ASSIGN TABLES TO WAITERS
-router.patch("/assignTables/:waiterUsername", WaiterController.assignTables);
+//PATCH INGREDIENTES
+router.patch("/ingredients/update/:id", IngredientsController.updateIngredient);
 
 //POST MENU
 router.post("/menu", AdminController.createMenu);
 
 //GET MENU
-router.get("/menu", AdminController.getMenu);
+router.get("/menu", MenuController.getMenu);
 
 //PATCH MENU
-router.patch("/menu/:id", AdminController.updateMenu);
+router.patch("/menu/update/:id", AdminController.updateMenu);
+
+//DELETE MENU
+router.delete("/menu/delete/:id", AdminController.removeMenu);
+
+//PATCH CLOSE DAY
+router.patch("/closeDay", AdminController.closeDay);
 
 export default router;

@@ -10,6 +10,25 @@ const adminSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	brandName: {
+		type: String,
+		required: true,
+	},
+	brandLogo: {
+		type: String,
+		required: true,
+	},
+	brandColor: {
+		type: String,
+		required: false,
+		default: '#FF5E5B',
+	},
+	subscription: {
+		type: String,
+		required: true,
+		enum: ['free', 'basic', 'premium'],
+		default: 'free',
+	},
 	role: {
 		type: String,
 		default: 'admin',
