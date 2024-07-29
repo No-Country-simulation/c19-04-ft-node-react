@@ -30,14 +30,13 @@ app.get('/health', (req, res) => {
 	res.json('Health OK')
 })
 
-app.use('/api/table', TableRoutes)
-app.use('/api/auth', AuthRoutes)
 app.use('/api/admin', VerifyToken, AdminRoutes)
-app.use('/api/waiters', WaiterRoutes)
+app.use('/api/analytics', VerifyToken, AnalyticsRoutes)
+app.use('/api/auth', AuthRoutes)
+app.use('/api/frontend', FrontendRoutes)
 app.use('/api/menu', MenuRoutes)
 app.use('/api/orders', OrderRoutes)
-app.use('/api/analytics', VerifyToken, AnalyticsRoutes)
-
-app.use('/api/frontend', FrontendRoutes)
+app.use('/api/table', TableRoutes)
+app.use('/api/waiters', WaiterRoutes)
 
 ServerUp(app)

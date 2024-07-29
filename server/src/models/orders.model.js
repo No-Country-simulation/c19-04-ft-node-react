@@ -11,7 +11,7 @@ const orderSchema = new mongoose.Schema({
 		required: true,
 	},
 	orderedDishes: {
-		type: mongoose.Schema.Types.ObjectId,
+		type: [mongoose.Schema.Types.ObjectId],
 		ref: 'Menu',
 	},
 })
