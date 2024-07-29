@@ -1,7 +1,13 @@
-import { setReady } from '../utils/frontendCalls.js'
+import {
+  setReady,
+  createIndividualOrder,
+  //   test,
+} from "../utils/frontendCalls.js";
 
 const FrontendCallsController = {
-	setReady,
-}
+  setReady,
+  createIndividualOrder,
+  //   test,
+};
 
-export default FrontendCallsController
+export default FrontendCallsController;
