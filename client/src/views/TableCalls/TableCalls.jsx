@@ -14,10 +14,11 @@ function TableCalls() {
     const currentUser = useSelector((state) => state.user.currentUser);
 
     useEffect(() => {
-        currentUser && dispatch(getCallsToWaiters(currentUser.username));
-    }, []);
+        currentUser?.username &&
+            dispatch(getCallsToWaiters(currentUser.username));
+    }, [dispatch, currentUser]);
 
-    const waiterUsername = "carlosc";
+    // const waiterUsername = "carlosc";
 
     return (
         <div>

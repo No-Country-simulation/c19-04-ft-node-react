@@ -10,6 +10,8 @@ import SecondaryButton from "../../components/Buttons/SecondaryButton";
 import MainButton from "../../components/Buttons/MainButton";
 import { useNavigateHelper } from "../../utils/hooks/useNavigations";
 import ContainerCardsFilter from "../../components/ContainerCardsFilter/ContainerCardsFilter";
+import { useParams } from "react-router-dom";
+import patchCallWaiter from "../../utils/api/patchCallWaiter";
 
 const MainViewMenu = () => {
     const { filter, filterFood, changeFilters } = useFilterFood();
@@ -18,21 +20,22 @@ const MainViewMenu = () => {
     );
     const dispatch = useDispatch();
 
-    const [dataView, setDataView] = useState(false)
+    const [dataView, setDataView] = useState(false);
+
+    const { table } = useParams();
+    // console.log(table);
 
     useEffect(() => {
-
         if (menus.length > filteredMenus.length) {
-            setDataView(true)
+            setDataView(true);
         } else {
-            setDataView(false)
+            setDataView(false);
         }
     }, [filteredMenus.length]);
 
     useEffect(() => {
         dispatch(dataMenuGet());
     }, [dispatch]);
-    
 
     const { navigateTo } = useNavigateHelper();
     return (
@@ -42,19 +45,24 @@ const MainViewMenu = () => {
             <div>
                 <h2 className="text-[16px] leading-5  px-5 pb-3">Menú</h2>
                 <section className="border-y">
-                    <FilterFood categories={categories} changeFilters={changeFilters} />
+                    <FilterFood
+                        categories={categories}
+                        changeFilters={changeFilters}
+                    />
                 </section>
                 <div className="py-7">
-                    {dataView ?
-                        <ContainerCardsFilter dataFilter={filteredMenus} /> :
+                    {dataView ? (
+                        <ContainerCardsFilter dataFilter={filteredMenus} />
+                    ) : (
                         <ContainerCards menus={filteredMenus} />
-                    }
+                    )}
                 </div>
             </div>
             <div className="sticky left-0 bottom-0 w-[95vw] py-3 flex flex-wrap gap-y-8 gap-x-2 mx-auto z-10  bg-opacity-100 backdrop-blur-lg">
                 <SecondaryButton
                     children="Llamar al Mozo"
                     classNameSize="h-10 items-center w-1/2"
+                    onClick={() => patchCallWaiter(table)}
                 />
                 <MainButton
                     children="Ver mi Pedido"
