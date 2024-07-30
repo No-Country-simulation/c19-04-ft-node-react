@@ -4,16 +4,6 @@ import VerifyToken from "../middlewares/jwt.middleware.js";
 import logger from "../utils/logger.js";
 const router = Router();
 
-// POST SAVE FINAL ORDER IN MONGO
-// router.post("/save", async (req, res) => {
-//   try {
-
-//   } catch (error) {
-//     logger.error(`Error in route 'order.routes POST/create'. ${error}`);
-//     return res.status(500).send("Internal server error.");
-//   }
-// })
-
 // POST CREATE NEW ORDER IN FIREBASE
 router.post("/create", async (req, res) => {
   const { tableNumber, order } = req.body;
@@ -38,12 +28,6 @@ router.post("/create", async (req, res) => {
 // GET ALL ORDERS OR BY STATUS
 router.get("/", VerifyToken, async (req, res) => {
   const { status, to } = req.query;
-  // if (!status || !to) {
-  //   logger.error("Missing either 'status' or 'to' from query.");
-  //   return res.status(400).json({
-  //     error: "Missing either 'status' or 'to' from query.",
-  //   });
-  // }
   if (
     status &&
     status !== "pending" &&
@@ -74,14 +58,6 @@ router.get("/", VerifyToken, async (req, res) => {
     return res.status(500).send("Internal server error.");
   }
 });
-// // GET PENDING ORDERS
-// router.get("/pending", VerifyToken, OrderController.getPendingOrders);
-
-// // GET IN PROGRESS ORDERS
-// router.get("/inProgress", VerifyToken, OrderController.getInProgressOrders);
-
-// // GET READY ORDERS
-// router.get("/ready", VerifyToken, OrderController.getReadyOrders);
 
 // UPDATE STATUS
 router.patch("/update/:orderId", VerifyToken, async (req, res) => {
