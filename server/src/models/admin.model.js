@@ -12,11 +12,9 @@ const adminSchema = new mongoose.Schema({
 	},
 	brandName: {
 		type: String,
-		required: true,
 	},
 	brandLogo: {
 		type: String,
-		required: true,
 	},
 	brandColor: {
 		type: String,

@@ -1,5 +1,5 @@
 import TableModel from '../models/table.model.js'
-import { generateQR } from './qr.service.js'
+import QRController from '../controllers/qr.controller.js'
 import logger from '../utils/logger.js'
 import database from '../connections/firebase.js'
 import { ref, get, set } from 'firebase/database'
@@ -18,7 +18,7 @@ export const createTable = async (req, res) => {
 	}
 
 	try {
-		const newQR = await generateQR(data.link.toString())
+		const newQR = await QRController.generateQR(data.link.toString())
 		const table = {
 			QRCode: newQR,
 			tableNumber: data.tableNumber,
