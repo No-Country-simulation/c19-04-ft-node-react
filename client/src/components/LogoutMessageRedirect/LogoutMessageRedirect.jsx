@@ -1,14 +1,14 @@
 import MessageRedirect from "../MessageRedirect/MessageRedirect";
 
-const LooutMessageRedirect = () => {
+const LogoutMessageRedirect = () => {
   const messageRedirect = {
     title: "Sesión cerrada",
-    message: "La sesión se cerro correctamente, redireccionando a home.",
-    path: "/",
+    message: "Has cerrado sesión exitosamente, redireccionando a home.",
+    path: "/"
   };
 
   return (
-    <div>
+    <div className="absolute flex items-center justify-center inset-0">
       <MessageRedirect
         title={messageRedirect.title}
         message={messageRedirect.message}
@@ -19,4 +19,4 @@ const LooutMessageRedirect = () => {
   );
 };
 
-export default LooutMessageRedirect;
+export default LogoutMessageRedirect;
