@@ -1,4 +1,3 @@
-import React from 'react';
 import MainButton from "../Buttons/MainButton";
 import SecondaryButton from "../Buttons/SecondaryButton";
 import {
@@ -9,15 +8,8 @@ import {
     validatePrecio,
     validateTag
 } from "../../utils/functions/ValidationMenu";
+import { validTags } from '../../assets/other-assets/menuResourcesCreate';
 
-const validTags = [
-  'Hamburguesas',
-  'Pizzas',
-  'Pastas',
-  'Ensaladas',
-  'Sushi',
-  'Milanesas',
-];
 
 const DropdownCreateMenu = ({
     newMenu,
@@ -121,7 +113,7 @@ const DropdownCreateMenu = ({
                             onChange={handleInputChange}
                             className="mt-1 block w-full border border-customRed-200 rounded-md shadow-sm focus:border-customRed-400 focus:ring-customRed-400 outline-none px-3 py-2 sm:text-[12px]"
                         >
-                            <option value="">Selecciona un tag</option>
+                            <option value="">Selecciona un Tag</option>
                             {validTags.map((tag) => (
                                 <option key={tag} value={tag}>
                                     {tag}
@@ -130,19 +122,21 @@ const DropdownCreateMenu = ({
                         </select>
                     </div>
                     <div className="flex justify-between space-x-4 pt-5">
-                        <SecondaryButton
-                            onClick={closeDropdown}
-                            classNameSize="px-4 py-2"
-                        >
-                            Cancelar
-                        </SecondaryButton>
                         <MainButton
                             type="submit"
-                            
                             classNameSize="px-10 py-2"
                         >
                             Crear
                         </MainButton>
+                        <SecondaryButton
+                            onClick={() => {
+                                closeDropdown()
+                            }}
+                            classNameSize="px-4 py-2"
+                        >
+                            Cancelar
+                        </SecondaryButton>
+
                     </div>
                 </form>
             </div>

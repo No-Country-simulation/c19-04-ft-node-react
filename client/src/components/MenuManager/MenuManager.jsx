@@ -7,83 +7,88 @@ import "../../styles/scrollbarContainerDashboard.css";
 import axiosInstanceWithCredentials from "../../utils/api/axiosInstanceWithCredentials";
 import MainButton from "../Buttons/MainButton";
 import SecondaryButton from "../Buttons/SecondaryButton";
+import { getInitialMenuState } from "../../utils/functions/getInitialMenuState";
+import { closeDropdowns } from "../../utils/functions/closeDropdownsMenusAdmin";
+import SuccessPopup from "../PopupIndicator/SuccessPopup";
+import ErrorPopup from "../PopupIndicator/ErrorPopup";
+import { closeMenuCreate } from "../../utils/functions/closeMenuCreate";
+import { getMenusForAdminPanel } from "../../utils/api/fetchMenusAdmin";
+import { handleCreateMenuWrapper } from "../../utils/functions/handleCreateMenuWrapper";
+import { optionsCreateForm } from "../../assets/other-assets/menuResourcesCreate";
+import { handleUpdateMenuAdmin } from "../../utils/functions/handleUpdateMenuAdmin";
 
 const MenuManager = () => {
     const [menus, setMenus] = useState([]);
     const [selectedMenu, setSelectedMenu] = useState(null);
-    const [newMenu, setNewMenu] = useState({
-        title: "",
-        description: "",
-        imgUrl: "",
-        estimatedTimeToDeliver: 0,
-        price: 0,
-        available: true,
-        category: "", // Corregido el campo 'category'
-        tags: "", // Corregido el campo 'tags'
-    });
+    const [newMenu, setNewMenu] = useState(getInitialMenuState());
     const [dropdown, setDropdown] = useState({
         create: false,
         update: false,
         delete: false,
         toggle: false,
     });
+
     const [showTable, setShowTable] = useState(false);
     const [error, setError] = useState("");
 
+    const [showSuccessPopup, setShowSuccessPopup] = useState(null);
+    const [popupMessage, setPopupMessage] = useState('');
+
     useEffect(() => {
-        const fetchMenus = async () => {
-            try {
-                const response = await axiosInstanceWithCredentials.get("/api/admin/menu");
-                setMenus(response.data);
-                setError("");
-            } catch (error) {
-                console.error("Error fetching menus:", error);
-                setError("No se puede acceder a la base de datos. Por favor, inténtelo de nuevo más tarde.");
-            }
-        };
-        fetchMenus();
-    }, []);
+        getMenusForAdminPanel(setMenus, setError);
+        setShowTable(true)
+    }, [dropdown]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setNewMenu({ ...newMenu, [name]: value });
     };
 
-    const handleCreateMenu = async (e) => {
-        e.preventDefault();
+
+    const handleDeleteMenu = async (menuId) => {
         try {
-            const response = await axiosInstanceWithCredentials.post("/api/admin/menu", {
-                title: newMenu.title,
-                description: newMenu.description,
-                imgUrl: newMenu.imgUrl,
-                estimatedTimeToDeliver: newMenu.estimatedTimeToDeliver,
-                price: newMenu.price,
-                available: newMenu.available,
-                category: newMenu.category, // Añadir el campo category
-                tags: newMenu.tags // Corregido el campo 'tags'
-            });
-            setMenus([...menus, response.data]);
-            setNewMenu({
-                title: "",
-                description: "",
-                imgUrl: "",
-                estimatedTimeToDeliver: 0,
-                price: 0,
-                available: true,
-                category: "", // Resetear el campo category
-                tags: "" // Resetear el campo tags
-            });
-            setDropdown({ ...dropdown, create: false });
+            await axiosInstanceWithCredentials.delete(`/api/admin/menu/${menuId}`);
+            const updatedMenus = menus.filter(menu => menu._id !== menuId);
+            setMenus(updatedMenus);
+            setDropdown({ ...dropdown, delete: false });
         } catch (error) {
-            console.error("Error al crear el menú:", error);
-            setError("No se pudo crear el menú. Por favor, inténtelo de nuevo más tarde.");
+            console.error("Error al eliminar el menú:", error);
+            setError("No se pudo eliminar el menú. Por favor, inténtelo de nuevo más tarde.");
         }
     };
 
-    // El resto de funciones como handleUpdateMenu, handleDeleteMenu y handleToggleAvailability permanecen igual
+    const handleToggleAvailability = async (menu) => {
+        try {
+            const updatedMenu = { ...menu, available: !menu.available };
+            await axiosInstanceWithCredentials.patch(`/api/admin/menu/${menu._id}`, updatedMenu);
+            const updatedMenus = menus.map(m => m._id === menu._id ? updatedMenu : m);
+            setMenus(updatedMenus);
+            setDropdown({ ...dropdown, toggle: false });
+        } catch (error) {
+            console.error("Error al cambiar la disponibilidad del menú:", error);
+            setError("No se pudo cambiar la disponibilidad. Por favor, inténtelo de nuevo más tarde.");
+        }
+    };
+
+    const sortMenus = (criteria) => {
+        const sortedMenus = [...menus].sort((a, b) => {
+            if (criteria === "title") {
+                return a.title.localeCompare(b.title);
+            } else if (criteria === "price") {
+                return a.price - b.price;
+            }
+            return 0;
+        });
+        setMenus(sortedMenus);
+    };
+
+    const selectMenuForUpdate = (menu) => {
+        setSelectedMenu(menu);
+        setDropdown({ ...dropdown, update: true });
+    };
 
     return (
-        <div className="relative">
+        <div className="relative h-[95%]">
             <div className="flex flex-nowrap justify-center gap-4 m-4">
                 <MainButton
                     onClick={() => setDropdown({ ...dropdown, create: !dropdown.create })}
@@ -109,101 +114,131 @@ const MenuManager = () => {
                 >
                     Cambiar Disponibilidad
                 </SecondaryButton>
+                <SecondaryButton
+                    onClick={() => sortMenus("title")}
+                    classNameSize="p-2 text-[14px]"
+                >
+                    Ordenar por Título
+                </SecondaryButton>
+                <SecondaryButton
+                    onClick={() => sortMenus("price")}
+                    classNameSize="p-2 text-[14px]"
+                >
+                    Ordenar por Precio
+                </SecondaryButton>
             </div>
 
-            {error && (
-                <div className="p-4 text-red-500">
-                    {error}
+            {showSuccessPopup !== null && (
+                <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-1000 ease-in-out">
+                    {showSuccessPopup ? <SuccessPopup message={popupMessage} /> : <ErrorPopup message={popupMessage} />}
                 </div>
             )}
 
+            {error && (
+                <MainButton classNameSize="fixed top-1/2 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-2 py-1 rounded-md shadow-lg border border-red-700 transition-transform duration-500 ease-out">
+                    {error}
+                </MainButton>
+            )}
             {showTable && !error && menus.length > 0 ? (
                 <div className="overflow-x-auto scrollbar-container text-[14px] custom-scrollbar-x scroll-smooth">
                     <table className="min-w-full bg-white shadow-xl border-separate border-spacing-0">
                         <thead className="bg-gray-100">
                             <tr>
-                                <th className="px-4 py-2 border border-transparent">Imagen</th>
-                                <th className="px-4 py-2 border border-transparent">Título</th>
-                                <th className="px-4 py-2 border border-transparent">Categoría</th>
-                                <th className="px-4 py-2 border border-transparent">Descripción</th>
-                                <th className="px-4 py-2 border border-transparent">Precio</th>
-                                <th className="px-4 py-2 border border-transparent">Acciones</th>
+                                {optionsCreateForm.map((label, index) => (
+                                    <th key={index} className="px-4 py-2 border border-transparent">
+                                        {label}
+                                    </th>
+                                ))}
                             </tr>
                         </thead>
                         <tbody>
                             {menus.map((menu, index) => (
                                 <tr
-                                    key={menu._id}
+                                    key={index}
                                     className={`hover:bg-customRed-100 ${index === menus.length - 1 ? "last:rounded-b-3xl" : ""}`}
                                 >
                                     <td className="border border-white">
                                         <img
                                             src={menu.imgUrl}
                                             alt={menu.title}
-                                            className="w-20 h-20 object-cover rounded-lg"
+                                            className="w-16 h-12 object-cover rounded-lg mx-auto"
                                         />
                                     </td>
-                                    <td className={`px-4 py-2 border border-white ${index === menus.length - 1 ? "rounded-l-3xl" : ""}`}>
+                                    <td className="px-2 py-1 border border-white">
                                         {menu.title}
                                     </td>
-                                    <td className="px-4 py-2 border border-white">
+                                    <td className="px-2 py-1 border border-white">
                                         {menu.category}
                                     </td>
-                                    <td className="px-4 py-2 truncate max-w-xs border border-white">
+                                    <td className="px-2 py-1 truncate max-w-xs border border-white">
                                         {menu.description}
                                     </td>
-                                    <td className="px-4 py-2 border border-white">
+                                    <td className="px-2 pl-6 border border-white">
                                         {menu.price}
                                     </td>
-                                    <td className={`px-2 py-2 rounded-sm border border-white ${index === menus.length - 1 ? "rounded-r-3xl" : ""}`}>
-                                        <SecondaryButton
+                                    <td className="p-4 border border-white flex items-center justify-center">
+                                        <MainButton
                                             onClick={() => selectMenuForUpdate(menu)}
-                                            classNameSize="px-3 w-full"
-                                        >
-                                            Editar
-                                        </SecondaryButton>
+                                            classNameSize="p-[6px] px-5 text-[10px]"
+                                            children="Editar"
+                                        />
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </div>
-            ) : showTable && !error ? (
-                <div className="p-4 text-red-500">
-                    No existe ningún menú para editar. Cree un menú antes, por favor.
+            ) : showTable && !error && (
+                <div className="text-center text-gray-950 text-[12px] p-4">
+                    No se encontraron menús.
                 </div>
-            ) : null}
+            )}
+
 
             {dropdown.create && (
                 <DropdownCreateMenu
                     newMenu={newMenu}
                     handleInputChange={handleInputChange}
-                    handleCreateMenu={handleCreateMenu}
-                    closeDropdown={() => setDropdown({ ...dropdown, create: false })}
+                    handleCreateMenu={(e) => handleCreateMenuWrapper(
+                        e,
+                        newMenu,
+                        setMenus,
+                        menus,
+                        setNewMenu,
+                        setDropdown,
+                        dropdown,
+                        setError,
+                        setShowSuccessPopup,
+                        setPopupMessage
+                    )}
+                    closeDropdown={() => {
+                        closeMenuCreate(
+                            closeDropdowns(setDropdown),
+                            setPopupMessage,
+                            setShowSuccessPopup
+                        )
+                    }}
                 />
             )}
-
             {dropdown.update && selectedMenu && (
                 <DropdownUpdateMenu
                     selectedMenu={selectedMenu}
-                    handleUpdateMenu={handleUpdateMenu}
-                    closeDropdown={() => setDropdown({ ...dropdown, update: false })}
+                    handleUpdateMenu={(updateMenu) => handleUpdateMenuAdmin(updateMenu, setDropdown, setPopupMessage, setShowSuccessPopup)}
+                    closeDropdown={closeDropdowns(setDropdown)}
                 />
             )}
 
-            {dropdown.delete && selectedMenu && (
+            {dropdown.delete && (
                 <DropdownDeleteMenu
-                    selectedMenu={selectedMenu}
+                    menus={menus}
                     handleDeleteMenu={handleDeleteMenu}
-                    closeDropdown={() => setDropdown({ ...dropdown, delete: false })}
                 />
             )}
 
-            {dropdown.toggle && selectedMenu && (
+            {dropdown.toggle && (
                 <DropdownToggleAvailability
-                    selectedMenu={selectedMenu}
+                    menus={menus}
                     handleToggleAvailability={handleToggleAvailability}
-                    closeDropdown={() => setDropdown({ ...dropdown, toggle: false })}
                 />
             )}
         </div>

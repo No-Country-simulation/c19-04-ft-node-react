@@ -1,55 +1,49 @@
-import React, { useContext } from "react";
-import DropdownFoodItem from "../Dropdown/DropdownFoodItem";
 import DropdownAdmin from "../Dropdown/DropdownAdmin";
 import TextButton from "../Buttons/TextButton";
-import "../../styles/scrollbarContainerDashboard.css"
+import "../../styles/scrollbarContainerDashboard.css";
+import optionsPanelAdmin from "../../assets/other-assets/optionsPanelAdmin.js";
+import logoutUser from "../../utils/api/logoutUser.js";
+import { useState } from "react";
+import LogoutMessageRedirect from "../LogoutMessageRedirect/LogoutMessageRedirect.jsx";
 
-const AdminControlPanel = ({isOpen}) => {
-  const arrayOptionsPanel = [
-    {
-      title: "Gestión Menú",
-      subOptions: [
-        "Agregar Menú",
-        "Editar Menú",
-        "Listar Menú",
-        "Desabilitar Menú",
-        "Eliminar Menu",
-      ],
-    },
-    {
-      title: "Gestión Meseros",
-      subOptions: ["Asignar Mesa", "Horas de Trabajo", "Salario"],
-    },
-    {
-      title: "Pedidos / Entregas",
-      subOptions: [
-        "Ver Todos los Pedidos",
-        "Pedidos por Mesa",
-        "Pedidos Pendientes",
-        "Pedidos Completados",
-      ],
-    },
-    {
-      title: "Gestión Usuarios",
-      subOptions: ["Meseros", "Mesas", "Admins"],
-    },
-  ];
+const AdminControlPanel = ({ isOpen }) => {
+  const [showLogoutMessage, setLogoutMessage] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      const responseLogout = await logoutUser();
+      setLogoutMessage(responseLogout);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <div className={`max-h-full flex flex-col ${isOpen ? "block" : " hidden"}`}>
-      <div className="my-4 overflow-y-auto max-h-[400px] custom-scrollbar mb-8">
-        {arrayOptionsPanel.map((panel) => (
-          <DropdownAdmin options={panel} isOpenA={isOpen} />
-        ))}
-      </div>
-      <TextButton
-        className={"align-self-end"}
-        onClick={() => {
-          console.log("Cerrar sesión");
-        }}
-      >
-        Cerrar Sesión
-      </TextButton>
+    <div className="relative">
+      {showLogoutMessage ? (
+        <div className="fixed inset-0 flex items-center justify-center bg-customRed-400 z-50">
+          <LogoutMessageRedirect />
+        </div>
+      ) : (
+        <div
+          className={`max-h-[80%] flex flex-col transition-opacity duration-500 ease-in-out ${
+            isOpen
+              ? "translate-x-0 opacity-100"
+              : "-translate-x-full opacity-0 h-0"
+          }`}
+        >
+          <div className="my-4 overflow-y-auto max-h-[400px] custom-scrollbar mb-8">
+            {optionsPanelAdmin.map((panel, index) => (
+              <DropdownAdmin key={index} options={panel} isOpenA={isOpen} />
+            ))}
+          </div>
+          <TextButton
+            children="Cerrar Sesión"
+            className={"align-self-end"}
+            onClick={handleLogout}
+          />
+        </div>
+      )}
     </div>
   );
 };

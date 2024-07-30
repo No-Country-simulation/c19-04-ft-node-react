@@ -13,6 +13,7 @@ import MainViewMenu from "../views/MainViewMenu/MainViewMenu.jsx";
 import TableCalls from "../views/TableCalls/TableCalls.jsx";
 import AdminAssignTables from "../views/AdminAssignTables/AdminAssignTables.jsx";
 import ManageUsers from "../views/ManageUsers/ManageUsers.jsx";
+import DetailModalPage from "../views/DetailModal/DetailModalPage.jsx";
 
 const routerPathComponent = [
     {
@@ -26,10 +27,6 @@ const routerPathComponent = [
     {
         path: "/customer-actions",
         element: <CustomerActions />,
-    },
-    {
-        path: "/login",
-        element: <Login />,
     },
     {
         path: "/invalid-password",

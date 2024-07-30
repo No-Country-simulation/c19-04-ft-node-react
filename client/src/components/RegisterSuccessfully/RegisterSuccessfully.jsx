@@ -13,6 +13,7 @@ const RegisterSuccessfully = () => {
         title={messageRegister.title}
         message={messageRegister.message}
         path={messageRegister.path}
+        timeRedirect={3000}
       />
     </div>
   );
