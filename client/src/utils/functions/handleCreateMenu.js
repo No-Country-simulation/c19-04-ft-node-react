@@ -14,7 +14,9 @@ export const handleCreateMenu = async (
 ) => {
   e.preventDefault();
   try {
-    await axiosInstanceWithCredentials.post("/api/admin/menu", {
+    await axiosInstanceWithCredentials.post("api/admin/menu", {
+      dishNumber: newMenu.dishNumber,
+      to: newMenu.to,
       title: newMenu.title,
       description: newMenu.description,
       imgUrl: newMenu.imgUrl,

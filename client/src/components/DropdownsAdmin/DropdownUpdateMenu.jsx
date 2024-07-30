@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import MainButton from '../Buttons/MainButton';
 import SecondaryButton from '../Buttons/SecondaryButton';
-import { validTags } from '../../assets/other-assets/menuResourcesCreate';
+import { validCategories, validTags, validToDispatch } from '../../assets/other-assets/menuResourcesCreate';
 import { fieldLabels } from '../../assets/other-assets/menuResourcesCreate';
 
-
 const DropdownUpdateMenu = ({ selectedMenu, handleUpdateMenu, closeDropdown }) => {
-    const [formState, setFormState] = useState(selectedMenu);
-
+    const [formState, setFormState] = useState({
+        ...selectedMenu,
+        tags: selectedMenu.tags[0],
+        category: selectedMenu.category[0],
+    });
+    console.log(formState.category)
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormState({ ...formState, [name]: value });
@@ -34,24 +37,37 @@ const DropdownUpdateMenu = ({ selectedMenu, handleUpdateMenu, closeDropdown }) =
                             <label htmlFor={field} className="text-customRed-300 font-medium mb-1 text-xs">
                                 {fieldLabels[field]}
                             </label>
-                            {field === 'tags' ? (
+                            {field === 'tags' || field === "category" || field === "to" ? (
                                 <select
                                     id={field}
                                     name={field}
-                                    value={formState[field]}
+                                    value={field === 'tags'
+                                        ? (Array.isArray(formState[field]) ? (formState[field].length > 0 ? formState[field][0] : validTags[0]) : formState[field] || validTags[0])
+                                        : (validCategories.includes(formState[field]) ? formState[field] : validCategories[0])}
                                     onChange={handleChange}
                                     className="p-2 border border-customRed-200 rounded focus:outline-none focus:ring-2 focus:ring-customRed-50 text-sm"
                                 >
-                                    {validTags.map((tag) => (
+                                    {field === "tags" && validTags.map((tag) => (
                                         <option key={tag} value={tag}>
                                             {tag}
                                         </option>
                                     ))}
+                                    {field === "category" && validCategories.map((tag) => (
+                                        <option key={tag} value={tag}>
+                                            {tag}
+                                        </option>
+                                    ))}
+                                    {field === "to" && validToDispatch.map((tag) => (
+                                        <option key={tag} value={tag}>
+                                            {tag}
+                                        </option>
+                                    ))}
+
                                 </select>
                             ) : (
                                 <input
                                     id={field}
-                                    type={field === 'price' || field === 'estimatedTimeToDeliver' ? 'number' : 'text'}
+                                    type={field === 'price' || field=== 'dishNumber' || field === 'estimatedTimeToDeliver' ? 'number' : 'text'}
                                     name={field}
                                     value={formState[field]}
                                     onChange={handleChange}

@@ -4,17 +4,18 @@ import { Link } from "react-router-dom";
 import { useNavigateHelper } from "../../utils/hooks/useNavigations";
 import axiosInstace from "../../utils/api/axiosInstance";
 import callWaiter from "../../utils/functions/callWaiterToTable";
+import { memo } from "react";
 
-const NavBar = () => {
+const NavBar = memo(({tableNumber}) => {
     const { navigateTo } = useNavigateHelper();
 
     return (
         <div className="sticky top-0 left-0 w-full h-13 flex justify-between items-center px-4 pt-5 pb-2 z-10  bg-opacity-100 backdrop-blur-lg">
-            <button onClick={() => navigateTo("/main-view-menu")}>
+            <button onClick={() => navigateTo(`/menu/${tableNumber}`)}>
                 <img
                     className="max-w-[33px]"
                     src={tableImg}
-                    alt="Volver Atras"
+                    alt="Main Menu"
                 />
             </button>
             <div className="w-[109px] h-[46px] font-[18px]">
@@ -32,6 +33,6 @@ const NavBar = () => {
             </Link>
         </div>
     );
-};
+});
 
 export default NavBar;

@@ -75,9 +75,10 @@ const ContainerCardsFilter = ({ dataFilter }) => {
                 style={{ transform: `translateX(-${scrollPosition}px)` }}
             >
                 <div className="flex-shrink-0" style={{ width: '30px' }}></div>
-                {dataFilter.map((element) => (
-                    <CardSearch 
-                        _id = {element._id}
+                {dataFilter.map((element, index) => (
+                    <CardSearch
+                        key={index}
+                        _id={element._id}
                         description={element.description}
                         price={element.price}
                         timePreparation={element.estimatedTimeToDeliver}

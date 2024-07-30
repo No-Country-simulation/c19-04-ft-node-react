@@ -53,10 +53,6 @@ const routerPathComponent = [
         element: <Buttons />,
     },
     {
-        path: "main-view-menu",
-        element: <MainViewMenu />,
-    },
-    {
         path: "menu/:table",
         element: <MainViewMenu />,
     },
