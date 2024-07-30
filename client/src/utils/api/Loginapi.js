@@ -25,7 +25,6 @@ export const login = async (username, password) => {
         return { data: response.data, message };
         
     } catch (error) {
-        console.log( "loginapi")
         if (error.response) {
             throw new Error(`Error ${error.response.status}: ${error.response.data.message}`);
         } else {
