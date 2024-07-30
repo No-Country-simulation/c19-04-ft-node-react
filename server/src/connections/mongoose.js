@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import logger from '../utils/logger.js'
 
-const dbConnection = async () => {
+const MongoDB = async () => {
 	if (process.env.PERSISTANCE === 'PROD') {
 		try {
 			await mongoose.connect(process.env.ATLAS_URI, {
@@ -25,4 +25,4 @@ const dbConnection = async () => {
 	}
 }
 
-export default dbConnection
+export default MongoDB

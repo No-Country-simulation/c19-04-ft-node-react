@@ -5,11 +5,14 @@ import logger from "./utils/logger.js";
 import { ServerUp } from "./connections/server.js";
 import TableRoutes from "./routes/table.routes.js";
 import AuthRoutes from "./routes/auth.routes.js";
-import AdminRoutes from "./routes/administrator.routes.js";
+import AdminRoutes from "./routes/admin.routes.js";
 import WaiterRoutes from "./routes/waiter.routes.js";
-import CardMenuRoutes from "./routes/card-menu.routes.js";
+import MenuRoutes from "./routes/menu.routes.js";
 import OrderRoutes from "./routes/order.routes.js";
+import AnalyticsRoutes from "./routes/analytics.routes.js";
 import VerifyToken from "./middlewares/jwt.middleware.js";
+
+import FrontendRoutes from "./routes/frontendCalls.routes.js";
 
 const app = express();
 app.disable("x-powered-by");
@@ -34,11 +37,13 @@ app.get("/health", (req, res) => {
     res.json("Health OK");
 });
 
-app.use('/api/table', TableRoutes)
-app.use('/api/auth', AuthRoutes)
-app.use('/api/admin', VerifyToken, AdminRoutes)
-app.use('/api/waiter', WaiterRoutes)
-app.use('/api/card-menu', CardMenuRoutes)
-app.use('/api/orders', VerifyToken, OrderRoutes)
+app.use("/api/admin", VerifyToken, AdminRoutes);
+app.use("/api/analytics", VerifyToken, AnalyticsRoutes);
+app.use("/api/auth", AuthRoutes);
+app.use("/api/frontend", FrontendRoutes);
+app.use("/api/menu", MenuRoutes);
+app.use("/api/orders", OrderRoutes);
+app.use("/api/table", TableRoutes);
+app.use("/api/waiters", WaiterRoutes);
 
 ServerUp(app);
