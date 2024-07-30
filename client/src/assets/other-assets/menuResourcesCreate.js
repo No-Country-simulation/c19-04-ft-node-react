@@ -64,7 +64,6 @@ export const validCategories = [
   "Vegano",
 ];
 
-export const validToDispatch = [
-  "Kitchen", 
-  "Bar"
-];
+export const validToDispatch = ["Kitchen", "Bar"];
+
+

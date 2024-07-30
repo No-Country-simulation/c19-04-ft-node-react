@@ -10,7 +10,6 @@ import {
 } from "../../utils/functions/ValidationMenu";
 import { validCategories, validTags, validToDispatch } from '../../assets/other-assets/menuResourcesCreate';
 
-// Definimos los campos del formulario en un arreglo, incluyendo el nuevo campo to
 const formFields = [
     {
         id: "title",
@@ -25,7 +24,7 @@ const formFields = [
         name: "dishNumber",
         type: "number",
         label: "Número del Plato",
-        validate: null, // Validación opcional para dishNumber
+        validate: null, 
         maxLength: null
     },
     {
@@ -65,16 +64,16 @@ const formFields = [
         name: "to",
         type: "select",
         label: "Para cocina",
-        validate: null, // Validación opcional para to
+        validate: null, 
         maxLength: null,
-        options: validToDispatch // Opciones para el campo select
+        options: validToDispatch
     },
     {
         id: "category",
         name: "category",
         type: "select",
         label: "Categoría",
-        validate: null, // No se necesita validación para categoría
+        validate: null, 
         maxLength: null,
         options: validCategories
     },
@@ -85,7 +84,7 @@ const formFields = [
         label: "Tags",
         validate: validateTag,
         maxLength: null,
-        options: validTags // Asigna la lista de tags como opciones
+        options: validTags 
     },
 ];
 
@@ -97,16 +96,16 @@ const DropdownCreateMenu = ({
 }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Validamos los campos del formulario
+       
         const errors = formFields
-            .filter(field => field.validate) // Solo validamos los campos que tienen una función de validación
+            .filter(field => field.validate) 
             .map(field => field.validate(newMenu[field.name]))
             .filter(error => error);
 
         if (errors.length > 0) {
-            alert(errors.join('\n')); // Mostramos los errores en una alerta
+            alert(errors.join('\n')); 
         } else {
-            handleCreateMenu(e); // Llamamos a la función para crear el menú si no hay errores
+            handleCreateMenu(e); 
         }
     };
 
