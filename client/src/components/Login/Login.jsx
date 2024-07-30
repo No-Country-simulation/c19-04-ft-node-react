@@ -29,30 +29,23 @@ const Login = () => {
 
     if (usernameValidationErrors.length > 0) {
       setUsernameErrors(usernameValidationErrors);
-      return;
     }
 
     if (passwordValidationErrors.length > 0) {
       setPasswordErrors(passwordValidationErrors);
-      return;
     }
 
-    setUsernameErrors([]);
-    setPasswordErrors([]);
-
-    try {
-      const { data, message } = await login(username, password);
-      dispatch(fetchUser());
-
-      setLoginMessage(message);
-      setDataResolve(data);
-      // Maneja la respuesta de la autenticación
-      // console.log(data);
-      // console.log(message);
-    } catch (error) {
-      setLoginError(error.message);
-    }
-  };
+    if (usernameErrors && passwordValidationErrors) {
+      try {
+        const { data, message } = await login(username, password);
+        dispatch(fetchUser());
+        setLoginMessage(message);
+        setDataResolve(data);
+      } catch (error) {
+        setLoginError(error.message);
+      }
+    };
+  }
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -153,7 +146,7 @@ const Login = () => {
         <MessageRedirect
           title={"Inicio de Sesión con exito"}
           message={loginMessage}
-          path={"admin/register"}  
+          path={"admin/register"}
         />
       )}
     </div>
