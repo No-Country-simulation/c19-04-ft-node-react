@@ -5,6 +5,7 @@ export const getCallsToWaiters = createAsyncThunk(
     "waiterCalls/getCalls",
     async (waiterUsername, thunkAPI) => {
         try {
+            console.log(waiterUsername);
             const response = await axiosInstace.get(
                 `api/waiter/msgWaiter/${waiterUsername}`
             );

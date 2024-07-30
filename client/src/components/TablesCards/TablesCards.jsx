@@ -1,16 +1,18 @@
 import React from "react";
 import served from "../../utils/functions/served";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getCallsToWaiters } from "../../state/store/slices/callWaiter/actionWaiter/getCallsToWaiter";
 
 function TablesCards({ table }) {
     const dispatch = useDispatch();
 
-    const waiterUsername = "carlosc";
+    // const waiterUsername = "carlosc";
+
+    const currentUser = useSelector((state) => state.user.currentUser);
 
     const handleServed = async () => {
         await served(table);
-        dispatch(getCallsToWaiters(waiterUsername));
+        dispatch(getCallsToWaiters(currentUser.username));
     };
 
     return (
