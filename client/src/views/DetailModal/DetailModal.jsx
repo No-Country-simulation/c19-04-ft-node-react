@@ -24,19 +24,21 @@ const DetailModal = ({ isOpen, onClose, product }) => {
                 </div>
                 <div className="bg-white flex flex-col grow p-6 rounded-t-[40px] -translate-y-8">
                     <div className='flex justify-between mt-4'>
-                        <h1 className="text-2xl font-bold text-customGray-900">{product.title}</h1>
+                        <h2 className="text-2xl font-bold text-customGray-900">{product.title}</h2>
                         <button onClick={onClose} className="font-extrabold text-3xl text-gray-500">
                             ˅
                         </button>
                     </div>
-                    <p className="mt-4 text-customGray-500 line-clamp-6 h-8-line">{product.details}</p>
+                    <div>
+                        <p className="mt-4 text-customGray-500 line-clamp-6 h-8-line">{product.details}</p>
+                    </div>
                     <div className="my-4 flex items-center bg-white space-x-2 text-customRed-300">
                         <AdditionalInfoFoodTime time={product.time} />
                         <AdditionalInfoFoodType />
                         <AdditionalInfoFoodUser />
                     </div>
-                    <div className="mt-4 flex items-center space-x-2">
-                        <p className="text-4xl font-semibold text-customYellow-500"><Rating /></p>
+                    <div className="mt-4 flex items-center space-x-2 text-4xl font-semibold text-customYellow-500">
+                        <Rating />
                     </div>
                     <div className="flex items-center my-8 space-x-2 w">
                         <span>Cantidad </span>

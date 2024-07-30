@@ -5,7 +5,7 @@ export const dataMenuGet = createAsyncThunk(
     "dataMenu/setMenus",
     async (_, thunkAPI) => {
         try {
-            const response = await axiosInstace.get("/api/card-menu");
+            const response = await axiosInstace.get("/api/menu");
             if (response.status === 200) {
                 return response.data;
             } else {

@@ -28,6 +28,7 @@ const MenuManager = () => {
         toggle: false,
     });
 
+    console.log(menus)
     const [showTable, setShowTable] = useState(false);
     const [error, setError] = useState("");
 
@@ -157,6 +158,9 @@ const MenuManager = () => {
                                     key={index}
                                     className={`hover:bg-customRed-100 ${index === menus.length - 1 ? "last:rounded-b-3xl" : ""}`}
                                 >
+                                    <td className="px-2 py-1 border border-white text-center">
+                                        {menu.dishNumber}
+                                    </td>
                                     <td className="border border-white">
                                         <img
                                             src={menu.imgUrl}
@@ -176,6 +180,8 @@ const MenuManager = () => {
                                     <td className="px-2 pl-6 border border-white">
                                         {menu.price}
                                     </td>
+                                    <td className="px-2 py-1 border border-white text-center">{menu.tags}</td>
+                                    <td className="px-2 py-1 border border-white text-center">{menu.to}</td>
                                     <td className="p-4 border border-white flex items-center justify-center">
                                         <MainButton
                                             onClick={() => selectMenuForUpdate(menu)}

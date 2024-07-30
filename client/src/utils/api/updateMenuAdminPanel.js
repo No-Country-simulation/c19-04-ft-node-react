@@ -2,7 +2,7 @@ import axiosInstanceWithCredentials from "./axiosInstanceWithCredentials";
 export const updateMenuAdmin = async (updatedMenu) => {
   try {
     await axiosInstanceWithCredentials.patch(
-      `/api/admin/menu/${updatedMenu._id}`,
+      `/api/admin/menu/update/${updatedMenu._id}`,
       updatedMenu
     );
     return { success: true };
