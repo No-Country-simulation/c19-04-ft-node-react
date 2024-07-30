@@ -1,26 +1,16 @@
 import React, { useState } from 'react';
-import axiosInstanceWithCredentials from '../../utils/api/axiosInstanceWithCredentials'; 
 import MainButton from '../Buttons/MainButton';
 import SecondaryButton from '../Buttons/SecondaryButton';
+import { validTags } from '../../assets/other-assets/menuResourcesCreate';
+import { fieldLabels } from '../../assets/other-assets/menuResourcesCreate';
+
 
 const DropdownUpdateMenu = ({ selectedMenu, handleUpdateMenu, closeDropdown }) => {
     const [formState, setFormState] = useState(selectedMenu);
 
-    if (!selectedMenu) return null;
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormState({ ...formState, [name]: value });
-    };
-
-    const updateMenu = async () => {
-        try {
-            const { _id, ...updatedFields } = formState;
-            await axiosInstanceWithCredentials.patch(`/api/admin/menu/${_id}`, updatedFields);
-            handleUpdateMenu(_id, updatedFields);
-        } catch (error) {
-            console.error("Error al actualizar el menú:", error);
-        }
     };
 
     return (
@@ -35,24 +25,39 @@ const DropdownUpdateMenu = ({ selectedMenu, handleUpdateMenu, closeDropdown }) =
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
-                        updateMenu();
+                        handleUpdateMenu(formState);
                     }}
                     className="space-y-4"
                 >
-                    {['title', 'description', 'imgUrl', 'estimatedTimeToDeliver', 'price', 'tag'].map((field) => (
+                    {Object.keys(fieldLabels).map((field) => (
                         <div key={field} className="flex flex-col">
                             <label htmlFor={field} className="text-customRed-300 font-medium mb-1 text-xs">
-                                {field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, ' $1')}
+                                {fieldLabels[field]}
                             </label>
-                            <input
-                                id={field}
-                                type={field === 'price' || field === 'estimatedTimeToDeliver' ? 'number' : 'text'}
-                                name={field}
-                                value={formState[field]}
-                                onChange={handleChange}
-                                
-                                className="p-2 border border-customRed-200 rounded focus:outline-none focus:ring-2 focus:ring-customRed-50 text-sm"
-                            />
+                            {field === 'tags' ? (
+                                <select
+                                    id={field}
+                                    name={field}
+                                    value={formState[field]}
+                                    onChange={handleChange}
+                                    className="p-2 border border-customRed-200 rounded focus:outline-none focus:ring-2 focus:ring-customRed-50 text-sm"
+                                >
+                                    {validTags.map((tag) => (
+                                        <option key={tag} value={tag}>
+                                            {tag}
+                                        </option>
+                                    ))}
+                                </select>
+                            ) : (
+                                <input
+                                    id={field}
+                                    type={field === 'price' || field === 'estimatedTimeToDeliver' ? 'number' : 'text'}
+                                    name={field}
+                                    value={formState[field]}
+                                    onChange={handleChange}
+                                    className="p-2 border border-customRed-200 rounded focus:outline-none focus:ring-2 focus:ring-customRed-50 text-sm"
+                                />
+                            )}
                         </div>
                     ))}
                     <div className="flex justify-between mt-4">

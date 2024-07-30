@@ -1,5 +1,3 @@
-// src/utils/api.js
-
 import axiosInstanceWithCredentials from "./axiosInstanceWithCredentials";
 
 export const login = async (username, password) => {
@@ -22,12 +20,11 @@ export const login = async (username, password) => {
                 message = 'Operación completada.';
         }
 
-        return { data: response.data, message };
+        return { data: true , message };
         
     } catch (error) {
-        console.log( "loginapi")
         if (error.response) {
-            throw new Error(`Error ${error.response.status}: ${error.response.data.message}`);
+            throw new Error(`La combinacion de Usuario y Contraseña no coincide, intentelo nuevamente.`);
         } else {
             throw new Error('Error de red. Inténtalo de nuevo más tarde.');
         }

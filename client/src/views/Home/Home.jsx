@@ -1,14 +1,9 @@
-import LoginComponent from "../../components/LoginComponent/LoginComponent";
+import Login from "../../components/Login/Login";
 
 const Home = () => {
     return (
         <div>
-            <p className="text-green-500 text-7xl bg-black">hola mundo</p>
-
-            <p className="text-violet-500 bg-slate-600 text-3xl">
-                tailwind es amistoso con su curva de aprendizaje
-            </p>
-            <LoginComponent />
+            <Login />
         </div>
     );
 };
