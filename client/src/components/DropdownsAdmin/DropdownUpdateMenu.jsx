@@ -10,7 +10,7 @@ const DropdownUpdateMenu = ({ selectedMenu, handleUpdateMenu, closeDropdown }) =
         tags: selectedMenu.tags[0],
         category: selectedMenu.category[0],
     });
-    console.log(formState.category)
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormState({ ...formState, [name]: value });

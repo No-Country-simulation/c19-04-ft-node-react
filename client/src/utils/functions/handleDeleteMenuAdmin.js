@@ -1,7 +1,7 @@
-import { updateMenuAdmin } from "../api/updateMenuAdminPanel";
+import { deleteMenuAdmin } from "../api/deleteMenuAdminPanel";
 import { closeDropdowns } from "./closeDropdownsMenusAdmin";
-export const handleUpdateMenuAdmin = async (updateMenu, setDropdown, setPopupMessage, setShowSuccessPopup) => {
-    const {success, message} = await updateMenuAdmin(updateMenu)
+export const handleDeleteMenuAdmin = async (_id, setDropdown, setPopupMessage, setShowSuccessPopup) => {
+    const {success, message} = await deleteMenuAdmin(_id)
     closeDropdowns(setDropdown)()
     setPopupMessage(message);
     setShowSuccessPopup(success);
@@ -9,4 +9,5 @@ export const handleUpdateMenuAdmin = async (updateMenu, setDropdown, setPopupMes
         setShowSuccessPopup(null);
         setPopupMessage("");
     }, 3000);
+
 };

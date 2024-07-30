@@ -16,6 +16,7 @@ import { getMenusForAdminPanel } from "../../utils/api/fetchMenusAdmin";
 import { handleCreateMenuWrapper } from "../../utils/functions/handleCreateMenuWrapper";
 import { optionsCreateForm } from "../../assets/other-assets/menuResourcesCreate";
 import { handleUpdateMenuAdmin } from "../../utils/functions/handleUpdateMenuAdmin";
+import { handleDeleteMenuAdmin } from "../../utils/functions/handleDeleteMenuAdmin";
 
 const MenuManager = () => {
     const [menus, setMenus] = useState([]);
@@ -46,17 +47,16 @@ const MenuManager = () => {
     };
 
 
-    const handleDeleteMenu = async (menuId) => {
-        try {
-            await axiosInstanceWithCredentials.delete(`/api/admin/menu/${menuId}`);
-            const updatedMenus = menus.filter(menu => menu._id !== menuId);
-            setMenus(updatedMenus);
-            setDropdown({ ...dropdown, delete: false });
-        } catch (error) {
-            console.error("Error al eliminar el menú:", error);
-            setError("No se pudo eliminar el menú. Por favor, inténtelo de nuevo más tarde.");
-        }
-    };
+    // const handleDeleteMenu = async (menuId) => {
+    //     try {
+    //         const response = await axiosInstanceWithCredentials.delete(`/api/admin/menu/delete/${menuId}`);
+    //         console.log(response)
+    //         closeDropdowns(setDropdown)()
+    //     } catch (error) {
+    //         console.error("Error al eliminar el menú:", error);
+    //         setError("No se pudo eliminar el menú. Por favor, inténtelo de nuevo más tarde.");
+    //     }
+    // };
 
     const handleToggleAvailability = async (menu) => {
         try {
@@ -88,6 +88,12 @@ const MenuManager = () => {
         setDropdown({ ...dropdown, update: true });
     };
 
+    const selectMenuForDelete = (menu) => {
+        setSelectedMenu(menu)
+        setDropdown({ ...dropdown, delete: true });
+        console.log("me abri delete")
+    }
+
     return (
         <div className="relative h-[95%]">
             <div className="flex flex-nowrap justify-center gap-4 m-4">
@@ -103,12 +109,6 @@ const MenuManager = () => {
                 >
                     Editar Menú
                 </SecondaryButton>
-                <MainButton
-                    onClick={() => setDropdown({ ...dropdown, delete: !dropdown.delete })}
-                    classNameSize="p-2 text-[14px]"
-                >
-                    Eliminar Elemento
-                </MainButton>
                 <SecondaryButton
                     onClick={() => setDropdown({ ...dropdown, toggle: !dropdown.toggle })}
                     classNameSize="p-2 text-[14px]"
@@ -188,6 +188,11 @@ const MenuManager = () => {
                                             classNameSize="p-[6px] px-5 text-[10px]"
                                             children="Editar"
                                         />
+                                        <MainButton
+                                            onClick={() => selectMenuForDelete(menu)}
+                                            classNameSize="p-[6px] px-5 text-[10px]"
+                                            children="Eliminar"
+                                        />
                                     </td>
                                 </tr>
                             ))}
@@ -236,8 +241,10 @@ const MenuManager = () => {
 
             {dropdown.delete && (
                 <DropdownDeleteMenu
+                    selectedMenu={selectedMenu}
                     menus={menus}
-                    handleDeleteMenu={handleDeleteMenu}
+                    handleDeleteMenu={(_id) => handleDeleteMenuAdmin(_id, setDropdown, setPopupMessage, setShowSuccessPopup)}
+                    closeDropdown={closeDropdowns(setDropdown)}
                 />
             )}
 
