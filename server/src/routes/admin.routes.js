@@ -2,6 +2,7 @@ import AuthController from "../controllers/auth.controller.js";
 import IngredientsController from "../controllers/ingredients.controller.js";
 import { Router } from "express";
 import AdminController from "../controllers/admin.controller.js";
+import MenuController from "../controllers/menu.controller.js";
 
 const router = Router();
 
