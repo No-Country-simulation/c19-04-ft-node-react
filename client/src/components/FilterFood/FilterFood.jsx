@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 const FilterFood = ({ categories }) => {
     const dispatch = useDispatch();
     const [showSubMenu, setShowSubMenu] = useState(false);
+    console.log(categories)
 
     const filters = useSelector((state) => state.search);
 
