@@ -4,7 +4,7 @@ import { setSearchValue } from "../../state/store/slices/searchValue/searchSlice
 import filterIcon from "../../assets/images/filter.png";
 import { useDebounce } from "use-debounce";
 import SearchResultBar from "../SearchBarResult/SearchBarResult";
-import InpusSearch from "../Inputs/InpusSearch";
+import InputSearch from "../Inputs/InpusSearch";
 
 const SearchBar = () => {
     const dispatch = useDispatch();
@@ -27,9 +27,10 @@ const SearchBar = () => {
                     searchValue !== "" ? "gap-6" : "gap-5"
                 }`}
             >
-                <InpusSearch
+                <InputSearch
                     onChange={handleInputChange}
                     onValue={searchValue}
+                    placeholder="Buscá tu plato acá"
                 />
             </div>
             <div

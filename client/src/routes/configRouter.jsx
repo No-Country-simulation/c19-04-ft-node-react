@@ -13,6 +13,7 @@ import AdminAssignTables from "../views/AdminAssignTables/AdminAssignTables.jsx"
 import ManageUsers from "../views/ManageUsers/ManageUsers.jsx";
 import WaitersOrders from "../views/WaiterOrders/WaitersOrders.jsx";
 import PopupCartPostOrder from "../components/PopupCartPostOrder/PopupCartPostOrder.jsx";
+import NewOrderWaiter from "../views/NewOrderWaiter/NewOrderWaiter.jsx";
 
 
 const routerPathComponent = [
@@ -73,8 +74,8 @@ const routerPathComponent = [
         element: <WaitersOrders />,
     },
     {
-        path: "/popUpOrCartPedir",
-        element: <PopupCartPostOrder />,
+        path: "/newOrderWaiter",
+        element: <NewOrderWaiter />,
     },
     {
         path: "*",

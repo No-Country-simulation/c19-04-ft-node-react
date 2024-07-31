@@ -22,9 +22,9 @@ const MainViewMenu = () => {
 
     const [dataView, setDataView] = useState(false);
 
-    const {table} = useParams();
-  
-    
+    const { table } = useParams();
+
+
     useEffect(() => {
         if (menus.length > filteredMenus.length) {
             setDataView(true);
@@ -40,7 +40,7 @@ const MainViewMenu = () => {
     const { navigateTo } = useNavigateHelper();
     return (
         <div className="bg-customBgMain pb-4">
-            <NavBar tableNumber={table}/>
+            <NavBar tableNumber={table} />
             <SearchBar />
             <div>
                 <h2 className="text-[16px] leading-5  px-5 pb-3">Menú</h2>
