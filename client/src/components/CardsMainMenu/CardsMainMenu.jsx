@@ -21,12 +21,13 @@ const CardsMainMenu = ({ _id, title, imgUrl, price, description, time }) => {
     }
 
     const product = {
+        _id: _id,
         title: title,
-        image: imgUrl,
         details: description,
         price: price,
-        rating: 4.7,
+        image: imgUrl,
         time: time,
+        rating: 4.7,
         servings: '1 persona',
         type: 'Carnívoro'
     };

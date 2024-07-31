@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import MainButton from "../../components/Buttons/MainButton";
 import MinButton from "../../components/Buttons/MinButton";
 import PlusButton from "../../components/Buttons/PlusButton";
@@ -6,12 +5,15 @@ import AdditionalInfoFoodTime from '../../components/AdditonalInfoFood/Additiona
 import AdditionalInfoFoodType from '../../components/AdditonalInfoFood/AdditionalInfoFoodType';
 import AdditionalInfoFoodUser from '../../components/AdditonalInfoFood/AdditionalInfoFoodUser';
 import Rating from '../../components/Rating/Rating';
+import { createCartItemObject } from '../../utils/functions/createItemObject';
+import useCartAction from '../../utils/hooks/useCartAction';
+import { orderSelectorQuantity } from '../../utils/functions/orderSelector';
 
 const DetailModal = ({ isOpen, onClose, product }) => {
-    const [quantity, setQuantity] = useState(1);
+    const itemPayLoad = createCartItemObject(product._id, product.title, product.description, product.price, product.imgUrl, product.timePreparation )
+    const { handleDecrement, handleIncrement } = useCartAction()
 
-    const increaseQuantity = () => setQuantity(quantity + 1);
-    const decreaseQuantity = () => setQuantity(quantity > 1 ? quantity - 1 : 1);
+    const quantity = orderSelectorQuantity(itemPayLoad)?.quantity ?? 0
 
     if (!isOpen) return null;
 
@@ -42,15 +44,16 @@ const DetailModal = ({ isOpen, onClose, product }) => {
                     </div>
                     <div className="flex items-center my-8 space-x-2 w">
                         <span>Cantidad </span>
-                        <MinButton onClick={decreaseQuantity} classNameIcon={"w-4"} />
-                        <span>{quantity < 10 ? `0${quantity}` : quantity}</span>
-                        <PlusButton onClick={increaseQuantity} classNameIcon={"w-4"} />
+                        <MinButton onClick={() => handleDecrement(itemPayLoad)} classNameIcon={"w-4"} />
+                        <span>{quantity < 10 ? `${quantity}` : quantity}</span>
+                        <PlusButton onClick={() => handleIncrement(itemPayLoad)} classNameIcon={"w-4"} />
                     </div>
                     <div className='mt-auto flex items-center justify-between space-x-2'>
                         <span className="text-[32px] font-bold">${product.price}</span>
                         <MainButton
                             children={`Añadir (${quantity})`}
                             classNameSize="h-10 w-48 items-center max-w-xs"
+                            disabled={quantity ? 'disabled' : null}
                             onClick={() => onClose()}
                         />
                     </div>
