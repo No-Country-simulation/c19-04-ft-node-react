@@ -74,7 +74,7 @@ const routerPathComponent = [
         element: <WaitersOrders />,
     },
     {
-        path: "/newOrderWaiter",
+        path: "/createOrder",
         element: <NewOrderWaiter />,
     },
     {
