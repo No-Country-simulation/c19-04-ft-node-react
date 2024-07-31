@@ -141,12 +141,12 @@ const MenuManager = () => {
                 </MainButton>
             )}
             {showTable && !error && menus.length > 0 ? (
-                <div className="overflow-x-auto scrollbar-container text-[14px] custom-scrollbar-x scroll-smooth">
+                <div className="overflow-x-auto scrollbar-container text-[11px] custom-scrollbar-x scroll-smooth">
                     <table className="min-w-full bg-white shadow-xl border-separate border-spacing-0">
-                        <thead className="bg-gray-100">
+                        <thead className="bg-customRed-400 text-white">
                             <tr>
                                 {optionsCreateForm.map((label, index) => (
-                                    <th key={index} className="px-4 py-2 border border-transparent">
+                                    <th key={index} className="px-2 py-2 border border-transparent">
                                         {label}
                                     </th>
                                 ))}
@@ -158,7 +158,7 @@ const MenuManager = () => {
                                     key={index}
                                     className={`hover:bg-customRed-100 ${index === menus.length - 1 ? "last:rounded-b-3xl" : ""}`}
                                 >
-                                    <td className="px-2 py-1 border border-white text-center">
+                                    <td className="text-[12px] px-2 py-1 border border-white text-center">
                                         {menu.dishNumber}
                                     </td>
                                     <td className="border border-white">
@@ -168,29 +168,29 @@ const MenuManager = () => {
                                             className="w-16 h-12 object-cover rounded-lg mx-auto"
                                         />
                                     </td>
-                                    <td className="px-2 py-1 border border-white">
+                                    <td className="text-[11px] px-2 py-1 border border-white">
                                         {menu.title}
                                     </td>
-                                    <td className="px-2 py-1 border border-white">
+                                    <td className="text-[11px] px-2 py-1 border border-white">
                                         {menu.category}
                                     </td>
-                                    <td className="px-2 py-1 truncate max-w-xs border border-white">
+                                    <td className="text-[11px] px-2 py-1 truncate max-w-[280px] border border-white">
                                         {menu.description}
                                     </td>
-                                    <td className="px-2 pl-6 border border-white">
+                                    <td className="text-[11px] px-2 pl-6 border border-white">
                                         {menu.price}
                                     </td>
-                                    <td className="px-2 py-1 border border-white text-center">{menu.tags}</td>
-                                    <td className="px-2 py-1 border border-white text-center">{menu.to}</td>
-                                    <td className="p-4 border border-white flex items-center justify-center">
+                                    <td className="text-[11px] px-2 py-1 border border-white text-center">{menu.tags}</td>
+                                    <td className="text-[11px] px-2 py-1 border border-white text-center">{menu.to}</td>
+                                    <td className="text-[11px] p-4 border border-white flex items-center justify-center gap-2">
                                         <MainButton
                                             onClick={() => selectMenuForUpdate(menu)}
                                             classNameSize="p-[6px] px-5 text-[10px]"
                                             children="Editar"
                                         />
-                                        <MainButton
+                                        <SecondaryButton
                                             onClick={() => selectMenuForDelete(menu)}
-                                            classNameSize="p-[6px] px-5 text-[10px]"
+                                            classNameSize="p-[6px] px-4 text-[9px]"
                                             children="Eliminar"
                                         />
                                     </td>
