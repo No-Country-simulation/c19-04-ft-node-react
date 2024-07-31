@@ -29,7 +29,7 @@ const MenuManager = () => {
         toggle: false,
     });
 
-    console.log(menus)
+
     const [showTable, setShowTable] = useState(false);
     const [error, setError] = useState("");
 
@@ -45,18 +45,6 @@ const MenuManager = () => {
         const { name, value } = e.target;
         setNewMenu({ ...newMenu, [name]: value });
     };
-
-
-    // const handleDeleteMenu = async (menuId) => {
-    //     try {
-    //         const response = await axiosInstanceWithCredentials.delete(`/api/admin/menu/delete/${menuId}`);
-    //         console.log(response)
-    //         closeDropdowns(setDropdown)()
-    //     } catch (error) {
-    //         console.error("Error al eliminar el menú:", error);
-    //         setError("No se pudo eliminar el menú. Por favor, inténtelo de nuevo más tarde.");
-    //     }
-    // };
 
     const handleToggleAvailability = async (menu) => {
         try {
