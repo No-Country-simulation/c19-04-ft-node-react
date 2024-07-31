@@ -7,8 +7,6 @@ import { totalPayOrder } from "../../state/store/slices/tableOrder/orderSlice";
 
 
 function ShoppingCartActions() {
-
-
   //Eliminar todos los pedidos en caso de los comensales no quieran comer mas en el Restaurant
   const handlerDeleteAllCart = useDeleteAllCart()
 
@@ -27,7 +25,6 @@ function ShoppingCartActions() {
       <p className="w-full text-[32px] leading-10">Total a pagar: <span className="font-bold">${totalPay}</span></p>
       <SecondaryButton children="Llamar al Mozo" classNameSize="h-10 items-center w-1/2" />
       <MainButton children="¡ Pedir !" classNameSize="h-10 items-center grow" />
-
     </div>
   );
 }
