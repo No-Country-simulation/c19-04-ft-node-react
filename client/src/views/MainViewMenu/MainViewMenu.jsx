@@ -13,6 +13,7 @@ import ContainerCardsFilter from "../../components/ContainerCardsFilter/Containe
 import { useParams } from "react-router-dom";
 import patchCallWaiter from "../../utils/api/patchCallWaiter";
 import { assignClientToTable } from "../../utils/api/assignClientToTable";
+import useFireBase from "../../utils/hooks/useFireBase";
 
 const MainViewMenu = () => {
     const { filter, filterFood, changeFilters } = useFilterFood();
@@ -24,6 +25,10 @@ const MainViewMenu = () => {
     const [dataView, setDataView] = useState(false);
 
     const { table } = useParams();
+
+    const [tables, setTables] = useFireBase("/tables", {});
+
+    const waiterUsername = table && tables[`table_${table}`]?.waiter;
 
     useEffect(() => {
         if (menus.length > filteredMenus.length) {
@@ -60,7 +65,7 @@ const MainViewMenu = () => {
 
     return (
         <div className="bg-customBgMain pb-4">
-            <NavBar tableNumber={table} />
+            <NavBar clientName={clientName} tableNumber={table} />
             <SearchBar />
             <div>
                 <h2 className="text-[16px] leading-5  px-5 pb-3">Menú</h2>
@@ -82,12 +87,12 @@ const MainViewMenu = () => {
                 <SecondaryButton
                     children="Llamar al Mozo"
                     classNameSize="h-10 items-center w-1/2"
-                    onClick={() => patchCallWaiter(waiterUsername)}
+                    onClick={() => patchCallWaiter(table, waiterUsername)}
                 />
                 <MainButton
                     children="Ver mi Pedido"
                     classNameSize="h-10 items-center grow"
-                    onClick={() => navigateTo("/shopping-cart")}
+                    onClick={() => navigateTo(`/my-order/${table}`)}
                 />
             </div>
             {showMessageBox ? (

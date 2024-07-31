@@ -33,10 +33,10 @@ const routerPathComponent = [
         path: "/invalid-password",
         element: <InvalidPasswordMessage />,
     },
-    {
-        path: "/shopping-cart",
-        element: <ShoppingCart />,
-    },
+    // {
+    //     path: "/shopping-cart",
+    //     element: <ShoppingCart />,
+    // },
     {
         path: "/register-successfully",
         element: <RegisterSuccessfully />,

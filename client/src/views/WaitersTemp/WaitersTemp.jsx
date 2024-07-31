@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 
-import { ref, get } from "firebase/database";
-import database from "../../connections/firebase";
-
 import useFireBase from "../../utils/hooks/useFireBase";
 
 import TablesCards from "../../components/TablesCards/TablesCards";
@@ -58,16 +55,32 @@ function WaitersTemp() {
         assignTableToWaiter(tableNumber, waiterUserName);
     };
 
-    const handlerCloseTable = (event) => {
+    const handlerCloseTable = async (event) => {
         // console.log(event.target.value);
-        closeTable(event.target.value);
+
+        const response = await closeTable(event.target.value);
+
+        console.log(response);
+
+        const newAssigned = waiters[waiterUserName]?.assignedTables?.filter(
+            (item) => item !== `Table ${event.target.value}`
+        );
+        const newWaiters = {
+            ...waiters,
+            [waiterUserName]: {
+                ...waiters[waiterUserName],
+                assignedTables: newAssigned,
+            },
+        };
+        console.log(newWaiters);
+        // setWaiters(newWaiters);    //ACTIVAR
     };
     const handlerAttendCall = (event) => {
         // console.log(event.target.value);
         const tableNumber = event.target.value;
         attendCall(tableNumber, waiterUserName);
     };
-    console.log(waiters[waiterUserName]);
+    console.log(waiters);
     return (
         <div className="w-full min-h-[100dvh]">
             <div className="p-6">
