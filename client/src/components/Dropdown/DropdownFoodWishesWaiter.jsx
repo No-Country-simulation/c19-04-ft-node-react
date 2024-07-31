@@ -1,10 +1,8 @@
 import { useState } from "react";
 import triangleIconSVG from "../../assets/svg/triangle-inverted.svg";
 import dishIconSVG from "../../assets/svg/book-open.svg"; 
-import SecondaryButton from "../Buttons/SecondaryButton";
-import MainButton from "../Buttons/MainButton";
 
-export default function DropdownSelectedDishes({ table, dishes }) {
+export default function DropdownSelectedDishes({ table, dishes}) {
     const [isOpen, setIsOpen] = useState(false);
     const toggleDropdown = () => setIsOpen((prevState) => !prevState);
 

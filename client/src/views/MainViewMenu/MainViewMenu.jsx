@@ -24,6 +24,19 @@ const MainViewMenu = () => {
 
     const { table } = useParams();
 
+    const categoriesWithoutArray = categories.map(element => {
+        if (Array.isArray(element)) {
+          // Devuelve los elementos internos del array
+          return element.map(subElement => {
+            return subElement;
+          });
+        } else {
+          return element;
+        }
+      });
+
+      console.log(categoriesWithoutArray)
+
 
     useEffect(() => {
         if (menus.length > filteredMenus.length) {
@@ -46,7 +59,7 @@ const MainViewMenu = () => {
                 <h2 className="text-[16px] leading-5  px-5 pb-3">Menú</h2>
                 <section className="border-y">
                     <FilterFood
-                        categories={categories}
+                        categories={categoriesWithoutArray}
                         changeFilters={changeFilters}
                     />
                 </section>

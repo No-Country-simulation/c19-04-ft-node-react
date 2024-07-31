@@ -12,14 +12,18 @@ import TableCalls from "../views/TableCalls/TableCalls.jsx";
 import AdminAssignTables from "../views/AdminAssignTables/AdminAssignTables.jsx";
 import ManageUsers from "../views/ManageUsers/ManageUsers.jsx";
 import WaitersOrders from "../views/WaiterOrders/WaitersOrders.jsx";
-import PopupCartPostOrder from "../components/PopupCartPostOrder/PopupCartPostOrder.jsx";
 import NewOrderWaiter from "../views/NewOrderWaiter/NewOrderWaiter.jsx";
+import Landing from "../views/Landing/Landing.jsx";
 
 
 const routerPathComponent = [
     {
         path: "/",
         element: <Home />,
+    },
+    {
+        path: "/home",
+        element: <Landing />,
     },
     {
         path: "/admin/register",
