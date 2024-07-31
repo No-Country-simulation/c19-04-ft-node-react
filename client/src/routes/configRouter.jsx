@@ -14,6 +14,7 @@ import TableCalls from "../views/TableCalls/TableCalls.jsx";
 import AdminAssignTables from "../views/AdminAssignTables/AdminAssignTables.jsx";
 import ManageUsers from "../views/ManageUsers/ManageUsers.jsx";
 import DetailModalPage from "../views/DetailModal/DetailModalPage.jsx";
+import WaitersTemp from "../views/WaitersTemp/WaitersTemp.jsx";
 
 const routerPathComponent = [
     {
@@ -71,6 +72,10 @@ const routerPathComponent = [
     {
         path: "/admin/manage-users",
         element: <ManageUsers />,
+    },
+    {
+        path: "/waiter/temp",
+        element: <WaitersTemp />,
     },
     {
         path: "*",
