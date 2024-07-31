@@ -108,11 +108,9 @@ export const requestAttended = async (req, res) => {
             !waiterData.requestedBy.find((key) => key === requestAttended)
         ) {
             logger.warn(`Waiter was not requested by ${requestAttended}`);
-            return res
-                .status(400)
-                .json({
-                    error: `Waiter was not requested by ${requestAttended}.`,
-                });
+            return res.status(400).json({
+                error: `Waiter was not requested by ${requestAttended}.`,
+            });
         }
         const requests = waiterData.requestedBy;
         if (!requests) {
@@ -142,6 +140,7 @@ export const requestAttended = async (req, res) => {
 export const closeTable = async (req, res) => {
     const { tableNumber } = req.params;
     const { order } = req.body;
+    console.log(tableNumber, order);
     if (!tableNumber || !order) {
         logger.error("Missing required fields");
         return res.status(400).send("Missing required fields");

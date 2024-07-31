@@ -8,17 +8,22 @@ import useFireBase from "../../utils/hooks/useFireBase";
 import TablesCards from "../../components/TablesCards/TablesCards";
 import { useSelector } from "react-redux";
 import { assignClientToTable } from "../../utils/api/assignClientToTable";
+import { assignTableToWaiter } from "../../utils/api/assignTableToWaiter";
+import MyTablesCards from "../../components/MyTablesCards/MyTablesCards";
+import { closeTable } from "../../utils/api/closeTable";
+import { attendCall } from "../../utils/api/attendCall";
 
 function WaitersTemp() {
     const [orders, setOrders] = useFireBase("/orders", {});
     const [tables, setTables] = useFireBase("/tables", {});
+    const [waiters, setWaiters] = useFireBase("/waiters", {});
 
     const tablesArray = Object.keys(tables).filter(
         (table) => table !== "unassignedTables"
     );
 
     const waiterUserName = useSelector(
-        (store) => store.user.currentUser.username
+        (store) => store.user?.currentUser?.username
     );
 
     const [showMessageBox, setShowMessageBox] = useState(false);
@@ -48,25 +53,41 @@ function WaitersTemp() {
         setClientName(event.target.value);
     };
 
-    const attendTable = () => {};
+    const attendTable = (event) => {
+        const tableNumber = event.target.value;
+        assignTableToWaiter(tableNumber, waiterUserName);
+    };
 
+    const handlerCloseTable = (event) => {
+        // console.log(event.target.value);
+        closeTable(event.target.value);
+    };
+    const handlerAttendCall = (event) => {
+        // console.log(event.target.value);
+        const tableNumber = event.target.value;
+        attendCall(tableNumber, waiterUserName);
+    };
+    console.log(waiters[waiterUserName]);
     return (
         <div className="w-full min-h-[100dvh]">
             <div className="p-6">
                 <h4>Tus mesas</h4>
-                {tablesArray
-                    .filter(
-                        (t) =>
-                            tables[t]?.waiter &&
-                            tables[t]?.waiter === waiterUserName
-                    )
-                    .map((t) => (
-                        <TablesCards
-                            key={t}
-                            tableNumber={t.split("_")[1]}
-                            action="Desocupar"
-                        />
-                    ))}
+                {waiters[waiterUserName]?.assignedTables?.map((t, index) => (
+                    <MyTablesCards
+                        key={t + index}
+                        tableNumber={
+                            typeof t === "string"
+                                ? t.split(" ")[1]
+                                : t.toString()
+                        }
+                        action="Cerrar mesa"
+                        requested={waiters[
+                            waiterUserName
+                        ]?.requestedBy?.includes(t)}
+                        handlerCloseTable={handlerCloseTable}
+                        handlerAttend={handlerAttendCall}
+                    />
+                ))}
             </div>
             <div className="p-6">
                 <h4>Mesas sin mesero asignado</h4>
