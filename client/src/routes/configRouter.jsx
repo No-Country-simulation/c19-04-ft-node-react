@@ -1,7 +1,5 @@
 import Home from "../views/Home/Home.jsx";
-import Login from "../components/Login/Login.jsx";
 import NotFound from "../views/NotFound/NotFound.jsx";
-import CustomerActions from "../components/CustomerActions/CustomerActions.jsx";
 import DashBoardAdmins from "../views/Admin/DashBoardAdmin.jsx";
 import InvalidPasswordMessage from "../components/InvalidPasswordMessage/InvalidPasswordMessage.jsx";
 import ShoppingCart from "../views/ShoppingCart/ShoppingCart.jsx";
@@ -13,7 +11,9 @@ import MainViewMenu from "../views/MainViewMenu/MainViewMenu.jsx";
 import TableCalls from "../views/TableCalls/TableCalls.jsx";
 import AdminAssignTables from "../views/AdminAssignTables/AdminAssignTables.jsx";
 import ManageUsers from "../views/ManageUsers/ManageUsers.jsx";
-import DetailModalPage from "../views/DetailModal/DetailModalPage.jsx";
+import WaitersOrders from "../views/WaiterOrders/WaitersOrders.jsx";
+import PopupCartPostOrder from "../components/PopupCartPostOrder/PopupCartPostOrder.jsx";
+
 
 const routerPathComponent = [
     {
@@ -23,10 +23,6 @@ const routerPathComponent = [
     {
         path: "/admin/register",
         element: <DashBoardAdmins />,
-    },
-    {
-        path: "/customer-actions",
-        element: <CustomerActions />,
     },
     {
         path: "/invalid-password",
@@ -71,6 +67,14 @@ const routerPathComponent = [
     {
         path: "/admin/manage-users",
         element: <ManageUsers />,
+    },
+    {
+        path: "/waiterOrders",
+        element: <WaitersOrders />,
+    },
+    {
+        path: "/popUpOrCartPedir",
+        element: <PopupCartPostOrder />,
     },
     {
         path: "*",
