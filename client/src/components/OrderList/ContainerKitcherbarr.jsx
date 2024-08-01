@@ -1,5 +1,5 @@
 import React from 'react';
-import OrderCard from '../KitchenBar/OrderCard';
+import OrderCard from '../KitchenBar/OrderCardKitchenbar';
 import burgerImage from "../../assets/images/imgHamburgesa.png"; // Asegúrate de poner la ruta correcta de la imagen
 
 
