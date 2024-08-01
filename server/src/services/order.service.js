@@ -81,6 +81,7 @@ export const createOrder = async (req, res) => {
                 img: dish.img || "",
                 notes: dish.notes || "",
                 to: dish.to,
+                price: dish.price,
             };
         });
         const orderId = uuidv4();

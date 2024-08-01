@@ -102,12 +102,13 @@ function WaitersTemp() {
     };
     return (
         <div className="w-full min-h-[100dvh] bg-customBgMain">
+            <h2 className='font-semibold text-center pt-4'> ¡Hola {waiterUserName}!</h2>
             <div className="p-6">
-                <h4>Tus mesas</h4>
+                <h4 text>Tus mesas </h4>
                 {waiters[waiterUserName]?.assignedTables &&
                     waiters[waiterUserName]?.assignedTables?.map((t, index) => (
                         <MyTablesCards
-                        //mesas atendidas
+                            //mesas atendidas
                             key={t + index}
                             tableNumber={
                                 typeof t === "string"

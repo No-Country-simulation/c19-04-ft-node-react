@@ -18,12 +18,14 @@ function MyTablesCards({
     const [isOpen, setIsOpen] = useState(false);
     const toggleDropdown = () => setIsOpen((prevState) => !prevState);
 
+    console.log(pendingOrders)
+
     return (
         <div
-            className={`bg-white  text-sm shadow-lg rounded-lg transition-[border-radius] px-2 mb-2 ${isOpen ? " duration-0" : "duration-1000"
+            className={`bg-white min-h-max text-sm shadow-lg rounded-lg transition-[border-radius] px-2 mb-2 ${isOpen ? " duration-0" : "duration-1000"
                 }`}
         >
-            <div className="p-2 flex justify-between items-center font-semibold">
+            <div className="p-2 flex justify-between items-center font-semibold border-b-2">
                 <h2 >Mesa {tableNumber}</h2>
                 <button onClick={toggleDropdown}>
                     <img
@@ -57,7 +59,7 @@ function MyTablesCards({
                     </button>
                 </div>
             </div>
-            <div className={`transition-all duration-500 overflow-hidden ${isOpen ? "max-h-60 " : "max-h-0"}`}>
+            <div className={`transition-all duration-500 overflow-hidden ${isOpen ? "max-h-max " : "max-h-0"}`}>
 
                 {pendingOrders &&
                     pendingOrders
