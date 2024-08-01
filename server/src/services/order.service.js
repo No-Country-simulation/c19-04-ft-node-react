@@ -81,6 +81,7 @@ export const createOrder = async (req, res) => {
                 img: dish.img || "",
                 notes: dish.notes || "",
                 to: dish.to,
+                price: dish.price,
             };
         });
         const orderId = uuidv4();
@@ -268,7 +269,7 @@ export const deleteOrder = async (req, res) => {
             orderDeleted: orderToDelete,
         });
     } catch (error) {
-        logger.error(`Error in order.service.getReadyOrders: ${error}`);
+        logger.error(`Error in order.service.deleteOrders: ${error}`);
         res.status(500).send("Internal Server Error");
     }
 };
