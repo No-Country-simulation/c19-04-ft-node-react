@@ -9,11 +9,15 @@ import { assignTableToWaiter } from "../../utils/api/assignTableToWaiter";
 import MyTablesCards from "../../components/MyTablesCards/MyTablesCards";
 import { closeTable } from "../../utils/api/closeTable";
 import { attendCall } from "../../utils/api/attendCall";
+import MainButton from "../../components/Buttons/MainButton";
+import { useNavigateHelper } from "../../utils/hooks/useNavigations";
 
 function WaitersTemp() {
     const [orders, setOrders] = useFireBase("/orders", {});
     const [tables, setTables] = useFireBase("/tables", {});
     const [waiters, setWaiters] = useFireBase("/waiters", {});
+
+    const {navigateTo}  = useNavigateHelper()
 
     const tablesArray = Object.keys(tables).filter(
         (table) => table !== "unassignedTables"
@@ -155,7 +159,7 @@ function WaitersTemp() {
         <div className="w-full min-h-[100dvh] bg-customBgMain">
             <h2 className='font-semibold text-center pt-4'> ¡Hola {waiterUserName}!</h2>
             <div className="p-6">
-                <h4 text>Tus mesas </h4>
+                <h4 className="text-gray-400 mb-2">Tus mesas </h4>
                 {waiters[waiterUserName]?.assignedTables &&
                     waiters[waiterUserName]?.assignedTables?.map((t, index) => (
                         <MyTablesCards
@@ -179,7 +183,7 @@ function WaitersTemp() {
                     ))}
             </div>
             <div className="p-6">
-                <h4>Mesas sin mesero asignado</h4>
+                <h4 className="text-gray-400 mb-2">Mesas sin mesero asignado</h4>
                 {tables?.unassignedTables &&
                     tables?.unassignedTables?.map((t) => (
                         //mesas sin mesero
@@ -192,7 +196,7 @@ function WaitersTemp() {
                     ))}
             </div>
             <div className="p-6">
-                <h4>Mesas desocupadas</h4>
+                <h4 className="text-gray-400 mb-2">Mesas desocupadas</h4>
                 {tablesArray
                     .filter((t) => !tables[t].isActive)
                     .map((t) => (
@@ -240,6 +244,11 @@ function WaitersTemp() {
             ) : (
                 ""
             )}
+
+            {/* navegando a la ruta de crear orden */}
+            <div className='flex justify-center py-2 sticky bottom-0 bg-opacity-100  backdrop-filter backdrop-blur-3xl'>
+                <MainButton children="Crear orden" classNameSize="w-[90%] h-[40px]" onClick={() => navigateTo('/createOrder')} />
+            </div>
         </div>
     );
 }

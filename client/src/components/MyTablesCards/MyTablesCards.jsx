@@ -2,8 +2,6 @@ import React from "react";
 import OrderTableCard from "../OrderTableCard/OrderTableCard";
 import { setOrderInProgress } from "../../utils/api/setOrderInProgress.";
 import { setOrderReady } from "../../utils/api/setOrderReady";
-import productSvg from "../../assets/svg/product.svg";
-import userSvg from "../../assets/svg/user.svg";
 import triangleIconSVG from "../../assets/svg/triangle-inverted.svg";
 
 import { useState } from "react";
@@ -31,15 +29,17 @@ function MyTablesCards({
                 }`}
         >
             <div className="p-2 flex justify-between items-center font-semibold border-b-2">
-                <h2 >Mesa {tableNumber}</h2>
-                <button onClick={toggleDropdown}>
-                    <img
-                        src={triangleIconSVG}
-                        alt="Toggle"
-                        className={`w-3 h-3 transform transition-transform duration-500 ${isOpen ? "rotate-180" : ""
-                            }`}
-                    />
-                </button>
+                <div className="flex gap-2">
+                    <h2 >Mesa {tableNumber}</h2>
+                    <button onClick={toggleDropdown}>
+                        <img
+                            src={triangleIconSVG}
+                            alt="Toggle"
+                            className={`w-3 h-3 transform transition-transform duration-500 ${isOpen ? "rotate-180" : ""
+                                }`}
+                        />
+                    </button>
+                </div>
                 <div className="flex gap-2 content-baseline">
                     {requested && (
                         <div className="py-1 px-2 border border-transparent">
@@ -64,50 +64,52 @@ function MyTablesCards({
                     </button>
                 </div>
             </div>
-            {pendingOrders &&
-            pendingOrders.filter((order) => order.tableNumber === tableNumber)
-                .length ? (
-                <OrderTableCard
-                    // orderId={order.id}
-                    array={pendingOrders}
-                    type="Ordenes pendientes"
-                    color="red"
-                    tableNumber={tableNumber}
-                    action={setOrderInProgress}
-                    actionDisplay="Marcar como EN PROGRESO"
-                />
-            ) : (
-                ""
-            )}
-            {inProgressOrders &&
-            inProgressOrders.filter(
-                (order) => order.tableNumber === tableNumber
-            ).length ? (
-                <OrderTableCard
-                    // orderId={order.id}
-                    array={inProgressOrders}
-                    type="Ordenes en progreso"
-                    color="yellow"
-                    tableNumber={tableNumber}
-                    action={setOrderReady}
-                    actionDisplay="Marcar como LISTA"
-                />
-            ) : (
-                ""
-            )}
-            {readyOrders &&
-            readyOrders.filter((order) => order.tableNumber === tableNumber)
-                .length ? (
-                <OrderTableCard
-                    // orderId={order.id}
-                    array={readyOrders}
-                    type="Ordenes listas"
-                    color="green"
-                    tableNumber={tableNumber}
-                />
-            ) : (
-                ""
-            )}
+            <div className={`transition-all duration-500  ${isOpen ? "max-h-fit my-4 pb-2" : "max-h-0 overflow-hidden"}`}>
+                {pendingOrders &&
+                    pendingOrders.filter((order) => order.tableNumber === tableNumber)
+                        .length ? (
+                    <OrderTableCard
+                        // orderId={order.id}
+                        array={pendingOrders}
+                        type="Ordenes pendientes"
+                        color="red"
+                        tableNumber={tableNumber}
+                        action={setOrderInProgress}
+                        actionDisplay="MARCAR EN PROGRESO"
+                    />
+                ) : (
+                    ""
+                )}
+                {inProgressOrders &&
+                    inProgressOrders.filter(
+                        (order) => order.tableNumber === tableNumber
+                    ).length ? (
+                    <OrderTableCard
+                        // orderId={order.id}
+                        array={inProgressOrders}
+                        type="Ordenes en progreso"
+                        color="yellow"
+                        tableNumber={tableNumber}
+                        action={setOrderReady}
+                        actionDisplay="MARCAR ORDEN LISTA"
+                    />
+                ) : (
+                    ""
+                )}
+                {readyOrders &&
+                    readyOrders.filter((order) => order.tableNumber === tableNumber)
+                        .length ? (
+                    <OrderTableCard
+                        // orderId={order.id}
+                        array={readyOrders}
+                        type="Ordenes listas"
+                        color="green"
+                        tableNumber={tableNumber}
+                    />
+                ) : (
+                    ""
+                )}
+            </div>
         </div>
     );
 }
