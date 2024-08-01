@@ -19,16 +19,31 @@ function WaitersTemp() {
         (table) => table !== "unassignedTables"
     );
 
-    const ordersIds =
+    // Ordenes con estado pending
+    const pendingIds =
         orders && orders.pending ? Object.keys(orders?.pending) : [];
 
-    const pendingOrders = ordersIds.map((id) => ({
+    const pendingOrders = pendingIds.map((id) => ({
         ...orders.pending[id],
         id,
     }));
 
-    // console.log(orders);
-    // console.log(pendingOrders);
+    // Ordenes con estado inProgress
+    const inProgressIds =
+        orders && orders.inProgress ? Object.keys(orders?.inProgress) : [];
+
+    const inProgressOrders = inProgressIds.map((id) => ({
+        ...orders.inProgress[id],
+        id,
+    }));
+
+    // Ordenes con estado ready
+    const readyIds = orders && orders.ready ? Object.keys(orders?.ready) : [];
+
+    const readyOrders = readyIds.map((id) => ({
+        ...orders.ready[id],
+        id,
+    }));
 
     const waiterUserName = useSelector(
         (store) => store.user?.currentUser?.username
@@ -67,13 +82,48 @@ function WaitersTemp() {
 
     const handlerCloseTable = async (event) => {
         const tableNumber = event.target.value;
-        const order = pendingOrders
+        const pendingOrdersIdsArray = pendingOrders
             .filter((order) => order.tableNumber === tableNumber)
             .map((order) => order.id);
-        try {
-            await closeTable(tableNumber, order);
+        const inProgressOrdersIdsArray = inProgressOrders
+            .filter((order) => order.tableNumber === tableNumber)
+            .map((order) => order.id);
+        const readyOrdersIdsArray = readyOrders
+            .filter((order) => order.tableNumber === tableNumber)
+            .map((order) => order.id);
+        // console.log(pendingOrdersIdsArray);
+        // console.log(inProgressOrdersIdsArray);
+        // console.log(readyOrdersIdsArray);
 
-            //   await deleteOrder(order);
+        const allIds = [
+            ...pendingOrdersIdsArray,
+            ...inProgressOrdersIdsArray,
+            ...readyOrdersIdsArray,
+        ];
+
+        try {
+            // ACTIVAR PARA CERRAR MESA
+            await closeTable(tableNumber, allIds);
+            console.log(orders);
+            const newOrdersToSet = { ...orders };
+
+            allIds.forEach((id) => {
+                // console.log(id);
+                // console.log(newOrdersToSet.pending?.hasOwnProperty(id));
+                // console.log(newOrdersToSet.inProgress?.hasOwnProperty(id));
+                // console.log(newOrdersToSet.ready?.hasOwnProperty(id));
+                if (newOrdersToSet.pending?.hasOwnProperty(id))
+                    newOrdersToSet.pending[id] = null;
+                if (newOrdersToSet.inProgress?.hasOwnProperty(id))
+                    newOrdersToSet.inProgress[id] = null;
+                if (newOrdersToSet.ready?.hasOwnProperty(id))
+                    newOrdersToSet.ready[id] = null;
+            });
+            // console.log("xxxxxxxxxxxxxxxxxxxxxxxxxx", orders);
+            console.log(newOrdersToSet);
+
+            // ACTIVAR
+            setOrders(newOrdersToSet);
 
             let newAssigned = waiters[waiterUserName]?.assignedTables?.filter(
                 (item) => item !== `Table ${event.target.value}`
@@ -83,7 +133,6 @@ function WaitersTemp() {
                 newAssigned = "";
             }
 
-            console.log(newAssigned);
             const newWaiters = {
                 ...waiters,
                 [waiterUserName]: {
@@ -91,8 +140,10 @@ function WaitersTemp() {
                     assignedTables: newAssigned,
                 },
             };
-            setWaiters(newWaiters); //ACTIVAR PARA DESASIGNAR MESA
+            // ACTIVAR PARA DESASIGNAR MESA
+            setWaiters(newWaiters);
         } catch (error) {
+            console.log(error);
             console.log("No se pudo cerrar la mesa");
         }
     };
@@ -122,6 +173,8 @@ function WaitersTemp() {
                             handlerCloseTable={handlerCloseTable}
                             handlerAttend={handlerAttendCall}
                             pendingOrders={pendingOrders}
+                            inProgressOrders={inProgressOrders}
+                            readyOrders={readyOrders}
                         />
                     ))}
             </div>
