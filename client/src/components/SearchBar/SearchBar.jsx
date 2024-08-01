@@ -4,7 +4,7 @@ import { setSearchValue } from "../../state/store/slices/searchValue/searchSlice
 import filterIcon from "../../assets/images/filter.png";
 import { useDebounce } from "use-debounce";
 import SearchResultBar from "../SearchBarResult/SearchBarResult";
-import InpusSearch from "../Inputs/InpusSearch";
+import InputSearch from "../Inputs/InpusSearch";
 
 const SearchBar = () => {
     const dispatch = useDispatch();
@@ -21,15 +21,16 @@ const SearchBar = () => {
     );
 
     return (
-        <section className="min-h-max flex flex-col items-center mb-2">
+        <section className="min-h-max flex flex-col items-center mb-2 text-[10px]">
             <div
                 className={`min-w-11 flex place-content-center py-2 w-[90%] sm:w-[80%] md:w-[70%] ${
                     searchValue !== "" ? "gap-6" : "gap-5"
                 }`}
             >
-                <InpusSearch
+                <InputSearch
                     onChange={handleInputChange}
                     onValue={searchValue}
+                    placeholder="Buscá tu plato acá"
                 />
             </div>
             <div
@@ -48,7 +49,7 @@ const SearchBar = () => {
                             />
                         ))
                     ) : (
-                        <p className="text-center text-gray-500">
+                        <p className="text-center text-xs text-gray-500">
                             No hay resultados para su búsqueda
                         </p>
                     ))}

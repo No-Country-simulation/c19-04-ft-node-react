@@ -1,10 +1,10 @@
 import React from 'react'
 
-const InpusSearch = ({ onChange, onValue }) => {
+const InputSearch = ({ onChange, onValue, placeholder }) => {
     return (
         <input
             type="text"
-            placeholder="Buscá tu plato acá"
+            placeholder={placeholder}
             onChange={onChange}
             value={onValue}
             className='min-w-full min-h-[38px] text-sm leading-[17.64px] rounded-lg p-[10px] text-customRed-600 outline-none transition-all duration-300 shadow-custom-light hover:shadow-custom-light-focushovered focus:shadow-custom-light-focushovered disabled:shadow-custom-light'
@@ -12,4 +12,4 @@ const InpusSearch = ({ onChange, onValue }) => {
     )
 }
 
-export default InpusSearch
+export default InputSearch

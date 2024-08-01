@@ -15,11 +15,17 @@ import WaitersOrders from "../views/WaiterOrders/WaitersOrders.jsx";
 import PopupCartPostOrder from "../components/PopupCartPostOrder/PopupCartPostOrder.jsx";
 // import DetailModalPage from "../views/DetailModal/DetailModalPage.jsx";
 import WaitersTemp from "../views/WaitersTemp/WaitersTemp.jsx";
+import Landing from "../views/Landing/Landing.jsx";
+import NewOrderWaiter from "../views/NewOrderWaiter/NewOrderWaiter.jsx";
 
 const routerPathComponent = [
     {
         path: "/",
         element: <Home />,
+    },
+    {
+        path: "/home",
+        element: <Landing />,
     },
     {
         path: "/admin/register",
@@ -29,10 +35,6 @@ const routerPathComponent = [
         path: "/invalid-password",
         element: <InvalidPasswordMessage />,
     },
-    // {
-    //     path: "/shopping-cart",
-    //     element: <ShoppingCart />,
-    // },
     {
         path: "/register-successfully",
         element: <RegisterSuccessfully />,
@@ -74,8 +76,8 @@ const routerPathComponent = [
         element: <WaitersOrders />,
     },
     {
-        path: "/popUpOrCartPedir",
-        element: <PopupCartPostOrder />,
+        path: "/createOrder",
+        element: <NewOrderWaiter />,
     },
     {
         path: "/waiter/temp",
