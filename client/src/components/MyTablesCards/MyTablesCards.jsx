@@ -1,4 +1,7 @@
 import React from "react";
+import OrderTableCard from "../OrderTableCard/OrderTableCard";
+import { setOrderInProgress } from "../../utils/api/setOrderInProgress.";
+import { setOrderReady } from "../../utils/api/setOrderReady";
 
 function MyTablesCards({
     handlerAttend,
@@ -6,9 +9,9 @@ function MyTablesCards({
     tableNumber,
     requested,
     pendingOrders,
+    inProgressOrders,
+    readyOrders,
 }) {
-    console.log(pendingOrders);
-    console.log(tableNumber);
     return (
         <div className="flex flex-col">
             <div className="border border-customRed p-2 flex justify-between items-center">
@@ -38,20 +41,49 @@ function MyTablesCards({
                 </div>
             </div>
             {pendingOrders &&
-                pendingOrders
-                    .filter((order) => order.tableNumber === tableNumber)
-                    .map((order) => (
-                        <div className="p-2">
-                            {/* {order.id} */}
-                            <div>Orden numero: {order.orderNumber}</div>
-                            <div>Platos pedidos:</div>
-                            <div className="px-4">
-                                {order.order.map((dish) => (
-                                    <div>{dish.title}</div>
-                                ))}
-                            </div>
-                        </div>
-                    ))}
+            pendingOrders.filter((order) => order.tableNumber === tableNumber)
+                .length ? (
+                <OrderTableCard
+                    // orderId={order.id}
+                    array={pendingOrders}
+                    type="Ordenes pendientes"
+                    color="red"
+                    tableNumber={tableNumber}
+                    action={setOrderInProgress}
+                    actionDisplay="Marcar como EN PROGRESO"
+                />
+            ) : (
+                ""
+            )}
+            {inProgressOrders &&
+            inProgressOrders.filter(
+                (order) => order.tableNumber === tableNumber
+            ).length ? (
+                <OrderTableCard
+                    // orderId={order.id}
+                    array={inProgressOrders}
+                    type="Ordenes en progreso"
+                    color="yellow"
+                    tableNumber={tableNumber}
+                    action={setOrderReady}
+                    actionDisplay="Marcar como LISTA"
+                />
+            ) : (
+                ""
+            )}
+            {readyOrders &&
+            readyOrders.filter((order) => order.tableNumber === tableNumber)
+                .length ? (
+                <OrderTableCard
+                    // orderId={order.id}
+                    array={readyOrders}
+                    type="Ordenes listas"
+                    color="green"
+                    tableNumber={tableNumber}
+                />
+            ) : (
+                ""
+            )}
         </div>
     );
 }
