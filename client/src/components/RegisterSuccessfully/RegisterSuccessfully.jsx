@@ -4,7 +4,7 @@ const RegisterSuccessfully = () => {
   const messageRegister = {
     title: "Registro exitoso",
     message: "Usuario registrado correctamente",
-    path: "/",
+    path: "/admin/register",
   };
 
   return (
