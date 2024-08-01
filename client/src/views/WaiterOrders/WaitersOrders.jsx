@@ -1,8 +1,11 @@
 import React from 'react';
 import DropdownWaiterOrders from '../../components/Dropdown/DropdownWaiterOrders';
 import MainButton from '../../components/Buttons/MainButton';
+import { useNavigateHelper } from '../../utils/hooks/useNavigations';
 
 const WaitersOrders = () => {
+    const { navigateTo } = useNavigateHelper()
+
 
     const mockOrdersForWaiter = [
         {
@@ -79,7 +82,7 @@ const WaitersOrders = () => {
                 </div>
 
                 <div className='w-full flex items-end grow'>
-                    <MainButton children="Crear orden" classNameSize="w-full h-[40px]" />
+                    <MainButton children="Crear orden" classNameSize="w-full h-[40px]" onClick={() => navigateTo('/createOrder')} />
                 </div>
             </div>
         </div>
