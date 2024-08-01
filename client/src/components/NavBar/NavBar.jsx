@@ -7,6 +7,7 @@ import callWaiter from "../../utils/functions/callWaiterToTable";
 import { memo } from "react";
 
 const NavBar = memo(({ tableNumber, clientName }) => {
+    const clientNameLocal = localStorage.getItem("clientNameLocal");
     const { table } = useParams();
     const { navigateTo } = useNavigateHelper();
 
@@ -20,7 +21,7 @@ const NavBar = memo(({ tableNumber, clientName }) => {
                 <h3 className="font-medium text-center leading-[22px]">
                     ¡Hola{" "}
                     <span className="font-bold">
-                        {clientName ? clientName : "Usuario"}!
+                        {clientNameLocal ? clientNameLocal : "Usuario"}!
                     </span>
                 </h3>
             </div>

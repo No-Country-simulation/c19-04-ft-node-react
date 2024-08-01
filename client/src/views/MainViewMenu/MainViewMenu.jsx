@@ -38,8 +38,12 @@ const MainViewMenu = () => {
         }
     }, [filteredMenus.length]);
 
+    const clientNameLocal = localStorage.getItem("clientNameLocal");
+
     useEffect(() => {
         dispatch(dataMenuGet());
+        clientNameLocal && setClientName(clientNameLocal);
+        assignClientToTable(table, clientNameLocal);
     }, [dispatch]);
 
     const { navigateTo } = useNavigateHelper();
@@ -49,8 +53,10 @@ const MainViewMenu = () => {
     const [clientName, setClientName] = useState("");
 
     const closeMessageBox = () => {
+        setClientName("Invitado");
+        localStorage.setItem("clientNameLocal", "Invitado");
+        assignClientToTable(table, clientName);
         setShowMessageBox(false);
-        setClientName("");
     };
 
     const handleClientName = (event) => {
@@ -59,6 +65,7 @@ const MainViewMenu = () => {
 
     const handleSetTable = (event) => {
         event.preventDefault();
+        localStorage.setItem("clientNameLocal", clientName);
         assignClientToTable(table, clientName);
         setShowMessageBox(false);
     };
@@ -95,7 +102,7 @@ const MainViewMenu = () => {
                     onClick={() => navigateTo(`/my-order/${table}`)}
                 />
             </div>
-            {showMessageBox ? (
+            {showMessageBox && !clientNameLocal ? (
                 <div className="fixed inset-0 flex items-center justify-center backdrop-blur bg-black bg-opacity-50">
                     <div className="h-[300px] w-[300px] rounded-[12px] flex items-center justify-center bg-white">
                         <form

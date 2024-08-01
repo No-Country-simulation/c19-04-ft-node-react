@@ -146,7 +146,7 @@ export const closeTable = async (req, res) => {
         return res.status(400).send("Missing required fields");
     }
     try {
-        await saveOrder(tableNumber, order);
+        // await saveOrder(tableNumber, order);
         const tableRef = ref(database, `/tables/table_${tableNumber}`);
         await set(tableRef, {
             isActive: false,
@@ -156,6 +156,7 @@ export const closeTable = async (req, res) => {
             .status(200)
             .json({ message: `Table ${tableNumber} has been closed` });
     } catch (error) {
+        console.log(error);
         logger.error(`Error in waiter.service.closeTable: ${error}`);
         res.status(500).send("Internal Server Error");
     }

@@ -4,7 +4,7 @@ export const applyFiltersToMenu = function (menus, filters) {
             return true;
         }
         return filters.categoryFilter
-            ? item.category === filters.categoryFilter
+            ? item.category[0] === filters.categoryFilter
             : true;
     });
     if (filters.searchValue) {

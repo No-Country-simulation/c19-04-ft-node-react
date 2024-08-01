@@ -19,6 +19,17 @@ function WaitersTemp() {
         (table) => table !== "unassignedTables"
     );
 
+    const ordersIds =
+        orders && orders.pending ? Object.keys(orders?.pending) : [];
+
+    const pendingOrders = ordersIds.map((id) => ({
+        ...orders.pending[id],
+        id,
+    }));
+
+    // console.log(orders);
+    // console.log(pendingOrders);
+
     const waiterUserName = useSelector(
         (store) => store.user?.currentUser?.username
     );
@@ -30,7 +41,6 @@ function WaitersTemp() {
     const [clientName, setClientName] = useState("");
 
     const assignClient = (event) => {
-        console.log(event.target.value);
         setTableToAssignClient(event.target.value);
         setShowMessageBox(true);
     };
@@ -56,62 +66,74 @@ function WaitersTemp() {
     };
 
     const handlerCloseTable = async (event) => {
-        // console.log(event.target.value);
+        const tableNumber = event.target.value;
+        const order = pendingOrders
+            .filter((order) => order.tableNumber === tableNumber)
+            .map((order) => order.id);
+        try {
+            await closeTable(tableNumber, order);
 
-        const response = await closeTable(event.target.value);
+            await deleteOrder(order);
 
-        console.log(response);
+            let newAssigned = waiters[waiterUserName]?.assignedTables?.filter(
+                (item) => item !== `Table ${event.target.value}`
+            );
 
-        const newAssigned = waiters[waiterUserName]?.assignedTables?.filter(
-            (item) => item !== `Table ${event.target.value}`
-        );
-        const newWaiters = {
-            ...waiters,
-            [waiterUserName]: {
-                ...waiters[waiterUserName],
-                assignedTables: newAssigned,
-            },
-        };
-        console.log(newWaiters);
-        // setWaiters(newWaiters);    //ACTIVAR
+            if (newAssigned.length === 0) {
+                newAssigned = "";
+            }
+
+            console.log(newAssigned);
+            const newWaiters = {
+                ...waiters,
+                [waiterUserName]: {
+                    ...waiters[waiterUserName],
+                    assignedTables: newAssigned,
+                },
+            };
+            setWaiters(newWaiters); //ACTIVAR PARA DESASIGNAR MESA
+        } catch (error) {
+            console.log("No se pudo cerrar la mesa");
+        }
     };
     const handlerAttendCall = (event) => {
-        // console.log(event.target.value);
         const tableNumber = event.target.value;
         attendCall(tableNumber, waiterUserName);
     };
-    console.log(waiters);
     return (
         <div className="w-full min-h-[100dvh]">
             <div className="p-6">
                 <h4>Tus mesas</h4>
-                {waiters[waiterUserName]?.assignedTables?.map((t, index) => (
-                    <MyTablesCards
-                        key={t + index}
-                        tableNumber={
-                            typeof t === "string"
-                                ? t.split(" ")[1]
-                                : t.toString()
-                        }
-                        action="Cerrar mesa"
-                        requested={waiters[
-                            waiterUserName
-                        ]?.requestedBy?.includes(t)}
-                        handlerCloseTable={handlerCloseTable}
-                        handlerAttend={handlerAttendCall}
-                    />
-                ))}
+                {waiters[waiterUserName]?.assignedTables &&
+                    waiters[waiterUserName]?.assignedTables?.map((t, index) => (
+                        <MyTablesCards
+                            key={t + index}
+                            tableNumber={
+                                typeof t === "string"
+                                    ? t.split(" ")[1]
+                                    : t.toString()
+                            }
+                            action="Cerrar mesa"
+                            requested={waiters[
+                                waiterUserName
+                            ]?.requestedBy?.includes(t)}
+                            handlerCloseTable={handlerCloseTable}
+                            handlerAttend={handlerAttendCall}
+                            pendingOrders={pendingOrders}
+                        />
+                    ))}
             </div>
             <div className="p-6">
                 <h4>Mesas sin mesero asignado</h4>
-                {tables?.unassignedTables?.map((t) => (
-                    <TablesCards
-                        key={t}
-                        tableNumber={t}
-                        action="Atender"
-                        handler={attendTable}
-                    />
-                ))}
+                {tables?.unassignedTables &&
+                    tables?.unassignedTables?.map((t) => (
+                        <TablesCards
+                            key={t}
+                            tableNumber={t}
+                            action="Atender"
+                            handler={attendTable}
+                        />
+                    ))}
             </div>
             <div className="p-6">
                 <h4>Mesas desocupadas</h4>
