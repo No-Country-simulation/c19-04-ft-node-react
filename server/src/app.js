@@ -21,7 +21,7 @@ app.use(express.json());
 
 app.use(
     cors({
-        origin: "http://localhost:5173", // Reemplaza con el dominio de tu frontend
+        origin: "http://localhost:5173", // Reemplazar con el dominio del frontend
         credentials: true, // Permite el envío de cookies con las solicitudes
     })
 );

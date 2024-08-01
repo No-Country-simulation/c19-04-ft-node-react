@@ -108,11 +108,9 @@ export const requestAttended = async (req, res) => {
             !waiterData.requestedBy.find((key) => key === requestAttended)
         ) {
             logger.warn(`Waiter was not requested by ${requestAttended}`);
-            return res
-                .status(400)
-                .json({
-                    error: `Waiter was not requested by ${requestAttended}.`,
-                });
+            return res.status(400).json({
+                error: `Waiter was not requested by ${requestAttended}.`,
+            });
         }
         const requests = waiterData.requestedBy;
         if (!requests) {
@@ -142,12 +140,13 @@ export const requestAttended = async (req, res) => {
 export const closeTable = async (req, res) => {
     const { tableNumber } = req.params;
     const { order } = req.body;
+    console.log(tableNumber, order);
     if (!tableNumber || !order) {
         logger.error("Missing required fields");
         return res.status(400).send("Missing required fields");
     }
     try {
-        await saveOrder(tableNumber, order);
+        // await saveOrder(tableNumber, order);
         const tableRef = ref(database, `/tables/table_${tableNumber}`);
         await set(tableRef, {
             isActive: false,
@@ -157,6 +156,7 @@ export const closeTable = async (req, res) => {
             .status(200)
             .json({ message: `Table ${tableNumber} has been closed` });
     } catch (error) {
+        console.log(error);
         logger.error(`Error in waiter.service.closeTable: ${error}`);
         res.status(500).send("Internal Server Error");
     }

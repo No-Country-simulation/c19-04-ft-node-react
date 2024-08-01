@@ -12,9 +12,9 @@ import TableCalls from "../views/TableCalls/TableCalls.jsx";
 import AdminAssignTables from "../views/AdminAssignTables/AdminAssignTables.jsx";
 import ManageUsers from "../views/ManageUsers/ManageUsers.jsx";
 import WaitersOrders from "../views/WaiterOrders/WaitersOrders.jsx";
-import NewOrderWaiter from "../views/NewOrderWaiter/NewOrderWaiter.jsx";
-import Landing from "../views/Landing/Landing.jsx";
-
+import PopupCartPostOrder from "../components/PopupCartPostOrder/PopupCartPostOrder.jsx";
+// import DetailModalPage from "../views/DetailModal/DetailModalPage.jsx";
+import WaitersTemp from "../views/WaitersTemp/WaitersTemp.jsx";
 
 const routerPathComponent = [
     {
@@ -33,10 +33,10 @@ const routerPathComponent = [
         path: "/invalid-password",
         element: <InvalidPasswordMessage />,
     },
-    {
-        path: "/shopping-cart",
-        element: <ShoppingCart />,
-    },
+    // {
+    //     path: "/shopping-cart",
+    //     element: <ShoppingCart />,
+    // },
     {
         path: "/register-successfully",
         element: <RegisterSuccessfully />,
@@ -80,6 +80,14 @@ const routerPathComponent = [
     {
         path: "/newOrderWaiter",
         element: <NewOrderWaiter />,
+    },
+    {
+        path: "/waiter/temp",
+        element: <WaitersTemp />,
+    },
+    {
+        path: "/waiter/temp",
+        element: <WaitersTemp />,
     },
     {
         path: "*",
