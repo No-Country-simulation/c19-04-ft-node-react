@@ -13,6 +13,7 @@ import AdminAssignTables from "../views/AdminAssignTables/AdminAssignTables.jsx"
 import ManageUsers from "../views/ManageUsers/ManageUsers.jsx";
 import WaitersOrders from "../views/WaiterOrders/WaitersOrders.jsx";
 import PopupCartPostOrder from "../components/PopupCartPostOrder/PopupCartPostOrder.jsx";
+import OrderList from "../components/OrderList/OrderList.jsx";
 
 
 const routerPathComponent = [
@@ -56,6 +57,7 @@ const routerPathComponent = [
         path: "/my-order/:table",
         element: <ShoppingCart />,
     },
+   
     {
         path: "/calls",
         element: <TableCalls />,
@@ -75,6 +77,11 @@ const routerPathComponent = [
     {
         path: "/popUpOrCartPedir",
         element: <PopupCartPostOrder />,
+    },
+    {   
+        path:"/OrderList",
+        element:<OrderList/>
+
     },
     {
         path: "*",
