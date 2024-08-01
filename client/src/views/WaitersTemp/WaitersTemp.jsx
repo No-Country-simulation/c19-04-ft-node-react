@@ -73,7 +73,7 @@ function WaitersTemp() {
         try {
             await closeTable(tableNumber, order);
 
-            await deleteOrder(order);
+            //   await deleteOrder(order);
 
             let newAssigned = waiters[waiterUserName]?.assignedTables?.filter(
                 (item) => item !== `Table ${event.target.value}`
@@ -101,12 +101,13 @@ function WaitersTemp() {
         attendCall(tableNumber, waiterUserName);
     };
     return (
-        <div className="w-full min-h-[100dvh]">
+        <div className="w-full min-h-[100dvh] bg-customBgMain">
             <div className="p-6">
                 <h4>Tus mesas</h4>
                 {waiters[waiterUserName]?.assignedTables &&
                     waiters[waiterUserName]?.assignedTables?.map((t, index) => (
                         <MyTablesCards
+                        //mesas atendidas
                             key={t + index}
                             tableNumber={
                                 typeof t === "string"
@@ -127,6 +128,7 @@ function WaitersTemp() {
                 <h4>Mesas sin mesero asignado</h4>
                 {tables?.unassignedTables &&
                     tables?.unassignedTables?.map((t) => (
+                        //mesas sin mesero
                         <TablesCards
                             key={t}
                             tableNumber={t}
@@ -140,6 +142,7 @@ function WaitersTemp() {
                 {tablesArray
                     .filter((t) => !tables[t].isActive)
                     .map((t) => (
+                        // mesas desocupadas
                         <TablesCards
                             key={t}
                             tableNumber={t.split("_")[1]}

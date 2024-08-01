@@ -5,7 +5,8 @@ function TablesCards({ handler, tableNumber, action }) {
         <div className="border border-customRed p-2 flex justify-between items-center">
             <h2>Mesa {tableNumber}</h2>
             <button
-                className="border border-customRed bg-white py-1 px-6 rounded-xl"
+                className="box-border px-3  py-1 rounded-lg text-white font-bold shadow-md bg-customRed-400 hover:bg-red-500 active:bg-red-600"
+
                 onClick={handler}
                 value={tableNumber}
             >

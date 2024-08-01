@@ -78,7 +78,7 @@ const MainViewMenu = () => {
                 <h2 className="text-[16px] leading-5  px-5 pb-3">Menú</h2>
                 <section className="border-y">
                     <FilterFood
-                        categories={categoriesWithoutArray}
+                        categories={categories}
                         changeFilters={changeFilters}
                     />
                 </section>
