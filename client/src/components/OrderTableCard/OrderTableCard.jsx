@@ -1,4 +1,4 @@
-import React from "react";
+import React, { act, useEffect, useState } from "react";
 import productSvg from "../../assets/svg/product.svg";
 import userSvg from "../../assets/svg/user.svg";
 
@@ -11,9 +11,32 @@ function OrderTableCard({
     actionDisplay,
     orderId,
 }) {
+
+    const [colorCurrentBorder, setColorCurrentBorder] = useState("red")
+    const [colorCurrentText, setColorCurrentText] = useState("red")
+
+    useEffect(() => {
+
+        if (color === "red") {
+            setColorCurrentBorder("border-red-600")
+            setColorCurrentText("text-red-600")
+        }
+
+        if (color === "yellow") {
+            setColorCurrentBorder("border-yellow-600")
+            setColorCurrentText("text-yellow-600")
+        }
+
+        if (color === "green") {
+            setColorCurrentBorder("border-green-600")
+            setColorCurrentText("text-green-600")
+        }
+
+    }, [color, action, actionDisplay])
+
     return (
-        <div className={` px-4 py-2 border-2 border-green-500 border-${color}-600 text-[11px] rounded-xl mb-2`}>
-            <div className={` font-semibold text-xs text-${color}-700 my-2`}>{type}</div>
+        <div className={` px-4 py-2 border-2 border-green-500 ${colorCurrentBorder} text-[11px] rounded-xl mb-2`}>
+            <div className={` font-semibold text-xs text-${colorCurrentText}-700 my-2`}>{type}</div>
             {array &&
                 array.filter &&
                 array
@@ -50,10 +73,10 @@ function OrderTableCard({
                                     {actionDisplay}
                                 </button>
                             )}
-                            <hr/>
+                            <hr />
                         </div>
                     ))}
-        
+
         </div>
     );
 }

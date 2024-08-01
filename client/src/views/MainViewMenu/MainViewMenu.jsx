@@ -14,7 +14,7 @@ import { useParams } from "react-router-dom";
 import patchCallWaiter from "../../utils/api/patchCallWaiter";
 import { assignClientToTable } from "../../utils/api/assignClientToTable";
 import useFireBase from "../../utils/hooks/useFireBase";
-
+import SkeletonComponent from "../../components/SkeletonComponente/SkeletonComponent";
 const MainViewMenu = () => {
     const { filter, filterFood, changeFilters } = useFilterFood();
     const { menus, filteredMenus, categories, loading, error } = useSelector(
@@ -32,6 +32,7 @@ const MainViewMenu = () => {
 
     useEffect(() => {
         if (menus.length > filteredMenus.length) {
+
             setDataView(true);
         } else {
             setDataView(false);
@@ -41,7 +42,9 @@ const MainViewMenu = () => {
     const clientNameLocal = localStorage.getItem("clientNameLocal");
 
     useEffect(() => {
+        if (loading === true) setIsLoading(true)
         dispatch(dataMenuGet());
+        if (loading === false) setIsLoading(false)
         clientNameLocal && setClientName(clientNameLocal);
         assignClientToTable(table, clientNameLocal);
     }, [dispatch]);
@@ -70,12 +73,16 @@ const MainViewMenu = () => {
         setShowMessageBox(false);
     };
 
+    const [isLoading, setIsLoading] = useState(false)
+
+
+
     return (
-        <div className="bg-customBgMain pb-4">
+        <div className="bg-customBgMain flex flex-col pb-4 min-h-screen">
             <NavBar clientName={clientName} tableNumber={table} />
             <SearchBar />
             <div>
-                <h2 className="text-[16px] leading-5  px-5 pb-3">Menú</h2>
+                <h2 className="text-[14px] leading-5  px-5 pb-3">Menú</h2>
                 <section className="border-y">
                     <FilterFood
                         categories={categories}
@@ -83,14 +90,16 @@ const MainViewMenu = () => {
                     />
                 </section>
                 <div className="py-7">
-                    {dataView ? (
-                        <ContainerCardsFilter dataFilter={filteredMenus} />
+                    {loading ? Array.from({ length: 5 }).map((_, index) => (
+                        <SkeletonComponent key={index} />
+                    )) : dataView ? (
+                        <ContainerCardsFilter dataFilter={filteredMenus} isLoading={isLoading} />
                     ) : (
                         <ContainerCards menus={filteredMenus} />
                     )}
                 </div>
             </div>
-            <div className="sticky left-0 bottom-0 w-[95vw] py-3 flex flex-wrap gap-y-8 gap-x-2 mx-auto z-10  bg-opacity-100 backdrop-blur-lg">
+            <div className="sticky left-0 bottom-0 w-[95vw] py-3 flex flex-wrap items-end gap-y-8 gap-x-2 mx-auto z-10  bg-opacity-100 backdrop-blur-lg grow">
                 <SecondaryButton
                     children="Llamar al Mozo"
                     classNameSize="h-10 items-center w-1/2"

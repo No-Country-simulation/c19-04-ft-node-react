@@ -17,6 +17,10 @@ function WaitersTemp() {
     const [tables, setTables] = useFireBase("/tables", {});
     const [waiters, setWaiters] = useFireBase("/waiters", {});
 
+    console.log(orders, "estoy aqui")
+    console.log(tables)
+    console.log(waiters)
+
     const {navigateTo}  = useNavigateHelper()
 
     const tablesArray = Object.keys(tables).filter(
@@ -210,30 +214,30 @@ function WaitersTemp() {
                     ))}
             </div>
             {showMessageBox ? (
-                <div className="fixed inset-0 flex items-center justify-center backdrop-blur bg-black bg-opacity-50">
-                    <div className="h-[300px] w-[300px] rounded-[12px] flex items-center justify-center bg-white">
+                <div className="fixed inset-0 flex items-center justify-center backdrop-blur bg-black bg-opacity-50 ">
+                    <div className="h-[300px] w-[300px] rounded-[12px] flex items-center justify-center bg-slate-50">
                         <form
-                            className="flex flex-col items-center"
+                            className="flex flex-col items-center gap-4 text-sm"
                             onSubmit={handleSetTable}
                         >
                             <div>Nombre del cliente</div>
                             <input
-                                className="border border-red-300 mb-6"
+                                className="border border-customRed-400 my-6 text-base"
                                 type="text"
                                 onChange={handleClientName}
                                 value={clientName}
                             />
-                            <div className="flex gap-4">
+                            <div className="flex gap-6">
                                 <button
                                     type="button"
-                                    className="border border-red-300 py-2 px-4 rounded-[10px]"
+                                    className="border border-customRed-400 py-1 px-4 rounded"
                                     onClick={closeMessageBox}
                                 >
                                     Cancelar
                                 </button>
                                 <button
                                     type="submit"
-                                    className="border border-red-300 py-2 px-4 rounded-[10px]"
+                                    className="border border-customRed-400 py-1 px-4 rounded"
                                 >
                                     Aceptar
                                 </button>

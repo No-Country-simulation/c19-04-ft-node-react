@@ -17,8 +17,8 @@ const NavBar = memo(({ tableNumber, clientName }) => {
                 <img className="max-w-[33px]" src={tableImg} alt="Main Menu" />
             </button>
             <div className="w-[109px] h-[46px] font-[18px]">
-                <h3 className="font-bold leading-[22px] text-center">Mesa {tableNumber ? tableNumber : table }</h3>
-                <h3 className="font-medium text-center leading-[22px]">
+                <h3 className="font-bold leading-[22px] text-center text-[12px]">Mesa {tableNumber ? tableNumber : table }</h3>
+                <h3 className="font-medium text-center leading-[22px] text-sm">
                     ¡Hola{" "}
                     <span className="font-bold">
                         {clientName ? clientName : clientNameLocal}!
