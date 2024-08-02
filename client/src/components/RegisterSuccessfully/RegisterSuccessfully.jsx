@@ -4,11 +4,11 @@ const RegisterSuccessfully = () => {
   const messageRegister = {
     title: "Registro exitoso",
     message: "Usuario registrado correctamente",
-    path: "/Login",
+    path: "/admin/register",
   };
 
   return (
-    <div>
+    <div className="bg-customRed-400">
       <MessageRedirect
         title={messageRegister.title}
         message={messageRegister.message}

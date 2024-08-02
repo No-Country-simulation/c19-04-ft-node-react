@@ -15,6 +15,7 @@ import CreateUserButton from "../Buttons/CreateUserButton";
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [ selectedOption, setSelectedOption ] = useState('')
 
   return (
     <div className="inline-flex">
@@ -29,7 +30,7 @@ export default function NavBar() {
           onClick={() => setIsOpen((prevState) => !prevState)}
         />
 
-        <AdminControlPanel isOpen={isExpanded} />
+        <AdminControlPanel isOpen={isExpanded} setSelectedOption={setSelectedOption} />
 
         {/* Aquí empieza el modal */}
         <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
@@ -68,7 +69,7 @@ export default function NavBar() {
           )}
         </button>
       </div>
-      <ContainerComponentsDashboard />
+      <ContainerComponentsDashboard  selectedOption={selectedOption}/>
     </div>
   );
 }
