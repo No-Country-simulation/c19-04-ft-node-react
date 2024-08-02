@@ -46,6 +46,7 @@ const Landing = () => {
                 className="bg-footer-radial-gradient text-white min-h-[10dvh] px-[100px] py-10 flex flex-col"
             >
                 <Footer />
+                
             </div>
 
         </div>
