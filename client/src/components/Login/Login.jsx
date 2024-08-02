@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   validateUsername,
   validatePassword,
@@ -6,7 +6,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { login } from "../../utils/api/Loginapi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../../state/store/slices/auth/actionsUser/fetchUser";
 import MessageRedirect from "../MessageRedirect/MessageRedirect";
 
@@ -21,6 +21,7 @@ const Login = () => {
   const [loginError, setLoginError] = useState("");
   const [loginMessage, setLoginMessage] = useState("");
   const [dataResolve, setDataResolve] = useState(null);
+  const currentUser = useSelector((state) => state.user.currentUser);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -44,16 +45,23 @@ const Login = () => {
       } catch (error) {
         setLoginError(error.message);
       }
-    };
-  }
+    }
+  };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
   return (
+
     <div className="min-h-screen flex items-center justify-center bg-customRed-400">
-      {dataResolve === null ? (
+      {(currentUser !== null && currentUser.username !== "") ? (
+        <MessageRedirect
+          title="Redirigiendo..."
+          message="Has iniciado sesión exitosamente"
+          path={currentUser.role === "admin" ? "/admin/register" : "/waiter/temp"}
+        />
+      ) : dataResolve === null ? (
         <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
           <h2 className="text-2xl font-bold mb-6 text-center">
             Inicio de Sesión
@@ -146,7 +154,9 @@ const Login = () => {
         <MessageRedirect
           title={"Inicio de Sesión con exito"}
           message={loginMessage}
-          path={"admin/register"}
+          path={
+            currentUser && currentUser.role === "admin" ? "/admin/register" : "/waiter/temp"
+          }
         />
       )}
     </div>

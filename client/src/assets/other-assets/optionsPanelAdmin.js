@@ -10,11 +10,11 @@ const optionsPanelAdmin = [
     ]
   },
   {
-    title: "Gestión Meseros",
+    title: "Gestión Usuarios",
     subOptions: [
-      "Asignar Mesa",
-      "Horas de Trabajo",
-      "Salario"
+      "Meseros",
+      "Mesas",
+      "Admins"
     ]
   },
   {
@@ -26,12 +26,13 @@ const optionsPanelAdmin = [
       "Pedidos Completados"
     ]
   },
+  
   {
-    title: "Gestión Usuarios",
+    title: "Gestión Meseros",
     subOptions: [
-      "Meseros",
-      "Mesas",
-      "Admins"
+      "Asignar Mesa",
+      "Horas de Trabajo",
+      "Salario"
     ]
   }
 ];

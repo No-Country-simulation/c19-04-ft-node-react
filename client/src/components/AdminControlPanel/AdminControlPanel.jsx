@@ -5,13 +5,19 @@ import optionsPanelAdmin from "../../assets/other-assets/optionsPanelAdmin.js";
 import logoutUser from "../../utils/api/logoutUser.js";
 import { useState } from "react";
 import LogoutMessageRedirect from "../LogoutMessageRedirect/LogoutMessageRedirect.jsx";
+import { useDispatch } from "react-redux";
+import { logoutCleanState } from "../../state/store/slices/auth/userSlice.js";
 
 const AdminControlPanel = ({ isOpen, setSelectedOption }) => {
+
+  const dispatch = useDispatch()
+
   const [showLogoutMessage, setLogoutMessage] = useState(false);
 
   const handleLogout = async () => {
     try {
       const responseLogout = await logoutUser();
+      dispatch(logoutCleanState())
       setLogoutMessage(responseLogout);
     } catch (error) {
       throw new error();

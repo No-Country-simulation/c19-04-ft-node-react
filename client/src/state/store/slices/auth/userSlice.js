@@ -16,7 +16,12 @@ export const userAuthSlice = createSlice({
         status: "idle",
         error: null,
     },
-    reducers: {},
+    reducers: {
+        logoutCleanState: (state) => {
+            state.currentUser.username = '',
+            state.currentUser.role = ''
+        }
+    },
     extraReducers: (builder) => {
         Object.keys(asyncHandlers).forEach((actionType) => {
             builder.addCase(actionType, (state, action) => {
@@ -36,5 +41,7 @@ export const userAuthSlice = createSlice({
         });
     },
 });
+
+export const {logoutCleanState} = userAuthSlice.actions
 
 export default userAuthSlice.reducer;
