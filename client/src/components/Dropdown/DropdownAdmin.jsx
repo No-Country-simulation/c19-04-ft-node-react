@@ -2,7 +2,7 @@ import { useState } from "react";
 import triangleIconSVG from "../../assets/svg/triangle-inverted.svg";
 import TextButton from "../Buttons/TextButton";
 
-const DropdownAdmin = ({ options, isOpenA }) => {
+const DropdownAdmin = ({ options, isOpenA, setSelectedOption }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -19,7 +19,7 @@ const DropdownAdmin = ({ options, isOpenA }) => {
         }`}
       >
         <div className="flex justify-around w-full gap-4 items-start">
-          <p className="text-[14px] font-normal">{options.title}</p>
+          <p className="text-[14px] font-normal" onClick={() => setSelectedOption(options.title)} >{options.title}</p>
           <button className="pt-1" onClick={toggleDropdown}>
             <img
               src={triangleIconSVG}

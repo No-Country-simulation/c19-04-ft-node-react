@@ -17,6 +17,7 @@ import PopupCartPostOrder from "../components/PopupCartPostOrder/PopupCartPostOr
 import WaitersTemp from "../views/WaitersTemp/WaitersTemp.jsx";
 import Landing from "../views/Landing/Landing.jsx";
 import NewOrderWaiter from "../views/NewOrderWaiter/NewOrderWaiter.jsx";
+import KitchenBarPanel from "../views/KitchenBar/KitchenBarPanel.jsx";
 
 const routerPathComponent = [
     {
@@ -82,6 +83,10 @@ const routerPathComponent = [
     {
         path: "/waiter/temp",
         element: <WaitersTemp />,
+    },
+    {
+        path: "/kitchen",
+        element: <KitchenBarPanel />,
     },
     {
         path: "*",
