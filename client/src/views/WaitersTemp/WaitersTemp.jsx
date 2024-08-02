@@ -9,26 +9,49 @@ import { assignTableToWaiter } from "../../utils/api/assignTableToWaiter";
 import MyTablesCards from "../../components/MyTablesCards/MyTablesCards";
 import { closeTable } from "../../utils/api/closeTable";
 import { attendCall } from "../../utils/api/attendCall";
+import MainButton from "../../components/Buttons/MainButton";
+import { useNavigateHelper } from "../../utils/hooks/useNavigations";
 
 function WaitersTemp() {
     const [orders, setOrders] = useFireBase("/orders", {});
     const [tables, setTables] = useFireBase("/tables", {});
     const [waiters, setWaiters] = useFireBase("/waiters", {});
 
+    console.log(orders, "estoy aqui")
+    console.log(tables)
+    console.log(waiters)
+
+    const {navigateTo}  = useNavigateHelper()
+
     const tablesArray = Object.keys(tables).filter(
         (table) => table !== "unassignedTables"
     );
 
-    const ordersIds =
+    // Ordenes con estado pending
+    const pendingIds =
         orders && orders.pending ? Object.keys(orders?.pending) : [];
 
-    const pendingOrders = ordersIds.map((id) => ({
+    const pendingOrders = pendingIds.map((id) => ({
         ...orders.pending[id],
         id,
     }));
 
-    // console.log(orders);
-    // console.log(pendingOrders);
+    // Ordenes con estado inProgress
+    const inProgressIds =
+        orders && orders.inProgress ? Object.keys(orders?.inProgress) : [];
+
+    const inProgressOrders = inProgressIds.map((id) => ({
+        ...orders.inProgress[id],
+        id,
+    }));
+
+    // Ordenes con estado ready
+    const readyIds = orders && orders.ready ? Object.keys(orders?.ready) : [];
+
+    const readyOrders = readyIds.map((id) => ({
+        ...orders.ready[id],
+        id,
+    }));
 
     const waiterUserName = useSelector(
         (store) => store.user?.currentUser?.username
@@ -67,13 +90,48 @@ function WaitersTemp() {
 
     const handlerCloseTable = async (event) => {
         const tableNumber = event.target.value;
-        const order = pendingOrders
+        const pendingOrdersIdsArray = pendingOrders
             .filter((order) => order.tableNumber === tableNumber)
             .map((order) => order.id);
-        try {
-            await closeTable(tableNumber, order);
+        const inProgressOrdersIdsArray = inProgressOrders
+            .filter((order) => order.tableNumber === tableNumber)
+            .map((order) => order.id);
+        const readyOrdersIdsArray = readyOrders
+            .filter((order) => order.tableNumber === tableNumber)
+            .map((order) => order.id);
+        // console.log(pendingOrdersIdsArray);
+        // console.log(inProgressOrdersIdsArray);
+        // console.log(readyOrdersIdsArray);
 
-            //   await deleteOrder(order);
+        const allIds = [
+            ...pendingOrdersIdsArray,
+            ...inProgressOrdersIdsArray,
+            ...readyOrdersIdsArray,
+        ];
+
+        try {
+            // ACTIVAR PARA CERRAR MESA
+            await closeTable(tableNumber, allIds);
+            console.log(orders);
+            const newOrdersToSet = { ...orders };
+
+            allIds.forEach((id) => {
+                // console.log(id);
+                // console.log(newOrdersToSet.pending?.hasOwnProperty(id));
+                // console.log(newOrdersToSet.inProgress?.hasOwnProperty(id));
+                // console.log(newOrdersToSet.ready?.hasOwnProperty(id));
+                if (newOrdersToSet.pending?.hasOwnProperty(id))
+                    newOrdersToSet.pending[id] = null;
+                if (newOrdersToSet.inProgress?.hasOwnProperty(id))
+                    newOrdersToSet.inProgress[id] = null;
+                if (newOrdersToSet.ready?.hasOwnProperty(id))
+                    newOrdersToSet.ready[id] = null;
+            });
+            // console.log("xxxxxxxxxxxxxxxxxxxxxxxxxx", orders);
+            console.log(newOrdersToSet);
+
+            // ACTIVAR
+            setOrders(newOrdersToSet);
 
             let newAssigned = waiters[waiterUserName]?.assignedTables?.filter(
                 (item) => item !== `Table ${event.target.value}`
@@ -83,7 +141,6 @@ function WaitersTemp() {
                 newAssigned = "";
             }
 
-            console.log(newAssigned);
             const newWaiters = {
                 ...waiters,
                 [waiterUserName]: {
@@ -91,8 +148,10 @@ function WaitersTemp() {
                     assignedTables: newAssigned,
                 },
             };
-            setWaiters(newWaiters); //ACTIVAR PARA DESASIGNAR MESA
+            // ACTIVAR PARA DESASIGNAR MESA
+            setWaiters(newWaiters);
         } catch (error) {
+            console.log(error);
             console.log("No se pudo cerrar la mesa");
         }
     };
@@ -102,12 +161,13 @@ function WaitersTemp() {
     };
     return (
         <div className="w-full min-h-[100dvh] bg-customBgMain">
+            <h2 className='font-semibold text-center pt-4'> ¡Hola {waiterUserName}!</h2>
             <div className="p-6">
-                <h4>Tus mesas</h4>
+                <h4 className="text-gray-400 mb-2">Tus mesas </h4>
                 {waiters[waiterUserName]?.assignedTables &&
                     waiters[waiterUserName]?.assignedTables?.map((t, index) => (
                         <MyTablesCards
-                        //mesas atendidas
+                            //mesas atendidas
                             key={t + index}
                             tableNumber={
                                 typeof t === "string"
@@ -121,11 +181,13 @@ function WaitersTemp() {
                             handlerCloseTable={handlerCloseTable}
                             handlerAttend={handlerAttendCall}
                             pendingOrders={pendingOrders}
+                            inProgressOrders={inProgressOrders}
+                            readyOrders={readyOrders}
                         />
                     ))}
             </div>
             <div className="p-6">
-                <h4>Mesas sin mesero asignado</h4>
+                <h4 className="text-gray-400 mb-2">Mesas sin mesero asignado</h4>
                 {tables?.unassignedTables &&
                     tables?.unassignedTables?.map((t) => (
                         //mesas sin mesero
@@ -138,7 +200,7 @@ function WaitersTemp() {
                     ))}
             </div>
             <div className="p-6">
-                <h4>Mesas desocupadas</h4>
+                <h4 className="text-gray-400 mb-2">Mesas desocupadas</h4>
                 {tablesArray
                     .filter((t) => !tables[t].isActive)
                     .map((t) => (
@@ -152,30 +214,30 @@ function WaitersTemp() {
                     ))}
             </div>
             {showMessageBox ? (
-                <div className="fixed inset-0 flex items-center justify-center backdrop-blur bg-black bg-opacity-50">
-                    <div className="h-[300px] w-[300px] rounded-[12px] flex items-center justify-center bg-white">
+                <div className="fixed inset-0 flex items-center justify-center backdrop-blur bg-black bg-opacity-50 ">
+                    <div className="h-[300px] w-[300px] rounded-[12px] flex items-center justify-center bg-slate-50">
                         <form
-                            className="flex flex-col items-center"
+                            className="flex flex-col items-center gap-4 text-sm"
                             onSubmit={handleSetTable}
                         >
                             <div>Nombre del cliente</div>
                             <input
-                                className="border border-red-300 mb-6"
+                                className="border border-customRed-400 my-6 text-base"
                                 type="text"
                                 onChange={handleClientName}
                                 value={clientName}
                             />
-                            <div className="flex gap-4">
+                            <div className="flex gap-6">
                                 <button
                                     type="button"
-                                    className="border border-red-300 py-2 px-4 rounded-[10px]"
+                                    className="border border-customRed-400 py-1 px-4 rounded"
                                     onClick={closeMessageBox}
                                 >
                                     Cancelar
                                 </button>
                                 <button
                                     type="submit"
-                                    className="border border-red-300 py-2 px-4 rounded-[10px]"
+                                    className="border border-customRed-400 py-1 px-4 rounded"
                                 >
                                     Aceptar
                                 </button>
@@ -186,6 +248,11 @@ function WaitersTemp() {
             ) : (
                 ""
             )}
+
+            {/* navegando a la ruta de crear orden */}
+            <div className='flex justify-center py-2 sticky bottom-0 bg-opacity-100  backdrop-filter backdrop-blur-3xl'>
+                <MainButton children="Crear orden" classNameSize="w-[90%] h-[40px]" onClick={() => navigateTo('/createOrder')} />
+            </div>
         </div>
     );
 }

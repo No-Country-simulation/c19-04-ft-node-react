@@ -1,6 +1,7 @@
 import React from "react";
-import productSvg from "../../assets/svg/product.svg";
-import userSvg from "../../assets/svg/user.svg";
+import OrderTableCard from "../OrderTableCard/OrderTableCard";
+import { setOrderInProgress } from "../../utils/api/setOrderInProgress.";
+import { setOrderReady } from "../../utils/api/setOrderReady";
 import triangleIconSVG from "../../assets/svg/triangle-inverted.svg";
 
 import { useState } from "react";
@@ -11,6 +12,8 @@ function MyTablesCards({
     tableNumber,
     requested,
     pendingOrders,
+    inProgressOrders,
+    readyOrders,
 }) {
     console.log(pendingOrders);
     console.log(tableNumber);
@@ -18,21 +21,25 @@ function MyTablesCards({
     const [isOpen, setIsOpen] = useState(false);
     const toggleDropdown = () => setIsOpen((prevState) => !prevState);
 
+    console.log(pendingOrders)
+
     return (
         <div
-            className={`bg-white  text-sm shadow-lg rounded-lg transition-[border-radius] px-2 mb-2 ${isOpen ? " duration-0" : "duration-1000"
+            className={`bg-white min-h-max text-sm shadow-lg rounded-lg transition-[border-radius] px-2 mb-2 ${isOpen ? " duration-0" : "duration-1000"
                 }`}
         >
-            <div className="p-2 flex justify-between items-center font-semibold">
-                <h2 >Mesa {tableNumber}</h2>
-                <button onClick={toggleDropdown}>
-                    <img
-                        src={triangleIconSVG}
-                        alt="Toggle"
-                        className={`w-3 h-3 transform transition-transform duration-500 ${isOpen ? "rotate-180" : ""
-                            }`}
-                    />
-                </button>
+            <div className="p-2 flex justify-between items-center font-semibold border-b-2">
+                <div className="flex gap-2">
+                    <h2 >Mesa {tableNumber}</h2>
+                    <button onClick={toggleDropdown}>
+                        <img
+                            src={triangleIconSVG}
+                            alt="Toggle"
+                            className={`w-3 h-3 transform transition-transform duration-500 ${isOpen ? "rotate-180" : ""
+                                }`}
+                        />
+                    </button>
+                </div>
                 <div className="flex gap-2 content-baseline">
                     {requested && (
                         <div className="py-1 px-2 border border-transparent">
@@ -57,35 +64,51 @@ function MyTablesCards({
                     </button>
                 </div>
             </div>
-            <div className={`transition-all duration-500 overflow-hidden ${isOpen ? "max-h-60 " : "max-h-0"}`}>
-
+            <div className={`transition-all duration-500  ${isOpen ? "max-h-fit my-4 pb-2" : "max-h-0 overflow-hidden"}`}>
                 {pendingOrders &&
-                    pendingOrders
-                        .filter((order) => order.tableNumber === tableNumber)
-                        .map((order) => (
-                            <div className="p-2 text-sm mb-3 ">
-                                {/* {order.id} */}
-                                <div>Orden numero : {order.orderNumber}</div>
-                                <div className="flex gap-2 items-center mt-1">
-                                    <img src={userSvg} alt="" />
-                                    <p>Platos pedidos:</p>
-                                </div>
-                                <div className="px-4 mt-1">
-                                    <ul>
-                                        {order.order.map((dish) => (
-                                            <li className="flex gap-2 items-center">
-                                                <img src={productSvg} alt="products" />
-                                                <p>
-                                                    {dish.title}
-                                                </p>
-                                            </li>
-                                        ))}
-
-                                    </ul>
-                                </div>
-                            </div>
-                        ))}
-
+                    pendingOrders.filter((order) => order.tableNumber === tableNumber)
+                        .length ? (
+                    <OrderTableCard
+                        // orderId={order.id}
+                        array={pendingOrders}
+                        type="Ordenes pendientes"
+                        color="red"
+                        tableNumber={tableNumber}
+                        action={setOrderInProgress}
+                        actionDisplay="MARCAR EN PROGRESO"
+                    />
+                ) : (
+                    ""
+                )}
+                {inProgressOrders &&
+                    inProgressOrders.filter(
+                        (order) => order.tableNumber === tableNumber
+                    ).length ? (
+                    <OrderTableCard
+                        // orderId={order.id}
+                        array={inProgressOrders}
+                        type="Ordenes en progreso"
+                        color="yellow"
+                        tableNumber={tableNumber}
+                        action={setOrderReady}
+                        actionDisplay="MARCAR ORDEN LISTA"
+                    />
+                ) : (
+                    ""
+                )}
+                {readyOrders &&
+                    readyOrders.filter((order) => order.tableNumber === tableNumber)
+                        .length ? (
+                    <OrderTableCard
+                        // orderId={order.id}
+                        array={readyOrders}
+                        type="Ordenes listas"
+                        color="green"
+                        tableNumber={tableNumber}
+                    />
+                ) : (
+                    ""
+                )}
             </div>
         </div>
     );

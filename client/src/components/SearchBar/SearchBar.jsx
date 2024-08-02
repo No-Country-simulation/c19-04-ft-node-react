@@ -21,7 +21,7 @@ const SearchBar = () => {
     );
 
     return (
-        <section className="min-h-max flex flex-col items-center mb-2">
+        <section className="min-h-max flex flex-col items-center mb-2 text-[10px]">
             <div
                 className={`min-w-11 flex place-content-center py-2 w-[90%] sm:w-[80%] md:w-[70%] ${
                     searchValue !== "" ? "gap-6" : "gap-5"
@@ -49,7 +49,7 @@ const SearchBar = () => {
                             />
                         ))
                     ) : (
-                        <p className="text-center text-gray-500">
+                        <p className="text-center text-xs text-gray-500">
                             No hay resultados para su búsqueda
                         </p>
                     ))}
