@@ -12,6 +12,7 @@ function Footer() {
             name: "Thiago Salaberry",
             link: "https://github.com/thiagoSalaberry",
         },
+        { name: "Blas Pachano", link: "" },
     ];
 
     return (
@@ -31,6 +32,7 @@ function Footer() {
                         className="border-b-2"
                         href={member.link}
                         title={`Link a github de ${member.name}`}
+                        target="#"
                     >
                         {member.name}
                     </a>
