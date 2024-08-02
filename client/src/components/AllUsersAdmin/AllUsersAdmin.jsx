@@ -31,27 +31,32 @@ function AllUsersAdmin() {
 
     return (
         <div className={loading ? "disable-mouse" : ""}>
-            <div className="block">
-                <h1 className="text-[18px] mb-4 block">
+            <div className="flex flex-nowrap flex-col justify-center items-center gap-2 mx-4">
+                <h1 className="text-[18px] block text-customRed-400">
                     Administración de usuarios
                 </h1>
-                <label htmlFor="type_of_user_selection">Filtro por rol:</label>
-                <select
-                    onChange={handleFilter}
-                    value={filter}
-                    name="type_of_user_selection"
-                    id="type_of_user_selection"
-                >
-                    <option value="all">Todos</option>
-                    <option value="admin">Administrador</option>
-                    <option value="waiter">Mesero</option>
-                    <option value="kitchen">Cocina</option>
-                </select>
+                <div className="flex gap-2 mb-4">
+                    <label htmlFor="type_of_user_selection">
+                        Filtrado por rol:
+                    </label>
+                    <select
+                        onChange={handleFilter}
+                        value={filter}
+                        name="type_of_user_selection"
+                        id="type_of_user_selection"
+                        className="bg-customGray-50 border-2 rounded-lg font-bold shadow-md gap-1 btn-secondary text-customRed-400 border-customRed-400 hover:text-customRed-700 hover:border-customRed-700  active:text-customRed-700 active:border-custom-600 text-center"
+                    >
+                        <option value="all">Todos</option>
+                        <option value="admin">Administrador</option>
+                        <option value="waiter">Mesero</option>
+                        <option value="kitchen">Cocina</option>
+                    </select>
+                </div>
             </div>
 
             <div className="overflow-y-auto scrollbar-container text-[14px] custom-scrollbar-x scroll-smooth">
                 <table className="min-w-full bg-white shadow-xl border-separate border-spacing-0">
-                    <thead className="bg-gray-100">
+                    <thead className="bg-customRed-400 text-white">
                         <tr>
                             <th className="px-4 py-2 border border-transparent">
                                 ID
@@ -89,11 +94,17 @@ function AllUsersAdmin() {
                                 <td className="px-4 py-2 border border-white">
                                     {user.username}
                                 </td>
-                                <td className="px-4 py-2 break-all border border-white">
-                                    {user.role}
+                                <td className="px-4 py-2 break-keep border border-white">
+                                    {
+                                        {
+                                            admin: "Administrador",
+                                            kitchen: "Cocina",
+                                            waiter: "Mesero",
+                                        }[user.role]
+                                    }
                                 </td>
                                 <td
-                                    className={`px-2 py-2 rounded-sm border border-white ${
+                                    className={`px-2 py-2 rounded-sm border border-white flex justify-center ${
                                         index === allUsers.length - 1
                                             ? "rounded-r-3xl"
                                             : ""
@@ -104,7 +115,7 @@ function AllUsersAdmin() {
                                             await handleDeleteUser(user._id);
                                             dispatch(getAllUsersAction(filter));
                                         }}
-                                        classNameSize="px-3 w-full"
+                                        classNameSize="px-2"
                                     >
                                         Eliminar
                                     </SecondaryButton>
