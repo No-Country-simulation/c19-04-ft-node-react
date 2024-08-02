@@ -12,7 +12,7 @@ const AnalitycsLanding = () => {
                 Obtén información valiosa para tomar decisiones inteligentes
             </p>
 
-            <div className="flex justify-between gap-8 flex-grow">
+            <div className="flex justify-between gap-8 flex-grow flex-wrap">
                 <img
                     src={analitycs1}
                     alt="analitycs1"

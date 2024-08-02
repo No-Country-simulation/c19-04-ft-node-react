@@ -43,10 +43,11 @@ const Landing = () => {
             </div>
             <div
                 id="footer"
-                className="bg-customRed-950 text-white min-h-[10dvh] px-[100px] py-10 flex flex-col"
+                className="bg-footer-radial-gradient text-white min-h-[10dvh] px-[100px] py-10 flex flex-col"
             >
                 <Footer />
             </div>
+
         </div>
     );
 };

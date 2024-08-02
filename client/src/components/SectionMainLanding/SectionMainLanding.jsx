@@ -5,7 +5,7 @@ import SecondaryButton from "../../components/Buttons/SecondaryButton";
 
 const SectionMainLanding = () => {
     return (
-        <div className="flex flex-grow justify-between items-center mt-10 gap-2">
+        <div className="flex-col flex flex-grow justify-between items-center mt-10 gap-2 sm:flex-row">
             <div className="mt-24 max-w-screen-md">
                 <h1 className="text-2xl font-bold break-words sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-5">
                     Gestioná tu negocio de manera eficiente y en tiempo real

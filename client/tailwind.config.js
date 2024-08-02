@@ -3,6 +3,10 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "./src/**/*.css"],
   theme: {
     extend: {
+      backgroundImage: {
+        "footer-radial-gradient":
+          "radial-gradient(circle, rgba(127,127,127,1) 22%, rgba(127,127,127,1) 52%, rgba(147,147,147,1) 64%, rgba(213,212,212,1) 100%)",
+      },
       fontFamily: {
         main: ["Outfit", "sans-serif"],
         secondary: ["Bodoni Moda", "serif"],
@@ -89,28 +93,28 @@ export default {
       },
     },
   },
-    plugins: [
-        function ({ addUtilities }) {
-            addUtilities(
-                {
-                    ".word-spacing-tight": {
-                        wordSpacing: "-0.125rem",
-                    },
-                    ".word-spacing-normal": {
-                        wordSpacing: "normal",
-                    },
-                    ".word-spacing-wide": {
-                        wordSpacing: "0.25rem",
-                    },
-                    ".word-spacing-wider": {
-                        wordSpacing: "0.5rem",
-                    },
-                    ".word-spacing-widest": {
-                        wordSpacing: "1rem",
-                    },
-                },
-                ["responsive", "hover"]
-            );
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities(
+        {
+          ".word-spacing-tight": {
+            wordSpacing: "-0.125rem",
+          },
+          ".word-spacing-normal": {
+            wordSpacing: "normal",
+          },
+          ".word-spacing-wide": {
+            wordSpacing: "0.25rem",
+          },
+          ".word-spacing-wider": {
+            wordSpacing: "0.5rem",
+          },
+          ".word-spacing-widest": {
+            wordSpacing: "1rem",
+          },
         },
-    ],
+        ["responsive", "hover"]
+      );
+    },
+  ],
 };

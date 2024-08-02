@@ -1,5 +1,5 @@
 import React from "react";
-
+import "../../styles/footer.css"
 function Footer() {
     const group = [
         { name: "Anthony Mendoza", link: "https://github.com/Anthonytrader" },
@@ -15,22 +15,24 @@ function Footer() {
     ];
 
     return (
-        <div className="flex-grow flex flex-col">
-            <h2 className="text-center text-[20px]">
+        <div className="flex-grow flex flex-col items-center text-white py-6">
+            <h2 className="text-center text-2xl mb-4 animate-fade-in">
                 Proyecto de demostración del programa de prácticas y aprendizaje
                 de No Country
             </h2>
-            <p className="text-center">
+            <p className="text-center text-lg mb-4 animate-fade-in">
                 No nos basamos en ninguna empresa real. Las marcas que aparecen
-                en nuestro proyecto no tienen relacion comercial con nosotros.
+                en nuestro proyecto no tienen relación comercial con nosotros.
             </p>
-            <h2 className="text-center text-[20px] mt-2">Creditos</h2>
-            {group.map((member) => (
-                <p className="text-center">
+            <h2 className="text-center text-2xl mt-4 mb-4 animate-fade-in">
+                Créditos
+            </h2>
+            {group.map((member, index) => (
+                <p key={index} className="text-center text-lg mb-2 animate-slide-up">
                     <a
-                        className="border-b-2"
+                        className="border-b-2 border-transparent hover:border-white transition duration-300"
                         href={member.link}
-                        title={`Link a github de ${member.name}`}
+                        title={`Link a GitHub de ${member.name}`}
                     >
                         {member.name}
                     </a>

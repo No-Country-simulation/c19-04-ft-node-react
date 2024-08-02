@@ -15,7 +15,7 @@ const SolutionsSectionsLanding = () => {
                 </p>
             </div>
 
-            <div className="flex gap-8">
+            <div className="flex flex-wrap justify-center items-center gap-8">
                 <CardsSolutions
                     imgCard={clockSolutions}
                     title="Gestión en tiempo real"
