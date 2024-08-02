@@ -1,8 +1,9 @@
+import AssignTableToWaiter from "../../AssignTableToWaiter/AssignTableToWaiter"
 
 const ManagementWaiters = () => {
   return (
     <div>
-      Gestión Meseros
+      <AssignTableToWaiter />
     </div>
   )
 }

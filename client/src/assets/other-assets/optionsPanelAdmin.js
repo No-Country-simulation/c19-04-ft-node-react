@@ -17,24 +17,24 @@ const optionsPanelAdmin = [
       "Admins"
     ]
   },
-  {
-    title: "Pedidos / Entregas",
-    subOptions: [
-      "Ver Todos los Pedidos",
-      "Pedidos por Mesa",
-      "Pedidos Pendientes",
-      "Pedidos Completados"
-    ]
-  },
+  // {
+  //   title: "Pedidos / Entregas",
+  //   subOptions: [
+  //     "Ver Todos los Pedidos",
+  //     "Pedidos por Mesa",
+  //     "Pedidos Pendientes",
+  //     "Pedidos Completados"
+  //   ]
+  // },
   
-  {
-    title: "Gestión Meseros",
-    subOptions: [
-      "Asignar Mesa",
-      "Horas de Trabajo",
-      "Salario"
-    ]
-  }
+  // {
+  //   title: "Gestión Meseros",
+  //   subOptions: [
+  //     "Asignar Mesa",
+  //     "Horas de Trabajo",
+  //     "Salario"
+  //   ]
+  // }
 ];
 
 export default optionsPanelAdmin;
