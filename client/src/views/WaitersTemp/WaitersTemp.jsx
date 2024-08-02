@@ -17,7 +17,7 @@ function WaitersTemp() {
     const [tables, setTables] = useFireBase("/tables", {});
     const [waiters, setWaiters] = useFireBase("/waiters", {});
 
-    const {navigateTo}  = useNavigateHelper()
+    const { navigateTo } = useNavigateHelper();
 
     const tablesArray = Object.keys(tables).filter(
         (table) => table !== "unassignedTables"
@@ -95,9 +95,6 @@ function WaitersTemp() {
         const readyOrdersIdsArray = readyOrders
             .filter((order) => order.tableNumber === tableNumber)
             .map((order) => order.id);
-        // console.log(pendingOrdersIdsArray);
-        // console.log(inProgressOrdersIdsArray);
-        // console.log(readyOrdersIdsArray);
 
         const allIds = [
             ...pendingOrdersIdsArray,
@@ -108,14 +105,9 @@ function WaitersTemp() {
         try {
             // ACTIVAR PARA CERRAR MESA
             await closeTable(tableNumber, allIds);
-            console.log(orders);
             const newOrdersToSet = { ...orders };
 
             allIds.forEach((id) => {
-                // console.log(id);
-                // console.log(newOrdersToSet.pending?.hasOwnProperty(id));
-                // console.log(newOrdersToSet.inProgress?.hasOwnProperty(id));
-                // console.log(newOrdersToSet.ready?.hasOwnProperty(id));
                 if (newOrdersToSet.pending?.hasOwnProperty(id))
                     newOrdersToSet.pending[id] = null;
                 if (newOrdersToSet.inProgress?.hasOwnProperty(id))
@@ -123,8 +115,6 @@ function WaitersTemp() {
                 if (newOrdersToSet.ready?.hasOwnProperty(id))
                     newOrdersToSet.ready[id] = null;
             });
-            // console.log("xxxxxxxxxxxxxxxxxxxxxxxxxx", orders);
-            console.log(newOrdersToSet);
 
             // ACTIVAR
             setOrders(newOrdersToSet);
@@ -146,10 +136,7 @@ function WaitersTemp() {
             };
             // ACTIVAR PARA DESASIGNAR MESA
             setWaiters(newWaiters);
-        } catch (error) {
-            console.log(error);
-            console.log("No se pudo cerrar la mesa");
-        }
+        } catch (error) {}
     };
     const handlerAttendCall = (event) => {
         const tableNumber = event.target.value;
@@ -157,7 +144,10 @@ function WaitersTemp() {
     };
     return (
         <div className="w-full min-h-[100dvh] bg-customBgMain">
-            <h2 className='font-semibold text-center pt-4'> ¡Hola {waiterUserName}!</h2>
+            <h2 className="font-semibold text-center pt-4">
+                {" "}
+                ¡Hola {waiterUserName}!
+            </h2>
             <div className="p-6">
                 <h4 className="text-gray-400 mb-2">Tus mesas </h4>
                 {waiters[waiterUserName]?.assignedTables &&
@@ -183,7 +173,9 @@ function WaitersTemp() {
                     ))}
             </div>
             <div className="p-6">
-                <h4 className="text-gray-400 mb-2">Mesas sin mesero asignado</h4>
+                <h4 className="text-gray-400 mb-2">
+                    Mesas sin mesero asignado
+                </h4>
                 {tables?.unassignedTables &&
                     tables?.unassignedTables?.map((t) => (
                         //mesas sin mesero
@@ -246,8 +238,12 @@ function WaitersTemp() {
             )}
 
             {/* navegando a la ruta de crear orden */}
-            <div className='flex justify-center py-2 sticky bottom-0 bg-opacity-100  backdrop-filter backdrop-blur-3xl'>
-                <MainButton children="Crear orden" classNameSize="w-[90%] h-[40px]" onClick={() => navigateTo('/createOrder')} />
+            <div className="flex justify-center py-2 sticky bottom-0 bg-opacity-100  backdrop-filter backdrop-blur-3xl">
+                <MainButton
+                    children="Crear orden"
+                    classNameSize="w-[90%] h-[40px]"
+                    onClick={() => navigateTo("/createOrder")}
+                />
             </div>
         </div>
     );

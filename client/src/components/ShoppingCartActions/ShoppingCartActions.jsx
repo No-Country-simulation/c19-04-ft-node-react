@@ -10,9 +10,15 @@ import { useParams } from "react-router-dom";
 import useFireBase from "../../utils/hooks/useFireBase";
 import { makeOrder } from "../../utils/api/makeOrder";
 
-function ShoppingCartActions() {
+function ShoppingCartActions({
+    setPopupMessage,
+    setShowSuccessPopup,
+    setShowErrorPopup,
+}) {
     //Eliminar todos los pedidos en caso de los comensales no quieran comer mas en el Restaurant
     const handlerDeleteAllCart = useDeleteAllCart();
+
+    const ordersUser = useSelector((state) => state.order.ordersOfTable);
 
     const { table } = useParams();
 
@@ -23,6 +29,11 @@ function ShoppingCartActions() {
     const dispatch = useDispatch();
     const totalPay = useSelector((state) => state.order.totalPay);
     const ordersOfTable = useSelector((state) => state.order.ordersOfTable);
+
+    const [buttonDisabled, setButtonDisabled] = useState(true);
+    useEffect(() => {
+        setButtonDisabled(!waiterUsername);
+    }, [tables]);
 
     useEffect(() => {
         dispatch(totalPayOrder());
@@ -42,20 +53,29 @@ function ShoppingCartActions() {
     //       <p className="w-full text-[32px] leading-10">Total a pagar: <span className="font-bold">${totalPay}</span></p>
     //       <SecondaryButton children="Llamar al Mozo" classNameSize="h-10 items-center w-1/2" />
     //       <MainButton children="¡ Pedir !" classNameSize="h-10 items-center grow" onClick={handleOpenModal} />
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     const handleMakeOrder = async (event) => {
-        console.log(ordersOfTable);
         const order = [];
         ordersOfTable.forEach((item) => {
             for (let index = 0; index < item.quantity; index++) {
                 order.push(item.productId._id);
             }
         });
-        console.log(order);
-
-        const response = await makeOrder(table, order);
-
-        console.log(response);
+        try {
+            const response = await makeOrder(table, order);
+            setShowSuccessPopup(true);
+            setPopupMessage("Orden tomada con éxito");
+            await delay(5000); // Espera 5 segundos
+            setShowSuccessPopup(false);
+        } catch (error) {
+            setShowErrorPopup(true);
+            setPopupMessage(
+                "No se pudo completar la orden. Por favor llama un mesero"
+            );
+            await delay(5000); // Espera 5 segundos
+            setShowErrorPopup(false);
+        }
     };
 
     return (
@@ -67,11 +87,13 @@ function ShoppingCartActions() {
                 onClick={() => patchCallWaiter(table, waiterUsername)}
                 children="Llamar al Mozo"
                 classNameSize="h-10 items-center w-1/2"
+                disabled={buttonDisabled}
             />
             <MainButton
                 children="¡ Pedir !"
                 classNameSize="h-10 items-center grow"
                 onClick={handleMakeOrder}
+                disabled={!ordersUser?.length}
             />
             {modalOpen && (
                 <PopupCartPostOrder

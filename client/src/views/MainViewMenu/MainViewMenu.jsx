@@ -32,7 +32,6 @@ const MainViewMenu = () => {
 
     useEffect(() => {
         if (menus.length > filteredMenus.length) {
-
             setDataView(true);
         } else {
             setDataView(false);
@@ -42,9 +41,9 @@ const MainViewMenu = () => {
     const clientNameLocal = localStorage.getItem("clientNameLocal");
 
     useEffect(() => {
-        if (loading === true) setIsLoading(true)
+        if (loading === true) setIsLoading(true);
         dispatch(dataMenuGet());
-        if (loading === false) setIsLoading(false)
+        if (loading === false) setIsLoading(false);
         clientNameLocal && setClientName(clientNameLocal);
         assignClientToTable(table, clientNameLocal);
     }, [dispatch]);
@@ -73,9 +72,7 @@ const MainViewMenu = () => {
         setShowMessageBox(false);
     };
 
-    const [isLoading, setIsLoading] = useState(false)
-
-
+    const [isLoading, setIsLoading] = useState(false);
 
     return (
         <div className="bg-customBgMain flex flex-col pb-4 min-h-screen">
@@ -89,11 +86,16 @@ const MainViewMenu = () => {
                         changeFilters={changeFilters}
                     />
                 </section>
-                <div className="py-7">
-                    {loading ? Array.from({ length: 5 }).map((_, index) => (
-                        <SkeletonComponent key={index} />
-                    )) : dataView ? (
-                        <ContainerCardsFilter dataFilter={filteredMenus} isLoading={isLoading} />
+                <div className="py-7 flex">
+                    {loading ? (
+                        Array.from({ length: 5 }).map((_, index) => (
+                            <SkeletonComponent key={index} />
+                        ))
+                    ) : dataView ? (
+                        <ContainerCardsFilter
+                            dataFilter={filteredMenus}
+                            isLoading={isLoading}
+                        />
                     ) : (
                         <ContainerCards menus={filteredMenus} />
                     )}

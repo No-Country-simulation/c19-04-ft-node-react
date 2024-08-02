@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const DetailModal = ({ isOpen, onClose, product }) => {
     const [quantity, setQuantity] = useState(1);
-    const [note, setNote] = useState('');
+    const [note, setNote] = useState("");
 
     if (!isOpen) return null;
 
@@ -13,11 +13,7 @@ const DetailModal = ({ isOpen, onClose, product }) => {
 
     const handleAddToCart = () => {
         // Aca se puede manejar la lógica para agregar el producto al carrito
-        console.log({
-            product,
-            quantity,
-            note,
-        });
+
         onClose();
     };
 
@@ -28,32 +24,49 @@ const DetailModal = ({ isOpen, onClose, product }) => {
                     <div className="flex justify-between items-center border-b pb-2">
                         <h2 className="text-xl font-bold">{product.title}</h2>
                         <button className="text-gray-500" onClick={onClose}>
-                        &times;
+                            &times;
                         </button>
                     </div>
-                <div className="p-4">
-                    <img src={product.image} alt={product.title} className="w-full h-64 object-cover mb-4 rounded" />
-                    <div className="max-h-40 overflow-y-auto mb-4">
-                        <p>{product.details}</p>
+                    <div className="p-4">
+                        <img
+                            src={product.image}
+                            alt={product.title}
+                            className="w-full h-64 object-cover mb-4 rounded"
+                        />
+                        <div className="max-h-40 overflow-y-auto mb-4">
+                            <p>{product.details}</p>
+                        </div>
+                        <div className="flex items-center mb-4">
+                            <button
+                                className="bg-customRed text-white px-2 py-1 rounded"
+                                onClick={handleDecrease}
+                            >
+                                -
+                            </button>
+                            <span className="mx-2">{quantity}</span>
+                            <button
+                                className="bg-customGreen text-white px-2 py-1 rounded"
+                                onClick={handleIncrease}
+                            >
+                                +
+                            </button>
+                        </div>
+                        <textarea
+                            className="w-full border rounded p-2 mb-4"
+                            placeholder="Nota para la cocina"
+                            value={note}
+                            onChange={(e) => setNote(e.target.value)}
+                        ></textarea>
+                        <button
+                            className="bg-customBlue text-white w-full py-2 rounded"
+                            onClick={handleAddToCart}
+                        >
+                            Agregar al carrito
+                        </button>
                     </div>
-                <div className="flex items-center mb-4">
-                    <button className="bg-customRed text-white px-2 py-1 rounded" onClick={handleDecrease}>-</button>
-                    <span className="mx-2">{quantity}</span>
-                    <button className="bg-customGreen text-white px-2 py-1 rounded" onClick={handleIncrease}>+</button>
                 </div>
-                <textarea
-                    className="w-full border rounded p-2 mb-4"
-                    placeholder="Nota para la cocina"
-                    value={note}
-                    onChange={(e) => setNote(e.target.value)}
-                ></textarea>
-                <button className="bg-customBlue text-white w-full py-2 rounded" onClick={handleAddToCart}>
-                    Agregar al carrito
-                </button>
             </div>
         </div>
-        </div>
-    </div>
     );
 };
 

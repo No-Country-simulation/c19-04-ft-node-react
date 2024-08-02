@@ -33,6 +33,10 @@ const routerPathComponent = [
         element: <DashBoardAdmins />,
     },
     {
+        path: "/admin",
+        element: <DashBoardAdmins />,
+    },
+    {
         path: "/invalid-password",
         element: <InvalidPasswordMessage />,
     },
@@ -82,6 +86,10 @@ const routerPathComponent = [
     },
     {
         path: "/waiter/temp",
+        element: <WaitersTemp />,
+    },
+    {
+        path: "/waiter",
         element: <WaitersTemp />,
     },
     {

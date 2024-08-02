@@ -15,28 +15,25 @@ function MyTablesCards({
     inProgressOrders,
     readyOrders,
 }) {
-    console.log(pendingOrders);
-    console.log(tableNumber);
-
     const [isOpen, setIsOpen] = useState(false);
     const toggleDropdown = () => setIsOpen((prevState) => !prevState);
 
-    console.log(pendingOrders)
-
     return (
         <div
-            className={`bg-white min-h-max text-sm shadow-lg rounded-lg transition-[border-radius] px-2 mb-2 ${isOpen ? " duration-0" : "duration-1000"
-                }`}
+            className={`bg-white min-h-max text-sm shadow-lg rounded-lg transition-[border-radius] px-2 mb-2 ${
+                isOpen ? " duration-0" : "duration-1000"
+            }`}
         >
             <div className="p-2 flex justify-between items-center font-semibold border-b-2">
                 <div className="flex gap-2">
-                    <h2 >Mesa {tableNumber}</h2>
+                    <h2>Mesa {tableNumber}</h2>
                     <button onClick={toggleDropdown}>
                         <img
                             src={triangleIconSVG}
                             alt="Toggle"
-                            className={`w-3 h-3 transform transition-transform duration-500 ${isOpen ? "rotate-180" : ""
-                                }`}
+                            className={`w-3 h-3 transform transition-transform duration-500 ${
+                                isOpen ? "rotate-180" : ""
+                            }`}
                         />
                     </button>
                 </div>
@@ -64,10 +61,15 @@ function MyTablesCards({
                     </button>
                 </div>
             </div>
-            <div className={`transition-all duration-500  ${isOpen ? "max-h-fit my-4 pb-2" : "max-h-0 overflow-hidden"}`}>
+            <div
+                className={`transition-all duration-500  ${
+                    isOpen ? "max-h-fit my-4 pb-2" : "max-h-0 overflow-hidden"
+                }`}
+            >
                 {pendingOrders &&
-                    pendingOrders.filter((order) => order.tableNumber === tableNumber)
-                        .length ? (
+                pendingOrders.filter(
+                    (order) => order.tableNumber === tableNumber
+                ).length ? (
                     <OrderTableCard
                         // orderId={order.id}
                         array={pendingOrders}
@@ -81,9 +83,9 @@ function MyTablesCards({
                     ""
                 )}
                 {inProgressOrders &&
-                    inProgressOrders.filter(
-                        (order) => order.tableNumber === tableNumber
-                    ).length ? (
+                inProgressOrders.filter(
+                    (order) => order.tableNumber === tableNumber
+                ).length ? (
                     <OrderTableCard
                         // orderId={order.id}
                         array={inProgressOrders}
@@ -97,8 +99,8 @@ function MyTablesCards({
                     ""
                 )}
                 {readyOrders &&
-                    readyOrders.filter((order) => order.tableNumber === tableNumber)
-                        .length ? (
+                readyOrders.filter((order) => order.tableNumber === tableNumber)
+                    .length ? (
                     <OrderTableCard
                         // orderId={order.id}
                         array={readyOrders}

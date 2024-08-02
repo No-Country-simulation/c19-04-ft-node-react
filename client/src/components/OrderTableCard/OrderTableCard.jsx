@@ -11,32 +11,35 @@ function OrderTableCard({
     actionDisplay,
     orderId,
 }) {
-
-    const [colorCurrentBorder, setColorCurrentBorder] = useState("red")
-    const [colorCurrentText, setColorCurrentText] = useState("red")
+    const [colorCurrentBorder, setColorCurrentBorder] = useState("red");
+    const [colorCurrentText, setColorCurrentText] = useState("red");
 
     useEffect(() => {
-
         if (color === "red") {
-            setColorCurrentBorder("border-red-600")
-            setColorCurrentText("text-red-600")
+            setColorCurrentBorder("border-red-600");
+            setColorCurrentText("text-red-600");
         }
 
         if (color === "yellow") {
-            setColorCurrentBorder("border-yellow-600")
-            setColorCurrentText("text-yellow-600")
+            setColorCurrentBorder("border-yellow-600");
+            setColorCurrentText("text-yellow-600");
         }
 
         if (color === "green") {
-            setColorCurrentBorder("border-green-600")
-            setColorCurrentText("text-green-600")
+            setColorCurrentBorder("border-green-600");
+            setColorCurrentText("text-green-600");
         }
-
-    }, [color, action, actionDisplay])
+    }, [color, action, actionDisplay]);
 
     return (
-        <div className={` px-4 py-2 border-2 border-green-500 ${colorCurrentBorder} text-[11px] rounded-xl mb-2`}>
-            <div className={` font-semibold text-xs text-${colorCurrentText}-700 my-2`}>{type}</div>
+        <div
+            className={` px-4 py-2 border-2 border-green-500 ${colorCurrentBorder} text-[11px] rounded-xl mb-2`}
+        >
+            <div
+                className={` font-semibold text-xs text-${colorCurrentText}-700 my-2`}
+            >
+                {type}
+            </div>
             {array &&
                 array.filter &&
                 array
@@ -57,10 +60,15 @@ function OrderTableCard({
                                 <p className="text-[12px]">Platos pedidos:</p>
                             </div>
                             <div className="px-2">
-                                {order.order.map((dish, index) => (
-                                    <div key={dish.title + index} className="flex  gap-1">
+                                {order?.order?.map((dish, index) => (
+                                    <div
+                                        key={dish.title + index}
+                                        className="flex  gap-1"
+                                    >
                                         <img src={productSvg} alt="Pedido" />
-                                        <p className="text-gray-400">{dish.title}</p>
+                                        <p className="text-gray-400">
+                                            {dish.title}
+                                        </p>
                                     </div>
                                 ))}
                             </div>
@@ -76,7 +84,6 @@ function OrderTableCard({
                             <hr />
                         </div>
                     ))}
-
         </div>
     );
 }

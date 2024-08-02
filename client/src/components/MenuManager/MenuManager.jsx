@@ -29,16 +29,15 @@ const MenuManager = () => {
         toggle: false,
     });
 
-
     const [showTable, setShowTable] = useState(false);
     const [error, setError] = useState("");
 
     const [showSuccessPopup, setShowSuccessPopup] = useState(null);
-    const [popupMessage, setPopupMessage] = useState('');
+    const [popupMessage, setPopupMessage] = useState("");
 
     useEffect(() => {
         getMenusForAdminPanel(setMenus, setError);
-        setShowTable(true)
+        setShowTable(true);
     }, [dropdown]);
 
     const handleInputChange = (e) => {
@@ -49,13 +48,23 @@ const MenuManager = () => {
     const handleToggleAvailability = async (menu) => {
         try {
             const updatedMenu = { ...menu, available: !menu.available };
-            await axiosInstanceWithCredentials.patch(`/api/admin/menu/${menu._id}`, updatedMenu);
-            const updatedMenus = menus.map(m => m._id === menu._id ? updatedMenu : m);
+            await axiosInstanceWithCredentials.patch(
+                `/api/admin/menu/${menu._id}`,
+                updatedMenu
+            );
+            const updatedMenus = menus.map((m) =>
+                m._id === menu._id ? updatedMenu : m
+            );
             setMenus(updatedMenus);
             setDropdown({ ...dropdown, toggle: false });
         } catch (error) {
-            console.error("Error al cambiar la disponibilidad del menú:", error);
-            setError("No se pudo cambiar la disponibilidad. Por favor, inténtelo de nuevo más tarde.");
+            console.error(
+                "Error al cambiar la disponibilidad del menú:",
+                error
+            );
+            setError(
+                "No se pudo cambiar la disponibilidad. Por favor, inténtelo de nuevo más tarde."
+            );
         }
     };
 
@@ -77,16 +86,17 @@ const MenuManager = () => {
     };
 
     const selectMenuForDelete = (menu) => {
-        setSelectedMenu(menu)
+        setSelectedMenu(menu);
         setDropdown({ ...dropdown, delete: true });
-        console.log("me abri delete")
-    }
+    };
 
     return (
         <div className="relative h-[95%]">
             <div className="flex flex-nowrap justify-center gap-4 m-4">
                 <MainButton
-                    onClick={() => setDropdown({ ...dropdown, create: !dropdown.create })}
+                    onClick={() =>
+                        setDropdown({ ...dropdown, create: !dropdown.create })
+                    }
                     classNameSize="p-2 text-[14px]"
                 >
                     Crear Elemento
@@ -98,7 +108,9 @@ const MenuManager = () => {
                     Editar Menú
                 </SecondaryButton>
                 <SecondaryButton
-                    onClick={() => setDropdown({ ...dropdown, toggle: !dropdown.toggle })}
+                    onClick={() =>
+                        setDropdown({ ...dropdown, toggle: !dropdown.toggle })
+                    }
                     classNameSize="p-2 text-[14px]"
                 >
                     Cambiar Disponibilidad
@@ -119,7 +131,11 @@ const MenuManager = () => {
 
             {showSuccessPopup !== null && (
                 <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-1000 ease-in-out">
-                    {showSuccessPopup ? <SuccessPopup message={popupMessage} /> : <ErrorPopup message={popupMessage} />}
+                    {showSuccessPopup ? (
+                        <SuccessPopup message={popupMessage} />
+                    ) : (
+                        <ErrorPopup message={popupMessage} />
+                    )}
                 </div>
             )}
 
@@ -134,7 +150,10 @@ const MenuManager = () => {
                         <thead className="bg-customRed-400 text-white">
                             <tr>
                                 {optionsCreateForm.map((label, index) => (
-                                    <th key={index} className="px-2 py-2 border border-transparent">
+                                    <th
+                                        key={index}
+                                        className="px-2 py-2 border border-transparent"
+                                    >
                                         {label}
                                     </th>
                                 ))}
@@ -144,7 +163,11 @@ const MenuManager = () => {
                             {menus.map((menu, index) => (
                                 <tr
                                     key={index}
-                                    className={`hover:bg-customRed-100 ${index === menus.length - 1 ? "last:rounded-b-3xl" : ""}`}
+                                    className={`hover:bg-customRed-100 ${
+                                        index === menus.length - 1
+                                            ? "last:rounded-b-3xl"
+                                            : ""
+                                    }`}
                                 >
                                     <td className="text-[12px] px-2 py-1 border border-white text-center">
                                         {menu.dishNumber}
@@ -168,16 +191,24 @@ const MenuManager = () => {
                                     <td className="text-[11px] px-2 pl-6 border border-white">
                                         {menu.price}
                                     </td>
-                                    <td className="text-[11px] px-2 py-1 border border-white text-center">{menu.tags}</td>
-                                    <td className="text-[11px] px-2 py-1 border border-white text-center">{menu.to}</td>
+                                    <td className="text-[11px] px-2 py-1 border border-white text-center">
+                                        {menu.tags}
+                                    </td>
+                                    <td className="text-[11px] px-2 py-1 border border-white text-center">
+                                        {menu.to}
+                                    </td>
                                     <td className="text-[11px] p-4 border border-white flex items-center justify-center gap-2">
                                         <MainButton
-                                            onClick={() => selectMenuForUpdate(menu)}
+                                            onClick={() =>
+                                                selectMenuForUpdate(menu)
+                                            }
                                             classNameSize="p-[6px] px-5 text-[10px]"
                                             children="Editar"
                                         />
                                         <SecondaryButton
-                                            onClick={() => selectMenuForDelete(menu)}
+                                            onClick={() =>
+                                                selectMenuForDelete(menu)
+                                            }
                                             classNameSize="p-[6px] px-4 text-[9px]"
                                             children="Eliminar"
                                         />
@@ -187,42 +218,53 @@ const MenuManager = () => {
                         </tbody>
                     </table>
                 </div>
-            ) : showTable && !error && (
-                <div className="text-center text-gray-950 text-[12px] p-4">
-                    No se encontraron menús.
-                </div>
+            ) : (
+                showTable &&
+                !error && (
+                    <div className="text-center text-gray-950 text-[12px] p-4">
+                        No se encontraron menús.
+                    </div>
+                )
             )}
-
 
             {dropdown.create && (
                 <DropdownCreateMenu
                     newMenu={newMenu}
                     handleInputChange={handleInputChange}
-                    handleCreateMenu={(e) => handleCreateMenuWrapper(
-                        e,
-                        newMenu,
-                        setMenus,
-                        menus,
-                        setNewMenu,
-                        setDropdown,
-                        dropdown,
-                        setError,
-                        setShowSuccessPopup,
-                        setPopupMessage
-                    )}
+                    handleCreateMenu={(e) =>
+                        handleCreateMenuWrapper(
+                            e,
+                            newMenu,
+                            setMenus,
+                            menus,
+                            setNewMenu,
+                            setDropdown,
+                            dropdown,
+                            setError,
+                            setShowSuccessPopup,
+                            setPopupMessage
+                        )
+                    }
                     closeDropdown={() => {
                         closeMenuCreate(
                             closeDropdowns(setDropdown),
                             setPopupMessage,
                             setShowSuccessPopup
-                        )
+                        );
                     }}
                 />
             )}
             {dropdown.update && selectedMenu && (
                 <DropdownUpdateMenu
                     selectedMenu={selectedMenu}
-                    handleUpdateMenu={(updateMenu) => handleUpdateMenuAdmin(updateMenu, setDropdown, setPopupMessage, setShowSuccessPopup)}
+                    handleUpdateMenu={(updateMenu) =>
+                        handleUpdateMenuAdmin(
+                            updateMenu,
+                            setDropdown,
+                            setPopupMessage,
+                            setShowSuccessPopup
+                        )
+                    }
                     closeDropdown={closeDropdowns(setDropdown)}
                 />
             )}
@@ -231,7 +273,14 @@ const MenuManager = () => {
                 <DropdownDeleteMenu
                     selectedMenu={selectedMenu}
                     menus={menus}
-                    handleDeleteMenu={(_id) => handleDeleteMenuAdmin(_id, setDropdown, setPopupMessage, setShowSuccessPopup)}
+                    handleDeleteMenu={(_id) =>
+                        handleDeleteMenuAdmin(
+                            _id,
+                            setDropdown,
+                            setPopupMessage,
+                            setShowSuccessPopup
+                        )
+                    }
                     closeDropdown={closeDropdowns(setDropdown)}
                 />
             )}
