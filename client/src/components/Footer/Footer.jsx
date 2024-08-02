@@ -4,6 +4,7 @@ function Footer() {
     const group = [
         { name: "Anthony Mendoza", link: "https://github.com/Anthonytrader" },
         { name: "Augusto Iphar", link: "" },
+        { name: "Blas Pachano", link: "" },
         { name: "Carlos Canabal", link: "https://github.com/canabaldev1" },
         { name: "Martin Alba", link: "https://github.com/Martin-Alba" },
         { name: "Paolo Suarez", link: "https://github.com/PSuarez18" },
@@ -33,6 +34,7 @@ function Footer() {
                         className="border-b-2 border-transparent hover:border-white transition duration-300"
                         href={member.link}
                         title={`Link a GitHub de ${member.name}`}
+                        target="#"
                     >
                         {member.name}
                     </a>
