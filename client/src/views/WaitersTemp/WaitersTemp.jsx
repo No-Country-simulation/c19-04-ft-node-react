@@ -17,10 +17,6 @@ function WaitersTemp() {
     const [tables, setTables] = useFireBase("/tables", {});
     const [waiters, setWaiters] = useFireBase("/waiters", {});
 
-    console.log(orders, "estoy aqui")
-    console.log(tables)
-    console.log(waiters)
-
     const {navigateTo}  = useNavigateHelper()
 
     const tablesArray = Object.keys(tables).filter(
