@@ -4,15 +4,51 @@ import "../../styles/footer.css";
 
 function Footer() {
     const group = [
-        { name: "Anthony Mendoza", link: "https://github.com/Anthonytrader", role: "frontend" },
-        { name: "Augusto Iphar", link: "", role: "teamLeader" },
-        { name: "Blas Pachano", link: "", role: "frontend" },
-        { name: "Carlos Canabal", link: "https://github.com/canabaldev1", role: "frontend" },
-        { name: "Martin Alba", link: "https://github.com/Martin-Alba", role: "backend" },
-        { name: "Paolo Suarez", link: "https://github.com/PSuarez18", role: "frontend" },
-        { name: "Rocio Tellez", link: "https://github.com/RocioTellezLopez", role: "frontend" },
-        { name: "Sofía Pérez", link: "https://github.com/esedesofia", role: "frontend" },
-        { name: "Thiago Salaberry", link: "https://github.com/thiagoSalaberry", role: "backend" },
+        {
+            name: "Anthony Mendoza",
+            link: "https://github.com/Anthonytrader",
+            role: "frontend",
+        },
+        {
+            name: "Augusto Iphar",
+            link: "https://github.com/Augustofrx",
+            role: "teamLeader",
+        },
+        {
+            name: "Blas Pachano",
+            link: "https://github.com/Blaschu",
+            role: "frontend",
+        },
+        {
+            name: "Carlos Canabal",
+            link: "https://github.com/canabaldev1",
+            role: "frontend",
+        },
+        {
+            name: "Martin Alba",
+            link: "https://github.com/Martin-Alba",
+            role: "backend",
+        },
+        {
+            name: "Paolo Suarez",
+            link: "https://github.com/PSuarez18",
+            role: "frontend",
+        },
+        {
+            name: "Rocio Tellez",
+            link: "https://github.com/RocioTellezLopez",
+            role: "frontend",
+        },
+        {
+            name: "Sofía Pérez",
+            link: "https://github.com/esedesofia",
+            role: "frontend",
+        },
+        {
+            name: "Thiago Salaberry",
+            link: "https://github.com/thiagoSalaberry",
+            role: "backend",
+        },
     ];
 
     return (
@@ -30,16 +66,22 @@ function Footer() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
-                    <h3 className="text-sm font-bold text-center mb-2">Team Leader</h3>
+                    <h3 className="text-sm font-bold text-center mb-2">
+                        Team Leader
+                    </h3>
                     {group
-                        .filter(member => member.role === "teamLeader")
+                        .filter((member) => member.role === "teamLeader")
                         .map((member, index) => (
-                            <p key={index} className="text-center mb-2 animate-slide-up">
+                            <p
+                                key={index}
+                                className="text-center mb-2 animate-slide-up"
+                            >
                                 <a
                                     className="border-b-2 border-transparent hover:border-white transition duration-300"
                                     href={member.link}
                                     title={`Link a GitHub de ${member.name}`}
-                                    target="_blank" rel="noopener noreferrer"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     {member.name}
                                 </a>
@@ -47,16 +89,22 @@ function Footer() {
                         ))}
                 </div>
                 <div>
-                    <h3 className="text-sm font-bold text-center mb-2">Desarrolladores Frontend</h3>
+                    <h3 className="text-sm font-bold text-center mb-2">
+                        Desarrolladores Frontend
+                    </h3>
                     {group
-                        .filter(member => member.role === "frontend")
+                        .filter((member) => member.role === "frontend")
                         .map((member, index) => (
-                            <p key={index} className="text-center  mb-2 animate-slide-up">
+                            <p
+                                key={index}
+                                className="text-center  mb-2 animate-slide-up"
+                            >
                                 <a
                                     className="border-b-2 border-transparent hover:border-white transition duration-300"
                                     href={member.link}
                                     title={`Link a GitHub de ${member.name}`}
-                                    target="_blank" rel="noopener noreferrer"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     {member.name}
                                 </a>
@@ -64,16 +112,22 @@ function Footer() {
                         ))}
                 </div>
                 <div>
-                    <h3 className="text-sm font-bold text-center mb-2">Desarrolladores Backend</h3>
+                    <h3 className="text-sm font-bold text-center mb-2">
+                        Desarrolladores Backend
+                    </h3>
                     {group
-                        .filter(member => member.role === "backend")
+                        .filter((member) => member.role === "backend")
                         .map((member, index) => (
-                            <p key={index} className="text-center mb-2 animate-slide-up">
+                            <p
+                                key={index}
+                                className="text-center mb-2 animate-slide-up"
+                            >
                                 <a
                                     className="border-b-2 border-transparent hover:border-white transition duration-300"
                                     href={member.link}
                                     title={`Link a GitHub de ${member.name}`}
-                                    target="_blank" rel="noopener noreferrer"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     {member.name}
                                 </a>
