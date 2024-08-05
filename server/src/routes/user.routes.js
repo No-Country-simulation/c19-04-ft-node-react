@@ -1,3 +1,6 @@
 //metodos para el usuario
 
-//POST a vista-mozo v1
+//GET CARD-MENU
+
+//POST LLAMAR MOZO
+

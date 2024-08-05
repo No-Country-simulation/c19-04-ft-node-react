@@ -1,9 +1,25 @@
-//modelo de mozo
+import mongoose from "mongoose";
 
-//Nombre
+const waiterSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        unique: true,
+        required: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+    name: {
+        type: String,
+        required: false,
+    },
+    role: {
+        type: String,
+        default: "waiter",
+    },
+});
 
-//Apellido
+const WaiterModel = mongoose.model("Waiter", waiterSchema);
 
-//Mesas Asignadas
-
-//Salario hora
+export default WaiterModel;

@@ -1,1 +1,0 @@
-//metodos del panel admin

@@ -1,1 +1,0 @@
-//GET de card-menu

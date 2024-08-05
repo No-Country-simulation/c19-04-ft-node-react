@@ -2,7 +2,7 @@ import winston from 'winston'
 
 const PERSISTANCE = process.env.PERSISTANCE
 
-console.log(`Environment: ${PERSISTANCE}`) // Agregar para verificar el valor de PERSISTANCE
+console.info(`Environment: ${PERSISTANCE}`) // Agregar para verificar el valor de PERSISTANCE
 
 const custom = {
 	levels: {
@@ -28,7 +28,7 @@ winston.addColors(custom.colors)
 
 const createLogger = (env) => {
 	if (env === 'PROD') {
-		console.log('Configuring logger for PROD environment') // Agregar para confirmar la configuración de PROD
+		console.info('Configuring logger for PROD environment') // Agregar para confirmar la configuración de PROD
 		return winston.createLogger({
 			levels: custom.levels,
 			transports: [
@@ -38,7 +38,7 @@ const createLogger = (env) => {
 					format: winston.format.simple(),
 				}),
 				new winston.transports.Console({
-					level: 'warn',
+					level: 'info',
 					format: winston.format.combine(
 						winston.format.colorize(),
 						winston.format.simple(),
@@ -47,7 +47,7 @@ const createLogger = (env) => {
 			],
 		})
 	}
-	console.log('Configuring logger for non-PROD environment') // Agregar para confirmar la configuración de no PROD
+	console.info('Configuring logger for non-PROD environment') // Agregar para confirmar la configuración de no PROD
 	return winston.createLogger({
 		levels: custom.levels,
 		transports: [

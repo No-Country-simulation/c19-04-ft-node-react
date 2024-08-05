@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.disable-mouse {
+    pointer-events: none;
+    filter: blur(5px);
+    transition: all 0.2s;
+}
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+}

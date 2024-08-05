@@ -1,0 +1,36 @@
+@keyframes blurFadeInOut {
+    0% {
+        opacity: 0;
+        filter: blur(10px);
+    }
+    10% {
+        opacity: 1;
+        filter: blur(5px);
+    }
+    13% {
+        opacity: 1;
+        filter: blur(0);
+    }
+
+    50% {
+        opacity: 1;
+        filter: blur(0);
+    }
+    87% {
+        opacity: 1;
+        filter: blur(0);
+    }
+    90% {
+        opacity: 1;
+        filter: blur(5px);
+    }
+    100% {
+        opacity: 0;
+        filter: blur(10px);
+    }
+}
+
+.popup {
+    animation: blurFadeInOut 4s ease-in-out;
+    animation-fill-mode: forwards;
+}
