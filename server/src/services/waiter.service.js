@@ -140,7 +140,6 @@ export const requestAttended = async (req, res) => {
 export const closeTable = async (req, res) => {
     const { tableNumber } = req.params;
     const { order } = req.body;
-    console.log(tableNumber, order);
     if (!tableNumber || !order) {
         logger.error("Missing required fields");
         return res.status(400).send("Missing required fields");
@@ -156,7 +155,6 @@ export const closeTable = async (req, res) => {
             .status(200)
             .json({ message: `Table ${tableNumber} has been closed` });
     } catch (error) {
-        console.log(error);
         logger.error(`Error in waiter.service.closeTable: ${error}`);
         res.status(500).send("Internal Server Error");
     }
