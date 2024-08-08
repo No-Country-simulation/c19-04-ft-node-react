@@ -337,5 +337,25 @@
         "people": 1,
         "extraInfo": "Notas del usuario",
         "rating": 1.7
+    },
+    {
+        "title": "Lomo saltado",
+        "description": "carne con papas",
+        "estimatedTimeToDeliver": 20,
+        "imgUrl": "https://www.ilcb.edu.pe/repositorioaps/data/1/2/2/not/el-lomo-saltado/images/LOMO-SALTADO.jpg",
+        "price": 3500,
+        "available": true,
+        "category": ["Platos principales"],
+        "tags": ["Crepes"],
+        "dishNumber": 21,
+        "to": "kitchen",
+        "ingredients": [],
+        "estimatedTime": 5,
+        "people": 1,
+        "extraInfo": "Notas del usuario",
+        "rating": 4.9
     }
+
+
+
 ]
