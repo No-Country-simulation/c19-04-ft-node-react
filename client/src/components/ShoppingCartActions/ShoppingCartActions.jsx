@@ -79,19 +79,19 @@ function ShoppingCartActions({
     };
 
     return (
-        <div className="w-[95vw] flex flex-wrap gap-y-8 gap-x-2 place-content-center self-center">
-            <p className="w-full text-[32px] leading-10">
+        <div className="w-[95vw] flex flex-wrap gap-y-8 gap-x-4 place-content-center self-center lg:w-[30%] lg:gap-x-3">
+            <p className="w-full text-[22px] leading-10">
                 Total a pagar: <span className="font-bold">${totalPay}</span>
             </p>
             <SecondaryButton
                 onClick={() => patchCallWaiter(table, waiterUsername)}
                 children="Llamar al Mozo"
-                classNameSize="h-10 items-center w-1/2"
+                classNameSize="h-10 items-center w-[48%]"
                 disabled={buttonDisabled}
             />
             <MainButton
                 children="¡ Pedir !"
-                classNameSize="h-10 items-center grow"
+                classNameSize="h-10 items-center w-[48%]"
                 onClick={handleMakeOrder}
                 disabled={!ordersUser?.length}
             />
