@@ -15,6 +15,7 @@ import patchCallWaiter from "../../utils/api/patchCallWaiter";
 import { assignClientToTable } from "../../utils/api/assignClientToTable";
 import useFireBase from "../../utils/hooks/useFireBase";
 import SkeletonComponent from "../../components/SkeletonComponente/SkeletonComponent";
+
 const MainViewMenu = () => {
     const { filter, filterFood, changeFilters } = useFilterFood();
     const { menus, filteredMenus, categories, loading, error } = useSelector(
@@ -23,11 +24,8 @@ const MainViewMenu = () => {
     const dispatch = useDispatch();
 
     const [dataView, setDataView] = useState(false);
-
     const { table } = useParams();
-
     const [tables, setTables] = useFireBase("/tables", {});
-
     const waiterUsername = table && tables[`table_${table}`]?.waiter;
 
     useEffect(() => {
@@ -36,28 +34,38 @@ const MainViewMenu = () => {
         } else {
             setDataView(false);
         }
-    }, [filteredMenus.length]);
+    }, [filteredMenus.length, menus.length]);
 
+    const [isLoading, setIsLoading] = useState(false);
     const clientNameLocal = localStorage.getItem("clientNameLocal");
 
     useEffect(() => {
-        if (loading === true) setIsLoading(true);
         dispatch(dataMenuGet());
-        if (loading === false) setIsLoading(false);
-        clientNameLocal && setClientName(clientNameLocal);
-        assignClientToTable(table, clientNameLocal);
     }, [dispatch]);
 
+    useEffect(() => {
+        if (loading === true) {
+            setIsLoading(true)
+        }
+        if (loading === false) {
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 300);
+        }
+    }, [loading]);
+    useEffect(() => {
+        clientNameLocal && setClientName(clientNameLocal);
+        assignClientToTable(table, clientNameLocal);
+    }, [table, clientNameLocal]);
+
     const { navigateTo } = useNavigateHelper();
-
     const [showMessageBox, setShowMessageBox] = useState(true);
-
     const [clientName, setClientName] = useState("");
 
     const closeMessageBox = () => {
         setClientName("Invitado");
         localStorage.setItem("clientNameLocal", "Invitado");
-        assignClientToTable(table, clientName);
+        assignClientToTable(table, "Invitado");
         setShowMessageBox(false);
     };
 
@@ -72,25 +80,25 @@ const MainViewMenu = () => {
         setShowMessageBox(false);
     };
 
-    const [isLoading, setIsLoading] = useState(false);
-
     return (
         <div className="bg-customBgMain flex flex-col pb-4 min-h-screen">
             <NavBar clientName={clientName} tableNumber={table} />
             <SearchBar />
             <div>
-                <h2 className="text-[14px] leading-5  px-5 pb-3">Menú</h2>
+                <h2 className="text-[14px] leading-5 px-5 pb-3">Menú</h2>
                 <section className="border-y">
                     <FilterFood
                         categories={categories}
                         changeFilters={changeFilters}
                     />
                 </section>
-                <div className="py-7 flex">
-                    {loading ? (
-                        Array.from({ length: 5 }).map((_, index) => (
+                <div className="py-7 flex justify-center ">
+                    {isLoading ? (<div className="flex flex-wrap gap-y-9 gap-x-2 justify-center w-full sm:grid sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 sm:justify-items-center sm:px-5">
+                        {Array.from({ length: 10 }).map((_, index) => (
                             <SkeletonComponent key={index} />
-                        ))
+                        ))}
+                    </div>
+
                     ) : dataView ? (
                         <ContainerCardsFilter
                             dataFilter={filteredMenus}
@@ -101,15 +109,15 @@ const MainViewMenu = () => {
                     )}
                 </div>
             </div>
-            <div className="sticky left-0 bottom-0 w-[95vw] py-3 flex flex-wrap items-end gap-y-8 gap-x-2 mx-auto z-10  bg-opacity-100 backdrop-blur-lg grow">
+            <div className="sticky left-0 bottom-0 w-[95vw] py-3 flex justify-center gap-y-8 gap-x-2 mx-auto z-10 bg-opacity-100 backdrop-blur-lg grow sm:gap-x-12">
                 <SecondaryButton
                     children="Llamar al Mozo"
-                    classNameSize="h-10 items-center w-1/2"
+                    classNameSize="h-10 items-center w-1/2 sm:w-1/4 xl:w-1/5"
                     onClick={() => patchCallWaiter(table, waiterUsername)}
                 />
                 <MainButton
                     children="Ver mi Pedido"
-                    classNameSize="h-10 items-center grow"
+                    classNameSize="h-10 items-center grow sm:w-1/4 xl:w-1/5 sm:grow-0"
                     onClick={() => navigateTo(`/my-order/${table}`)}
                 />
             </div>
@@ -123,7 +131,7 @@ const MainViewMenu = () => {
                             <div className="text-lg max-w-[90%] mb-2">
                                 Bienvenido al restaurante!
                             </div>
-                            <div className="max-w-[90%]  mb-2">
+                            <div className="max-w-[90%] mb-2">
                                 Por favor, introduce tu nombre, y con gusto uno
                                 de nuestros meseros te atenderá en el menor
                                 tiempo posible
@@ -153,9 +161,7 @@ const MainViewMenu = () => {
                         </form>
                     </div>
                 </div>
-            ) : (
-                ""
-            )}
+            ) : null}
         </div>
     );
 };

@@ -65,7 +65,7 @@ const CardsMainMenu = ({ _id, title, imgUrl, price, description, time }) => {
       <div className="tracking-tight gap-[5px]">
         <section className="flex flex-col gap-[5px]">
           <div className="flex justify-between">
-            <p className="text-lg leading-[22.68px] font-bold overflow-hidden whitespace-nowrap text-ellipsis word-spacing-tight">
+            <p className="text-lg leading-[22.68px] font-bold overflow-hidden whitespace-nowrap text-ellipsis word-spacing-wide-s sm:word-spacing-wide-xs">
               {title}
             </p>
             <img className="w-6 h-[22.5px]" src={corazonImg} alt="favorite" />
