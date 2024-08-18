@@ -12,7 +12,9 @@ const SearchBar = () => {
     const [debounceSearchValue] = useDebounce(searchValue, 1000);
 
     const handleInputChange = (e) => {
-        dispatch(setSearchValue(e.target.value));
+
+        const newValue = e.target.value.replace(/\s{2,}/g, ' ').trimStart();
+        dispatch(setSearchValue(newValue));
     };
 
     const arraySearch = useSelector((state) => state.dataMenus.menus);
@@ -40,7 +42,8 @@ const SearchBar = () => {
                         : "max-h-0 opacity-0"
                 } ${busquedaEnArray.length > 0 ? "" : "hidden"}`}
             >
-                {debounceSearchValue !== "" &&
+                {/* Muestra los resultados de la busqueda del searchBar */}
+                {/* {debounceSearchValue !== "" &&
                     (busquedaEnArray.length > 0 ? (
                         busquedaEnArray.map((item) => (
                             <SearchResultBar
@@ -52,7 +55,7 @@ const SearchBar = () => {
                         <p className="text-center text-xs text-gray-500">
                             No hay resultados para su búsqueda
                         </p>
-                    ))}
+                    ))} */}
             </div>
         </section>
     );
