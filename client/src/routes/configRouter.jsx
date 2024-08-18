@@ -95,6 +95,10 @@ const routerPathComponent = [
         element: <WaitersTemp />,
     },
     {
+        path: "/createOrder",
+        element: <NewOrderWaiter />,
+    },
+    {
         path: "/kitchen",
         element: <KitchenBarPanel />,
     },

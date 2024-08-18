@@ -67,7 +67,7 @@ const DropdownUpdateMenu = ({ selectedMenu, handleUpdateMenu, closeDropdown }) =
                             ) : (
                                 <input
                                     id={field}
-                                    type={field === 'price' || field=== 'dishNumber' || field === 'estimatedTimeToDeliver' ? 'number' : 'text'}
+                                    type={field === 'price' || field=== 'dishNumber' || field === 'estimatedTime' ? 'number' : 'text'}
                                     name={field}
                                     value={formState[field]}
                                     onChange={handleChange}

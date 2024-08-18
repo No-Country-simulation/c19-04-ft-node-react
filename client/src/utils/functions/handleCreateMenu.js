@@ -20,7 +20,7 @@ export const handleCreateMenu = async (
       title: newMenu.title,
       description: newMenu.description,
       imgUrl: newMenu.imgUrl,
-      estimatedTimeToDeliver: newMenu.estimatedTimeToDeliver,
+      estimatedTime: newMenu.estimatedTime,
       price: newMenu.price,
       available: newMenu.available,
       category: newMenu.category,

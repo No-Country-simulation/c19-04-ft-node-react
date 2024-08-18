@@ -27,10 +27,10 @@ const dataMenuSlice = createSlice({
                 state.error = null;
             })
             .addCase(dataMenuGet.fulfilled, (state, action) => {
-                state.loading = false;
                 state.menus = action.payload;
                 state.filteredMenus = action.payload;
                 state.categories = extractCategories(action.payload);
+                state.loading = false
             })
             .addCase(dataMenuGet.rejected, (state, action) => {
                 state.loading = false;

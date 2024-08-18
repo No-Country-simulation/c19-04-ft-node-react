@@ -103,6 +103,12 @@ export default {
           ".word-spacing-normal": {
             wordSpacing: "normal",
           },
+          ".word-spacing-wide-xs": {
+            wordSpacing: "0.08rem",
+          },
+          ".word-spacing-wide-s": {
+            wordSpacing: "0.13rem",
+          },
           ".word-spacing-wide": {
             wordSpacing: "0.25rem",
           },
