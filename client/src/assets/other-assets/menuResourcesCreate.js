@@ -39,7 +39,7 @@ export const fieldLabels = {
   title: "Título",
   description: "Descripción",
   imgUrl: "Imagen URL",
-  estimatedTimeToDeliver: "Tiempo Estimado de Entrega",
+  estimatedTime: "Tiempo Estimado de Entrega",
   price: "Precio",
   to: "Lugar de Despacho",
   category: "Categoria",

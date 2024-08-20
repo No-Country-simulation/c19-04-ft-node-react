@@ -21,16 +21,16 @@ export default function DropdownFoodItem({ food }) {
   };
 
   return (
-    <div className="w-[390px]">
+    <div className="w-[60%] lg:max-w-[30%]">
       <div
         className={`bg-white shadow-lg rounded-lg transition-[border-radius] p-3 ${isOpen ? "rounded-b-none duration-0" : "duration-1000"
           }`}
       >
         <div className="flex justify-between w-full ">
-          <p >
+          <p className="p-1">
             {title} ({quantity})
           </p>
-          <button className="absolute left-[90%]" onClick={toggleDropdown}>
+          <button className="p-1" onClick={toggleDropdown}>
             <img
               src={triangleIconSVG}
               alt=""

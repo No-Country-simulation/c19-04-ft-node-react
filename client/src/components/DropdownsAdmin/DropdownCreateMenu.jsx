@@ -52,8 +52,8 @@ const formFields = [
         maxLength: null
     },
     {
-        id: "estimatedTimeToDeliver",
-        name: "estimatedTimeToDeliver",
+        id: "estimatedTime",
+        name: "estimatedTime",
         type: "number",
         label: "Tiempo de Preparación (minutos)",
         validate: validateTiempoDePreparacion,
@@ -94,12 +94,13 @@ const DropdownCreateMenu = ({
     handleCreateMenu,
     closeDropdown
 }) => {
+
     const handleSubmit = (e) => {
         e.preventDefault();
-       
+        
         const errors = formFields
-            .filter(field => field.validate) 
-            .map(field => field.validate(newMenu[field.name]))
+        .filter(field => field.validate) 
+        .map(field => field.validate(newMenu[field.name]))
             .filter(error => error);
 
         if (errors.length > 0) {

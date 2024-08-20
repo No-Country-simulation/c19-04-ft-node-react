@@ -10,7 +10,7 @@ const ContainerCardsFilter = ({ dataFilter, isLoading }) => {
         containerRef.current.scrollLeft = containerRef.current.scrollLeft;
         containerRef.current.isDragging = true;
     };
-
+   
     const handleMouseMove = (e) => {
         if (!containerRef.current.isDragging) return;
 
@@ -53,7 +53,7 @@ const ContainerCardsFilter = ({ dataFilter, isLoading }) => {
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
         >
-            <div className="flex flex-nowrap gap-8 pl-8 pr-20">
+            <div className="flex flex-nowrap gap-8 px-8 justify-center min-w-max">
                 {isLoading
                     ? Array.from({ length: 5 }).map((_, index) => (
                         <SkeletonComponent key={index} />
@@ -64,12 +64,11 @@ const ContainerCardsFilter = ({ dataFilter, isLoading }) => {
                             _id={element._id}
                             description={element.description}
                             price={element.price}
-                            timePreparation={element.estimatedTimeToDeliver}
+                            timePreparation={element.estimatedTime}
                             title={element.title}
                             imgUrl={element.imgUrl}
                         />
                     ))}
-                <div className="flex-shrink-0 w-5"></div>
             </div>
         </div>
     );

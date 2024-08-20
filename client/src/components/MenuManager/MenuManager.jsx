@@ -22,6 +22,7 @@ const MenuManager = () => {
     const [menus, setMenus] = useState([]);
     const [selectedMenu, setSelectedMenu] = useState(null);
     const [newMenu, setNewMenu] = useState(getInitialMenuState());
+    
     const [dropdown, setDropdown] = useState({
         create: false,
         update: false,
@@ -90,6 +91,7 @@ const MenuManager = () => {
         setDropdown({ ...dropdown, delete: true });
     };
 
+    
     return (
         <div className="relative h-[95%]">
             <div className="flex flex-nowrap justify-center gap-4 m-4">
