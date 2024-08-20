@@ -105,7 +105,18 @@ const MainViewMenu = () => {
                 <SecondaryButton
                     children="Llamar al Mozo"
                     classNameSize="h-10 items-center w-1/2"
-                    onClick={() => patchCallWaiter(table, waiterUsername)}
+                    onClick={() => {
+                        if (waiterUsername) {
+                            patchCallWaiter(table, waiterUsername);
+                        }
+                        setTables({
+                            ...tables,
+                            [`table_${table}`]: {
+                                ...tables[`table_${table}`],
+                                called: true,
+                            },
+                        });
+                    }}
                 />
                 <MainButton
                     children="Ver mi Pedido"

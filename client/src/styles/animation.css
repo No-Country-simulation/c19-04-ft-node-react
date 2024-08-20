@@ -1,0 +1,45 @@
+@keyframes zoomIn {
+    from {
+        transform: scale3d(0.3, 0.3, 0.3);
+    }
+    50% {
+    }
+}
+
+@keyframes zoomOut {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+    to {
+        transform: scale3d(0, 0, 0);
+    }
+}
+
+.zoom-in {
+    animation-name: zoomIn;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    transition: opacity 0.5s ease-out;
+    opacity: 1;
+}
+.zoom-out {
+    animation-name: zoomOut;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    transition: opacity 0.5s ease-out;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.blur-in {
+    transition: opacity 0.5s ease-out;
+    opacity: 1;
+}
+
+.blur-out {
+    transition: opacity 0.5s ease-out;
+    pointer-events: none;
+    opacity: 0;
+}
