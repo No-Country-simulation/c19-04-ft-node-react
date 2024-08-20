@@ -23,6 +23,10 @@ import OrderList from "../components/OrderList/ContainerKitcherbarr.jsx";
 const routerPathComponent = [
     {
         path: "/",
+        element: <Landing />,
+    },
+    {
+        path: "/home",
         element: <Home />,
     },
     {

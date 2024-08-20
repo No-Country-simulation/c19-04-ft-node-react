@@ -112,8 +112,21 @@ const MainViewMenu = () => {
             <div className="sticky left-0 bottom-0 w-[95vw] py-3 flex justify-center gap-y-8 gap-x-2 mx-auto z-10 bg-opacity-100 backdrop-blur-lg grow sm:gap-x-12">
                 <SecondaryButton
                     children="Llamar al Mozo"
-                    classNameSize="h-10 items-center w-1/2 sm:w-1/4 xl:w-1/5"
-                    onClick={() => patchCallWaiter(table, waiterUsername)}
+
+                    classNameSize="h-10 items-center w-1/2"
+                    onClick={() => {
+                        if (waiterUsername) {
+                            patchCallWaiter(table, waiterUsername);
+                        }
+                        setTables({
+                            ...tables,
+                            [`table_${table}`]: {
+                                ...tables[`table_${table}`],
+                                called: true,
+                            },
+                        });
+                    }}
+
                 />
                 <MainButton
                     children="Ver mi Pedido"

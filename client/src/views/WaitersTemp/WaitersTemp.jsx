@@ -176,16 +176,15 @@ function WaitersTemp() {
                 <h4 className="text-gray-400 mb-2">
                     Mesas sin mesero asignado
                 </h4>
-                {tables?.unassignedTables &&
-                    tables?.unassignedTables?.map((t) => (
-                        //mesas sin mesero
-                        <TablesCards
-                            key={t}
-                            tableNumber={t}
-                            action="Atender"
-                            handler={attendTable}
-                        />
-                    ))}
+                {tables?.unassignedTables?.map((t) => (
+                    <TablesCards
+                        called={tables[`table_${t}`].called}
+                        key={t}
+                        tableNumber={t}
+                        action="Atender"
+                        handler={attendTable}
+                    />
+                ))}
             </div>
             <div className="p-6">
                 <h4 className="text-gray-400 mb-2">Mesas desocupadas</h4>
